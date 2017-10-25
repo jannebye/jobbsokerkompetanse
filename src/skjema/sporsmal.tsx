@@ -16,10 +16,12 @@ type SporsmalProps = DispatchProps & OwnProps;
 
 const Sporsmal = function({ sporsmal, besvarSporsmal }: SporsmalProps) {
     return (
-        <div className="sporsmal">
-            <h4>{sporsmal.id}</h4>
-            <button onClick={besvarSporsmal}>svar</button>
-        </div>
+        <section className="sporsmal">
+            <h1 className="typo-element blokk-xs">{sporsmal.id}</h1>
+            <button className="knapp knapp--hoved" onClick={besvarSporsmal}>
+                svar
+            </button>
+        </section>
     );
 };
 

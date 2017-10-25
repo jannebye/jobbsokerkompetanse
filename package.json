@@ -10,7 +10,6 @@
     "eslint": "echo 'TODO eslint'",
     "prettier": "prettier --write --single-quote --tab-width 4 src/**/*.ts src/**/*.tsx src/**/*.less",
     "eject": "react-scripts-ts eject",
-    "lesshint": "lesshint --reporter ./lesshint-reporter src/",
     "dev:less": "autoless --source-map --intervall 100 ./src ./public",
     "build:less": "node ./node_modules/less/bin/lessc/ src/index.less ./public/index.css"
   },
