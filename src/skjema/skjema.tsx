@@ -4,8 +4,7 @@ import Sporsmal from './sporsmal';
 
 export default function() {
     const sporsmal = alleSporsmal.map(spm => {
-        return <Sporsmal key={spm.id} sporsmal={spm} />;
+        return <Sporsmal key={spm.sporsmal} sporsmal={spm} />;
     });
-
     return <form className="skjema">{sporsmal}</form>;
 }
