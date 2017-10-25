@@ -3,10 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "classnames": "^2.2.5",
+    "lodash.throttle": "^4.1.1",
+    "nav-frontend-core": "^4.0.5",
+    "nav-frontend-grid": "^0.1.8",
+    "nav-frontend-grid-style": "^0.2.3",
+    "nav-frontend-ikoner-assets": "^0.2.16",
+    "nav-frontend-js-utils": "^0.2.9",
+    "nav-frontend-knapper": "^0.2.12",
+    "nav-frontend-knapper-style": "^0.3.4",
+    "nav-frontend-lenker-style": "^0.2.4",
+    "nav-frontend-skjema": "^0.1.17",
+    "nav-frontend-skjema-style": "^0.3.8",
+    "nav-frontend-spinner": "^0.1.17",
+    "nav-frontend-spinner-style": "^0.2.3",
+    "nav-frontend-typografi": "^1.0.9",
+    "nav-frontend-typografi-style": "^1.0.6",
+    "prop-types": "^15.6.0",
     "react": "16.0.0",
     "react-dom": "16.0.0",
-    "react-scripts-ts": "2.8.0",
     "react-redux": "5.0.6",
+    "react-scripts-ts": "2.8.0",
     "redux": "3.7.2",
     "redux-thunk": "2.2.0"
   },
@@ -17,7 +34,10 @@
     "deploy": "npm run build && gh-pages -d build",
     "test": "react-scripts-ts test --env=jsdom",
     "eslint": "echo 'TODO eslint'",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "lesshint": "lesshint --reporter ./lesshint-reporter src/",
+    "dev:less": "autoless --source-map --intervall 100 ./src ./public",
+    "build:less": "node ./node_modules/less/bin/lessc/ src/index.less ./public/bundle.css"
   },
   "devDependencies": {
     "@types/jest": "21.1.4",
@@ -25,6 +45,8 @@
     "@types/react": "16.0.18",
     "@types/react-dom": "16.0.2",
     "@types/react-redux": "5.0.10",
+    "autoless": "^0.1.7",
+    "less": "^2.7.3",
     "gh-pages": "1.0.0"
   }
 }
