@@ -17,15 +17,16 @@ type SporsmalProps = DispatchProps & OwnProps;
 const Sporsmal = function ({sporsmal, besvarSporsmal}: SporsmalProps) {
     return (
         <div className="sporsmal">
-            <h4>{sporsmal.id}</h4>
-            <button onClick={besvarSporsmal}>svar</button>
+            <h4>{sporsmal.sporsmal}</h4>
+            {sporsmal.alternativer.map((alternativ) =>
+                <button key={alternativ} onClick={besvarSporsmal}>{alternativ}</button>)}
         </div>
     );
 };
 
 const mapDispatchToProps = (dispatch: Dispatch, props: OwnProps): DispatchProps => ({
-    besvarSporsmal: () => dispatch(besvar({
-        sporsmalId: props.sporsmal.id,
+    besvarSporsmal: (sporsmal, svar) => dispatch(besvar({
+        sporsmalId: props.sporsmal.sporsmal,
         svarAlternativer: []
     }))
 });

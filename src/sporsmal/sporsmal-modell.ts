@@ -1,3 +1,5 @@
 export default interface Sporsmal {
-    id: string;
+    sporsmal: string;
+    alternativer: string[];
+    type: string;
 }
