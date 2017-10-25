@@ -1,6 +1,7 @@
 import Sporsmal from './sporsmal-modell';
 
-const spm: Sporsmal[] = [{
+const spm: Sporsmal[] = [ {
+    id: 1,
     sporsmal: 'Hvor finner du ledige stillinger?',
     alternativer: [
         'På internett',
@@ -15,8 +16,9 @@ const spm: Sporsmal[] = [{
         'Kontakter arbeidsgivere direkte',
         'Annet'
     ],
-    type: 'flervalg'
+    type: 'flervalg',
 }, {
+    id: 2,
     sporsmal: 'Hvor ser du etter jobber?',
     alternativer: [
         'I nærområdet mitt',
@@ -27,14 +29,62 @@ const spm: Sporsmal[] = [{
         'Ingen begrensninger'
     ],
     type: 'flervalg'
-},
-    {sporsmal: 'Søker du på flere type stillinger?',
-        alternativer: [
-            'Jeg søker bare én type stillinger',
-            'Jeg søker på litt forskjellig',
-            'Jeg søker på alt jeg kommer over'
-        ],
-        type: 'ettvalg'
-    } ];
+}, {
+    id: 3,
+    sporsmal: 'Søker du på flere type stillinger?',
+    alternativer: [
+        'Jeg søker bare én type stillinger',
+        'Jeg søker på litt forskjellig',
+        'Jeg søker på alt jeg kommer over'
+    ],
+    type: 'ettvalg'
+}, {
+    id: 4,
+    sporsmal: 'Hvilken type ansettelse ser du etter?',
+    alternativer: [
+        'Fast',
+        'Vikariat',
+        'Midlertidig',
+        'Tilkallingshjelp',
+        'Heltid',
+        'Deltid'
+    ],
+    type: 'flervalg'
+}, {
+    id: 5,
+    sporsmal: 'Hvor fornøyd er du med måten du leter etter jobb på?',
+    alternativer: [
+        'Svært fornøyd',
+        'Fornøyd',
+        'Kunne vært bedre',
+        'Misfornøyd'
+    ],
+    type: 'ettvalg'
+}, {
+    id: 6,
+    sporsmal: 'Hvor har du registrert CV-en din?',
+    alternativer: [
+        'nav.no',
+        'Finn.no',
+        'LinkedIn',
+        'Bemanningsbyråer ol.',
+        'På nettsidene til bedrifter',
+        'Jobb-apper',
+        'Andre steder',
+        'Jeg har ikke registrert CV-en min'
+    ],
+    type: 'flervalg'
+}, {
+    id: 16,
+    sporsmal: 'Hvor trygg er du i en intervjusituasjon?',
+    alternativer: [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5'
+    ],
+    type: 'skala'
+}];
 
 export default spm;
