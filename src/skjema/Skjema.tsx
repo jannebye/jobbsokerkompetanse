@@ -8,8 +8,8 @@ export default function () {
     });
 
     return (
-        <div className="Skjema">
+        <form className="skjema">
             {sporsmal}
-        </div>
+        </form>
     );
 };
