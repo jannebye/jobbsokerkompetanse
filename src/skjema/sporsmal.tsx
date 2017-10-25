@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import {besvar, marker} from '../svar/svar-duck';
-import {Dispatch} from '../types';
-import {AppState} from "../reducer";
+import { besvar, marker } from '../svar/svar-duck';
+import { Dispatch } from '../types';
+import { AppState } from '../reducer';
 
 interface DispatchProps {
     besvarSporsmal: (sporsmalId: number, svar: string[]) => void;
