@@ -4,6 +4,20 @@ import SporsmalModell from '../sporsmal/sporsmal-modell';
 import { besvar, marker } from '../svar/svar-duck';
 import { Dispatch } from '../types';
 import { AppState } from '../reducer';
+import { ettValgHjelpetekst, flereValgHjelpetekst, skalaHjelpetekst } from '../tekster/hjelptetekster';
+
+function finnHjelpetekst(type: string): string {
+    switch (type) {
+        case 'flervalg':
+            return flereValgHjelpetekst;
+        case 'ettvalg':
+            return ettValgHjelpetekst;
+        case 'skala':
+            return skalaHjelpetekst;
+        default:
+            return '';
+    }
+}
 
 interface DispatchProps {
     besvarSporsmal: (sporsmalId: number, svar: string[]) => void;
@@ -21,12 +35,20 @@ interface StateProps {
 type SporsmalProps = DispatchProps & OwnProps & StateProps;
 
 const Sporsmal = function ({sporsmal, besvarSporsmal, markerAlternativ, markerteAlternativ}: SporsmalProps) {
+    const hjelpetekst: string = finnHjelpetekst(sporsmal.type);
     return (
         <div className="sporsmal">
             <h4 className="typo-element blokk-xs">{sporsmal.sporsmal}</h4>
+            <p className="hjelpetekst">{hjelpetekst}</p>
             {sporsmal.alternativer.map((alternativ) =>
                 <button key={alternativ} onClick={() => markerAlternativ(alternativ)}>{alternativ}</button>)}
-            <button className="knapp knapp--hoved" key="besvar" onClick={() => besvarSporsmal(sporsmal.id, markerteAlternativ)}>Fortsett</button>
+            <button
+                className="knapp knapp--hoved"
+                key="besvar"
+                onClick={() => besvarSporsmal(sporsmal.id, markerteAlternativ)}
+            >
+                Fortsett
+            </button>
         </div>
     );
 };
