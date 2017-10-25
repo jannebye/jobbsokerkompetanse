@@ -7,5 +7,9 @@ export default function() {
         return <Sporsmal key={spm.id} sporsmal={spm} />;
     });
 
-    return <form className="skjema">{sporsmal}</form>;
-}
+    return (
+        <form className="skjema">
+            {sporsmal}
+        </form>
+    );
+};

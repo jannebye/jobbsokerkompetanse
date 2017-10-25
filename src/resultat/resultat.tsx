@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export default function() {
     return (
-        <div className="Resultat">
+        <div className="resultat">
             <p>Takk for din besvarelse!</p>
         </div>
     );
