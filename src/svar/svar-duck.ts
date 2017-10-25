@@ -1,25 +1,26 @@
-import Svar from './svar-modell';
-import { Handling, ActionType, BesvarAction } from '../actions';
+import SvarModell from './svar-modell';
+import { Handling, ActionType, BesvarAction, MarkerAction } from '../actions';
 
-const {BESVAR} = ActionType;
+const {BESVAR, MARKER} = ActionType;
 
 export interface SvarState {
-    data: {
-        [key: string]: Svar
-    };
+    data: SvarModell[];
+    alternativer: string[];
 }
 
 const initialState = {
-    data: {}
+    data: [],
+    alternativer: []
 };
 
 //  Reducer
 export default function reducer(state: SvarState = initialState, action: Handling): SvarState {
-    const stateData = state.data;
     switch (action.type) {
+        case ActionType.MARKER:
+            return {...state, alternativer: [...state.alternativer, action.data]};
         case ActionType.BESVAR:
-            const svar = action.data;
-            return {...state, data: {...stateData, [svar.sporsmalId]: svar}};
+            const besvarelse = action.data;
+            return {...state, data: [...state.data, besvarelse]};
         case ActionType.TILBAKE:
             return {...state};
         default:
@@ -28,9 +29,16 @@ export default function reducer(state: SvarState = initialState, action: Handlin
 }
 
 // Action Creators
-export function besvar(svar: Svar): BesvarAction {
+export function besvar(svar: SvarModell): BesvarAction {
     return {
         type: BESVAR,
         data: svar
+    };
+}
+
+export function marker(svarAlternativ: string): MarkerAction {
+    return {
+        type: MARKER,
+        data: svarAlternativ
     };
 }

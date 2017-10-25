@@ -1,4 +1,4 @@
-export default interface Svar {
-    sporsmalId: string;
+export default interface SvarModell {
+    sporsmalId: number;
     svarAlternativer: string[];
 }
