@@ -16,12 +16,11 @@ type SporsmalProps = DispatchProps & OwnProps;
 
 const Sporsmal = function({ sporsmal, besvarSporsmal }: SporsmalProps) {
     return (
-        <section className="sporsmal">
-            <h1 className="typo-element blokk-xs">{sporsmal.id}</h1>
-            <button className="knapp knapp--hoved" onClick={besvarSporsmal}>
-                svar
-            </button>
-        </section>
+        <div className="sporsmal">
+            <h4 className="typo-element blokk-xs">{sporsmal.sporsmal}</h4>
+            {sporsmal.alternativer.map((alternativ) =>
+                <button className="knapp knapp--hoved" key={alternativ} onClick={besvarSporsmal}>{alternativ}</button>)}
+        </div>
     );
 };
 
