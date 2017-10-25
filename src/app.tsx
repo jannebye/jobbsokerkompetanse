@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import getStore from './store';
-import Innhold from './Innhold';
+import Innhold from './innhold';
 
 const store = getStore();
 

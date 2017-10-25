@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Skjema from './skjema/Skjema';
-import Resultat from './resultat/Resultat';
+import Skjema from './skjema/skjema';
+import Resultat from './resultat/resultat';
 import {AppState} from './reducer';
 import {connect} from 'react-redux';
 import {selectErAlleSpormalBesvart} from './svar/svar-selector';

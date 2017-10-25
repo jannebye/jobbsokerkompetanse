@@ -1,6 +1,6 @@
 import * as React from 'react';
 import alleSporsmal from '../sporsmal/sporsmal-alle';
-import Sporsmal from './Sporsmal';
+import Sporsmal from './sporsmal';
 
 export default function () {
     const sporsmal = alleSporsmal.map(spm => {
