@@ -1,11 +1,11 @@
 import Svar from './svar-modell';
 import { Handling, ActionType, BesvarAction } from '../actions';
 
-const {BESVAR} = ActionType;
+const { BESVAR } = ActionType;
 
 export interface SvarState {
     data: {
-        [key: string]: Svar
+        [key: string]: Svar;
     };
 }
 
@@ -14,14 +14,20 @@ const initialState = {
 };
 
 //  Reducer
-export default function reducer(state: SvarState = initialState, action: Handling): SvarState {
+export default function reducer(
+    state: SvarState = initialState,
+    action: Handling
+): SvarState {
     const stateData = state.data;
     switch (action.type) {
         case ActionType.BESVAR:
             const svar = action.data;
-            return {...state, data: {...stateData, [svar.sporsmalId]: svar}};
+            return {
+                ...state,
+                data: { ...stateData, [svar.sporsmalId]: svar }
+            };
         case ActionType.TILBAKE:
-            return {...state};
+            return { ...state };
         default:
             return state;
     }
