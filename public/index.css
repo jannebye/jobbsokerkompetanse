@@ -1073,7 +1073,13 @@ body .blokk-xl {
   }
 }
 .limit {
-  margin: 0 auto;
+  margin: 1rem auto;
   width: calc(100% - 2rem);
+}
+.sporsmal {
+  margin: 2rem 0;
+}
+.sporsmal:first-child {
+  margin-top: 1rem;
 }
 /*# sourceMappingURL=index.css.map */

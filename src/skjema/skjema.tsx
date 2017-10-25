@@ -6,5 +6,10 @@ export default function() {
     const sporsmal = alleSporsmal.map(spm => {
         return <Sporsmal key={spm.sporsmal} sporsmal={spm} />;
     });
-    return <form className="skjema">{sporsmal}</form>;
-}
+
+    return (
+        <form className="skjema">
+            {sporsmal}
+        </form>
+    );
+};

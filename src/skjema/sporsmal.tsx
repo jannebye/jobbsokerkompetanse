@@ -23,10 +23,10 @@ type SporsmalProps = DispatchProps & OwnProps & StateProps;
 const Sporsmal = function ({sporsmal, besvarSporsmal, markerAlternativ, markerteAlternativ}: SporsmalProps) {
     return (
         <div className="sporsmal">
-            <h4>{sporsmal.sporsmal}</h4>
+            <h4 className="typo-element blokk-xs">{sporsmal.sporsmal}</h4>
             {sporsmal.alternativer.map((alternativ) =>
                 <button key={alternativ} onClick={() => markerAlternativ(alternativ)}>{alternativ}</button>)}
-            <button key="besvar" onClick={() => besvarSporsmal(sporsmal.id, markerteAlternativ)}>Fortsett</button>
+            <button className="knapp knapp--hoved" key="besvar" onClick={() => besvarSporsmal(sporsmal.id, markerteAlternativ)}>Fortsett</button>
         </div>
     );
 };
