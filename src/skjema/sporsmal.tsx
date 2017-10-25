@@ -14,7 +14,7 @@ interface OwnProps {
 
 type SporsmalProps = DispatchProps & OwnProps;
 
-const Sporsmal = function ({sporsmal, besvarSporsmal}: SporsmalProps) {
+const Sporsmal = function({ sporsmal, besvarSporsmal }: SporsmalProps) {
     return (
         <div className="sporsmal">
             <h4>{sporsmal.sporsmal}</h4>
@@ -24,11 +24,18 @@ const Sporsmal = function ({sporsmal, besvarSporsmal}: SporsmalProps) {
     );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch, props: OwnProps): DispatchProps => ({
-    besvarSporsmal: (sporsmal, svar) => dispatch(besvar({
-        sporsmalId: props.sporsmal.sporsmal,
-        svarAlternativer: []
-    }))
+
+const mapDispatchToProps = (
+    dispatch: Dispatch,
+    props: OwnProps
+): DispatchProps => ({
+    besvarSporsmal: () =>
+        dispatch(
+            besvar({
+                sporsmalId: props.sporsmal.id,
+                svarAlternativer: []
+            })
+        )
 });
 
 export default connect(null, mapDispatchToProps)(Sporsmal);
