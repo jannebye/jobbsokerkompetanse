@@ -1082,4 +1082,23 @@ body .blokk-xl {
 .sporsmal:first-child {
   margin-top: 1rem;
 }
+.svar {
+  margin: 0.65rem 0;
+}
+.svar .svar__radio {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+.svar .svar__radio + .svar__label {
+  display: block;
+  border: 1px solid #b7b1a9;
+  padding: 0.65rem 1rem;
+  width: 100%;
+  text-align: left;
+}
+.svar .svar__radio :checked + .svar__label {
+  border-color: #0067c5;
+}
 /*# sourceMappingURL=index.css.map */
