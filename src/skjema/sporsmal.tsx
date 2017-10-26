@@ -21,7 +21,7 @@ function finnHjelpetekst(type: string): string {
 }
 
 interface DispatchProps {
-    besvarSporsmal: (sporsmalId: number, svar: string[]) => void;
+    besvarSporsmal: (sporsmalId: number, svar: SvarAlternativModell[]) => void;
     markerAlternativ: (alternativ: SvarAlternativModell) => void;
 }
 
@@ -47,14 +47,20 @@ const Sporsmal = function ({sporsmal, besvarSporsmal, markerAlternativ, markerte
                     <label
                         for={alternativ.id}
                         className="svar__label"
-                        key={alternativ}
+                        key={alternativ.id}
                         onClick={() => markerAlternativ(alternativ)}
                     >
                         {alternativ.tekst}
                     </label>
                 </div>
             )}
-            <button className="knapp knapp--hoved" key="besvar" onClick={() => besvarSporsmal(sporsmal.id, markerteAlternativ)}>Fortsett</button>
+            <button
+                className="knapp knapp--hoved"
+                key="besvar"
+                onClick={() => besvarSporsmal(sporsmal.id, markerteAlternativ)}
+            >
+                Fortsett
+            </button>
         </section>
     );
 };
