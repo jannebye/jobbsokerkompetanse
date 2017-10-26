@@ -45,7 +45,7 @@ const Sporsmal = function ({sporsmal, besvarSporsmal, markerAlternativ, markerte
                 <div className="svar">
                     <input id={alternativ.id} className="svar__radio" type="radio" name={sporsmal.id.toString()}/>
                     <label
-                        for={alternativ.id}
+                        htmlFor={alternativ.id}
                         className="svar__label"
                         key={alternativ.id}
                         onClick={() => markerAlternativ(alternativ)}
