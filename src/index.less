@@ -8,17 +8,40 @@
 @import '../node_modules/nav-frontend-typografi-style/src/index';
 
 .limit {
-    margin: 1rem auto;
-    width: ~'calc(100% - 2rem)';
+	margin: 1rem auto;
+	width: ~'calc(100% - 2rem)';
 }
 
 .sporsmal {
-    margin: 2rem 0;
-    &:first-child {
-        margin-top: 1rem;
-    }
+	margin: 2rem 0;
+	&:first-child {
+		margin-top: 1rem;
+	}
 }
 
 .hjelpetekst {
     color: @navMorkGra;
 }
+.svar {
+	margin: 0.65rem 0;
+
+	.svar__radio {
+		position: absolute;
+		opacity: 0;
+		height: 0;
+		width: 0;
+
+		& + .svar__label {
+			display: block;
+			border: 1px solid @grayIcon;
+			padding: 0.65rem 1rem;
+			width: 100%;
+			text-align: left;
+		}
+
+		& :checked + .svar__label {
+			border-color: @navBla;
+		}
+	}
+}
+
