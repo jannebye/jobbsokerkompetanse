@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import { besvar, marker } from '../svar/svar-duck';
-import { Dispatch } from '../types';
-import { AppState } from '../reducer';
+import {besvar, marker} from '../svar/svar-duck';
+import {Dispatch} from '../types';
+import {AppState} from '../reducer';
 
 interface DispatchProps {
     besvarSporsmal: (sporsmalId: number, svar: string[]) => void;
@@ -22,12 +22,16 @@ type SporsmalProps = DispatchProps & OwnProps & StateProps;
 
 const Sporsmal = function ({sporsmal, besvarSporsmal, markerAlternativ, markerteAlternativ}: SporsmalProps) {
     return (
-        <div className="sporsmal">
-            <h4 className="typo-element blokk-xs">{sporsmal.sporsmal}</h4>
+        <section className="sporsmal">
+            <h1 className="typo-element blokk-xs">{sporsmal.sporsmal}</h1>
             {sporsmal.alternativer.map((alternativ) =>
-                <button key={alternativ} onClick={() => markerAlternativ(alternativ)}>{alternativ}</button>)}
+                <div className="svar">
+                    <input className="svar__radio" type="radio" name={sporsmal.id.toString()}/>
+                    <label className="svar__label" key={alternativ} onClick={() => markerAlternativ(alternativ)}>{alternativ}</label>
+                </div>
+            )}
             <button className="knapp knapp--hoved" key="besvar" onClick={() => besvarSporsmal(sporsmal.id, markerteAlternativ)}>Fortsett</button>
-        </div>
+        </section>
     );
 };
 
