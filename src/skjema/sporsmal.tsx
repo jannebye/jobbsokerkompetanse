@@ -30,7 +30,7 @@ interface OwnProps {
 }
 
 interface StateProps {
-    markerteAlternativ: string[];
+    markerteAlternativ: SvarAlternativModell[];
 }
 
 type SporsmalProps = DispatchProps & OwnProps & StateProps;
@@ -40,6 +40,7 @@ const Sporsmal = function ({sporsmal, besvarSporsmal, markerAlternativ, markerte
     return (
         <section className="sporsmal">
             <h1 className="typo-element blokk-xs">{sporsmal.sporsmal}</h1>
+            <p className="hjelpetekst">{hjelpetekst}</p>
             {sporsmal.alternativer.map((alternativ) =>
                 <div className="svar">
                     <input id={alternativ.id} className="svar__radio" type="radio" name={sporsmal.id.toString()}/>
