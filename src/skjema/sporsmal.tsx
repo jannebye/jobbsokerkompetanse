@@ -42,12 +42,11 @@ const Sporsmal = function ({sporsmal, besvarSporsmal, markerAlternativ, markerte
             <h1 className="typo-element blokk-xs">{sporsmal.sporsmal}</h1>
             <p className="hjelpetekst">{hjelpetekst}</p>
             {sporsmal.alternativer.map((alternativ) =>
-                <div className="svar">
+                <div className="svar" key={alternativ.id}>
                     <input id={alternativ.id} className="svar__radio" type="radio" name={sporsmal.id.toString()}/>
                     <label
                         htmlFor={alternativ.id}
                         className="svar__label"
-                        key={alternativ.id}
                         onClick={() => markerAlternativ(alternativ)}
                     >
                         {alternativ.tekst}
