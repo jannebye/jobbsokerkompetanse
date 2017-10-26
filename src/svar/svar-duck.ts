@@ -1,11 +1,12 @@
-import SvarModell from './svar-modell';
+import BesvarelseModell from './svar-modell';
 import { Handling, ActionType, BesvarAction, MarkerAction } from '../actions';
+import SvarAlternativModell from '../sporsmal/svaralternativ';
 
 const {BESVAR, MARKER} = ActionType;
 
 export interface SvarState {
-    data: SvarModell[];
-    alternativer: string[];
+    data: BesvarelseModell[];
+    alternativer: SvarAlternativModell[];
 }
 
 const initialState = {
@@ -17,7 +18,11 @@ const initialState = {
 export default function reducer(state: SvarState = initialState, action: Handling): SvarState {
     switch (action.type) {
         case ActionType.MARKER:
-            return {...state, alternativer: [...state.alternativer, action.data]};
+            if (state.alternativer.indexOf(action.data) > -1) {
+                return {...state, alternativer: [...state.alternativer, action.data]};
+            } else {
+                return {...state, alternativer: state.alternativer.filter((alt) => alt !== action.data)}
+            }
         case ActionType.BESVAR:
             const besvarelse = action.data;
             return {...state, data: [...state.data, besvarelse]};
@@ -29,14 +34,14 @@ export default function reducer(state: SvarState = initialState, action: Handlin
 }
 
 // Action Creators
-export function besvar(svar: SvarModell): BesvarAction {
+export function besvar(svar: BesvarelseModell): BesvarAction {
     return {
         type: BESVAR,
         data: svar
     };
 }
 
-export function marker(svarAlternativ: string): MarkerAction {
+export function marker(svarAlternativ: SvarAlternativModell): MarkerAction {
     return {
         type: MARKER,
         data: svarAlternativ

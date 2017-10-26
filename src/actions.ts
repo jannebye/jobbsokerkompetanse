@@ -1,4 +1,5 @@
 import Svar from './svar/svar-modell';
+import SvarAlternativModell from './sporsmal/svaralternativ';
 
 export enum ActionType {
     BESVAR,
@@ -17,7 +18,7 @@ export interface TilbakeAction {
 
 export interface MarkerAction {
     type: ActionType.MARKER;
-    data: string;
+    data: SvarAlternativModell;
 }
 
 export type Handling =
