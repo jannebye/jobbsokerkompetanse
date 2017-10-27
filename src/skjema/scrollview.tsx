@@ -62,7 +62,7 @@ class ScrollView extends React.Component<{}, ScrollviewState> {
                     isActive: index === this.state.activeIndex
                 })
         );
-        return <div ref={this.refhandler}>{augmentedChildren}</div>;
+        return <ul className="sporsmalsliste" ref={this.refhandler}>{augmentedChildren}</ul>;
     }
 }
 

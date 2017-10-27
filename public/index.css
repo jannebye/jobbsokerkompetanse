@@ -1076,10 +1076,6 @@ body .blokk-xl {
   margin: 1rem auto;
   width: calc(100% - 2rem);
 }
-.svarliste {
-  list-style: none;
-  padding: 0;
-}
 .sporsmal {
   opacity: 0.2;
   margin: 2rem 0;
@@ -1090,6 +1086,11 @@ body .blokk-xl {
 }
 .sporsmal.active {
   opacity: 1;
+}
+.svarliste,
+.sporsmalsliste {
+  list-style: none;
+  padding: 0;
 }
 .hjelpetekst {
   color: #3e3832;
