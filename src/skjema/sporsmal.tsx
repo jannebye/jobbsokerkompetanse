@@ -4,7 +4,11 @@ import SporsmalModell from '../sporsmal/sporsmal-modell';
 import { besvar, marker } from '../svar/svar-duck';
 import { Dispatch } from '../types';
 import { AppState } from '../reducer';
-import { ettValgHjelpetekst, flereValgHjelpetekst, skalaHjelpetekst } from '../tekster/hjelptetekster';
+import {
+    ettValgHjelpetekst,
+    flereValgHjelpetekst,
+    skalaHjelpetekst
+} from '../tekster/hjelptetekster';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 
 function finnHjelpetekst(type: string): string {
@@ -26,6 +30,7 @@ interface DispatchProps {
 }
 
 interface OwnProps {
+    isActive: boolean;
     sporsmal: SporsmalModell;
 }
 
@@ -33,17 +38,30 @@ interface StateProps {
     markerteAlternativ: SvarAlternativModell[];
 }
 
-type SporsmalProps = DispatchProps & OwnProps & StateProps;
+export type SporsmalProps = DispatchProps & OwnProps & StateProps;
 
-const Sporsmal = function ({sporsmal, besvarSporsmal, markerAlternativ, markerteAlternativ}: SporsmalProps) {
+const Sporsmal = function({
+    isActive,
+    sporsmal,
+    besvarSporsmal,
+    markerAlternativ,
+    markerteAlternativ
+}: SporsmalProps) {
     const hjelpetekst: string = finnHjelpetekst(sporsmal.type);
+    const cls = ['sporsmal', isActive ? 'active' : ''].join(' ');
     return (
-        <section className="sporsmal">
+        <li id={'sp-' + sporsmal.id} className={cls}>
             <h1 className="typo-element blokk-xs">{sporsmal.sporsmal}</h1>
             <p className="hjelpetekst">{hjelpetekst}</p>
-            {sporsmal.alternativer.map((alternativ) =>
-                <div className="svar" key={alternativ.id}>
-                    <input id={alternativ.id} className="svar__radio" type="radio" name={sporsmal.id.toString()}/>
+            {sporsmal.alternativer.map(alternativ => (
+                <div key={alternativ.id} className="svar">
+                    <input
+                        id={alternativ.id}
+                        className="svar__radio"
+                        type="radio"
+                        name={sporsmal.id.toString()}
+                        value={alternativ.id}
+                    />
                     <label
                         htmlFor={alternativ.id}
                         className="svar__label"
@@ -52,7 +70,7 @@ const Sporsmal = function ({sporsmal, besvarSporsmal, markerAlternativ, markerte
                         {alternativ.tekst}
                     </label>
                 </div>
-            )}
+            ))}
             <button
                 className="knapp knapp--hoved"
                 key="besvar"
@@ -60,7 +78,7 @@ const Sporsmal = function ({sporsmal, besvarSporsmal, markerAlternativ, markerte
             >
                 Fortsett
             </button>
-        </section>
+        </li>
     );
 };
 
@@ -68,12 +86,19 @@ const mapStateToProps = (state: AppState): StateProps => ({
     markerteAlternativ: state.svar.alternativer
 });
 
-const mapDispatchToProps = (dispatch: Dispatch, props: OwnProps): DispatchProps => ({
-    markerAlternativ: (alternativ: SvarAlternativModell) => dispatch(marker(alternativ)),
-    besvarSporsmal: (sporsmal, svar) => dispatch(besvar({
-        sporsmalId: props.sporsmal.id,
-        svarAlternativer: svar
-    }))
+const mapDispatchToProps = (
+    dispatch: Dispatch,
+    props: OwnProps
+): DispatchProps => ({
+    markerAlternativ: (alternativ: SvarAlternativModell) =>
+        dispatch(marker(alternativ)),
+    besvarSporsmal: (sporsmal, svar) =>
+        dispatch(
+            besvar({
+                sporsmalId: props.sporsmal.id,
+                svarAlternativer: svar
+            })
+        )
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sporsmal);

@@ -1076,11 +1076,23 @@ body .blokk-xl {
   margin: 1rem auto;
   width: calc(100% - 2rem);
 }
+.svarliste {
+  list-style: none;
+  padding: 0;
+}
 .sporsmal {
+  opacity: 0.2;
   margin: 2rem 0;
+  transition: opacity 300ms ease-in-out;
 }
 .sporsmal:first-child {
   margin-top: 1rem;
+}
+.sporsmal.active {
+  opacity: 1;
+}
+.hjelpetekst {
+  color: #3e3832;
 }
 .svar {
   margin: 0.65rem 0;
@@ -1098,7 +1110,7 @@ body .blokk-xl {
   width: 100%;
   text-align: left;
 }
-.svar .svar__radio :checked + .svar__label {
-  border-color: #0067c5;
+.svar .svar__radio:checked + .svar__label {
+  background-color: #cce1f3;
 }
 /*# sourceMappingURL=index.css.map */

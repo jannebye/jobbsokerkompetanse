@@ -2,7 +2,7 @@ import BesvarelseModell from './svar-modell';
 import { Handling, ActionType, BesvarAction, MarkerAction } from '../actions';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 
-const {BESVAR, MARKER} = ActionType;
+const { BESVAR, MARKER } = ActionType;
 
 export interface SvarState {
     data: BesvarelseModell[];
@@ -15,19 +15,30 @@ const initialState = {
 };
 
 //  Reducer
-export default function reducer(state: SvarState = initialState, action: Handling): SvarState {
+export default function reducer(
+    state: SvarState = initialState,
+    action: Handling
+): SvarState {
     switch (action.type) {
         case ActionType.MARKER:
             if (state.alternativer.indexOf(action.data) > -1) {
-                return {...state, alternativer: [...state.alternativer, action.data]};
+                return {
+                    ...state,
+                    alternativer: [...state.alternativer, action.data]
+                };
             } else {
-                return {...state, alternativer: state.alternativer.filter((alt) => alt !== action.data)}
+                return {
+                    ...state,
+                    alternativer: state.alternativer.filter(
+                        alt => alt !== action.data
+                    )
+                };
             }
         case ActionType.BESVAR:
             const besvarelse = action.data;
-            return {...state, data: [...state.data, besvarelse]};
+            return { ...state, data: [...state.data, besvarelse] };
         case ActionType.TILBAKE:
-            return {...state};
+            return { ...state };
         default:
             return state;
     }
