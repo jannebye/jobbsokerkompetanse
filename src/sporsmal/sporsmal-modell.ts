@@ -4,4 +4,4 @@ export default interface Sporsmal {
     sporsmal: string;
     alternativer: SvarAlternativModell[];
     type: string;
-};
+}

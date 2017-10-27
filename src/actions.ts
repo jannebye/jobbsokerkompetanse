@@ -1,9 +1,9 @@
 import Svar from './svar/svar-modell';
-import SvarAlternativModell from './sporsmal/svaralternativ';
 
 export enum ActionType {
     BESVAR,
-    MARKER,
+    ENDRE_ALTERNATIV,
+    FJERN_MARKERING,
     TILBAKE,
 }
 
@@ -16,12 +16,12 @@ export interface TilbakeAction {
     type: ActionType.TILBAKE;
 }
 
-export interface MarkerAction {
-    type: ActionType.MARKER;
-    data: SvarAlternativModell;
+export interface EndreAlternativAction {
+    type: ActionType.ENDRE_ALTERNATIV;
+    data: Svar;
 }
 
 export type Handling =
-    BesvarAction | MarkerAction
+    BesvarAction | EndreAlternativAction
     | TilbakeAction
     ;
