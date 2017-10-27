@@ -1111,6 +1111,9 @@ body .blokk-xl {
   width: 100%;
   text-align: left;
 }
+.svar .svar__radio + .markert {
+  background-color: #0067c5;
+}
 .svar .svar__radio:checked + .svar__label {
   background-color: #cce1f3;
 }
