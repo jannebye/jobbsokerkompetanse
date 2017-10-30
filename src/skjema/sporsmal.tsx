@@ -50,7 +50,7 @@ const Sporsmal = function({
     const hjelpetekst: string = finnHjelpetekst(sporsmal.type);
     const cls = ['sporsmal', isActive ? 'active' : ''].join(' ');
     return (
-        <li id={'sp-' + sporsmal.id} className={cls}>
+        <li id={'sp-' + sporsmal.id} className={cls} tabIndex={0}>
             <h1 className="typo-element blokk-xs">{sporsmal.sporsmal}</h1>
             <p className="hjelpetekst">{hjelpetekst}</p>
             {sporsmal.alternativer.map(alternativ => (
@@ -74,7 +74,7 @@ const Sporsmal = function({
             <button
                 className="knapp knapp--hoved"
                 key="besvar"
-                onClick={() => besvarSporsmal(sporsmal.id, markerteAlternativ)}
+                onClick={e => besvarSporsmal(sporsmal.id, markerteAlternativ)}
             >
                 Fortsett
             </button>

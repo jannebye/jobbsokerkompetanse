@@ -1087,8 +1087,16 @@ body .blokk-xl {
 .sporsmal.active {
   opacity: 1;
 }
-.svarliste,
+.sporsmal:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #ffbd66;
+}
 .sporsmalsliste {
+  list-style: none;
+  padding: 0;
+  margin: 200px 0 300px;
+}
+.svarliste {
   list-style: none;
   padding: 0;
 }
@@ -1096,7 +1104,7 @@ body .blokk-xl {
   color: #3e3832;
 }
 .svar {
-  margin: 0.65rem 0;
+  margin: 0.5rem 0;
 }
 .svar .svar__radio {
   position: absolute;
@@ -1107,11 +1115,18 @@ body .blokk-xl {
 .svar .svar__radio + .svar__label {
   display: block;
   border: 1px solid #b7b1a9;
-  padding: 0.65rem 1rem;
+  padding: 0.5rem 1rem;
   width: 100%;
   text-align: left;
 }
+.svar .svar__radio + .svar__label:hover {
+  background-color: #e9e7e7;
+}
 .svar .svar__radio:checked + .svar__label {
   background-color: #cce1f3;
+}
+.svar .svar__radio:focus + .svar__label {
+  outline: none;
+  box-shadow: 0 0 0 3px #ffbd66;
 }
 /*# sourceMappingURL=index.css.map */
