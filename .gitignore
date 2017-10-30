@@ -25,3 +25,4 @@ yarn-error.log*
 *.iml
 
 public/index.css
+public/index.css.map
