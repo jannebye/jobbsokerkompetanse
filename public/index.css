@@ -1122,6 +1122,13 @@ body .blokk-xl {
 .svar .svar__radio + .svar__label:hover {
   background-color: #e9e7e7;
 }
+.svar .svar__radio + .markert {
+  background-color: #0067c5;
+  color: #ffffff;
+}
+.svar .svar__radio + .markert:hover {
+  background-color: #0067c5;
+}
 .svar .svar__radio:checked + .svar__label {
   background-color: #cce1f3;
 }
