@@ -71,7 +71,7 @@ const Sporsmal = function ({
                         <input
                             id={alternativ.id}
                             className="svar__radio"
-                            type="radio"
+                            type={sporsmal.type !== 'skala' ? sporsmal.type : 'radio'}
                             name={sporsmal.id.toString()}
                             value={alternativ.id}
                         />
