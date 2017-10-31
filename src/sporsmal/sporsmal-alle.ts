@@ -123,11 +123,17 @@ const spm: Sporsmal[] = [
         id: 10,
         sporsmal: 'Hvilken erfaring har du som jobbsøker?',
         alternativer: [
-            { id: '1001', tekst: 'Fått tilbud om jobb gjennom nettverket mitt' },
+            {
+                id: '1001',
+                tekst: 'Fått tilbud om jobb gjennom nettverket mitt'
+            },
             { id: '1002', tekst: 'Tatt direkte kontakt med en arbeidsgiver' },
             { id: '1003', tekst: 'Sendt søknad på utlyste stillinger' },
             { id: '1004', tekst: 'Sendt en åpen søknad' },
-            { id: '1005', tekst: 'Levert en åpne søknad ved personlig oppmøte' },
+            {
+                id: '1005',
+                tekst: 'Levert en åpne søknad ved personlig oppmøte'
+            },
             { id: '1006', tekst: 'Tilbudt stilling uten å ha søkt' },
             { id: '1007', tekst: 'Lite eller ingen erfaring' }
         ],
@@ -147,7 +153,8 @@ const spm: Sporsmal[] = [
     },
     {
         id: 12,
-        sporsmal: 'Hvor mange ganger har du blitt innkalt til intervju det siste året?',
+        sporsmal:
+            'Hvor mange ganger har du blitt innkalt til intervju det siste året?',
         alternativer: [
             { id: '1201', tekst: 'Ingen' },
             { id: '1202', tekst: 'Noen få' },
@@ -157,7 +164,8 @@ const spm: Sporsmal[] = [
     },
     {
         id: 13,
-        sporsmal: 'Hvor mange ganger har du blitt innkalt til intervju det siste året?',
+        sporsmal:
+            'Hvor mange ganger har du blitt innkalt til intervju det siste året?',
         alternativer: [
             { id: '1301', tekst: 'Ingen' },
             { id: '1302', tekst: 'Noen få' },
@@ -200,12 +208,22 @@ const spm: Sporsmal[] = [
         id: 17,
         sporsmal: 'Hvor trygg er du i en intervjusituasjon?',
         alternativer: [
-            { id: '1701', tekst: 'Forbereder meg ikke, tar det som det kommer' },
+            {
+                id: '1701',
+                tekst: 'Forbereder meg ikke, tar det som det kommer'
+            },
             { id: '1702', tekst: 'Vet ikke hvordan man forbereder seg' },
             { id: '1703', tekst: 'Tenker igjennom hvordan jeg skal kle meg' },
-            { id: '1704', tekst: 'Tenker igjennom hvordan jeg skal oppføre meg (kroppspråk)' },
+            {
+                id: '1704',
+                tekst:
+                    'Tenker igjennom hvordan jeg skal oppføre meg (kroppspråk)'
+            },
             { id: '1705', tekst: 'Leser om bedriften på forhånd' },
-            { id: '1706', tekst: 'Leser utlysningsteksten og søknaden på nytt' },
+            {
+                id: '1706',
+                tekst: 'Leser utlysningsteksten og søknaden på nytt'
+            },
             { id: '1707', tekst: 'Øver på å presentere meg selv' }
         ],
         type: 'checkbox'

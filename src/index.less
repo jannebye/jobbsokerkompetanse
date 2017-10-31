@@ -8,82 +8,82 @@
 @import '../node_modules/nav-frontend-typografi-style/src/index';
 
 .limit {
-	margin: 1rem auto;
-	width: ~'calc(100% - 2rem)';
+    margin: 1rem auto;
+    width: ~'calc(100% - 2rem)';
 }
 
 .sporsmal {
-	opacity: 0.2;
-	margin: 2rem 0;
-	transition: opacity 300ms ease-in-out;
-	&:first-child {
-		margin-top: 1rem;
-	}
-	&.active {
-		opacity: 1;
-	}
-	&:focus {
-		outline: none;
-		box-shadow: 0 0 0 3px @orangeFocus;
-	}
+    opacity: 0.2;
+    margin: 2rem 0;
+    transition: opacity 300ms ease-in-out;
+    &:first-child {
+        margin-top: 1rem;
+    }
+    &.active {
+        opacity: 1;
+    }
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px @orangeFocus;
+    }
 }
 
 .sporsmalsliste {
-	list-style: none;
-	padding: 0;
-	margin: 200px 0 300px;
+    list-style: none;
+    padding: 0;
+    margin: 200px 0 300px;
 }
 
 .svarliste {
-	list-style: none;
-	padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .hjelpetekst {
-	color: @navMorkGra;
+    color: @navMorkGra;
 }
 
 .svar {
-	margin: 0.5rem 0;
+    margin: 0.5rem 0;
 
-	.svar__radio {
-		position: absolute;
-		opacity: 0;
-		height: 0;
-		width: 0;
+    .svar__radio {
+        position: absolute;
+        opacity: 0;
+        height: 0;
+        width: 0;
 
-		& + .svar__label {
-			display: block;
-			border: 1px solid @grayIcon;
-			padding: 0.5rem 1rem;
-			width: 100%;
-			text-align: left;
+        & + .svar__label {
+            display: block;
+            border: 1px solid @grayIcon;
+            padding: 0.5rem 1rem;
+            width: 100%;
+            text-align: left;
 
-			&:hover {
-				background-color: @navLysGra;
-			}
-		}
+            &:hover {
+                background-color: @navLysGra;
+            }
+        }
 
-		& + .markert {
-			background-color: @navBla;
-			color: @white;
+        & + .markert {
+            background-color: @navBla;
+            color: @white;
 
-			&:hover {
-				background-color: @navBla;
-			}
-		}
-	}
+            &:hover {
+                background-color: @navBla;
+            }
+        }
+    }
 
-	.svar__radio:checked {
-		& + .svar__label {
-			background-color: @navBlaLighten80;
-		}
-	}
+    .svar__radio:checked {
+        & + .svar__label {
+            background-color: @navBlaLighten80;
+        }
+    }
 
-	.svar__radio:focus {
-		& + .svar__label {
-			outline: none;
-			box-shadow: 0 0 0 3px @orangeFocus;
-		}
-	}
+    .svar__radio:focus {
+        & + .svar__label {
+            outline: none;
+            box-shadow: 0 0 0 3px @orangeFocus;
+        }
+    }
 }
