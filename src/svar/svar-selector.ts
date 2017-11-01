@@ -7,7 +7,8 @@ function selectSvarSlice(state: AppState): SvarState {
 }
 
 export function selectAlleSvar(state: AppState) {
-    return Object.values(selectSvarSlice(state).data);
+    const data = selectSvarSlice(state).data;
+    return Object.keys(data).map(k => data[k]);
 }
 
 export function selectSvar(state: AppState, id: string) {
