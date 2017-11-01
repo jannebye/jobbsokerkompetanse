@@ -26,7 +26,10 @@ function finnHjelpetekst(type: string): string {
 }
 
 interface DispatchProps {
-    markerAlternativ: (sporsmalId: number, alternativ: SvarAlternativModell[]) => void;
+    markerAlternativ: (
+        sporsmalId: number,
+        alternativ: SvarAlternativModell[]
+    ) => void;
 }
 
 interface OwnProps {
@@ -40,48 +43,70 @@ interface StateProps {
 
 export type SporsmalProps = DispatchProps & OwnProps & StateProps;
 
-function prepMarkerAlternativ(alternativ: SvarAlternativModell, erValgt: boolean,
-                              alternativListe: SvarAlternativModell[]): SvarAlternativModell[] {
+function prepMarkerAlternativ(
+    alternativ: SvarAlternativModell,
+    erValgt: boolean,
+    alternativListe: SvarAlternativModell[]
+): SvarAlternativModell[] {
     if (erValgt) {
-        return alternativListe.filter((alt) => alt.id !== alternativ.id);
+        return alternativListe.filter(alt => alt.id !== alternativ.id);
     } else {
         return [...alternativListe, alternativ];
     }
 }
 
-const Sporsmal = function ({
-                               isActive,
-                               sporsmal,
-                               markerAlternativ,
-                               besvarteSporsmal
-                           }: SporsmalProps) {
+const Sporsmal = function({
+    isActive,
+    sporsmal,
+    markerAlternativ,
+    besvarteSporsmal
+}: SporsmalProps) {
     const hjelpetekst: string = finnHjelpetekst(sporsmal.type);
-    const besvartSpm: BesvarelseModell | undefined =
-        besvarteSporsmal.find((besvarelse) => besvarelse.sporsmalId === sporsmal.id);
-    const markerteAlternativer: SvarAlternativModell[] = besvartSpm ? besvartSpm.svarAlternativer : [];
+    const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
+        besvarelse => besvarelse.sporsmalId === sporsmal.id
+    );
+    const markerteAlternativer: SvarAlternativModell[] = besvartSpm
+        ? besvartSpm.svarAlternativer
+        : [];
     const cls = ['sporsmal', isActive ? 'active' : ''].join(' ');
     return (
         <li id={'sp-' + sporsmal.id} className={cls}>
             <h1 className="typo-element blokk-xs">{sporsmal.sporsmal}</h1>
             <p className="hjelpetekst">{hjelpetekst}</p>
-            {sporsmal.alternativer.map(function (alternativ: SvarAlternativModell) {
-                const erValgt = !!markerteAlternativer.find(alt => alt.id === alternativ.id);
+            {sporsmal.alternativer.map(function(
+                alternativ: SvarAlternativModell
+            ) {
+                const erValgt = !!markerteAlternativer.find(
+                    alt => alt.id === alternativ.id
+                );
                 return (
                     <div key={alternativ.id} className="svar">
                         <input
                             id={alternativ.id}
                             className="svar__radio"
-                            type="radio"
+                            type={
+                                sporsmal.type !== 'skala'
+                                    ? sporsmal.type
+                                    : 'radio'
+                            }
                             name={sporsmal.id.toString()}
                             value={alternativ.id}
                         />
                         <label
                             htmlFor={alternativ.id}
-                            className={`svar__label ${erValgt ? 'markert' : ''}`}
-                            onClick={(e) => {
+                            className={`svar__label ${erValgt
+                                ? 'markert'
+                                : ''}`}
+                            onClick={e => {
                                 e.preventDefault();
-                                markerAlternativ(sporsmal.id,
-                                                 prepMarkerAlternativ(alternativ, erValgt, markerteAlternativer));
+                                markerAlternativ(
+                                    sporsmal.id,
+                                    prepMarkerAlternativ(
+                                        alternativ,
+                                        erValgt,
+                                        markerteAlternativer
+                                    )
+                                );
                             }}
                         >
                             {alternativ.tekst}
@@ -92,7 +117,7 @@ const Sporsmal = function ({
             <button
                 className="knapp knapp--hoved"
                 key="besvar"
-                onClick={(e) => {
+                onClick={e => {
                     e.preventDefault();
                 }}
             >
@@ -106,8 +131,10 @@ const mapStateToProps = (state: AppState): StateProps => ({
     besvarteSporsmal: state.svar.data
 });
 
-const mapDispatchToProps = (dispatch: Dispatch,
-                            props: OwnProps): DispatchProps => ({
+const mapDispatchToProps = (
+    dispatch: Dispatch,
+    props: OwnProps
+): DispatchProps => ({
     markerAlternativ: (sporsmalId, alternativ: SvarAlternativModell[]) =>
         dispatch(marker(sporsmalId, alternativ))
 });

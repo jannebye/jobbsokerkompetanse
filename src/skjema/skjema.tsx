@@ -3,9 +3,9 @@ import alleSporsmal from '../sporsmal/sporsmal-alle';
 import Sporsmal from './sporsmal';
 import ScrollView from './scrollview';
 
-export default function () {
+export default function() {
     const sporsmal = alleSporsmal.map(spm => {
-        return <Sporsmal isActive={false} key={spm.sporsmal} sporsmal={spm}/>;
+        return <Sporsmal isActive={false} key={spm.sporsmal} sporsmal={spm} />;
     });
 
     return (

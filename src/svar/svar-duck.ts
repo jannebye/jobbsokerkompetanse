@@ -1,6 +1,10 @@
 import BesvarelseModell from './svar-modell';
 import {
-    Handling, ActionType, BesvarAction, EndreAlternativAction } from '../actions';
+    Handling,
+    ActionType,
+    BesvarAction,
+    EndreAlternativAction
+} from '../actions';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 
 const { BESVAR, ENDRE_ALTERNATIV } = ActionType;
@@ -20,15 +24,15 @@ export default function reducer(
 ): SvarState {
     // return initialState;
     switch (action.type) {
-        case ActionType.ENDRE_ALTERNATIV:
-            {
-                const besvarteSpm: BesvarelseModell[] = state.data
-                    .filter((besvarelse) => besvarelse.sporsmalId !== action.data.sporsmalId);
-                return {
-                    ...state,
-                    data: [...besvarteSpm, action.data]
-                };
-            }
+        case ActionType.ENDRE_ALTERNATIV: {
+            const besvarteSpm: BesvarelseModell[] = state.data.filter(
+                besvarelse => besvarelse.sporsmalId !== action.data.sporsmalId
+            );
+            return {
+                ...state,
+                data: [...besvarteSpm, action.data]
+            };
+        }
         case ActionType.TILBAKE:
             return { ...state };
         default:
@@ -44,7 +48,10 @@ export function besvar(svar: BesvarelseModell): BesvarAction {
     };
 }
 
-export function marker(sporsmalId: number, svarAlternativ: SvarAlternativModell[]): EndreAlternativAction {
+export function marker(
+    sporsmalId: number,
+    svarAlternativ: SvarAlternativModell[]
+): EndreAlternativAction {
     return {
         type: ENDRE_ALTERNATIV,
         data: {
