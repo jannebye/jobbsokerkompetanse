@@ -45,11 +45,11 @@ class ScrollView extends React.Component<{}, ScrollviewState> {
     }
 
     componentDidMount() {
-        document.addEventListener('scroll', this.scrollHandler);
+        document.addEventListener('scroll', this.scrollHandler.bind(this));
     }
 
     componentWillUnmount() {
-        document.removeEventListener('scroll', this.scrollHandler);
+        document.removeEventListener('scroll', this.scrollHandler.bind(this));
     }
 
     render() {
