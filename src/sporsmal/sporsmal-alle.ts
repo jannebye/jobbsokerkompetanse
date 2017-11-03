@@ -111,11 +111,11 @@ const spm: Sporsmal[] = [
         id: 9,
         sporsmal: 'Hvor etterspurt er kompetansen sin på arbeidsmarkedet?',
         alternativer: [
-            { id: '0901', tekst: '1' },
-            { id: '0902', tekst: '2' },
-            { id: '0903', tekst: '3' },
-            { id: '0904', tekst: '4' },
-            { id: '0905', tekst: '5' }
+            { id: '0901', tekst: '1', skalaId: 1 },
+            { id: '0902', tekst: '2', skalaId: 2 },
+            { id: '0903', tekst: '3', skalaId: 3 },
+            { id: '0904', tekst: '4', skalaId: 4 },
+            { id: '0905', tekst: '5', skalaId: 5 }
         ],
         type: 'skala'
     },
@@ -196,11 +196,11 @@ const spm: Sporsmal[] = [
         id: 16,
         sporsmal: 'Hvor trygg er du i en intervjusituasjon?',
         alternativer: [
-            { id: '1601', tekst: '1' },
-            { id: '1602', tekst: '2' },
-            { id: '1603', tekst: '3' },
-            { id: '1604', tekst: '4' },
-            { id: '1605', tekst: '5' }
+            { id: '1601', tekst: '1', skalaId: 1 },
+            { id: '1602', tekst: '2', skalaId: 2 },
+            { id: '1603', tekst: '3', skalaId: 3 },
+            { id: '1604', tekst: '4', skalaId: 4 },
+            { id: '1605', tekst: '5', skalaId: 5 }
         ],
         type: 'skala'
     },
@@ -232,11 +232,11 @@ const spm: Sporsmal[] = [
         id: 18,
         sporsmal: 'Hvordan pleier du å gjøre det på intervju?',
         alternativer: [
-            { id: '1801', tekst: '1' },
-            { id: '1802', tekst: '2' },
-            { id: '1803', tekst: '3' },
-            { id: '1804', tekst: '4' },
-            { id: '1805', tekst: '5' }
+            { id: '1801', tekst: '1', skalaId: 1 },
+            { id: '1802', tekst: '2', skalaId: 2 },
+            { id: '1803', tekst: '3', skalaId: 3 },
+            { id: '1804', tekst: '4', skalaId: 4 },
+            { id: '1805', tekst: '5', skalaId: 5 }
         ],
         type: 'skala'
     },

@@ -9,11 +9,11 @@ class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <div className="content">
-                    <div className="limit">
-                        <Innhold/>
+                    <div className="content">
+                        <div className="limit">
+                            <Innhold/>
+                        </div>
                     </div>
-                </div>
             </Provider>
         );
     }

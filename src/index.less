@@ -39,6 +39,11 @@
     padding: 0;
 }
 
+.skjemaelement__feilmelding {
+    font-style: italic;
+    color: @redError;
+}
+
 .hjelpetekst {
     color: @navMorkGra;
 }
@@ -85,5 +90,14 @@
             outline: none;
             box-shadow: 0 0 0 3px @orangeFocus;
         }
+    }
+}
+
+.resultatliste {
+    list-style: none;
+    .sporsmal__besvarelse {
+        border: 1px solid @navBlaLighten20;
+        padding: 1rem;
+        margin-top: 1rem;
     }
 }
