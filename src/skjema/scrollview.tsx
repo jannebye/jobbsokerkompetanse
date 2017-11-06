@@ -1,8 +1,7 @@
 import * as React from 'react';
-import throttle from 'lodash.throttle';
 import { SporsmalProps } from './sporsmal';
 
-function distance(element: HTMLElement) {
+function beregnDistanse(element: HTMLElement) {
     const windowMidpoint = window.innerHeight / 2;
     const br = element.getBoundingClientRect();
     const elementMidpoint = br.top + br.height / 2;
@@ -30,28 +29,27 @@ class ScrollView extends React.Component<{}, ScrollviewState> {
         }
     }
 
-    scrollHandler = throttle(() => {
+    scrollHandler() {
         const children = Array.from(this.element.childNodes);
-        const closestChild = children.map(distance).reduce((
-            closest,
-            distance
-        ) => {
-            if (distance.distance < closest.distance) {
-                return distance;
-            }
-            return closest;
-        },
-        { element: null, distance: 99999 }).element;
+        const closestChild = children.map(beregnDistanse).reduce(
+            (closest, distance) => {
+                if (distance.distance < closest.distance) {
+                    return distance;
+                }
+                return closest;
+            },
+            {element: null, distance: 99999}
+        ).element;
 
         this.setState({ activeIndex: children.indexOf(closestChild!) });
-    }, 250);
+    }
 
     componentDidMount() {
-        document.addEventListener('scroll', this.scrollHandler);
+        document.addEventListener('scroll', this.scrollHandler.bind(this));
     }
 
     componentWillUnmount() {
-        document.removeEventListener('scroll', this.scrollHandler);
+        document.removeEventListener('scroll', this.scrollHandler.bind(this));
     }
 
     render() {

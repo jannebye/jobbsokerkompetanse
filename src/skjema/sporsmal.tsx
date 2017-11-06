@@ -70,7 +70,8 @@ function prepMarkerAlternativ(
         if (type === 'radio') {
             return [alternativ];
         } else if (type === 'skala') {
-            return [...alternativListe, ...sporsmalAlternativer.filter((alt) => {
+            alternativListe = [];
+            return [...sporsmalAlternativer.filter((alt) => {
                 return (alt.skalaId!) <= (alternativ.skalaId!);
             })];
         }

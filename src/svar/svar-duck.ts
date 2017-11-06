@@ -28,6 +28,7 @@ export default function reducer(
             const besvarteSpm: BesvarelseModell[] = state.data.filter(
                 besvarelse => besvarelse.sporsmalId !== action.data.sporsmalId
             );
+            console.log(besvarteSpm);
             return {
                 ...state,
                 data: [...besvarteSpm, action.data]
@@ -52,6 +53,7 @@ export function marker(
     sporsmalId: number,
     svarAlternativ: SvarAlternativModell[]
 ): EndreAlternativAction {
+    console.log('marker', sporsmalId, svarAlternativ);
     return {
         type: ENDRE_ALTERNATIV,
         data: {
