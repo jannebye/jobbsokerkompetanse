@@ -102,6 +102,9 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             ? besvartSpm.svarAlternativer
             : [];
         const cls = ['sporsmal', isActive ? 'active' : ''].join(' ');
+        if (this.state.feil && markerteAlternativer.length !== 0) {
+            this.setState({feil: false});
+        }
         return (
             <li id={'sp-' + sporsmal.id} className={cls}>
                 <h1 className="typo-element blokk-xs">{sporsmal.sporsmal}</h1>
