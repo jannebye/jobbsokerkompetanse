@@ -12,14 +12,16 @@ import {
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
 import Alternativ from './alternativ';
+import Avhengigheter, { AvhengighetModell } from '../utils/avhengigheter';
+import { AlternativTyper } from '../utils/konstanter';
 
-function finnHjelpetekst(type: string): string {
+function finnHjelpetekst(type: AlternativTyper): string {
     switch (type) {
-        case 'checkbox':
+        case AlternativTyper.FLERVALG:
             return flereValgHjelpetekst;
-        case 'radio':
+        case AlternativTyper.ETTVALG:
             return ettValgHjelpetekst;
-        case 'skala':
+        case AlternativTyper.SKALA:
             return skalaHjelpetekst;
         default:
             return '';
@@ -79,6 +81,15 @@ function prepMarkerAlternativ(
     }
 }
 
+function sjekkAvhengigheter(sporsmalId: number, svarteAlternativ: SvarAlternativModell[]): number {
+    const avhengighet: AvhengighetModell | undefined = Avhengigheter.find(avh => avh.sporsmalId === sporsmalId);
+    if ( !!avhengighet &&
+        !!svarteAlternativ.find(a => a.id === avhengighet.harSvartAlternativId) ) {
+        return avhengighet.sendesTilSporsmalId;
+    }
+    return 0;
+}
+
 type SporsmalProps = OwnProps & Dispatch & StateProps;
 
 class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
@@ -87,9 +98,16 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         this.state = {feil: false};
     }
 
-    sjekkSvar(markerteSpm: SvarAlternativModell[]) {
+    sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: number) {
         if (markerteSpm.length === 0) {
             this.setState({feil: true});
+        } else if (sjekkAvhengigheter(sporsmalId, markerteSpm) > 0) {
+            document.getElementById(`sp-${sjekkAvhengigheter(sporsmalId, markerteSpm)}`)!.scrollIntoView();
+            window.scrollBy(0, -300);
+        } else {
+            const nesteSpmId = sporsmalId + 1;
+            document.getElementById(`sp-${nesteSpmId}`)!.scrollIntoView();
+            window.scrollBy(0, -300);
         }
     }
 
@@ -107,8 +125,8 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             this.setState({feil: false});
         }
         return (
-            <li id={'sp-' + sporsmal.id} className={cls}>
-                <h1 className="typo-element blokk-xs">{sporsmal.sporsmal}</h1>
+            <li ref={'spm-' + sporsmal.id} id={'sp-' + sporsmal.id} className={cls}>
+                <h1 className="typo-element blokk-xs">{sporsmal.id + '.' + ' ' + sporsmal.sporsmal}</h1>
                 {this.state.feil && <p className="skjemaelement__feilmelding">
                     Du må svare på spørsmålet før du kan gå videre</p>}
                 <p className="hjelpetekst">{hjelpetekst}</p>
@@ -143,7 +161,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                     key="besvar"
                     onClick={e => {
                         e.preventDefault();
-                        this.sjekkSvar(markerteAlternativer);
+                        this.sjekkSvar(markerteAlternativer, sporsmal.id);
                     }}
                 >
                     Fortsett
@@ -152,7 +170,6 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         );
     }
 }
-
 
 const mapStateToProps = (state: AppState): StateProps => ({
     besvarteSporsmal: state.svar.data

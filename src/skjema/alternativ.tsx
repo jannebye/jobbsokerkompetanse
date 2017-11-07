@@ -1,24 +1,27 @@
 import * as React from 'react';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
+import { AlternativTyper } from '../utils/konstanter';
+import OverskriftMedHjelpeTekst from './overskrift-med-hjelpetekst';
 
 interface AlternativProps {
     alternativ: SvarAlternativModell;
     erValgt: boolean;
     markerAlternativ: () => void;
     sporsmalId: number;
-    sporsmalType: string;
+    sporsmalType: AlternativTyper;
 }
 
 function Alternativ({ alternativ, erValgt, markerAlternativ, sporsmalId, sporsmalType }: AlternativProps) {
+    const skalHaHjelpetekst: boolean = alternativ.id === '0111';
     return (
         <div key={alternativ.id} className="svar">
             <input
                 id={alternativ.id}
                 className="svar__radio"
                 type={
-                    sporsmalType !== 'skala'
+                    sporsmalType !== AlternativTyper.SKALA
                         ? sporsmalType
-                        : 'radio'
+                        : AlternativTyper.ETTVALG
                 }
                 name={sporsmalId.toString()}
                 value={alternativ.id}
@@ -34,6 +37,8 @@ function Alternativ({ alternativ, erValgt, markerAlternativ, sporsmalId, sporsma
                 }}
             >
                 {alternativ.tekst}
+                {skalHaHjelpetekst &&
+                <OverskriftMedHjelpeTekst overskriftId="" hjelpetekstId="F.eks I papiraviser"/>}
             </label>
         </div>
     );

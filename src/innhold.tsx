@@ -36,7 +36,7 @@ render() {
     const erAlleSpormalBesvart = this.state.erAlleSporsmalBesvart;
     return (
             erAlleSpormalBesvart ?
-                <Resultat/> : <Skjema handleSubmit={() => this.handleSubmit()}/>
+                <Resultat/> : <Skjema handleSubmit={this.handleSubmit}/>
     );
 }
 }

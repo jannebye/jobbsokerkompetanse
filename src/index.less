@@ -6,6 +6,7 @@
 @import '../node_modules/nav-frontend-lenker-style/src/lenker-style';
 @import '../node_modules/nav-frontend-spinner-style/src/spinner-style';
 @import '../node_modules/nav-frontend-typografi-style/src/index';
+@import '../node_modules/nav-frontend-hjelpetekst-style/src/hjelpetekst-style';
 
 .limit {
     margin: 1rem auto;
@@ -58,11 +59,11 @@
         width: 0;
 
         & + .svar__label {
-            display: block;
+            display: flex;
+            justify-content: space-between;
             border: 1px solid @grayIcon;
             padding: 0.5rem 1rem;
             width: 100%;
-            text-align: left;
 
             &:hover {
                 background-color: @navLysGra;
@@ -89,6 +90,22 @@
         & + .svar__label {
             outline: none;
             box-shadow: 0 0 0 3px @orangeFocus;
+        }
+    }
+
+    .overskrift-med-hjelpetekst {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        svg {
+            height: 16px;
+            width: 16px;
+        }
+
+        .hjelpetekst {
+            height: 18px;
+            padding-left: 0.5rem;
         }
     }
 }
