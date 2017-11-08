@@ -1,4 +1,5 @@
 import Sporsmal from './sporsmal-modell';
+import { AlternativTyper } from '../utils/konstanter';
 
 const spm: Sporsmal[] = [
     {
@@ -23,7 +24,7 @@ const spm: Sporsmal[] = [
             { id: '0110', tekst: 'Kontakter arbeidsgivere direkte' },
             { id: '0111', tekst: 'Annet' }
         ],
-        type: 'checkbox'
+        type: AlternativTyper.FLERVALG
     },
     {
         id: 2,
@@ -36,7 +37,7 @@ const spm: Sporsmal[] = [
             { id: '0205', tekst: 'I utlandet' },
             { id: '0206', tekst: 'Ingen begrensninger' }
         ],
-        type: 'checkbox'
+        type: AlternativTyper.FLERVALG
     },
     {
         id: 3,
@@ -46,7 +47,7 @@ const spm: Sporsmal[] = [
             { id: '0302', tekst: 'Jeg søker på litt forskjellig' },
             { id: '0303', tekst: 'Jeg søker på alt jeg kommer over' }
         ],
-        type: 'radio'
+        type: AlternativTyper.ETTVALG
     },
     {
         id: 4,
@@ -59,7 +60,7 @@ const spm: Sporsmal[] = [
             { id: '0405', tekst: 'Heltid' },
             { id: '0406', tekst: 'Deltid' }
         ],
-        type: 'checkbox'
+        type: AlternativTyper.FLERVALG
     },
     {
         id: 5,
@@ -70,7 +71,7 @@ const spm: Sporsmal[] = [
             { id: '0503', tekst: 'Kunne vært bedre' },
             { id: '0504', tekst: 'Misfornøyd' }
         ],
-        type: 'radio'
+        type: AlternativTyper.ETTVALG
     },
     {
         id: 6,
@@ -85,7 +86,7 @@ const spm: Sporsmal[] = [
             { id: '0607', tekst: 'Andre steder' },
             { id: '0608', tekst: 'Jeg har ikke registrert CV-en min' }
         ],
-        type: 'checkbox'
+        type: AlternativTyper.FLERVALG
     },
     {
         id: 7,
@@ -95,7 +96,7 @@ const spm: Sporsmal[] = [
             { id: '0702', tekst: 'Ganske synlig' },
             { id: '0703', tekst: 'Veldig synlig' }
         ],
-        type: 'radio'
+        type: AlternativTyper.ETTVALG
     },
     {
         id: 8,
@@ -105,19 +106,19 @@ const spm: Sporsmal[] = [
             { id: '0802', tekst: 'Gjør noen tilpasninger' },
             { id: '0803', tekst: 'Sender samme CV til alle' }
         ],
-        type: 'radio'
+        type: AlternativTyper.ETTVALG
     },
     {
         id: 9,
         sporsmal: 'Hvor etterspurt er kompetansen sin på arbeidsmarkedet?',
         alternativer: [
-            { id: '0901', tekst: '1' },
-            { id: '0902', tekst: '2' },
-            { id: '0903', tekst: '3' },
-            { id: '0904', tekst: '4' },
-            { id: '0905', tekst: '5' }
+            { id: '0901', tekst: '1', skalaId: 1 },
+            { id: '0902', tekst: '2', skalaId: 2 },
+            { id: '0903', tekst: '3', skalaId: 3 },
+            { id: '0904', tekst: '4', skalaId: 4 },
+            { id: '0905', tekst: '5', skalaId: 5 }
         ],
-        type: 'skala'
+        type: AlternativTyper.SKALA
     },
     {
         id: 10,
@@ -137,7 +138,7 @@ const spm: Sporsmal[] = [
             { id: '1006', tekst: 'Tilbudt stilling uten å ha søkt' },
             { id: '1007', tekst: 'Lite eller ingen erfaring' }
         ],
-        type: 'checkbox'
+        type: AlternativTyper.FLERVALG
     },
     {
         id: 11,
@@ -149,7 +150,7 @@ const spm: Sporsmal[] = [
             { id: '1104', tekst: '21-50' },
             { id: '1105', tekst: '50+' }
         ],
-        type: 'radio'
+        type: AlternativTyper.ETTVALG
     },
     {
         id: 12,
@@ -160,7 +161,7 @@ const spm: Sporsmal[] = [
             { id: '1202', tekst: 'Noen få' },
             { id: '1203', tekst: 'Flere' }
         ],
-        type: 'radio'
+        type: AlternativTyper.ETTVALG
     },
     {
         id: 13,
@@ -171,7 +172,7 @@ const spm: Sporsmal[] = [
             { id: '1302', tekst: 'Noen få' },
             { id: '1303', tekst: 'Flere' }
         ],
-        type: 'radio'
+        type: AlternativTyper.ETTVALG
     },
     {
         id: 14,
@@ -181,7 +182,7 @@ const spm: Sporsmal[] = [
             { id: '1402', tekst: 'Gjør noen tilpasninger' },
             { id: '1403', tekst: 'Skreddersyr alle søknader' }
         ],
-        type: 'radio'
+        type: AlternativTyper.ETTVALG
     },
     {
         id: 15,
@@ -190,19 +191,19 @@ const spm: Sporsmal[] = [
             { id: '1501', tekst: 'Ja' },
             { id: '1502', tekst: 'Nei' }
         ],
-        type: 'radio'
+        type: AlternativTyper.ETTVALG
     },
     {
         id: 16,
         sporsmal: 'Hvor trygg er du i en intervjusituasjon?',
         alternativer: [
-            { id: '1601', tekst: '1' },
-            { id: '1602', tekst: '2' },
-            { id: '1603', tekst: '3' },
-            { id: '1604', tekst: '4' },
-            { id: '1605', tekst: '5' }
+            { id: '1601', tekst: '1', skalaId: 1 },
+            { id: '1602', tekst: '2', skalaId: 2 },
+            { id: '1603', tekst: '3', skalaId: 3 },
+            { id: '1604', tekst: '4', skalaId: 4 },
+            { id: '1605', tekst: '5', skalaId: 5 }
         ],
-        type: 'skala'
+        type: AlternativTyper.SKALA
     },
     {
         id: 17,
@@ -226,19 +227,19 @@ const spm: Sporsmal[] = [
             },
             { id: '1707', tekst: 'Øver på å presentere meg selv' }
         ],
-        type: 'checkbox'
+        type: AlternativTyper.FLERVALG
     },
     {
         id: 18,
         sporsmal: 'Hvordan pleier du å gjøre det på intervju?',
         alternativer: [
-            { id: '1801', tekst: '1' },
-            { id: '1802', tekst: '2' },
-            { id: '1803', tekst: '3' },
-            { id: '1804', tekst: '4' },
-            { id: '1805', tekst: '5' }
+            { id: '1801', tekst: '1', skalaId: 1 },
+            { id: '1802', tekst: '2', skalaId: 2 },
+            { id: '1803', tekst: '3', skalaId: 3 },
+            { id: '1804', tekst: '4', skalaId: 4 },
+            { id: '1805', tekst: '5', skalaId: 5 }
         ],
-        type: 'skala'
+        type: AlternativTyper.SKALA
     },
     {
         id: 19,
@@ -254,7 +255,7 @@ const spm: Sporsmal[] = [
             { id: '1908', tekst: 'Annet' },
             { id: '1909', tekst: 'Ikke noe spesielt' }
         ],
-        type: 'checkbox'
+        type: AlternativTyper.FLERVALG
     },
     {
         id: 20,
@@ -266,7 +267,7 @@ const spm: Sporsmal[] = [
             { id: '2004', tekst: 'Synes jeg har gjort en brukbar jobb' },
             { id: '2005', tekst: 'Er veldig fornøyd med egen innsats' }
         ],
-        type: 'radio'
+        type: AlternativTyper.ETTVALG
     }
 ];
 
