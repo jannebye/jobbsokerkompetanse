@@ -5,3 +5,8 @@ replicas:
   max: 4
   cpuThresholdPercentage: 50
 port: 80
+healthcheck:
+  liveness:
+    path: nais/alive.txt
+  readiness:
+    path: nais/ready.txt
