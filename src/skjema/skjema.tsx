@@ -9,7 +9,7 @@ interface SkjemaProps {
 
 export default function({ handleSubmit }: SkjemaProps) {
     const sporsmal = alleSporsmal.map(spm => {
-        return <Sporsmal isActive={false} key={spm.sporsmal} sporsmal={spm}/>;
+        return <Sporsmal isActive={false} key={spm.id} sporsmal={spm}/>;
     });
 
     return (
