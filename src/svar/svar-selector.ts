@@ -1,6 +1,6 @@
 import { AppState } from '../reducer';
 import { SvarState } from './svar-duck';
-import alleSporsmal from '../sporsmal/sporsmal-alle';
+import alleSporsmal from '../sporsmal/sporsmal-alle-ny';
 import BesvarelseModell from './svar-modell';
 
 function selectSvarSlice(state: AppState): SvarState {
@@ -28,6 +28,6 @@ export function selectErAlleSpormalBesvart(besvarelser: BesvarelseModell[]) {
 
 export function sorterSvar(svar: BesvarelseModell[]) {
     svar.sort(function(svarA: BesvarelseModell, svarB: BesvarelseModell) {
-        return svarA.sporsmalId - svarB.sporsmalId;
+        return Number(svarA.sporsmalId.split('-')[2]) - Number(svarB.sporsmalId.split('-')[2]);
     });
 }

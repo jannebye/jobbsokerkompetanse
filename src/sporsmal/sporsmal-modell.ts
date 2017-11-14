@@ -3,8 +3,7 @@ import { OverskriftModell } from '../tekster/overskrifter';
 import { AlternativTyper } from '../utils/konstanter';
 
 export default interface SporsmalModell {
-    id: number;
-    sporsmal: string;
+    id: string;
     alternativer: SvarAlternativModell[];
     type: AlternativTyper;
     overskriftId?: OverskriftModell;

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import { marker } from '../svar/svar-duck';
-import { Dispatch } from '../types';
-import { AppState } from '../reducer';
+import {marker} from '../svar/svar-duck';
+import {Dispatch} from '../types';
+import {AppState} from '../reducer';
 import {
     ettValgHjelpetekst,
     flereValgHjelpetekst,
@@ -12,8 +12,8 @@ import {
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
 import Alternativ from './alternativ';
-import Avhengigheter, { AvhengighetModell } from '../utils/avhengigheter';
-import { AlternativTyper } from '../utils/konstanter';
+import Avhengigheter, {AvhengighetModell} from '../utils/avhengigheter';
+import {AlternativTyper} from '../utils/konstanter';
 
 function finnHjelpetekst(type: AlternativTyper): string {
     switch (type) {
@@ -29,10 +29,8 @@ function finnHjelpetekst(type: AlternativTyper): string {
 }
 
 interface DispatchProps {
-    markerAlternativ: (
-        sporsmalId: number,
-        alternativ: SvarAlternativModell[]
-    ) => void;
+    markerAlternativ: (sporsmalId: string,
+                       alternativ: SvarAlternativModell[]) => void;
 }
 
 interface OwnProps {
@@ -51,13 +49,11 @@ interface EgenStateProps {
 
 export type SporsmalProps = DispatchProps & OwnProps & StateProps;
 
-function prepMarkerAlternativ(
-    alternativ: SvarAlternativModell,
-    erValgt: boolean,
-    alternativListe: SvarAlternativModell[],
-    sporsmal: SporsmalModell,
-    type: string
-): SvarAlternativModell[] {
+function prepMarkerAlternativ(alternativ: SvarAlternativModell,
+                              erValgt: boolean,
+                              alternativListe: SvarAlternativModell[],
+                              sporsmal: SporsmalModell,
+                              type: string): SvarAlternativModell[] {
     let sporsmalAlternativer = [...sporsmal.alternativer];
     if (erValgt) {
         if (type === 'radio') {
@@ -81,27 +77,34 @@ function prepMarkerAlternativ(
     }
 }
 
-function sjekkAvhengigheter(sporsmalId: number, svarteAlternativ: SvarAlternativModell[]): number {
+function sjekkAvhengigheter(sporsmalId: string, svarteAlternativ: SvarAlternativModell[]): string {
     const avhengighet: AvhengighetModell | undefined = Avhengigheter.find(avh => avh.sporsmalId === sporsmalId);
-    if ( !!avhengighet &&
-        !!svarteAlternativ.find(a => a.id === avhengighet.harSvartAlternativId) ) {
+    if (!!avhengighet &&
+        !!svarteAlternativ.find(a => a.id === avhengighet.harSvartAlternativId)) {
         return avhengighet.sendesTilSporsmalId;
     }
-    return 0;
+    return '';
 }
 
 type SporsmalProps = OwnProps & Dispatch & StateProps;
 
 class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
+    private liElement: HTMLLIElement;
+
     constructor(props: SporsmalProps) {
         super(props);
         this.state = {feil: false};
+        this.focusNesteSporsmal = this.focusNesteSporsmal.bind(this);
     }
 
-    sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: number) {
+    focusNesteSporsmal() {
+        //this.liElement.focus();
+    }
+
+    sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: string) {
         if (markerteSpm.length === 0) {
             this.setState({feil: true});
-        } else if (sjekkAvhengigheter(sporsmalId, markerteSpm) > 0) {
+        } else if (sjekkAvhengigheter(sporsmalId, markerteSpm)) {
             document.getElementById(`sp-${sjekkAvhengigheter(sporsmalId, markerteSpm)}`)!.scrollIntoView();
             window.scrollBy(0, -300);
         } else {
@@ -112,7 +115,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
     }
 
     render() {
-        const { sporsmal, besvarteSporsmal, markerAlternativ, isActive  } = this.props;
+        const {sporsmal, besvarteSporsmal, markerAlternativ, isActive} = this.props;
         const hjelpetekst: string = finnHjelpetekst(sporsmal.type);
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
             besvarelse => besvarelse.sporsmalId === sporsmal.id
@@ -125,47 +128,51 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             this.setState({feil: false});
         }
         return (
-            <li ref={'spm-' + sporsmal.id} id={'sp-' + sporsmal.id} className={cls}>
-                <h1 className="typo-element blokk-xs">{sporsmal.id + '.' + ' ' + sporsmal.sporsmal}</h1>
-                {this.state.feil && <p className="skjemaelement__feilmelding">
-                    Du må svare på spørsmålet før du kan gå videre</p>}
-                <p className="hjelpetekst">{hjelpetekst}</p>
-                {sporsmal.alternativer.map(function(
-                    alternativ: SvarAlternativModell
-                ) {
-                    const erValgt = !!markerteAlternativer.find(
-                        alt => alt.id === alternativ.id
-                    );
-                    return (
-                        <Alternativ
-                            key={alternativ.id}
-                            alternativ={alternativ}
-                            erValgt={erValgt}
-                            sporsmalId={sporsmal.id}
-                            sporsmalType={sporsmal.type}
-                            markerAlternativ={() => markerAlternativ(
-                                sporsmal.id,
-                                prepMarkerAlternativ(
-                                    alternativ,
-                                    erValgt,
-                                    markerteAlternativer,
-                                    sporsmal,
-                                    sporsmal.type
-                                )
-                            )}
-                        />
-                    );
-                })}
-                <button
-                    className="knapp knapp--hoved"
-                    key="besvar"
-                    onClick={e => {
-                        e.preventDefault();
-                        this.sjekkSvar(markerteAlternativer, sporsmal.id);
-                    }}
-                >
-                    Fortsett
-                </button>
+            <li
+                ref={li => (this.liElement = li!)}
+                id={'sp-' + sporsmal.id}
+                className={cls}
+                tabIndex={0}
+            >
+                <section>
+                    <h1 className="typo-element blokk-xs">{sporsmal.id + '.' + ' ' + sporsmal.id}</h1>
+                    {this.state.feil && <p className="skjemaelement__feilmelding">
+                        Du må svare på spørsmålet før du kan gå videre</p>}
+                    <p className="hjelpetekst">{hjelpetekst}</p>
+                    {sporsmal.alternativer.map(function (alternativ: SvarAlternativModell) {
+                        const erValgt = !!markerteAlternativer.find(
+                            alt => alt.id === alternativ.id
+                        );
+                        return (
+                            <Alternativ
+                                key={alternativ.id}
+                                alternativ={alternativ}
+                                erValgt={erValgt}
+                                sporsmalId={sporsmal.id}
+                                sporsmalType={sporsmal.type}
+                                markerAlternativ={() => markerAlternativ(
+                                    sporsmal.id,
+                                    prepMarkerAlternativ(
+                                        alternativ,
+                                        erValgt,
+                                        markerteAlternativer,
+                                        sporsmal,
+                                        sporsmal.type
+                                    )
+                                )}
+                            />
+                        );
+                    })}
+                    <button className="knapp knapp--hoved" key="besvar"
+                            onClick={e => {
+                                e.preventDefault();
+                                this.sjekkSvar(markerteAlternativer, sporsmal.id);
+                                this.focusNesteSporsmal();
+                            }}
+                    >
+                        Fortsett
+                    </button>
+                </section>
             </li>
         );
     }
@@ -175,10 +182,8 @@ const mapStateToProps = (state: AppState): StateProps => ({
     besvarteSporsmal: state.svar.data
 });
 
-const mapDispatchToProps = (
-    dispatch: Dispatch,
-    props: OwnProps
-): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch,
+                            props: OwnProps): DispatchProps => ({
     markerAlternativ: (sporsmalId, alternativ: SvarAlternativModell[]) =>
         dispatch(marker(sporsmalId, alternativ))
 });

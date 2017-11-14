@@ -7,7 +7,7 @@ interface AlternativProps {
     alternativ: SvarAlternativModell;
     erValgt: boolean;
     markerAlternativ: () => void;
-    sporsmalId: number;
+    sporsmalId: string;
     sporsmalType: AlternativTyper;
 }
 
@@ -36,7 +36,7 @@ function Alternativ({ alternativ, erValgt, markerAlternativ, sporsmalId, sporsma
                     markerAlternativ();
                 }}
             >
-                {alternativ.tekst}
+                {alternativ.id}
                 {skalHaHjelpetekst &&
                 <OverskriftMedHjelpeTekst overskriftId="" hjelpetekstId="F.eks I papiraviser"/>}
             </label>

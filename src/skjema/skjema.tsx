@@ -1,5 +1,5 @@
 import * as React from 'react';
-import alleSporsmal from '../sporsmal/sporsmal-alle';
+import alleSporsmal from '../sporsmal/sporsmal-alle-ny';
 import Sporsmal from './sporsmal';
 import ScrollView from './scrollview';
 
@@ -15,9 +15,7 @@ export default function({ handleSubmit }: SkjemaProps) {
     return (
         <form className="sporsmalsskjema">
             <ScrollView>{sporsmal}</ScrollView>
-            <button
-                onClick={() => handleSubmit()}
-            >
+            <button onClick={() => handleSubmit()}>
                 Send inn
             </button>
         </form>
