@@ -160,7 +160,10 @@ const spm: Sporsmal[] = [
         id: 'intervju-spm-01',
         alternativer: [
             { id: 'intervju-svar-0101' },
-            { id: 'intervju-svar-0102' }
+            { id: 'intervju-svar-0102' },
+            { id: 'intervju-svar-0103' },
+            { id: 'intervju-svar-0104' },
+            { id: 'intervju-svar-0105' }
         ],
         type: AlternativTyper.ETTVALG
     },
