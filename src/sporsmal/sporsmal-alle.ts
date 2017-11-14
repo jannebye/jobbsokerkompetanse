@@ -1,7 +1,7 @@
-import Sporsmal from './sporsmal-modell';
+import SporsmalModell from './sporsmal-modell';
 import { AlternativTyper } from '../utils/konstanter';
 
-const spm: Sporsmal[] = [
+const spm: SporsmalModell[] = [
     {
         id: 1,
         sporsmal: 'Hvor finner du ledige stillinger?',
@@ -176,7 +176,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 14,
-        sporsmal: 'Tilpasser du søknaden til hver enkelt stillingsannonse?',
+        sporsmal: 'Er søknaden din et direkte svar på stillingsannonsen?',
         alternativer: [
             { id: '1401', tekst: 'Sender samme søknad til alle' },
             { id: '1402', tekst: 'Gjør noen tilpasninger' },
@@ -186,27 +186,18 @@ const spm: Sporsmal[] = [
     },
     {
         id: 15,
-        sporsmal: 'Har du vært på jobbintervju tidligere?',
+        sporsmal: 'Hvor trygg er du i en intervjusituasjon?',
         alternativer: [
-            { id: '1501', tekst: 'Ja' },
-            { id: '1502', tekst: 'Nei' }
+            { id: '1601', tekst: 'Jeg føler meg ikke trygg eller konfortabel i intervju'},
+            { id: '1602', tekst: 'Jeg føler meg litt utrygg i intervju' },
+            { id: '1603', tekst: 'Jeg føler meg litt trygg i intervju' },
+            { id: '1604', tekst: 'Jeg føler meg ganske trygg i intervju' },
+            { id: '1605', tekst: 'Jeg føler meg veldig trygg i intervju' }
         ],
         type: AlternativTyper.ETTVALG
     },
     {
         id: 16,
-        sporsmal: 'Hvor trygg er du i en intervjusituasjon?',
-        alternativer: [
-            { id: '1601', tekst: '1', skalaId: 1 },
-            { id: '1602', tekst: '2', skalaId: 2 },
-            { id: '1603', tekst: '3', skalaId: 3 },
-            { id: '1604', tekst: '4', skalaId: 4 },
-            { id: '1605', tekst: '5', skalaId: 5 }
-        ],
-        type: AlternativTyper.SKALA
-    },
-    {
-        id: 17,
         sporsmal: 'Hvor trygg er du i en intervjusituasjon?',
         alternativer: [
             {
@@ -230,7 +221,7 @@ const spm: Sporsmal[] = [
         type: AlternativTyper.FLERVALG
     },
     {
-        id: 18,
+        id: 17,
         sporsmal: 'Hvordan pleier du å gjøre det på intervju?',
         alternativer: [
             { id: '1801', tekst: '1', skalaId: 1 },
@@ -242,7 +233,7 @@ const spm: Sporsmal[] = [
         type: AlternativTyper.SKALA
     },
     {
-        id: 19,
+        id: 18,
         sporsmal: 'Hva har du gjort for å øke sjansene dine for å få en jobb?',
         alternativer: [
             { id: '1901', tekst: 'Tatt interessetester' },
@@ -258,7 +249,7 @@ const spm: Sporsmal[] = [
         type: AlternativTyper.FLERVALG
     },
     {
-        id: 20,
+        id: 19,
         sporsmal: 'Hvordan vurderer du din egen innsats som jobbsøker?',
         alternativer: [
             { id: '2001', tekst: 'Har ikke begynt å søkte jobber enda' },
