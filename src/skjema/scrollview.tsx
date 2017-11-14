@@ -31,15 +31,16 @@ class ScrollView extends React.Component<{}, ScrollviewState> {
 
     scrollHandler() {
         const children = Array.from(this.element.childNodes);
-        const closestChild = children.map(beregnDistanse).reduce(
-            (closest, distance) => {
-                if (distance.distance < closest.distance) {
-                    return distance;
-                }
-                return closest;
-            },
-            {element: null, distance: 99999}
-        ).element;
+        const closestChild = children.map(beregnDistanse).reduce((
+            closest,
+            distance
+        ) => {
+            if (distance.distance < closest.distance) {
+                return distance;
+            }
+            return closest;
+        },
+        { element: null, distance: 99999 }).element;
 
         this.setState({ activeIndex: children.indexOf(closestChild!) });
     }

@@ -183,7 +183,7 @@ const spm: Sporsmal[] = [
             { id: 'intervju-svar-0303' },
             { id: 'intervju-svar-0304' },
             { id: 'intervju-svar-0305' },
-            { id: 'intervju-svar-0306' },
+            { id: 'intervju-svar-0306' },
             { id: 'intervju-svar-0307' }
         ],
         type: AlternativTyper.FLERVALG

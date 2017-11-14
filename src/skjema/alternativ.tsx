@@ -11,7 +11,13 @@ interface AlternativProps {
     sporsmalType: AlternativTyper;
 }
 
-function Alternativ({ alternativ, erValgt, markerAlternativ, sporsmalId, sporsmalType }: AlternativProps) {
+function Alternativ({
+    alternativ,
+    erValgt,
+    markerAlternativ,
+    sporsmalId,
+    sporsmalType
+}: AlternativProps) {
     const skalHaHjelpetekst: boolean = alternativ.id === '0111';
     return (
         <div key={alternativ.id} className="svar">
@@ -28,17 +34,19 @@ function Alternativ({ alternativ, erValgt, markerAlternativ, sporsmalId, sporsma
             />
             <label
                 htmlFor={alternativ.id}
-                className={`svar__label ${erValgt
-                    ? 'markert'
-                    : ''}`}
+                className={`svar__label ${erValgt ? 'markert' : ''}`}
                 onClick={e => {
                     e.preventDefault();
                     markerAlternativ();
                 }}
             >
                 {alternativ.id}
-                {skalHaHjelpetekst &&
-                <OverskriftMedHjelpeTekst overskriftId="" hjelpetekstId="F.eks I papiraviser"/>}
+                {skalHaHjelpetekst && (
+                    <OverskriftMedHjelpeTekst
+                        overskriftId=""
+                        hjelpetekstId="F.eks I papiraviser"
+                    />
+                )}
             </label>
         </div>
     );

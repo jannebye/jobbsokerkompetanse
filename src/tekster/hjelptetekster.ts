@@ -6,5 +6,4 @@ export const flereValgHjelpetekst =
 export const skalaHjelpetekst =
     'Marker på en skala fra 1 til 5 hvor 1 er "utrygg" og 5 er "trygg".';
 
-export const hjelpeTekst =
-    'Papiravis, oppslagstavler, butikkvinduer mm.';
+export const hjelpeTekst = 'Papiravis, oppslagstavler, butikkvinduer mm.';

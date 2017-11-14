@@ -13,7 +13,8 @@ const Avhengigheter: AvhengighetModell[] = [
         type: AlternativTyper.FLERVALG,
         harSvartAlternativId: '1101',
         sendesTilSporsmalId: 'soke-spm-04'
-    }, {
+    },
+    {
         sporsmalId: 'soke-spm-02',
         type: AlternativTyper.ETTVALG,
         harSvartAlternativId: '1201',
