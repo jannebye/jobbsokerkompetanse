@@ -5,7 +5,8 @@ export interface OverskriftModell {
 
 const cvOverskrift = {
     header: 'CV-en',
-    tekst: 'CV-en skal fortelle hvem du er, hva slags utdanning du har og hva du har gjort. Hvor god er CV-en din?'
+    tekst:
+        'CV-en skal fortelle hvem du er, hva slags utdanning du har og hva du har gjort. Hvor god er CV-en din?'
 };
 
 const finnJobbOverskrift = {
@@ -20,7 +21,8 @@ const sokeErfaringOverskrift = {
 
 const intervjuOverskrift = {
     header: 'Intervjuet',
-    tekst: 'I intervjuet skal du overbevise om at du passer inn i bedriften og at du er et trygt valg.' +
+    tekst:
+        'I intervjuet skal du overbevise om at du passer inn i bedriften og at du er et trygt valg.' +
         'Hvilke erfaringer har du med jobbintervju?'
 };
 

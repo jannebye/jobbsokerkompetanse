@@ -8,14 +8,13 @@ interface OverskriftMedHjelpeTekstProps {
     hjelpetekstId: string;
 }
 
-const OverskriftMedHjelpeTekst = ({ overskriftId, hjelpetekstId }: OverskriftMedHjelpeTekstProps) => (
+const OverskriftMedHjelpeTekst = ({
+    overskriftId,
+    hjelpetekstId
+}: OverskriftMedHjelpeTekstProps) => (
     <div className="overskrift-med-hjelpetekst">
-        <Element tag="h3">
-            {overskriftId}
-        </Element>
-        <HjelpetekstAuto>
-            {hjelpetekstId}
-        </HjelpetekstAuto>
+        <Element tag="h3">{overskriftId}</Element>
+        <HjelpetekstAuto>{hjelpetekstId}</HjelpetekstAuto>
     </div>
 );
 

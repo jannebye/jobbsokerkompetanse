@@ -14,14 +14,22 @@ function Resultat({ besvarteSporsmal }: StateProps) {
         <div>
             Din besvarelse:
             <ul className="resultatliste">
-                {besvarteSporsmal.map((spm) => (<li className="sporsmal__besvarelse">
-                    <h3>Spørsmål {spm.sporsmalId}:</h3>
-                    <h4>{alleSporsmal.find(spom => spom.id === spm.sporsmalId)!.sporsmal}</h4>
-                    <p>Dine svar: </p>
-                    <ul>
-                        {spm.svarAlternativer.map(alt => (<li>{alt.tekst}</li>))}
-                    </ul>
-                </li>))}
+                {besvarteSporsmal.map(spm => (
+                    <li className="sporsmal__besvarelse">
+                        <h3>Spørsmål {spm.sporsmalId}:</h3>
+                        <h4>
+                            {
+                                alleSporsmal.find(
+                                    spom => spom.id === spm.sporsmalId
+                                )!.id
+                            }
+                        </h4>
+                        <p>Dine svar: </p>
+                        <ul>
+                            {spm.svarAlternativer.map(alt => <li>{alt.id}</li>)}
+                        </ul>
+                    </li>
+                ))}
             </ul>
         </div>
     );

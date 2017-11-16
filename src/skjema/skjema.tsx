@@ -9,17 +9,13 @@ interface SkjemaProps {
 
 export default function({ handleSubmit }: SkjemaProps) {
     const sporsmal = alleSporsmal.map(spm => {
-        return <Sporsmal isActive={false} key={spm.id} sporsmal={spm}/>;
+        return <Sporsmal isActive={false} key={spm.id} sporsmal={spm} />;
     });
 
     return (
         <form className="sporsmalsskjema">
             <ScrollView>{sporsmal}</ScrollView>
-            <button
-                onClick={() => handleSubmit()}
-            >
-                Send inn
-            </button>
+            <button onClick={() => handleSubmit()}>Send inn</button>
         </form>
     );
 }

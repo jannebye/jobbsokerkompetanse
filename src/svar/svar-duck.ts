@@ -49,7 +49,7 @@ export function besvar(svar: BesvarelseModell): BesvarAction {
 }
 
 export function marker(
-    sporsmalId: number,
+    sporsmalId: string,
     svarAlternativ: SvarAlternativModell[]
 ): EndreAlternativAction {
     return {

@@ -1,23 +1,24 @@
 import { AlternativTyper } from './konstanter';
 
 export interface AvhengighetModell {
-    sporsmalId: number;
+    sporsmalId: string;
     type: AlternativTyper;
     harSvartAlternativId: string;
-    sendesTilSporsmalId: number;
+    sendesTilSporsmalId: string;
 }
 
 const Avhengigheter: AvhengighetModell[] = [
     {
-        sporsmalId: 11,
+        sporsmalId: 'soke-spm-01',
         type: AlternativTyper.FLERVALG,
         harSvartAlternativId: '1101',
-        sendesTilSporsmalId: 14
-    }, {
-        sporsmalId: 12,
+        sendesTilSporsmalId: 'soke-spm-04'
+    },
+    {
+        sporsmalId: 'soke-spm-02',
         type: AlternativTyper.ETTVALG,
         harSvartAlternativId: '1201',
-        sendesTilSporsmalId: 14
+        sendesTilSporsmalId: 'soke-spm-04'
     }
 ];
 
