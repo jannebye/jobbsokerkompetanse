@@ -7,4 +7,4 @@ export default interface SporsmalModell {
     alternativer: SvarAlternativModell[];
     type: AlternativTyper;
     overskriftId?: OverskriftModell;
-};
+}

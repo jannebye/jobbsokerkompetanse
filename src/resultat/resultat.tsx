@@ -26,7 +26,7 @@ function Resultat({ besvarteSporsmal }: StateProps) {
                         </h4>
                         <p>Dine svar: </p>
                         <ul>
-                            {spm.svarAlternativer.map(alt => <li>{alt.id}</li>)}
+                            {spm.svarAlternativer.map(alt => <li key={alt.id}>{alt.id}</li>)}
                         </ul>
                     </li>
                 ))}

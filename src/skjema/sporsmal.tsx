@@ -78,7 +78,7 @@ function prepMarkerAlternativ(
             alternativListe = [];
             return [
                 ...sporsmalAlternativer.filter(alt => {
-                    return alt.skalaId! <= alternativ.skalaId!;
+                    return alternativ.skalaId! >= alt.skalaId!;
                 })
             ];
         }
@@ -110,11 +110,6 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
     constructor(props: SporsmalProps) {
         super(props);
         this.state = { feil: false };
-        this.focusNesteSporsmal = this.focusNesteSporsmal.bind(this);
-    }
-
-    focusNesteSporsmal() {
-        //this.liElement.focus();
     }
 
     sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: string) {
@@ -200,7 +195,6 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                         onClick={e => {
                             e.preventDefault();
                             this.sjekkSvar(markerteAlternativer, sporsmal.id);
-                            this.focusNesteSporsmal();
                         }}
                     >
                         Fortsett
