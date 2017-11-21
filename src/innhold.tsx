@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Skjema from './skjema/skjema';
 import Resultat from './resultat/resultat';
-import { selectErAlleSpormalBesvart } from './svar/svar-selector';
 import { AppState } from './reducer';
 import { connect } from 'react-redux';
 import BesvarelseModell from './svar/svar-modell';
@@ -11,32 +10,25 @@ interface InnholdStateProps {
 }
 
 interface InnholdProps {
-    erAlleSporsmalBesvart: boolean;
+    visResultat: boolean;
 }
 
 class Innhold extends React.Component<InnholdStateProps, InnholdProps> {
-    constructor(props: any) { // tslint:disable-line:no-any
+    constructor(props: InnholdStateProps) {
         super(props);
 
-        this.state = { erAlleSporsmalBesvart: false };
+        this.state = { visResultat: false };
     }
 
     handleSubmit() {
-        if (selectErAlleSpormalBesvart(this.props.besvarteSporsmal)) {
-            this.setState({ erAlleSporsmalBesvart: true });
-            return <div>OK</div>;
-        } else {
-            return (
-              <div>Ikke alle spørsmål er besvart</div>
-            );
-        }
+        this.setState({ visResultat: true}); // Foreløpig
     }
 
 render() {
-    const erAlleSpormalBesvart = this.state.erAlleSporsmalBesvart;
+    const erAlleSpormalBesvart = this.state.visResultat;
     return (
             erAlleSpormalBesvart ?
-                <Resultat/> : <Skjema handleSubmit={this.handleSubmit}/>
+                <Resultat/> : <Skjema handleSubmit={() => this.handleSubmit()}/>
     );
 }
 }

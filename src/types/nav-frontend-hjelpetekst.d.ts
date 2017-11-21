@@ -8,13 +8,28 @@ declare module 'nav-frontend-hjelpetekst' {
         children: React.ReactNode;
     }
 
-    export class HjelpetekstOver extends React.Component<HjelpetekstProps, {}> {}
-    export class HjelpetekstUnder extends React.Component<HjelpetekstProps, {}> {}
-    export class HjelpetekstHoyre extends React.Component<HjelpetekstProps, {}> {}
+    export class HjelpetekstOver extends React.Component<
+        HjelpetekstProps,
+        {}
+    > {}
+    export class HjelpetekstUnder extends React.Component<
+        HjelpetekstProps,
+        {}
+    > {}
+    export class HjelpetekstHoyre extends React.Component<
+        HjelpetekstProps,
+        {}
+    > {}
     export class HjelpetekstVenstre extends React.Component<
         HjelpetekstProps,
         {}
-        > {}
-    export class HjelpetekstAuto extends React.Component<HjelpetekstProps, {}> {}
-    export class HjelpetekstMidt extends React.Component<HjelpetekstProps, {}> {}
+    > {}
+    export class HjelpetekstAuto extends React.Component<
+        HjelpetekstProps,
+        {}
+    > {}
+    export class HjelpetekstMidt extends React.Component<
+        HjelpetekstProps,
+        {}
+    > {}
 }
