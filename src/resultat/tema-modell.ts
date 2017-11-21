@@ -1,7 +1,3 @@
-export enum typeHandling {
-    VIS,
-    SKJUL
-}
 
 export enum defaultType {
     FAST,

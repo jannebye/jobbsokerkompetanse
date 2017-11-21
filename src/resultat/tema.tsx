@@ -304,6 +304,6 @@ export const alleTemaerPrioritert = alleTemaer.sort(
 export const fasteTemaer = alleTemaerPrioritert.filter(
     tema => tema.defaultPosisjon === defaultType.FAST
 );
-export const leggesTilTemaer = Object.values(alleTemaer).filter(
+export const leggesTilTemaer = alleTemaerPrioritert.filter(
     tema => tema.defaultPosisjon === defaultType.LEGGES_TIL
 );
