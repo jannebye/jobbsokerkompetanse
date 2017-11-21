@@ -9,10 +9,12 @@ import temaLogikk from './tema-mapping';
 import { TemaModell } from './tema-modell';
 
 function temaSkalBehandles(tema: TemaModell, alternativId: string) {
-    if ( temaLogikk[tema.id]) {
-        if (temaLogikk[tema.id].alternativ.find(function(alt: string) {
-            return alt === alternativId;
-            })) {
+    if (temaLogikk[tema.id]) {
+        if (
+            temaLogikk[tema.id].alternativ.find(function(alt: string) {
+                return alt === alternativId;
+            })
+        ) {
             return true;
         }
     }
@@ -20,19 +22,25 @@ function temaSkalBehandles(tema: TemaModell, alternativId: string) {
 }
 
 function getAlleSvarteAlternativer(besvarelse: BesvarelseModell[]) {
-    return besvarelse.reduce((acc, svar) => [...acc, ...svar.svarAlternativer.map(a => a.id)], []);
+    return besvarelse.reduce(
+        (acc, svar) => [...acc, ...svar.svarAlternativer.map(a => a.id)],
+        []
+    );
 }
 
 function genererTema(fullfortBesvarelse: BesvarelseModell[]) {
     const valgteAlternativ = getAlleSvarteAlternativer(fullfortBesvarelse);
 
-    const resultatFaste = fasteTemaer
-        .filter(tema => !valgteAlternativ
-            .find(alternativ => temaSkalBehandles(tema, alternativ)));
+    const resultatFaste = fasteTemaer.filter(
+        tema =>
+            !valgteAlternativ.find(alternativ =>
+                temaSkalBehandles(tema, alternativ)
+            )
+    );
 
-    const resultatLeggesTil = leggesTilTemaer
-        .filter(tema => valgteAlternativ
-            .find(alternativ => temaSkalBehandles(tema, alternativ)));
+    const resultatLeggesTil = leggesTilTemaer.filter(tema =>
+        valgteAlternativ.find(alternativ => temaSkalBehandles(tema, alternativ))
+    );
 
     const resultat = resultatFaste
         .concat(resultatLeggesTil)
@@ -63,7 +71,9 @@ function Resultat({ besvarteSporsmal }: StateProps) {
                         </h4>
                         <p>Dine svar: </p>
                         <ul>
-                            {spm.svarAlternativer.map(alt => <li key={alt.id}>{alt.id}</li>)}
+                            {spm.svarAlternativer.map(alt => (
+                                <li key={alt.id}>{alt.id}</li>
+                            ))}
                         </ul>
                     </li>
                 ))}
@@ -72,12 +82,9 @@ function Resultat({ besvarteSporsmal }: StateProps) {
             <ul className="resultatliste">
                 {resultat.map(tema => (
                     <li className="sporsmal_besvarelse">
-                        <h3>
-                            {tema.tekst}
-                        </h3>
+                        <h3>{tema.tekst}</h3>
                     </li>
                 ))}
-
             </ul>
         </div>
     );
