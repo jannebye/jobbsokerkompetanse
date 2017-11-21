@@ -170,37 +170,41 @@ const spm: Sporsmal[] = [
     {
         id: 'intervju-spm-02',
         alternativer: [
-            { id: 'intervju-svar-0201', skalaId: 1 },
-            { id: 'intervju-svar-0202', skalaId: 2 },
-            { id: 'intervju-svar-0203', skalaId: 3 },
-            { id: 'intervju-svar-0204', skalaId: 4 },
-            { id: 'intervju-svar-0205', skalaId: 5 }
-        ],
-        type: AlternativTyper.SKALA
-    },
-    {
-        id: 'intervju-spm-03',
-        alternativer: [
-            { id: 'intervju-svar-0301' },
-            { id: 'intervju-svar-0302' },
-            { id: 'intervju-svar-0303' },
-            { id: 'intervju-svar-0304' },
-            { id: 'intervju-svar-0305' },
-            { id: 'intervju-svar-0306' },
-            { id: 'intervju-svar-0307' }
+            { id: 'intervju-svar-0201' },
+            { id: 'intervju-svar-0202' },
+            { id: 'intervju-svar-0203' },
+            { id: 'intervju-svar-0204' },
+            { id: 'intervju-svar-0205' },
+            { id: 'intervju-svar-0206' },
+            { id: 'intervju-svar-0207' }
         ],
         type: AlternativTyper.FLERVALG
     },
     {
-        id: 'intervju-spm-04',
+        id: 'intervju-spm-03',
         alternativer: [
-            { id: 'intervju-svar-0401', skalaId: 1 },
-            { id: 'intervju-svar-0402', skalaId: 2 },
-            { id: 'intervju-svar-0403', skalaId: 3 },
-            { id: 'intervju-svar-0404', skalaId: 4 },
-            { id: 'intervju-svar-0405', skalaId: 5 }
+            { id: 'intervju-svar-0301', skalaId: 1 },
+            { id: 'intervju-svar-0302', skalaId: 2 },
+            { id: 'intervju-svar-0303', skalaId: 3 },
+            { id: 'intervju-svar-0304', skalaId: 4 },
+            { id: 'intervju-svar-0305', skalaId: 5 }
         ],
         type: AlternativTyper.SKALA
+    },
+    {
+        id: 'intervju-spm-04',
+        alternativer: [
+            { id: 'intervju-svar-0401' },
+            { id: 'intervju-svar-0402' },
+            { id: 'intervju-svar-0403' },
+            { id: 'intervju-svar-0404' },
+            { id: 'intervju-svar-0405' },
+            { id: 'intervju-svar-0406' },
+            { id: 'intervju-svar-0407' },
+            { id: 'intervju-svar-0408' },
+            { id: 'intervju-svar-0409' }
+        ],
+        type: AlternativTyper.FLERVALG
     },
     {
         id: 'intervju-spm-05',
@@ -209,22 +213,7 @@ const spm: Sporsmal[] = [
             { id: 'intervju-svar-0502' },
             { id: 'intervju-svar-0503' },
             { id: 'intervju-svar-0504' },
-            { id: 'intervju-svar-0505' },
-            { id: 'intervju-svar-0506' },
-            { id: 'intervju-svar-0507' },
-            { id: 'intervju-svar-0508' },
-            { id: 'intervju-svar-0509' }
-        ],
-        type: AlternativTyper.FLERVALG
-    },
-    {
-        id: 'intervju-spm-06',
-        alternativer: [
-            { id: 'intervju-svar-0601' },
-            { id: 'intervju-svar-0602' },
-            { id: 'intervju-svar-0603' },
-            { id: 'intervju-svar-0604' },
-            { id: 'intervju-svar-0605' }
+            { id: 'intervju-svar-0505' }
         ],
         type: AlternativTyper.ETTVALG
     }
