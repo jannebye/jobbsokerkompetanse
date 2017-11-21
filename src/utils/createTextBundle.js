@@ -19,8 +19,7 @@ const read = (dir) =>
             fs.statSync(path.join(dir, file)).isDirectory() ?
                 files.concat(read(path.join(dir, file))) :
                 files.concat({
-                    id: file.split('_')[0],
-                    text: readFile(dir, file).trim()
+                    [file.split('_')[0]] : readFile(dir, file).trim()
                 }), []);
 
 try{
