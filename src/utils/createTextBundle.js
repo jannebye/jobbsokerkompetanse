@@ -28,5 +28,5 @@ try{
     console.log("Kunne ikke skrive fil ", e);
 }
 
-//console.log(read('../tekster/sporsmal'));
+console.log(read('../tekster/sporsmal'));
 

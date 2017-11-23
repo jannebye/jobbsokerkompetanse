@@ -40,7 +40,7 @@ class ScrollView extends React.Component<{}, ScrollviewState> {
             }
             return closest;
         },
-                                                                 { element: null, distance: 99999 }).element;
+        { element: null, distance: 99999 }).element;
 
         this.setState({ activeIndex: children.indexOf(closestChild!) });
     }
