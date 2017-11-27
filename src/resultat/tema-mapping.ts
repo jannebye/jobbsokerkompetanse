@@ -23,7 +23,7 @@ const temaLogikk = {
     },
     finnJobb8: {
         sporsmalId: 3,
-        alternativ: ['finn-svar-0302']
+        alternativ: ['finn-svar-0302', 'finn-svar-0303']
     },
     soknadCV2: {
         alternativ: [
