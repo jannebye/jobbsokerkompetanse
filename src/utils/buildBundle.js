@@ -10,7 +10,7 @@ function readFile(dir, file) {
 }
 
 function createJson(katalog) {
-    return 'export const bundle = {"nb":' + JSON.stringify(read(katalog)) + ',"en":[]};';
+    return 'export default {\'nb\':{' + read(katalog) + '},\'en\':{}};';
 }
 
 const read = (dir) =>
@@ -18,9 +18,9 @@ const read = (dir) =>
         .reduce((files, file) =>
             fs.statSync(path.join(dir, file)).isDirectory() ?
                 files.concat(read(path.join(dir, file))) :
-                files.concat({
-                    [file.split('_')[0]] : readFile(dir, file).trim()
-                }), []);
+                files.concat(
+                    "'" + file.split('_')[0] + "'" + ':' + "'" + readFile(dir, file).trim() + "'"
+                ), []);
 
 try{
     fs.writeFileSync('./src/tekster/sporsmal-tekster.ts', createJson('./src/tekster/sporsmal'));

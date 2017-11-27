@@ -1,32 +1,22 @@
 import * as React from 'react';
 import { addLocaleData, IntlProvider as Provider } from 'react-intl';
-import { connect } from 'react-redux';
 import * as nb from 'react-intl/locale-data/nb';
-import { LedeTekstState } from './ducks/ledetekster-reducer';
-import { AppState } from "./ducks/reducer";
+import tekster from './tekster/sporsmal-tekster';
 
 addLocaleData(nb);
 
-interface IntlProviderProps {
-    ledetekster: LedeTekstState;
-}
-
-class IntlProvider extends React.Component<IntlProviderProps> {
+class IntlProvider extends React.Component {
 
     render() {
-        const {children, ledetekster, ...props} = this.props;
+        const {children, ...props} = this.props;
         const locale = 'nb';
 
         return (
-            <Provider {...props} locale={locale} messages={ledetekster.data.nb || []}>
+            <Provider {...props} locale={locale} messages={tekster.nb || []}>
                 {children}
             </Provider>
         );
     }
 }
 
-const mapStateToProps = (state: AppState) => ({
-    ledetekster: state.ledetekster,
-});
-
-export default connect(mapStateToProps)(IntlProvider);
+export default IntlProvider;
