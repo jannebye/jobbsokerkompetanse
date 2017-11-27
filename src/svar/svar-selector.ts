@@ -1,4 +1,4 @@
-import { AppState } from '../reducer';
+import { AppState } from '../ducks/reducer';
 import { SvarState } from './svar-duck';
 import alleSporsmal from '../sporsmal/sporsmal-alle';
 import BesvarelseModell from './svar-modell';

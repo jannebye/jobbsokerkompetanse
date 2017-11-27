@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppState } from '../reducer';
+import { AppState } from '../ducks/reducer';
 import BesvarelseModell from '../svar/svar-modell';
 import { connect } from 'react-redux';
 import alleSporsmal from '../sporsmal/sporsmal-alle';

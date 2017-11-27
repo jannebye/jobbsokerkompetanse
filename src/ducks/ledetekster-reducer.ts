@@ -1,43 +1,36 @@
-import {STATUS, doThenDispatch} from './utils';
-import {Handling} from "../actions";
+import * as Tekster from '../tekster/sporsmal-tekster';
 
-const {OK, PENDING} = STATUS;
+export enum STATUS {
+    NOT_STARTED,
+    PENDING,
+    OK,
+    FEILET
+}
 
-// Actions
-export const OK = 'ledetekster/OK';
-export const FEILET = 'ledetekster/FEILET';
-export const PENDING = 'ledetekster/PENDING';
+interface TekstModell {
+    [key: string]: string;
+}
 
-const initalState = {
+interface SprakModell {
+    [key: string]: TekstModell[];
+}
+
+export interface LedeTekstState {
+    status: STATUS;
+    data: SprakModell;
+}
+
+const initalState: LedeTekstState = {
     status: STATUS.NOT_STARTED,
-    data: {},
+    data: Tekster.bundle
 };
 
 // Reducer
-export default function reducer(state = initalState, action: Handling) {
-    switch (action.type) {
-        case PENDING:
-            return {
-                ...state,
-                status:
-                    state.status === STATUS.NOT_STARTED
-                        ? STATUS.PENDING
-                        : STATUS.RELOADING,
-            };
-        case FEILET:
-            return {...state, status: STATUS.ERROR, feil: action.data};
-        case OK: {
-            return {...state, status: STATUS.OK, data: action.data};
-        }
-        default:
-            return state;
-    }
+export default function reducer(state: LedeTekstState = initalState) {
+    return state;
 }
 
-function ApiHentLedetekster() {
-
-}
-
+/*
 function konverterledetekster(ledetekster) {
     return Object.keys(ledetekster)
         .map(key => ({key, value: `${ledetekster[key]} [${key}]`}))
@@ -46,7 +39,9 @@ function konverterledetekster(ledetekster) {
             return previous;
         }, {});
 }
+*/
 
+/*
 function hentLedeteksterMedKeys() {
     return ApiHentLedetekster().then(data =>
         Object.keys(data)
@@ -57,8 +52,10 @@ function hentLedeteksterMedKeys() {
             }, {})
     );
 }
+*/
 
 // Action Creators
+/*
 export function hentLedetekster() {
     const vistekster = window.location.search.indexOf('vistekster') !== -1;
     return doThenDispatch(
@@ -66,3 +63,4 @@ export function hentLedetekster() {
         {OK, FEILET, PENDING,}: STATUS
     );
 }
+*/

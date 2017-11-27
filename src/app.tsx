@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import getStore from './store';
 import Innhold from './innhold';
-import IntlProvider from './intl-provider';
+import IntlProvider from './Intl-provider';
 
 const store = getStore();
 
