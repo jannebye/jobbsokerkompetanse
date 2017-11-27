@@ -12,7 +12,7 @@ import {
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
 import Alternativ from './alternativ';
-import Avhengigheter, { AvhengighetModell } from '../utils/avhengigheter';
+// import Avhengigheter, { AvhengighetModell } from '../utils/avhengigheter';
 import { AlternativTyper } from '../utils/konstanter';
 import { FormattedMessage } from 'react-intl';
 
@@ -30,14 +30,13 @@ function finnHjelpetekst(type: AlternativTyper): string {
 }
 
 interface DispatchProps {
-    markerAlternativ: (
-        sporsmalId: string,
-        alternativ: SvarAlternativModell[]
-    ) => void;
+    markerAlternativ: (sporsmalId: string,
+                       alternativ: SvarAlternativModell[]) => void;
 }
 
 interface OwnProps {
-    isActive: boolean;
+    nesteSpm: () => void;
+    forrigeSpm: () => void;
     sporsmal: SporsmalModell;
     feil?: boolean;
 }
@@ -50,15 +49,11 @@ interface EgenStateProps {
     feil: boolean;
 }
 
-export type SporsmalProps = DispatchProps & OwnProps & StateProps;
-
-function prepMarkerAlternativ(
-    alternativ: SvarAlternativModell,
-    erValgt: boolean,
-    alternativListe: SvarAlternativModell[],
-    sporsmal: SporsmalModell,
-    type: string
-): SvarAlternativModell[] {
+function prepMarkerAlternativ(alternativ: SvarAlternativModell,
+                              erValgt: boolean,
+                              alternativListe: SvarAlternativModell[],
+                              sporsmal: SporsmalModell,
+                              type: string): SvarAlternativModell[] {
     let sporsmalAlternativer = [...sporsmal.alternativer];
     if (erValgt) {
         if (type === 'radio') {
@@ -87,44 +82,36 @@ function prepMarkerAlternativ(
     }
 }
 
-function sjekkAvhengigheter(
-    sporsmalId: string,
-    svarteAlternativ: SvarAlternativModell[]
-): string {
-    const avhengighet: AvhengighetModell | undefined = Avhengigheter.find(
-        avh => avh.sporsmalId === sporsmalId
-    );
-    if (
-        !!avhengighet &&
-        !!svarteAlternativ.find(a => a.id === avhengighet.harSvartAlternativId)
-    ) {
-        return avhengighet.sendesTilSporsmalId;
-    }
-    return '';
-}
+// function sjekkAvhengigheter(
+//     sporsmalId: string,
+//     svarteAlternativ: SvarAlternativModell[]
+// ): string {
+//     const avhengighet: AvhengighetModell | undefined = Avhengigheter.find(
+//         avh => avh.sporsmalId === sporsmalId
+//     );
+//     if (
+//         !!avhengighet &&
+//         !!svarteAlternativ.find(a => a.id === avhengighet.harSvartAlternativId)
+//     ) {
+//         return avhengighet.sendesTilSporsmalId;
+//     }
+// }
 
-type SporsmalProps = OwnProps & Dispatch & StateProps;
+type SporsmalProps = OwnProps & DispatchProps & StateProps;
 
 class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
     private liElement: HTMLLIElement;
 
     constructor(props: SporsmalProps) {
         super(props);
-        this.state = { feil: false };
+        this.state = {feil: false};
     }
 
     sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: string) {
         if (markerteSpm.length === 0) {
             this.setState({ feil: true });
-        } else if (sjekkAvhengigheter(sporsmalId, markerteSpm)) {
-            document.getElementById(
-                `sp-${sjekkAvhengigheter(sporsmalId, markerteSpm)}`
-            )!.scrollIntoView();
-            window.scrollBy(0, -300);
         } else {
-            const nesteSpmId = sporsmalId + 1;
-            document.getElementById(`sp-${nesteSpmId}`)!.scrollIntoView();
-            window.scrollBy(0, -300);
+            return this.props.nesteSpm();
         }
     }
 
@@ -133,7 +120,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             sporsmal,
             besvarteSporsmal,
             markerAlternativ,
-            isActive
+            forrigeSpm
         } = this.props;
         const hjelpetekst: string = finnHjelpetekst(sporsmal.type);
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
@@ -142,20 +129,19 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         const markerteAlternativer: SvarAlternativModell[] = besvartSpm
             ? besvartSpm.svarAlternativer
             : [];
-        const cls = ['sporsmal', isActive ? 'active' : ''].join(' ');
         if (this.state.feil && markerteAlternativer.length !== 0) {
-            this.setState({ feil: false });
+            this.setState({feil: false});
         }
         return (
             <li
                 ref={li => (this.liElement = li!)}
                 id={'sp-' + sporsmal.id}
-                className={cls}
+                className={'sporsmal active'}
                 tabIndex={0}
             >
                 <section>
                     <h1 className="typo-element blokk-xs">
-                        <FormattedMessage id={sporsmal.id} />
+                        <FormattedMessage id={sporsmal.id}/>
                     </h1>
                     {this.state.feil && (
                         <p className="skjemaelement__feilmelding">
@@ -163,9 +149,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                         </p>
                     )}
                     <p className="hjelpetekst">{hjelpetekst}</p>
-                    {sporsmal.alternativer.map(function(
-                        alternativ: SvarAlternativModell
-                    ) {
+                    {sporsmal.alternativer.map(function (alternativ: SvarAlternativModell) {
                         const erValgt = !!markerteAlternativer.find(
                             alt => alt.id === alternativ.id
                         );
@@ -190,6 +174,18 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             />
                         );
                     })}
+                    { !sporsmal.erForsteSpm &&
+                    <button
+                        className="knapp"
+                        key="tilbake"
+                        onClick={e => {
+                            e.preventDefault();
+                            forrigeSpm();
+                        }}
+                    >
+                        Tilbake
+                    </button> }
+                    { !sporsmal.erSisteSpm &&
                     <button
                         className="knapp knapp--hoved"
                         key="besvar"
@@ -199,7 +195,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                         }}
                     >
                         Fortsett
-                    </button>
+                    </button> }
                 </section>
             </li>
         );
@@ -210,10 +206,8 @@ const mapStateToProps = (state: AppState): StateProps => ({
     besvarteSporsmal: state.svar.data
 });
 
-const mapDispatchToProps = (
-    dispatch: Dispatch,
-    props: OwnProps
-): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch,
+                            props: OwnProps): DispatchProps => ({
     markerAlternativ: (sporsmalId, alternativ: SvarAlternativModell[]) =>
         dispatch(marker(sporsmalId, alternativ))
 });

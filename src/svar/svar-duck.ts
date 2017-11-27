@@ -33,8 +33,6 @@ export default function reducer(
                 data: [...besvarteSpm, action.data]
             };
         }
-        case ActionType.TILBAKE:
-            return { ...state };
         default:
             return state;
     }

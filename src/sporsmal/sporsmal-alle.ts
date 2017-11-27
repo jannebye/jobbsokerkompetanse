@@ -17,7 +17,8 @@ const spm: Sporsmal[] = [
             { id: 'finn-svar-0110' },
             { id: 'finn-svar-0111' }
         ],
-        type: AlternativTyper.FLERVALG
+        type: AlternativTyper.FLERVALG,
+        erForsteSpm: true
     },
     {
         id: 'finn-spm-02',
@@ -215,7 +216,8 @@ const spm: Sporsmal[] = [
             { id: 'intervju-svar-0504' },
             { id: 'intervju-svar-0505' }
         ],
-        type: AlternativTyper.ETTVALG
+        type: AlternativTyper.ETTVALG,
+        erSisteSpm: true
     }
 ];
 
