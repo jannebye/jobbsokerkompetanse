@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
 import { marker } from '../svar/svar-duck';
 import { Dispatch } from '../types';
-import { AppState } from '../reducer';
+import { AppState } from '../ducks/reducer';
 import {
     ettValgHjelpetekst,
     flereValgHjelpetekst,
@@ -14,6 +14,7 @@ import BesvarelseModell from '../svar/svar-modell';
 import Alternativ from './alternativ';
 import Avhengigheter, { AvhengighetModell } from '../utils/avhengigheter';
 import { AlternativTyper } from '../utils/konstanter';
+import { FormattedMessage } from 'react-intl';
 
 function finnHjelpetekst(type: AlternativTyper): string {
     switch (type) {
@@ -154,7 +155,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             >
                 <section>
                     <h1 className="typo-element blokk-xs">
-                        {sporsmal.id + '.' + ' ' + sporsmal.id}
+                        <FormattedMessage id={sporsmal.id} />
                     </h1>
                     {this.state.feil && (
                         <p className="skjemaelement__feilmelding">
