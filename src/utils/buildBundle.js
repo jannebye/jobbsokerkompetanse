@@ -10,7 +10,7 @@ function readFile(dir, file) {
 }
 
 function createJson(katalog) {
-    return 'const bundle = ' + JSON.stringify(read(katalog));
+    return 'export default {\'nb\':{' + read(katalog) + '},\'en\':{}};';
 }
 
 const read = (dir) =>
@@ -18,18 +18,15 @@ const read = (dir) =>
         .reduce((files, file) =>
             fs.statSync(path.join(dir, file)).isDirectory() ?
                 files.concat(read(path.join(dir, file))) :
-                files.concat({
-                    id: file.split('_')[0],
-                    text: readFile(dir, file).trim()
-                }), []);
+                files.concat(
+                    "'" + file.split('_')[0] + "'" + ':' + "'" + readFile(dir, file).trim() + "'"
+                ), []);
 
 try{
-    fs.writeFileSync('../../build/dist/tekster/bundle.js', createJson('../tekster/sporsmal'));
+    fs.writeFileSync('./src/tekster/sporsmal-tekster.ts', createJson('./src/tekster/sporsmal'));
 }catch (e){
     console.log("Kunne ikke skrive fil ", e);
 }
 
-console.log(
-    read('../tekster/sporsmal')
-);
+console.log(read('./src/tekster/sporsmal'));
 

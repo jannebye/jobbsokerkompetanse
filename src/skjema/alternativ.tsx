@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import { AlternativTyper } from '../utils/konstanter';
 import OverskriftMedHjelpeTekst from './overskrift-med-hjelpetekst';
@@ -40,7 +41,7 @@ function Alternativ({
                     markerAlternativ();
                 }}
             >
-                {alternativ.id}
+                <FormattedMessage id={alternativ.id} />
                 {skalHaHjelpetekst && (
                     <OverskriftMedHjelpeTekst
                         overskriftId=""

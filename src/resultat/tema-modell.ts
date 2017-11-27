@@ -1,4 +1,3 @@
-
 export enum defaultType {
     FAST,
     LEGGES_TIL,

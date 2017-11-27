@@ -1,4 +1,3 @@
-
 const temaLogikk = {
     finnJobb1: {
         alternativ: ['finn-svar-0101']

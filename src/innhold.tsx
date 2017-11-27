@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Skjema from './skjema/skjema';
 import Resultat from './resultat/resultat';
-import { AppState } from './reducer';
+import { AppState } from './ducks/reducer';
 import { connect } from 'react-redux';
 import BesvarelseModell from './svar/svar-modell';
 
