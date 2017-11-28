@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { addLocaleData, IntlProvider as Provider } from 'react-intl';
 import * as nb from 'react-intl/locale-data/nb';
-import tekster from './tekster/sporsmal-tekster';
+import tekster from './tekster/alle-tekster';
 
 addLocaleData(nb);
 

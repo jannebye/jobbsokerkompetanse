@@ -23,10 +23,10 @@ const read = (dir) =>
                 ), []);
 
 try{
-    fs.writeFileSync('./src/tekster/sporsmal-tekster.ts', createJson('./src/tekster/sporsmal'));
+    fs.writeFileSync('./src/tekster/alle-tekster.ts', createJson('./src/tekster/hjelpetekster'));
 }catch (e){
     console.log("Kunne ikke skrive fil ", e);
 }
 
-console.log(read('./src/tekster/sporsmal'));
+console.log(read('./src/tekster/hjelpetekster'));
 
