@@ -1,5 +1,5 @@
 export enum AlternativTyper {
-    ETTVALG = 'radio',
-    FLERVALG = 'checkbox',
+    ETTVALG = 'ettvalg',
+    FLERVALG = 'flervalg',
     SKALA = 'skala'
 }

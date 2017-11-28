@@ -2,6 +2,7 @@ import * as React from 'react';
 import { AppState } from '../ducks/reducer';
 import BesvarelseModell from '../svar/svar-modell';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import alleSporsmal from '../sporsmal/sporsmal-alle';
 import { sorterSvar } from '../svar/svar-selector';
 import { fasteTemaer, leggesTilTemaer } from './tema';
@@ -57,7 +58,7 @@ function Resultat({ besvarteSporsmal }: StateProps) {
     const resultat = genererTema(besvarteSporsmal);
     return (
         <div>
-            Din besvarelse:
+            <FormattedMessage id="din-besvarelse" />:
             <ul className="resultatliste">
                 {besvarteSporsmal.map(spm => (
                     <li className="sporsmal__besvarelse">
@@ -69,7 +70,9 @@ function Resultat({ besvarteSporsmal }: StateProps) {
                                 )!.id
                             }
                         </h4>
-                        <p>Dine svar: </p>
+                        <p>
+                            <FormattedMessage id="dine-svar" />:{' '}
+                        </p>
                         <ul>
                             {spm.svarAlternativer.map(alt => (
                                 <li key={alt.id}>{alt.id}</li>
@@ -78,7 +81,7 @@ function Resultat({ besvarteSporsmal }: StateProps) {
                     </li>
                 ))}
             </ul>
-            Råd:
+            <FormattedMessage id="raad" /> :
             <ul className="resultatliste">
                 {resultat.map(tema => (
                     <li className="sporsmal_besvarelse">
