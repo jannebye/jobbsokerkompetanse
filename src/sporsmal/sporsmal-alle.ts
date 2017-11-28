@@ -75,7 +75,8 @@ const spm: Sporsmal[] = [
             { id: 'cv-svar-0107' },
             { id: 'cv-svar-0108' }
         ],
-        type: AlternativTyper.FLERVALG
+        type: AlternativTyper.FLERVALG,
+        uniktAlternativ: 'cv-svar-0108'
     },
     {
         id: 'cv-spm-02',
@@ -179,7 +180,8 @@ const spm: Sporsmal[] = [
             { id: 'intervju-svar-0206' },
             { id: 'intervju-svar-0207' }
         ],
-        type: AlternativTyper.FLERVALG
+        type: AlternativTyper.FLERVALG,
+        uniktAlternativ: 'intervju-svar-0201'
     },
     {
         id: 'intervju-spm-03',
@@ -205,7 +207,8 @@ const spm: Sporsmal[] = [
             { id: 'intervju-svar-0408' },
             { id: 'intervju-svar-0409' }
         ],
-        type: AlternativTyper.FLERVALG
+        type: AlternativTyper.FLERVALG,
+        uniktAlternativ: 'intervju-svar-0409'
     },
     {
         id: 'intervju-spm-05',

@@ -1,7 +1,4 @@
-import {
-    Handling,
-    ActionType, NesteSporsmalAction
-} from '../actions';
+import { Handling, ActionType, NesteSporsmalAction } from '../actions';
 
 const { NESTE_SPORSMAL } = ActionType;
 
@@ -20,7 +17,7 @@ export default function reducer(
 ): VisningState {
     switch (action.type) {
         case ActionType.NESTE_SPORSMAL:
-            return {...state, data: action.data };
+            return { ...state, data: action.data };
         default:
             return state;
     }
