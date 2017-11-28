@@ -116,7 +116,6 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             markerAlternativ,
             isActive
         } = this.props;
-        const hjelpetekst: string = sporsmal.type;
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
             besvarelse => besvarelse.sporsmalId === sporsmal.id
         );
@@ -143,7 +142,9 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             <FormattedMessage id="du-ma-svare" />
                         </p>
                     )}
-                    <p className="hjelpetekst">{hjelpetekst}</p>
+                    <p className="hjelpetekst">
+                        <FormattedMessage id={sporsmal.type} />
+                    </p>
                     {sporsmal.alternativer.map(function(
                         alternativ: SvarAlternativModell
                     ) {
