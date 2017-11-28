@@ -1,18 +1,19 @@
 export default {
     nb: {
-        checkbox: 'Marker de alternativene som passer for deg.',
         'cv-overskrift':
             'CV-en skal fortelle hvem du er, hva slags utdanning du har og hva du har gjort. Hvor god er CV-en din?',
         'din-besvarelse': 'Din besvarelse',
         'dine-svar': 'Dine svar',
-        'du-ma-svare': 'Du må svare på spørsmålet før du kan gå videre',
+        ettvalg: 'Marker det alternativet som passer for deg.',
+        'feilmelding-mangler-svar':
+            'Du må svare på spørsmålet før du kan gå videre',
         'finn-jobb-overskrift':
             'Der er mange måter å finne ledige jobber på. Hvordan leter du?',
-        fortsett: 'Fortsett',
+        flervalg: 'Marker de alternativene som passer for deg.',
+        'fortsett-knapp': 'Fortsett',
         'intervju-overskrift':
             'I intervjuet skal du overbevise om at du passer inn i bedriften og at du er et trygt valg. Hvilke erfaringer har du med jobbintervju?',
         raad: 'Råd',
-        radio: 'Marker det alternativet som passer for deg.',
         'send-inn': 'Send inn',
         skala:
             'Marker på en skala fra 1 til 5 hvor 1 er "utrygg" og 5 er "trygg".',

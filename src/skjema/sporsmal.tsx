@@ -98,14 +98,18 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         if (markerteSpm.length === 0) {
             this.setState({ feil: true });
         } else if (sjekkAvhengigheter(sporsmalId, markerteSpm)) {
+            /*
             document.getElementById(
                 `sp-${sjekkAvhengigheter(sporsmalId, markerteSpm)}`
             )!.scrollIntoView();
             window.scrollBy(0, -300);
+*/
         } else {
+            /*
             const nesteSpmId = sporsmalId + 1;
             document.getElementById(`sp-${nesteSpmId}`)!.scrollIntoView();
             window.scrollBy(0, -300);
+*/
         }
     }
 
@@ -139,7 +143,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                     </h1>
                     {this.state.feil && (
                         <p className="skjemaelement__feilmelding">
-                            <FormattedMessage id="du-ma-svare" />
+                            <FormattedMessage id="feilmelding-mangler-svar" />
                         </p>
                     )}
                     <p className="hjelpetekst">
@@ -180,7 +184,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             this.sjekkSvar(markerteAlternativer, sporsmal.id);
                         }}
                     >
-                        <FormattedMessage id="fortsett" />
+                        <FormattedMessage id="fortsett-knapp" />
                     </button>
                 </section>
             </li>
