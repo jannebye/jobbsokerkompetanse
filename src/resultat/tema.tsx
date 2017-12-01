@@ -284,18 +284,14 @@ export const alleTemaer = [
         defaultPosisjon: defaultType.FAST
     },
     {
-        id: 'begynnSelv13',
-        tekst: 'Hva kan jeg bruke kompetansen til',
-        prioritet: 12,
-        defaultPosisjon: defaultType.FAST
-    },
-    {
         id: 'begynnSelv14',
         tekst: 'Har du språkutfordringer',
         prioritet: 1000,
         defaultPosisjon: defaultType.INGEN
     }
 ];
+
+// Pri 12 mangler, og det skal den i følge matrisen
 
 export const alleTemaerPrioritert = alleTemaer.sort(
     (temaA, temaB) => temaA.prioritet - temaB.prioritet

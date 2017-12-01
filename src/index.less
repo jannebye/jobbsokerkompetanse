@@ -11,12 +11,14 @@
 .limit {
     margin: 1rem auto;
     width: ~'calc(100% - 2rem)';
+    height: 100%;
 }
 
 .sporsmal {
     opacity: 0.2;
     margin: 2rem 0;
     transition: opacity 300ms ease-in-out;
+    height: 100%;
     &:first-child {
         margin-top: 1rem;
     }
@@ -25,7 +27,22 @@
     }
     &:focus {
         outline: none;
-        box-shadow: 0 0 0 3px @orangeFocus;
+        box-shadow: none;
+    }
+}
+
+form {
+    height: 100%;
+    ul {
+        height: 100%;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        li {
+            flex-grow: 1;
+            flex-basis: 100%;
+        }
     }
 }
 
@@ -33,6 +50,7 @@
     list-style: none;
     padding: 0;
     margin: 200px 0 300px;
+    height: 100%;
 }
 
 .svarliste {
@@ -126,4 +144,9 @@
 
 .knapp + .knapp--hoved {
     margin-left: 1rem;
+}
+
+.alternativer {
+    display: flex;
+    flex-direction: column;
 }
