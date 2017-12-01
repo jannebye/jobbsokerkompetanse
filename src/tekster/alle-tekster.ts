@@ -1,4 +1,4 @@
-/*tslint:disable:max-line-length*/
+/*tslint:disable*/
 export default {
     nb: {
         'cv-overskrift':
