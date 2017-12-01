@@ -10,6 +10,7 @@ import {
     default as Avhengigheter,
     AvhengighetModell
 } from '../utils/avhengigheter';
+import { FormattedMessage } from 'react-intl';
 
 // TODO: Legg til feilhåndtering hvis spørsmål ikke finnes
 
@@ -96,7 +97,9 @@ function Skjema({
                         )
                     )}
             />
-            <button onClick={() => handleSubmit()}>Send inn</button>
+            <button onClick={() => handleSubmit()}>
+                <FormattedMessage id="send-inn" />
+            </button>
         </form>
     );
 }

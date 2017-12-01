@@ -30,10 +30,10 @@ function Alternativ({
                 type={
                     sporsmalType !== AlternativTyper.SKALA
                         ? sporsmalType
-                        : AlternativTyper.ETTVALG
+                        : 'radio'
                 }
                 name={sporsmalId.toString()}
-                value={alternativ.id}
+                defaultValue={alternativ.id}
             />
             <label
                 htmlFor={alternativ.id}

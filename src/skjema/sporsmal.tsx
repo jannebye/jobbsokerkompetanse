@@ -4,29 +4,10 @@ import SporsmalModell from '../sporsmal/sporsmal-modell';
 import { marker } from '../svar/svar-duck';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
-import {
-    ettValgHjelpetekst,
-    flereValgHjelpetekst,
-    skalaHjelpetekst
-} from '../tekster/hjelptetekster';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
 import Alternativ from './alternativ';
-import { AlternativTyper } from '../utils/konstanter';
 import { FormattedMessage } from 'react-intl';
-
-function finnHjelpetekst(type: AlternativTyper): string {
-    switch (type) {
-        case AlternativTyper.FLERVALG:
-            return flereValgHjelpetekst;
-        case AlternativTyper.ETTVALG:
-            return ettValgHjelpetekst;
-        case AlternativTyper.SKALA:
-            return skalaHjelpetekst;
-        default:
-            return '';
-    }
-}
 
 interface DispatchProps {
     markerAlternativ: (
@@ -135,7 +116,6 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             markerAlternativ,
             forrigeSpm
         } = this.props;
-        const hjelpetekst: string = finnHjelpetekst(sporsmal.type);
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
             besvarelse => besvarelse.sporsmalId === sporsmal.id
         );
@@ -157,10 +137,12 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                     </h1>
                     {this.state.feil && (
                         <p className="skjemaelement__feilmelding">
-                            Du må svare på spørsmålet før du kan gå videre
+                            <FormattedMessage id="feilmelding-mangler-svar" />
                         </p>
                     )}
-                    <p className="hjelpetekst">{hjelpetekst}</p>
+                    <p className="hjelpetekst">
+                        <FormattedMessage id={sporsmal.type} />
+                    </p>
                     {sporsmal.alternativer.map(function(
                         alternativ: SvarAlternativModell
                     ) {
@@ -220,7 +202,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 );
                             }}
                         >
-                            Fortsett
+                            <FormattedMessage id="fortsett-knapp" />
                         </button>
                     )}
                 </section>
