@@ -4,7 +4,7 @@ import Sporsmal from './sporsmal';
 import { connect } from 'react-redux';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
-import { nesteSporsmal } from '../ducks/sporsmal-duck';
+import { nesteSporsmal } from '../svar/svar-duck';
 import BesvarelseModell from '../svar/svar-modell';
 import {
     default as Avhengigheter,
@@ -68,40 +68,78 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    byttSpm: (sporsmalId: string) => void;
+    byttSpm: (sporsmalId: string) => Promise<{}>;
 }
 
 type SkjemaProps = OwnProps & StateProps & DispatchProps;
 
-function Skjema({
-    handleSubmit,
-    gjeldendeSporsmalId,
-    byttSpm,
-    forelopigBesvarelse
-}: SkjemaProps) {
-    const sporsmal = alleSporsmal.find(spm => spm.id === gjeldendeSporsmalId);
+class Skjema extends React.Component<SkjemaProps, {}> {
+    private sporsmalRefs = {};
+    constructor(props: SkjemaProps) {
+        super(props);
 
-    return (
-        <form className="sporsmalsskjema">
-            <Sporsmal
-                sporsmal={sporsmal!}
-                nesteSpm={() =>
-                    byttSpm(
-                        finnNesteSpm(gjeldendeSporsmalId, forelopigBesvarelse)
+        this.byttSpmOgFokus = this.byttSpmOgFokus.bind(this);
+    }
+
+    byttSpmOgFokus(spmId: string) {
+        this.props
+            .byttSpm(finnNesteSpm(spmId, this.props.forelopigBesvarelse))
+            .then(res => {
+                const nesteSpm = this.sporsmalRefs[
+                    this.props.gjeldendeSporsmalId
+                ];
+                nesteSpm.focus();
+                nesteSpm.scrollIntoView();
+            });
+    }
+
+    render() {
+        const {
+            handleSubmit,
+            gjeldendeSporsmalId,
+            byttSpm,
+            forelopigBesvarelse
+        } = this.props;
+        let sporsmalRefs = this.sporsmalRefs;
+        const gjeldendeSporsmal = alleSporsmal.find(
+            spm => spm.id === gjeldendeSporsmalId
+        );
+
+        return (
+            <form className="sporsmalsskjema">
+                <ul>
+                    {forelopigBesvarelse.map(spm => (
+                        <Sporsmal
+                            key={spm.sporsmalId}
+                            sporsmal={
+                                alleSporsmal.find(
+                                    sporsmal => sporsmal.id === spm.sporsmalId
+                                )!
+                            }
+                            spmRef={(ref: {}) =>
+                                (sporsmalRefs[spm.sporsmalId] = ref)}
+                            nesteSpm={id => this.byttSpmOgFokus(id)}
+                            forrigeSpm={() =>
+                                byttSpm(
+                                    forrigeSporsmal(
+                                        gjeldendeSporsmalId,
+                                        forelopigBesvarelse
+                                    )
+                                )}
+                        />
+                    ))}
+                    {gjeldendeSporsmal!.erSisteSpm && (
+                        <button
+                            className="knapp knapp--hoved"
+                            onClick={() => handleSubmit()}
+                        >
+                            <FormattedMessage id="send-inn" />
+                        </button>
                     )}
-                forrigeSpm={() =>
-                    byttSpm(
-                        forrigeSporsmal(
-                            gjeldendeSporsmalId,
-                            forelopigBesvarelse
-                        )
-                    )}
-            />
-            <button onClick={() => handleSubmit()}>
-                <FormattedMessage id="send-inn" />
-            </button>
-        </form>
-    );
+                </ul>
+            </form>
+        );
+    }
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
@@ -113,7 +151,8 @@ const mapDispatchToProps = (
     dispatch: Dispatch,
     props: OwnProps
 ): DispatchProps => ({
-    byttSpm: (sporsmalId: string) => dispatch(nesteSporsmal(sporsmalId))
+    byttSpm: (sporsmalId: string) =>
+        new Promise(resolve => resolve(dispatch(nesteSporsmal(sporsmalId))))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Skjema);

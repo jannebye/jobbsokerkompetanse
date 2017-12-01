@@ -17,10 +17,11 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-    nesteSpm: () => void;
+    nesteSpm: (id: string) => void;
     forrigeSpm: () => void;
     sporsmal: SporsmalModell;
     feil?: boolean;
+    spmRef: any; // tslint:disable-line:no-any
 }
 
 interface StateProps {
@@ -94,8 +95,6 @@ function erAlternativMulig(
 type SporsmalProps = OwnProps & DispatchProps & StateProps;
 
 class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
-    private liElement: HTMLLIElement;
-
     constructor(props: SporsmalProps) {
         super(props);
         this.state = { feil: false };
@@ -105,7 +104,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         if (markerteSpm.length === 0) {
             this.setState({ feil: true });
         } else {
-            return this.props.nesteSpm();
+            return this.props.nesteSpm(sporsmalId);
         }
     }
 
@@ -114,7 +113,8 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             sporsmal,
             besvarteSporsmal,
             markerAlternativ,
-            forrigeSpm
+            forrigeSpm,
+            spmRef
         } = this.props;
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
             besvarelse => besvarelse.sporsmalId === sporsmal.id
@@ -127,9 +127,10 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         }
         return (
             <li
-                ref={li => (this.liElement = li!)}
+                ref={spmRef}
                 id={'sp-' + sporsmal.id}
                 className={'sporsmal active'}
+                tabIndex={0}
             >
                 <section>
                     <h1 className="typo-element blokk-xs">
@@ -143,41 +144,43 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                     <p className="hjelpetekst">
                         <FormattedMessage id={sporsmal.type} />
                     </p>
-                    {sporsmal.alternativer.map(function(
-                        alternativ: SvarAlternativModell
-                    ) {
-                        const erValgt = !!markerteAlternativer.find(
-                            alt => alt.id === alternativ.id
-                        );
-                        const kanVelges: boolean = !!sporsmal.uniktAlternativ
-                            ? erAlternativMulig(
-                                  sporsmal.uniktAlternativ,
-                                  alternativ.id,
-                                  markerteAlternativer
-                              )
-                            : true;
-                        return (
-                            <Alternativ
-                                key={alternativ.id}
-                                alternativ={alternativ}
-                                erValgt={erValgt}
-                                sporsmalId={sporsmal.id}
-                                sporsmalType={sporsmal.type}
-                                kanVelges={kanVelges}
-                                markerAlternativ={() =>
-                                    markerAlternativ(
-                                        sporsmal.id,
-                                        prepMarkerAlternativ(
-                                            alternativ,
-                                            erValgt,
-                                            markerteAlternativer,
-                                            sporsmal,
-                                            sporsmal.type
-                                        )
-                                    )}
-                            />
-                        );
-                    })}
+                    <div className="alternativer">
+                        {sporsmal.alternativer.map(function(
+                            alternativ: SvarAlternativModell
+                        ) {
+                            const erValgt = !!markerteAlternativer.find(
+                                alt => alt.id === alternativ.id
+                            );
+                            const kanVelges: boolean = !!sporsmal.uniktAlternativ
+                                ? erAlternativMulig(
+                                      sporsmal.uniktAlternativ,
+                                      alternativ.id,
+                                      markerteAlternativer
+                                  )
+                                : true;
+                            return (
+                                <Alternativ
+                                    key={alternativ.id}
+                                    alternativ={alternativ}
+                                    erValgt={erValgt}
+                                    sporsmalId={sporsmal.id}
+                                    sporsmalType={sporsmal.type}
+                                    kanVelges={kanVelges}
+                                    markerAlternativ={() =>
+                                        markerAlternativ(
+                                            sporsmal.id,
+                                            prepMarkerAlternativ(
+                                                alternativ,
+                                                erValgt,
+                                                markerteAlternativer,
+                                                sporsmal,
+                                                sporsmal.type
+                                            )
+                                        )}
+                                />
+                            );
+                        })}
+                    </div>
                     {!sporsmal.erForsteSpm && (
                         <button
                             className="knapp"
