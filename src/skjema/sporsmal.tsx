@@ -7,7 +7,6 @@ import { AppState } from '../ducks/reducer';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
 import Alternativ from './alternativ';
-import Avhengigheter, { AvhengighetModell } from '../utils/avhengigheter';
 import { FormattedMessage } from 'react-intl';
 
 interface DispatchProps {
@@ -18,7 +17,8 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-    isActive: boolean;
+    nesteSpm: () => void;
+    forrigeSpm: () => void;
     sporsmal: SporsmalModell;
     feil?: boolean;
 }
@@ -31,8 +31,6 @@ interface EgenStateProps {
     feil: boolean;
 }
 
-export type SporsmalProps = DispatchProps & OwnProps & StateProps;
-
 function prepMarkerAlternativ(
     alternativ: SvarAlternativModell,
     erValgt: boolean,
@@ -41,6 +39,7 @@ function prepMarkerAlternativ(
     type: string
 ): SvarAlternativModell[] {
     let sporsmalAlternativer = [...sporsmal.alternativer];
+
     if (erValgt) {
         if (type === 'radio') {
             return alternativListe;
@@ -54,6 +53,12 @@ function prepMarkerAlternativ(
         }
         return alternativListe.filter(alt => alt.id !== alternativ.id);
     } else {
+        if (
+            !!sporsmal.uniktAlternativ &&
+            sporsmal.uniktAlternativ === alternativ.id
+        ) {
+            return [alternativ];
+        }
         if (type === 'radio') {
             return [alternativ];
         } else if (type === 'skala') {
@@ -68,23 +73,25 @@ function prepMarkerAlternativ(
     }
 }
 
-function sjekkAvhengigheter(
-    sporsmalId: string,
-    svarteAlternativ: SvarAlternativModell[]
-): string {
-    const avhengighet: AvhengighetModell | undefined = Avhengigheter.find(
-        avh => avh.sporsmalId === sporsmalId
-    );
-    if (
-        !!avhengighet &&
-        !!svarteAlternativ.find(a => a.id === avhengighet.harSvartAlternativId)
-    ) {
-        return avhengighet.sendesTilSporsmalId;
+function erAlternativMulig(
+    uniktAlternativId: string,
+    gjeldendeAlternativId: string,
+    markerteAlternativer: SvarAlternativModell[]
+): boolean {
+    if (uniktAlternativId === gjeldendeAlternativId) {
+        return true;
+    } else {
+        if (!!markerteAlternativer.find(alt => alt.id === uniktAlternativId)) {
+            if (gjeldendeAlternativId === 'intervju-svar-0202') {
+                return true;
+            }
+            return false;
+        }
     }
-    return '';
+    return true;
 }
 
-type SporsmalProps = OwnProps & Dispatch & StateProps;
+type SporsmalProps = OwnProps & DispatchProps & StateProps;
 
 class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
     private liElement: HTMLLIElement;
@@ -97,19 +104,8 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
     sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: string) {
         if (markerteSpm.length === 0) {
             this.setState({ feil: true });
-        } else if (sjekkAvhengigheter(sporsmalId, markerteSpm)) {
-            /*
-            document.getElementById(
-                `sp-${sjekkAvhengigheter(sporsmalId, markerteSpm)}`
-            )!.scrollIntoView();
-            window.scrollBy(0, -300);
-*/
         } else {
-            /*
-            const nesteSpmId = sporsmalId + 1;
-            document.getElementById(`sp-${nesteSpmId}`)!.scrollIntoView();
-            window.scrollBy(0, -300);
-*/
+            return this.props.nesteSpm();
         }
     }
 
@@ -118,7 +114,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             sporsmal,
             besvarteSporsmal,
             markerAlternativ,
-            isActive
+            forrigeSpm
         } = this.props;
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
             besvarelse => besvarelse.sporsmalId === sporsmal.id
@@ -126,7 +122,6 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         const markerteAlternativer: SvarAlternativModell[] = besvartSpm
             ? besvartSpm.svarAlternativer
             : [];
-        const cls = ['sporsmal', isActive ? 'active' : ''].join(' ');
         if (this.state.feil && markerteAlternativer.length !== 0) {
             this.setState({ feil: false });
         }
@@ -134,8 +129,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             <li
                 ref={li => (this.liElement = li!)}
                 id={'sp-' + sporsmal.id}
-                className={cls}
-                tabIndex={0}
+                className={'sporsmal active'}
             >
                 <section>
                     <h1 className="typo-element blokk-xs">
@@ -155,6 +149,13 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                         const erValgt = !!markerteAlternativer.find(
                             alt => alt.id === alternativ.id
                         );
+                        const kanVelges: boolean = !!sporsmal.uniktAlternativ
+                            ? erAlternativMulig(
+                                  sporsmal.uniktAlternativ,
+                                  alternativ.id,
+                                  markerteAlternativer
+                              )
+                            : true;
                         return (
                             <Alternativ
                                 key={alternativ.id}
@@ -162,6 +163,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 erValgt={erValgt}
                                 sporsmalId={sporsmal.id}
                                 sporsmalType={sporsmal.type}
+                                kanVelges={kanVelges}
                                 markerAlternativ={() =>
                                     markerAlternativ(
                                         sporsmal.id,
@@ -176,16 +178,33 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             />
                         );
                     })}
-                    <button
-                        className="knapp knapp--hoved"
-                        key="besvar"
-                        onClick={e => {
-                            e.preventDefault();
-                            this.sjekkSvar(markerteAlternativer, sporsmal.id);
-                        }}
-                    >
-                        <FormattedMessage id="fortsett-knapp" />
-                    </button>
+                    {!sporsmal.erForsteSpm && (
+                        <button
+                            className="knapp"
+                            key="tilbake"
+                            onClick={e => {
+                                e.preventDefault();
+                                forrigeSpm();
+                            }}
+                        >
+                            Tilbake
+                        </button>
+                    )}
+                    {!sporsmal.erSisteSpm && (
+                        <button
+                            className="knapp knapp--hoved"
+                            key="besvar"
+                            onClick={e => {
+                                e.preventDefault();
+                                this.sjekkSvar(
+                                    markerteAlternativer,
+                                    sporsmal.id
+                                );
+                            }}
+                        >
+                            <FormattedMessage id="fortsett-knapp" />
+                        </button>
+                    )}
                 </section>
             </li>
         );

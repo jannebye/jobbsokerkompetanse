@@ -10,6 +10,7 @@ interface AlternativProps {
     markerAlternativ: () => void;
     sporsmalId: string;
     sporsmalType: AlternativTyper;
+    kanVelges: boolean;
 }
 
 function Alternativ({
@@ -17,9 +18,10 @@ function Alternativ({
     erValgt,
     markerAlternativ,
     sporsmalId,
-    sporsmalType
+    sporsmalType,
+    kanVelges
 }: AlternativProps) {
-    const skalHaHjelpetekst: boolean = alternativ.id === '0111';
+    const skalHaHjelpetekst: boolean = alternativ.id === 'finn-svar-0111';
     return (
         <div key={alternativ.id} className="svar">
             <input
@@ -35,17 +37,21 @@ function Alternativ({
             />
             <label
                 htmlFor={alternativ.id}
-                className={`svar__label ${erValgt ? 'markert' : ''}`}
+                className={`svar__label ${kanVelges
+                    ? erValgt ? 'markert' : ''
+                    : 'disabled'}`}
                 onClick={e => {
                     e.preventDefault();
-                    markerAlternativ();
+                    if (kanVelges) {
+                        markerAlternativ();
+                    }
                 }}
             >
                 <FormattedMessage id={alternativ.id} />
                 {skalHaHjelpetekst && (
                     <OverskriftMedHjelpeTekst
                         overskriftId=""
-                        hjelpetekstId="F.eks I papiraviser"
+                        hjelpetekstId="Papiravis, oppslagstavler, butikkvinduer mm."
                     />
                 )}
             </label>
