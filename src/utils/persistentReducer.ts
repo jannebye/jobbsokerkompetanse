@@ -13,7 +13,7 @@ function write(scope: string, content: any) {
     return localStorage.setItem(scope, JSON.stringify(content)); // eslint-disable-line no-undef
 }
 
-function erFiltreringEndret(scope: string, initialState: SvarState) {
+function erBesvarelseEndret(scope: string, initialState: SvarState) {
     const content = localStorage.getItem(scope); // eslint-disable-line no-undef
     if (!content || content === 'undefined') {
         return true;
@@ -36,7 +36,7 @@ export default (
     let nState = state;
     if (
         location.search.includes('clean') ||
-        erFiltreringEndret(scope, initialSvarState)
+        erBesvarelseEndret(scope, initialSvarState)
     ) {
         write(scope, undefined);
     }
