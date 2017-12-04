@@ -9,7 +9,7 @@ export default { 'nb': {
 'flervalg': 'Marker de alternativene som passer for deg.',
 'fortsett-knapp': 'Fortsett',
 'intervju-overskrift': 'I intervjuet skal du overbevise om at du passer inn i bedriften og at du er et trygt valg. Hvilke erfaringer har du med jobbintervju?',
-'raad': 'Råd',
+'overskrift-raad': 'Vi har uthevet 4 råd til deg',
 'send-inn': 'Send inn',
 'skala': 'Marker på en skala fra 1 til 5 hvor 1 er "utrygg" og 5 er "trygg".',
 'soke-erfaring-overskrift': 'Hva er din erfaring som jobbsøker?',

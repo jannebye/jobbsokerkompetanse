@@ -7,171 +7,171 @@
 @import '../node_modules/nav-frontend-spinner-style/src/spinner-style';
 @import '../node_modules/nav-frontend-typografi-style/src/index';
 @import '../node_modules/nav-frontend-hjelpetekst-style/src/hjelpetekst-style';
-@bakgrunnsFargeLys: #F7FCFF;
-@bakgrunnsFargeBla: #E6F5FA;
+@bakgrunnsFargeLys: #f7fcff;
+@bakgrunnsFargeBla: #e6f5fa;
 
 body {
-  background-color: @bakgrunnsFargeLys;
+    background-color: @bakgrunnsFargeLys;
 }
 
 .limit {
-  margin: 1rem auto;
-  width: ~'calc(100% - 2rem)';
-  height: 100%;
+    margin: 1rem auto;
+    width: ~'calc(100% - 2rem)';
+    height: 100%;
 }
 
 .sporsmal {
-  opacity: 0.2;
-  margin: 2rem 0;
-  transition: opacity 300ms ease-in-out;
-  height: 100%;
-  &:first-child {
-    margin-top: 1rem;
-  }
-  &.active {
-    opacity: 1;
-  }
-  &:focus {
-    outline: none;
-    box-shadow: none;
-  }
+    opacity: 0.2;
+    margin: 2rem 0;
+    transition: opacity 300ms ease-in-out;
+    height: 100%;
+    &:first-child {
+        margin-top: 1rem;
+    }
+    &.active {
+        opacity: 1;
+    }
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
 }
 
 form {
-  height: 100%;
-  ul {
     height: 100%;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    li {
-      flex-grow: 1;
-      flex-basis: 100%;
+    ul {
+        height: 100%;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        li {
+            flex-grow: 1;
+            flex-basis: 100%;
+        }
     }
-  }
 }
 
 .sporsmalsliste {
-  list-style: none;
-  padding: 0;
-  margin: 200px 0 300px;
-  height: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 200px 0 300px;
+    height: 100%;
 }
 
 .svarliste {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .skjemaelement__feilmelding {
-  font-style: italic;
-  color: @redError;
+    font-style: italic;
+    color: @redError;
 }
 
 .hjelpetekst {
-  color: @navMorkGra;
+    color: @navMorkGra;
 }
 
 .svar {
-  margin: 0.5rem 0;
+    margin: 0.5rem 0;
 
-  .svar__radio {
-    position: absolute;
-    opacity: 0;
-    height: 0;
-    width: 0;
+    .svar__radio {
+        position: absolute;
+        opacity: 0;
+        height: 0;
+        width: 0;
 
-    & + .svar__label {
-      display: flex;
-      justify-content: space-between;
-      border: 1px solid @grayIcon;
-      padding: 0.5rem 1rem;
-      width: 100%;
+        & + .svar__label {
+            display: flex;
+            justify-content: space-between;
+            border: 1px solid @grayIcon;
+            padding: 0.5rem 1rem;
+            width: 100%;
 
-      &:hover {
-        background-color: @navLysGra;
-      }
+            &:hover {
+                background-color: @navLysGra;
+            }
+        }
+
+        & + .markert {
+            background-color: @navBla;
+            color: @white;
+
+            &:hover {
+                background-color: @navBla;
+            }
+        }
+
+        & + .disabled {
+            background-color: @navLysGra;
+            color: black;
+        }
     }
 
-    & + .markert {
-      background-color: @navBla;
-      color: @white;
-
-      &:hover {
-        background-color: @navBla;
-      }
+    .svar__radio:checked {
+        & + .svar__label {
+            background-color: @navBlaLighten80;
+        }
     }
 
-    & + .disabled {
-      background-color: @navLysGra;
-      color: black;
-    }
-  }
-
-  .svar__radio:checked {
-    & + .svar__label {
-      background-color: @navBlaLighten80;
-    }
-  }
-
-  .svar__radio:focus {
-    & + .svar__label {
-      outline: none;
-      box-shadow: 0 0 0 3px @orangeFocus;
-    }
-  }
-
-  .overskrift-med-hjelpetekst {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-
-    svg {
-      height: 16px;
-      width: 16px;
+    .svar__radio:focus {
+        & + .svar__label {
+            outline: none;
+            box-shadow: 0 0 0 3px @orangeFocus;
+        }
     }
 
-    .hjelpetekst {
-      height: 18px;
-      padding-left: 0.5rem;
+    .overskrift-med-hjelpetekst {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        svg {
+            height: 16px;
+            width: 16px;
+        }
+
+        .hjelpetekst {
+            height: 18px;
+            padding-left: 0.5rem;
+        }
     }
-  }
 }
 
 .resultatliste {
-  list-style: none;
-  -webkit-padding-start: 0;
-  .sporsmal__besvarelse {
-    border: 1px solid @navBlaLighten20;
-    padding: 1rem;
-    margin-top: 1rem;
-  }
+    list-style: none;
+    -webkit-padding-start: 0;
+    .sporsmal__besvarelse {
+        border: 1px solid @navBlaLighten20;
+        padding: 1rem;
+        margin-top: 1rem;
+    }
 }
 
 .knapp + .knapp--hoved {
-  margin-left: 1rem;
+    margin-left: 1rem;
 }
 
 .alternativer {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 /* RESULTATSIDE */
 .resultatside {
-  padding: 1rem;
-  .overskrift__tema {
-    padding: 2rem;
-  }
-  .temaliste {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    -webkit-padding-start: 0;
-    .tema {
-      background-color: @bakgrunnsFargeBla;
-      padding: 1rem;
+    padding: 1rem;
+    .overskrift__tema {
+        padding: 2rem;
     }
-  }
+    .temaliste {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        -webkit-padding-start: 0;
+        .tema {
+            background-color: @bakgrunnsFargeBla;
+            padding: 1rem;
+        }
+    }
 }

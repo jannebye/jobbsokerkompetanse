@@ -21,13 +21,23 @@ function erFiltreringEndret(scope: string, initialState: SvarState) {
     const keysFromStorage = Object.keys(JSON.parse(content));
     const keysFromInitialState = Object.keys(initialState);
 
-    return !(keysFromStorage.length === keysFromInitialState.length &&
-        keysFromStorage.every((key) => keysFromInitialState.includes(key)));
+    return !(
+        keysFromStorage.length === keysFromInitialState.length &&
+        keysFromStorage.every(key => keysFromInitialState.includes(key))
+    );
 }
 
-export default (scope: string, location: Location, reducer: any, initialSvarState: SvarState) => (state: any, action: any) => {
+export default (
+    scope: string,
+    location: Location,
+    reducer: any,
+    initialSvarState: SvarState
+) => (state: any, action: any) => {
     let nState = state;
-    if (location.search.includes('clean') || erFiltreringEndret(scope, initialSvarState)) {
+    if (
+        location.search.includes('clean') ||
+        erFiltreringEndret(scope, initialSvarState)
+    ) {
         write(scope, undefined);
     }
     if (state === undefined) {
