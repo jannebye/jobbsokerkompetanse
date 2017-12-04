@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
+import AlleSporsmal from '../sporsmal/sporsmal-alle';
 import { marker } from '../svar/svar-duck';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
@@ -83,10 +84,7 @@ function erAlternativMulig(
         return true;
     } else {
         if (!!markerteAlternativer.find(alt => alt.id === uniktAlternativId)) {
-            if (gjeldendeAlternativId === 'intervju-svar-0202') {
-                return true;
-            }
-            return false;
+            return gjeldendeAlternativId === 'intervju-svar-0202';
         }
     }
     return true;
@@ -129,22 +127,40 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             <li
                 ref={spmRef}
                 id={'sp-' + sporsmal.id}
-                className={'sporsmal active'}
+                className={'sporsmal'}
                 tabIndex={0}
             >
                 <section>
-                    <h1 className="typo-element blokk-xs">
-                        <FormattedMessage id={sporsmal.id} />
-                    </h1>
-                    {this.state.feil && (
-                        <p className="skjemaelement__feilmelding">
-                            <FormattedMessage id="feilmelding-mangler-svar" />
-                        </p>
-                    )}
-                    <p className="hjelpetekst">
-                        <FormattedMessage id={sporsmal.type} />
-                    </p>
-                    <div className="alternativer">
+                    <div className="sporsmal__start">
+                        <div className="sporsmal__paginering">
+                            <strong>
+                                {Number(sporsmal.id.split('-')[2])}
+                            </strong>{' '}
+                            av <strong>{AlleSporsmal.length}</strong>
+                        </div>
+                        <div className="sporsmal__innhold">
+                            <h1 className="sporsmal__overskrift typo-innholdstittel blokk-xs">
+                                <FormattedMessage id={sporsmal.id} />
+                            </h1>
+                            {this.state.feil && (
+                                <p className="skjemaelement__feilmelding">
+                                    <FormattedMessage id="feilmelding-mangler-svar" />
+                                </p>
+                            )}
+                            <p className="sporsmal__ingress typo-undertekst">
+                                <FormattedMessage id={sporsmal.type} />
+                            </p>
+                        </div>
+                        <button
+                            className="sporsmal__knapp"
+                            onClick={e => {
+                                e.preventDefault();
+                            }}
+                        >
+                            <FormattedMessage id="fortsett-knapp" />
+                        </button>
+                    </div>
+                    <ul className="alternativer">
                         {sporsmal.alternativer.map(function(
                             alternativ: SvarAlternativModell
                         ) {
@@ -180,7 +196,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 />
                             );
                         })}
-                    </div>
+                    </ul>
                     {!sporsmal.erForsteSpm && (
                         <button
                             className="knapp"
@@ -195,7 +211,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                     )}
                     {!sporsmal.erSisteSpm && (
                         <button
-                            className="knapp knapp--hoved"
+                            className="sporsmal__knapp"
                             key="besvar"
                             onClick={e => {
                                 e.preventDefault();

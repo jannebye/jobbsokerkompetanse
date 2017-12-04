@@ -1,0 +1,55 @@
+.sporsmalsliste {
+    list-style: none;
+    padding: 0;
+}
+
+.sporsmal {
+    margin: 2rem 0;
+
+    &:first-child {
+        margin-top: 1rem;
+    }
+
+    &.active {
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    &__paginering {
+        text-align: center;
+    }
+
+    &__start {
+        text-align: center;
+    }
+
+    &__ingress {
+        margin-bottom: 1rem;
+    }
+
+    &__knapp {
+        margin: 0 auto;
+        display: block;
+        width: 52px;
+        height: 52px;
+        background-color: @navBla;
+        border-radius: 50%;
+        font: ~'0/0' a;
+        color: transparent;
+        border: 0;
+        cursor: pointer;
+        &:before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-top: -2px;
+            border-bottom: 2px solid @white;
+            border-right: 2px solid @white;
+            transform: rotate(45deg);
+        }
+    }
+}
