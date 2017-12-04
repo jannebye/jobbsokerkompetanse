@@ -40,9 +40,8 @@ function prepMarkerAlternativ(
     type: string
 ): SvarAlternativModell[] {
     let sporsmalAlternativer = [...sporsmal.alternativer];
-
     if (erValgt) {
-        if (type === 'radio') {
+        if (type === 'ettvalg') {
             return alternativListe;
         } else if (type === 'skala') {
             return alternativListe.filter(
@@ -60,7 +59,7 @@ function prepMarkerAlternativ(
         ) {
             return [alternativ];
         }
-        if (type === 'radio') {
+        if (type === 'ettvalg') {
             return [alternativ];
         } else if (type === 'skala') {
             alternativListe = [];

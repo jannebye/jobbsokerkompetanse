@@ -1,5 +1,5 @@
 {
-  "name": "jobbsokerkompetanse",
+  "name": "fo-jobbsokerkompetanse",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@types/lodash.throttle": "4.1.3",
+    "@types/redux-persist": "4.3.1",
     "babel-polyfill": "6.22.0",
     "classnames": "2.2.5",
     "intl": "1.2.5",
@@ -49,10 +50,11 @@
     "react-redux": "5.0.6",
     "react-scripts-ts": "2.8.0",
     "redux": "3.7.2",
+    "redux-persist": "5.4.0",
     "redux-thunk": "2.2.0",
     "xml-js": "1.5.2"
   },
-  "homepage": "https://navikt.github.io/jobbsokerkompetanse",
+  "homepage": "https://navikt.github.io/fo-jobbsokerkompetanse",
   "devDependencies": {
     "@types/jest": "21.1.4",
     "@types/node": "8.0.46",

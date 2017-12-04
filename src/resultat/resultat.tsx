@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { AppState } from '../ducks/reducer';
+import {AppState} from '../ducks/reducer';
 import BesvarelseModell from '../svar/svar-modell';
-import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import {connect} from 'react-redux';
+import {FormattedMessage} from 'react-intl';
 import alleSporsmal from '../sporsmal/sporsmal-alle';
-import { sorterSvar } from '../svar/svar-selector';
-import { fasteTemaer, leggesTilTemaer } from './tema';
+import {sorterSvar} from '../svar/svar-selector';
+import {fasteTemaer, leggesTilTemaer} from './tema';
 import temaLogikk from './tema-mapping';
-import { TemaModell } from './tema-modell';
+import {TemaModell} from './tema-modell';
 
 function temaSkalBehandles(tema: TemaModell, alternativId: string) {
     if (temaLogikk[tema.id]) {
         if (
-            temaLogikk[tema.id].alternativ.find(function(alt: string) {
+            temaLogikk[tema.id].alternativ.find(function (alt: string) {
                 return alt === alternativId;
             })
         ) {
@@ -53,12 +53,13 @@ function genererTema(fullfortBesvarelse: BesvarelseModell[]) {
 interface StateProps {
     besvarteSporsmal: BesvarelseModell[];
 }
-function Resultat({ besvarteSporsmal }: StateProps) {
+
+function Resultat({besvarteSporsmal}: StateProps) {
     sorterSvar(besvarteSporsmal);
     const resultat = genererTema(besvarteSporsmal);
     return (
-        <div>
-            <FormattedMessage id="din-besvarelse" />:
+        <div className="resultatside">
+            <FormattedMessage id="din-besvarelse"/>:
             <ul className="resultatliste">
                 {besvarteSporsmal.map(spm => (
                     <li className="sporsmal__besvarelse">
@@ -71,7 +72,7 @@ function Resultat({ besvarteSporsmal }: StateProps) {
                             }
                         </h4>
                         <p>
-                            <FormattedMessage id="dine-svar" />:{' '}
+                            <FormattedMessage id="dine-svar"/>:{' '}
                         </p>
                         <ul>
                             {spm.svarAlternativer.map(alt => (
@@ -81,10 +82,12 @@ function Resultat({ besvarteSporsmal }: StateProps) {
                     </li>
                 ))}
             </ul>
-            <FormattedMessage id="raad" /> :
-            <ul className="resultatliste">
+            <h3 className="overskrift__tema">
+                <FormattedMessage id="overskrift-raad"/>
+            </h3>
+            <ul className="temaliste">
                 {resultat.map(tema => (
-                    <li className="sporsmal_besvarelse">
+                    <li className="tema blokk-xs">
                         <h3>{tema.tekst}</h3>
                     </li>
                 ))}

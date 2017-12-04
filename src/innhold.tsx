@@ -17,7 +17,7 @@ class Innhold extends React.Component<InnholdStateProps, InnholdProps> {
     constructor(props: InnholdStateProps) {
         super(props);
 
-        this.state = { visResultat: false };
+        this.state = { visResultat: this.props.besvarteSporsmal.length === 19 };
     }
 
     handleSubmit() {

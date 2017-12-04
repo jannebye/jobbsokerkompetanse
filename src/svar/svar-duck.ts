@@ -15,7 +15,7 @@ export interface SvarState {
     gjeldendeSpmId: string;
 }
 
-const initialState = {
+export const initialState = {
     data: [{ sporsmalId: 'finn-spm-01', svarAlternativer: [] }],
     gjeldendeSpmId: 'finn-spm-01'
 };
