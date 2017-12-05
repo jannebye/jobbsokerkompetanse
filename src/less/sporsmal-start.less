@@ -1,0 +1,36 @@
+.sporsmal {
+    &__start {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: @white;
+        z-index: 100;
+
+        .sporsmal__paginering {
+            display: inline;
+            margin-top: 0.5rem;
+        }
+
+        .sporsmal__innhold {
+            //padding: 0 4rem;
+        }
+
+        .sporsmal__videre {
+            display: block;
+            margin-bottom: 4rem;
+            animation: sprett 2s infinite alternate;
+        }
+    }
+}
+
+@keyframes sprett {
+    30%, 100% {
+        transform: translate(0px, -10px);
+    }
+}
+
