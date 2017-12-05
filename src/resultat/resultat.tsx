@@ -47,14 +47,21 @@ function genererTema(fullfortBesvarelse: BesvarelseModell[]) {
         .concat(resultatLeggesTil)
         .sort((temaA, temaB) => temaA.prioritet - temaB.prioritet);
 
-    return resultat.splice(0, 5);
+    // return resultat.splice(0, 4);  // TODO: Denne skal brukes
+    return resultat; // Kun for at fag skal få teste
 }
 
 interface StateProps {
     besvarteSporsmal: BesvarelseModell[];
 }
 
-function Resultat({ besvarteSporsmal }: StateProps) {
+interface ResultatProps {
+    startPaNytt: () => void;
+}
+
+type Props = StateProps & ResultatProps;
+
+function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
     sorterSvar(besvarteSporsmal);
     const resultat = genererTema(besvarteSporsmal);
     return (
@@ -92,6 +99,12 @@ function Resultat({ besvarteSporsmal }: StateProps) {
                     </li>
                 ))}
             </ul>
+            <button
+                className="knapp knapp--hoved"
+                onClick={() => startPaNytt()}
+            >
+                Ta testen på nytt
+            </button>
         </div>
     );
 }

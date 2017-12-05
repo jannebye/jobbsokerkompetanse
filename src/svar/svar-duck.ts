@@ -4,11 +4,12 @@ import {
     ActionType,
     BesvarAction,
     EndreAlternativAction,
-    NesteSporsmalAction
+    NesteSporsmalAction,
+    ResetAction
 } from '../actions';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 
-const { BESVAR, ENDRE_ALTERNATIV, NESTE_SPORSMAL } = ActionType;
+const { BESVAR, ENDRE_ALTERNATIV, NESTE_SPORSMAL, RESET } = ActionType;
 
 export interface SvarState {
     data: BesvarelseModell[];
@@ -25,7 +26,6 @@ export default function reducer(
     state: SvarState = initialState,
     action: Handling
 ): SvarState {
-    // return initialState;
     switch (action.type) {
         case ActionType.ENDRE_ALTERNATIV: {
             if (
@@ -79,6 +79,8 @@ export default function reducer(
                     gjeldendeSpmId: action.data
                 };
             }
+        case ActionType.RESET:
+            return initialState;
         default:
             return state;
     }
@@ -105,10 +107,15 @@ export function marker(
     };
 }
 
-// Action Creators
 export function nesteSporsmal(sporsmal: string): NesteSporsmalAction {
     return {
         type: NESTE_SPORSMAL,
         data: sporsmal
+    };
+}
+
+export function reset(): ResetAction {
+    return {
+        type: RESET
     };
 }

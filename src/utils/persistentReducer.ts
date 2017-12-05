@@ -1,5 +1,7 @@
 /* tslint:disable */
+
 import { SvarState } from '../svar/svar-duck';
+import { SideState } from '../ducks/side-duck';
 
 function read(scope: string) {
     const content = localStorage.getItem(scope);
@@ -10,11 +12,14 @@ function read(scope: string) {
 }
 
 function write(scope: string, content: any) {
-    return localStorage.setItem(scope, JSON.stringify(content)); // eslint-disable-line no-undef
+    return localStorage.setItem(scope, JSON.stringify(content));
 }
 
-function erBesvarelseEndret(scope: string, initialState: SvarState) {
-    const content = localStorage.getItem(scope); // eslint-disable-line no-undef
+function erBesvarelseEndret(
+    scope: string,
+    initialState: SvarState | SideState
+) {
+    const content = localStorage.getItem(scope);
     if (!content || content === 'undefined') {
         return true;
     }
@@ -31,12 +36,13 @@ export default (
     scope: string,
     location: Location,
     reducer: any,
-    initialSvarState: SvarState
+    initialState: SvarState | SideState
 ) => (state: any, action: any) => {
     let nState = state;
     if (
         location.search.includes('clean') ||
-        erBesvarelseEndret(scope, initialSvarState)
+        erBesvarelseEndret(scope, initialState) ||
+        erBesvarelseEndret(scope, initialState)
     ) {
         write(scope, undefined);
     }
