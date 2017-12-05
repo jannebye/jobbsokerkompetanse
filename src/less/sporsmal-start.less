@@ -12,12 +12,25 @@
         z-index: 100;
 
         .sporsmal__paginering {
+            display: inline;
+            margin-top: 0.5rem;
         }
 
-        .sporsmal__overskrift {
+        .sporsmal__innhold {
+            //padding: 0 4rem;
         }
 
-        .sporsmal__ingress {
+        .sporsmal__videre {
+            display: block;
+            margin-bottom: 4rem;
+            animation: sprett 2s infinite alternate;
         }
     }
 }
+
+@keyframes sprett {
+    30%, 100% {
+        transform: translate(0px, -10px);
+    }
+}
+

@@ -93,9 +93,18 @@ function erAlternativMulig(
 type SporsmalProps = OwnProps & DispatchProps & StateProps;
 
 class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
+    spmStart: HTMLElement;
+
     constructor(props: SporsmalProps) {
         super(props);
         this.state = { feil: false };
+        this.refhandler = this.refhandler.bind(this);
+    }
+
+    refhandler(spmStart: HTMLElement | null) {
+        if (spmStart != null) {
+            this.spmStart = spmStart;
+        }
     }
 
     sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: string) {
@@ -131,15 +140,15 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                 tabIndex={0}
             >
                 <section>
-                    <div className="sporsmal__start">
-                        <div className="sporsmal__paginering">
+                    <div className="sporsmal__start" ref={this.refhandler}>
+                        <span className="sporsmal__paginering typo-normal">
                             <strong>
                                 {Number(sporsmal.id.split('-')[2])}
                             </strong>{' '}
                             av <strong>{AlleSporsmal.length}</strong>
-                        </div>
+                        </span>
                         <div className="sporsmal__innhold">
-                            <h1 className="sporsmal__overskrift typo-innholdstittel blokk-xs">
+                            <h1 className="sporsmal__overskrift typo-sidetittel blokk-xs">
                                 <FormattedMessage id={sporsmal.id} />
                             </h1>
                             {this.state.feil && (
@@ -152,9 +161,12 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             </p>
                         </div>
                         <button
-                            className="sporsmal__knapp"
+                            className="sporsmal__knapp sporsmal__videre"
                             onClick={e => {
                                 e.preventDefault();
+                                this.spmStart.classList.contains('sporsmal__start') ?
+                                    this.spmStart.classList.remove('sporsmal__start') :
+                                    this.spmStart.classList.add('sporsmal__start');
                             }}
                         >
                             <FormattedMessage id="fortsett-knapp" />
