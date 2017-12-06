@@ -26,7 +26,7 @@ const temaLogikk = {
     },
     soknadCV2: {
         alternativ: [
-            '1007',
+            'cv-svar-0507',
             'soke-svar-0101',
             'soke-svar-0201',
             'soke-svar-0401'
