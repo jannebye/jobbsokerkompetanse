@@ -8,5 +8,5 @@ WORKDIR /source
 RUN npm install && npm run build
 
 FROM nginx
-COPY --from=builder /source/build /usr/share/nginx/html
+COPY --from=builder /source/build /usr/share/nginx/html/jobbsokerkompetanse
 EXPOSE 80

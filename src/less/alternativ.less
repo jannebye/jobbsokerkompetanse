@@ -1,0 +1,66 @@
+.alternativer {
+    list-style: none;
+    padding: 0;
+
+    .alternativ {
+        list-style: none;
+        padding: 0;
+
+        .alternativ__radio {
+            position: absolute;
+            opacity: 0;
+            height: 0;
+            width: 0;
+
+            & + .alternativ__label {
+                display: flex;
+                justify-content: space-between;
+                border-top: 1px solid @grayIcon;
+                padding: 0.5rem 1rem;
+                width: 100%;
+
+                &:hover {
+                    background-color: @navLysGra;
+                }
+            }
+
+            & + .markert {
+                background-color: @navBla;
+                color: @white;
+
+                &:hover {
+                    background-color: @navBla;
+                }
+            }
+
+            & + .disabled {
+                background-color: @navLysGra;
+                color: black;
+            }
+        }
+
+        .alternativ__radio:checked {
+            & + .alternativ__label {
+                background-color: @navBlaLighten80;
+            }
+        }
+
+        .alternativ__radio:focus {
+            & + .alternativ__label {
+                outline: none;
+                box-shadow: 0 0 0 3px @orangeFocus;
+            }
+        }
+
+        .overskrift-med-hjelpetekst {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            svg {
+                height: 16px;
+                width: 16px;
+            }
+        }
+    }
+}

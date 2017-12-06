@@ -106,8 +106,8 @@ class Skjema extends React.Component<SkjemaProps, {}> {
         );
 
         return (
-            <form className="sporsmalsskjema">
-                <ul>
+            <form>
+                <ul className="sporsmalsliste">
                     {forelopigBesvarelse.map(spm => (
                         <Sporsmal
                             key={spm.sporsmalId}

@@ -23,10 +23,10 @@ function Alternativ({
 }: AlternativProps) {
     const skalHaHjelpetekst: boolean = alternativ.id === 'finn-svar-0111';
     return (
-        <div key={alternativ.id} className="svar">
+        <li key={alternativ.id} className="alternativ">
             <input
                 id={alternativ.id}
-                className="svar__radio"
+                className="alternativ__radio"
                 type={
                     sporsmalType !== AlternativTyper.SKALA
                         ? sporsmalType
@@ -37,7 +37,7 @@ function Alternativ({
             />
             <label
                 htmlFor={alternativ.id}
-                className={`svar__label ${kanVelges
+                className={`alternativ__label ${kanVelges
                     ? erValgt ? 'markert' : ''
                     : 'disabled'}`}
                 onClick={e => {
@@ -55,7 +55,7 @@ function Alternativ({
                     />
                 )}
             </label>
-        </div>
+        </li>
     );
 }
 

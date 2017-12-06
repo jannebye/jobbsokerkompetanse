@@ -7,6 +7,6 @@ replicas:
 port: 80
 healthcheck:
   liveness:
-    path: nais/alive.txt
+    path: jobbsokerkompetanse/nais/alive.txt
   readiness:
-    path: nais/ready.txt
+    path: jobbsokerkompetanse/nais/ready.txt
