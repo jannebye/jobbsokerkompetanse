@@ -1,4 +1,5 @@
 import Svar from './svar/svar-modell';
+import { Sidetype } from './utils/konstanter';
 
 export enum ActionType {
     BESVAR,
@@ -6,6 +7,8 @@ export enum ActionType {
     FJERN_MARKERING,
     NESTE_SPORSMAL,
     FORRIGE_SPORSMAL,
+    RESET,
+    ENDRE_SIDE
 }
 
 export interface BesvarAction {
@@ -27,7 +30,16 @@ export interface ForrigeSporsmalAction {
     type: ActionType.FORRIGE_SPORSMAL;
 }
 
+export interface ResetAction {
+    type: ActionType.RESET;
+}
+
+export interface EndreSideAction {
+    type: ActionType.ENDRE_SIDE;
+    data: Sidetype;
+}
+
 export type Handling =
     BesvarAction | EndreAlternativAction
-    | NesteSporsmalAction | ForrigeSporsmalAction
+    | NesteSporsmalAction | ForrigeSporsmalAction | ResetAction | EndreSideAction
     ;
