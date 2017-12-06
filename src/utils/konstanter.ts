@@ -3,3 +3,9 @@ export enum AlternativTyper {
     FLERVALG = 'flervalg',
     SKALA = 'skala'
 }
+
+export enum Sidetype {
+    START = 'startside',
+    KARTLEGGING = 'kartleggingside',
+    RESULTAT = 'resultatside'
+}

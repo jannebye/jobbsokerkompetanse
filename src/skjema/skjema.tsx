@@ -143,14 +143,11 @@ class Skjema extends React.Component<SkjemaProps, {}> {
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    gjeldendeSporsmalId: state.gjeldendeSporsmal.data,
+    gjeldendeSporsmalId: state.svar.gjeldendeSpmId,
     forelopigBesvarelse: state.svar.data
 });
 
-const mapDispatchToProps = (
-    dispatch: Dispatch,
-    props: OwnProps
-): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     byttSpm: (sporsmalId: string) =>
         new Promise(resolve => resolve(dispatch(nesteSporsmal(sporsmalId))))
 });
