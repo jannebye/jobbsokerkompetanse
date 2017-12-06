@@ -9,6 +9,7 @@ import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
 import Alternativ from './alternativ';
 import { FormattedMessage } from 'react-intl';
+import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 interface DispatchProps {
     markerAlternativ: (
@@ -90,7 +91,7 @@ function erAlternativMulig(
     return true;
 }
 
-type SporsmalProps = OwnProps & DispatchProps & StateProps;
+type SporsmalProps = OwnProps & DispatchProps & StateProps & InjectedIntlProps;
 
 class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
     spmStart: HTMLElement;
@@ -254,4 +255,4 @@ const mapDispatchToProps = (
         dispatch(marker(sporsmalId, alternativ))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sporsmal);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Sporsmal));
