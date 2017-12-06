@@ -10,9 +10,9 @@ import temaLogikk from './tema-mapping';
 import { TemaModell } from './tema-modell';
 
 function temaSkalBehandles(tema: TemaModell, alternativId: string) {
-    if (temaLogikk[tema.id]) {
+    if (temaLogikk[tema.referanse]) {
         if (
-            temaLogikk[tema.id].alternativ.find(function(alt: string) {
+            temaLogikk[tema.referanse].alternativ.find(function(alt: string) {
                 return alt === alternativId;
             })
         ) {

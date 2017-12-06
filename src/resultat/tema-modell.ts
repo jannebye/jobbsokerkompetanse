@@ -5,7 +5,8 @@ export enum defaultType {
 }
 
 export interface TemaModell {
-    id: string;
+    referanse: string;
+    kategori: string;
     tekst: string;
     prioritet: number;
     defaultPosisjon: defaultType;

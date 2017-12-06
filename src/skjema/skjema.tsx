@@ -90,6 +90,7 @@ class Skjema extends React.Component<SkjemaProps, {}> {
                 ];
                 nesteSpm.focus();
                 nesteSpm.scrollIntoView();
+                console.log(nesteSpm);
             });
     }
 
@@ -118,7 +119,7 @@ class Skjema extends React.Component<SkjemaProps, {}> {
                             }
                             spmRef={(ref: {}) =>
                                 (sporsmalRefs[spm.sporsmalId] = ref)}
-                            nesteSpm={id => this.byttSpmOgFokus(id)}
+                            nesteSpm={(id: string) => this.byttSpmOgFokus(id)}
                             forrigeSpm={() =>
                                 byttSpm(
                                     forrigeSporsmal(

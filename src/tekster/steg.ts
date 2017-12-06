@@ -8,6 +8,7 @@ const steg = [
 		temaer: [
 			{
 				id: 454071,
+				referanse: "raad-1",
 				tittel: "Kom i gang",
 				ingress: "Kom i gang med jobbsøkingen så raskt som mulig.",
 				aktiviteter: [
@@ -25,6 +26,7 @@ const steg = [
 			},
 			{
 				id: 454067,
+                referanse: "raad-2",
 				tittel: "Beskriv kompetansen din",
 				ingress: "Tenk gjennom hva du har gjort, hva du har lært og hva du kan gjøre.",
 				aktiviteter: [
@@ -39,6 +41,7 @@ const steg = [
 			},
 			{
 				id: 454073,
+                referanse: "raad-3",
 				tittel: "Sett deg mål",
 				ingress: "Det kan være lurt å sette seg noen karrieremål og jobbe mot dem.",
 				aktiviteter: [
@@ -60,6 +63,7 @@ const steg = [
 			},
 			{
 				id: 454075,
+                referanse: "raad-4",
 				tittel: "Ta en interessetest",
 				ingress: "En interessetest kan hjelpe deg med å velge utdanning og yrke.",
 				aktiviteter: [
@@ -88,6 +92,7 @@ const steg = [
 			},
 			{
 				id: 454076,
+                referanse: "raad-5",
 				tittel: "Ta en personlighetstest",
 				ingress: "En personlighetstest kan gi deg verdifull innsikt om deg selv og dine interesser.",
 				aktiviteter: [
@@ -109,6 +114,7 @@ const steg = [
 			},
 			{
 				id: 454068,
+                referanse: "raad-6",
 				tittel: "Gjør avtale med karrieresenter",
 				ingress: "Offentlige karrieresentre finnes i nesten hele landet. Sentrene tilbyr gratis karriereveiledning og hjelp til å søke jobb for alle over 19 år.",
 				aktiviteter: [
@@ -123,6 +129,7 @@ const steg = [
 			},
 			{
 				id: 454072,
+                referanse: "raad-7",
 				tittel: "Meld deg på et kurs",
 				ingress: "Det kan være at du trenger mer kompetanse for å den jobben du ønsker deg.",
 				aktiviteter: [
@@ -143,7 +150,17 @@ const steg = [
 				],
 			},
 			{
+				id: 454198,
+				referanse: "raad-8",
+				tittel: "Forbedre norskkunnskapene dine",
+				ingress: "Gode norskkunnskaper kan være avgjørende når du søker jobb.",
+				innhold: "Forbedre norsken din. Er du innvandrer, lær deg norsk. Et godt språk kan være avgjørende når du søker jobb. En CV og søknad med skrivefeil havner fort i feil bunke. Et godt språk vil også gir deg flere muligheter på arbeidsmarkedet. Se hvordan du kan <a href=\"https://www.nav.no/no/Person/Arbeid/Arbeidsledig+og+jobbsoker/Jobbsokertips/vil-du-ha-jobb-og-sliter-med-spr%C3%A5k\" target=\"_blank\">forbedre norskkunnskapene</a> dine og hvor du finner kurs.",
+				tags: [],
+				collapsable: "false",
+			},
+			{
 				id: 454077,
+                referanse: "raad-9",
 				tittel: "Ta mer utdanning",
 				ingress: "Det kan være at du trenger mer utdanning for å den jobben du ønsker deg.",
 				aktiviteter: [
@@ -158,7 +175,8 @@ const steg = [
 			},
 			{
 				id: 454070,
-				tittel: "Har du krav på voksenopplæring",
+                referanse: "raad-10",
+				tittel: "Sjekk om du har krav på voksenopplæring",
 				ingress: "Det er fylkeskommunen og kommunen din som har ansvaret for voksenopplæring.",
 				aktiviteter: [
 					{
@@ -186,6 +204,7 @@ const steg = [
 			},
 			{
 				id: 454069,
+                referanse: "raad-10",
 				tittel: "Google deg selv",
 				ingress: "Vær klar over at arbeidsgivere ofte sjekker Facebook-profilen din og googler deg.",
 				aktiviteter: [
@@ -200,6 +219,7 @@ const steg = [
 			},
 			{
 				id: 454074,
+                referanse: "raad-11",
 				tittel: "Start egen virksomhet",
 				ingress: "Har du ambisjoner om å starte for deg selv? De viktigste veivalgene gjøres i starten.",
 				aktiviteter: [
@@ -237,6 +257,7 @@ const steg = [
 		temaer: [
 			{
 				id: 454089,
+                referanse: "raad-12",
 				tittel: "Finn jobben på nav.no ",
 				ingress: "På nav.no har du oversikt over stillinger i hele landet. Er du fleksibel når det gjelder jobbønske og arbeidssted, øker mulighetene for å komme raskt i jobb.",
 				aktiviteter: [
@@ -272,6 +293,7 @@ const steg = [
 			},
 			{
 				id: 454091,
+                referanse: "raad-13",
 				tittel: "Abonner på stillinger",
 				ingress: "Det er mange måter å finne ledige jobber på.",
 				aktiviteter: [
@@ -300,6 +322,7 @@ const steg = [
 			},
 			{
 				id: 454805,
+                referanse: "raad-14",
 				tittel: "Under 18 år og vil ha jobb",
 				ingress: "Det kan være mer utfordrende å få jobb når du er under 18 år. Men det finnes muligheter.",
 				aktiviteter: [
@@ -316,6 +339,7 @@ const steg = [
 			},
 			{
 				id: 454799,
+                referanse: "raad-15",
 				tittel: "Hvordan få jobb som nyutdannet",
 				ingress: "Du kan ikke forvente å finne drømmejobben med en gang. Ikke være kresen, all jobberfaring er verdifull og kan gi deg muligheter videre.",
 				aktiviteter: [
@@ -332,6 +356,7 @@ const steg = [
 			},
 			{
 				id: 454808,
+                referanse: "raad-16",
 				tittel: "Ung og jobb i utlandet",
 				ingress: "Jobb i utlandet gir deg både gode språkkunnskaper og unik arbeidserfaring.",
 				aktiviteter: [
@@ -348,6 +373,7 @@ const steg = [
 			},
 			{
 				id: 454797,
+                referanse: "raad-17",
 				tittel: "Jobber for deg med ekstra utfordringer",
 				ingress: "Det finnes et stillingsmarked for deg som har noen ekstra utfordringer når du søker jobb.",
 				aktiviteter: [
@@ -364,6 +390,7 @@ const steg = [
 			},
 			{
 				id: 454096,
+                referanse: "raad-18",
 				tittel: "Delta på karrieredager",
 				ingress: "Som student kan du delta på karrieredager ved universiteter og høyskoler.",
 				aktiviteter: [
@@ -380,6 +407,7 @@ const steg = [
 			},
 			{
 				id: 454090,
+                referanse: "raad-19",
 				tittel: "Registrer deg flere steder",
 				ingress: "En midlertidig jobb kan være et godt alternativ, også hvis du er permittert eller deltidsansatt.",
 				aktiviteter: [
@@ -394,6 +422,7 @@ const steg = [
 			},
 			{
 				id: 454097,
+                referanse: "raad-20",
 				tittel: "Bruk nettverket ditt ",
 				ingress: "Noen finner ny jobb gjennom nettverket sitt. Men ikke tro at alle vet at du er på jakt etter jobb.",
 				aktiviteter: [
@@ -415,6 +444,7 @@ const steg = [
 			},
 			{
 				id: 454092,
+                referanse: "raad-21",
 				tittel: "Bruk sosiale medier i jobbjakten",
 				ingress: "Det er vanlig at bedrifter benytter sosiale medier som Facebook, Twitter, LinkedIn og blogger når de rekrutterer.",
 				aktiviteter: [
@@ -443,6 +473,7 @@ const steg = [
 			},
 			{
 				id: 454094,
+                referanse: "raad-22",
 				tittel: "Bruk LinkedIn",
 				ingress: "Flere arbeidsgivere og rekrutteringsbyråer bruker LinkedIn når de søker etter medarbeidere.",
 				aktiviteter: [
@@ -457,6 +488,7 @@ const steg = [
 			},
 			{
 				id: 454095,
+                referanse: "raad-23",
 				tittel: "Delta på NAVs jobbmesser ",
 				ingress: "På jobbmesser kan du treffe arbeidsgivere ansikt til ansikt og knytte kontakter.",
 				aktiviteter: [
@@ -480,6 +512,7 @@ const steg = [
 		temaer: [
 			{
 				id: 454152,
+                referanse: "raad-24",
 				tittel: "Skriv søknad og CV",
 				ingress: "Hvis søknaden og CV-en din får deg på intervju, har du gjort mye riktig.",
 				aktiviteter: [
@@ -541,6 +574,7 @@ const steg = [
 			{
 				id: 454810,
 				tittel: "Hvordan skrive om hull i CV-en",
+                referanse: "raad-25",
 				ingress: "Noen har perioder i livet uten jobb, skole eller andre organiserte aktivitetet på grunn av sykdom, rus, arbeidsledighet, reiser eller andre ting.",
 				aktiviteter: [
 					{
@@ -557,6 +591,7 @@ const steg = [
 			},
 			{
 				id: 454374,
+                referanse: "raad-26",
 				tittel: "Skaff dokumentasjon på utdanning og attester",
 				ingress: "Du må kunne dokumentere utdanning og arbeidserfaring gjennom vitnemål og attester.",
 				aktiviteter: [
@@ -578,6 +613,7 @@ const steg = [
 			},
 			{
 				id: 454375,
+                referanse: "raad-27",
 				tittel: "Sjekk referansene dine",
 				ingress: "Referansepersoner kan være en tidligere eller nåværende arbeidsgiver, kollegaer, fagforeningskontakter, lærere, trenere eller et medlem i en organisasjon du er med i.",
 				aktiviteter: [
@@ -608,6 +644,7 @@ const steg = [
 			},
 			{
 				id: 454376,
+                referanse: "raad-28",
 				tittel: "Logg jobbene du søker på ",
 				ingress: "En jobblogg er et verktøy som hjelper deg med å holde oversikt over jobbene du har søkt på.",
 				aktiviteter: [
@@ -622,6 +659,7 @@ const steg = [
 			},
 			{
 				id: 454378,
+                referanse: "raad-29",
 				tittel: "Send en åpen søknad",
 				ingress: "Selv om bedriften ikke har lyst ut ledige stillinger, kan du sende en åpen søknad.",
 				aktiviteter: [
@@ -657,6 +695,7 @@ const steg = [
 			},
 			{
 				id: 454377,
+                referanse: "raad-30",
 				tittel: "Lag en utradisjonell søknad eller CV ",
 				ingress: "I noen bransjer gjelder det å skille seg ut. En annerledes søknad eller CV kan bidra til at du får jobben.",
 				aktiviteter: [
@@ -680,6 +719,7 @@ const steg = [
 		temaer: [
 			{
 				id: 454119,
+                referanse: "raad-31",
 				tittel: "Finn ut hva slags intervju du skal på ",
 				ingress: "Det tradisjonelle intervjuet ansikt til ansikt med en arbeidsgiver er fortsatt det mest vanlige, men det finnes flere intervjuformer.",
 				aktiviteter: [
@@ -694,6 +734,7 @@ const steg = [
 			},
 			{
 				id: 454121,
+                referanse: "raad-32",
 				tittel: "Forbered deg til intervjuet ",
 				ingress: "I intervjuet skal du overbevise om at du passer inn i bedriften og at du er et trygt valg.",
 				aktiviteter: [
@@ -722,12 +763,14 @@ const steg = [
 			},
 			{
 				id: 454806,
+                referanse: "raad-33",
 				tittel: "Intervjutips for deg som er ung",
 				ingress: "Det kan være nervepirrende å møte opp på sitt første jobbintervju. Vær godt forberedt, men hva bør du forberede deg på? ",
 				aktiviteter: [],
 			},
 			{
 				id: 454123,
+                referanse: "raad-34",
 				tittel: "Hva er dine sterke sider ",
 				ingress: "Når du blir spurt om dine sterke sider er det din sjanse til å si hva du er god på.",
 				aktiviteter: [
@@ -742,6 +785,7 @@ const steg = [
 			},
 			{
 				id: 454124,
+                referanse: "raad-35",
 				tittel: "Hva er dine svake sider",
 				ingress: "En arbeidsgiver vil ofte utfordre deg til å si noe også om dine svake sider.",
 				aktiviteter: [
@@ -756,6 +800,7 @@ const steg = [
 			},
 			{
 				id: 454126,
+                referanse: "raad-36",
 				tittel: "Øv på intervjusituasjonen",
 				ingress: "Øvelse gjør mester, det gjelder også intervjusituasjonen.",
 				aktiviteter: [
@@ -784,6 +829,7 @@ const steg = [
 			},
 			{
 				id: 454127,
+                referanse: "raad-37",
 				tittel: "Gjør et godt førsteinntrykk",
 				ingress: "Førsteinntrykket kan avgjøre om du får jobben.",
 				aktiviteter: [
@@ -805,6 +851,7 @@ const steg = [
 			},
 			{
 				id: 454130,
+                referanse: "raad-38",
 				tittel: "Still spørsmål til bedriften",
 				ingress: "Benytt anledningen til å stille spørsmål som viser at du har forstått hva som er viktig for denne arbeidsgiveren.",
 				aktiviteter: [
@@ -819,6 +866,7 @@ const steg = [
 			},
 			{
 				id: 454132,
+                referanse: "raad-39",
 				tittel: "Hvordan gikk intervjuet ",
 				ingress: "Bruk tid på å evaluere innsatsen din etter hvert intervju.  ",
 				aktiviteter: [
@@ -847,6 +895,7 @@ const steg = [
 			},
 			{
 				id: 454135,
+                referanse: "raad-40",
 				tittel: "Fikk du ikke jobben ",
 				ingress: "Ta kontakt med arbeidsgiveren hvis du ikke fikk jobben. Du kan få tilbakemeldinger som hjelper deg videre.",
 				aktiviteter: [
@@ -870,6 +919,7 @@ const steg = [
 		temaer: [
 			{
 				id: 454137,
+                referanse: "raad-41",
 				tittel: "Lag en plan",
 				ingress: "Vær forberedt på at jobbsøking kan være en lang prosess. Tenk måneder, ikke uker. Sett av god tid til jobbsøking, det er en fulltidsjobb.",
 				aktiviteter: [
@@ -896,6 +946,7 @@ const steg = [
 			},
 			{
 				id: 454138,
+                referanse: "raad-42",
 				tittel: "Reflekter over jobbene du søker på ",
 				ingress: "Det er helt vanlig å søke mange jobber uten å få napp. Er du fleksibel nok?",
 				aktiviteter: [
@@ -915,6 +966,7 @@ const steg = [
 			},
 			{
 				id: 454140,
+                referanse: "raad-43",
 				tittel: "Vær aktiv ",
 				ingress: "Sett av tid til aktiviteter utenom jobbsøkingen.",
 				aktiviteter: [
@@ -948,6 +1000,7 @@ const steg = [
 			},
 			{
 				id: 454141,
+                referanse: "raad-44",
 				tittel: "Delta i frivillig arbeid",
 				ingress: "Frivillig arbeid gir deg erfaring, kompetanse og sosial kontakt, og er bra å ha på CV-en.",
 				aktiviteter: [
@@ -967,6 +1020,7 @@ const steg = [
 			},
 			{
 				id: 454142,
+                referanse: "raad-45",
 				tittel: "Meld deg på jobbsøkerkurs  ",
 				ingress: "Trenger du å bli en bedre jobbsøker? Er du usikker på om du skriver gode nok søknader, eller trenger du å trene på intervjuer?",
 				aktiviteter: [
