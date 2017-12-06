@@ -70,7 +70,7 @@ const temaLogikk = {
         ]
     },
     intervju6: {
-        alternativ: ['intervju-svar-0203', 'intervju-svar-0204']
+        alternativ: ['soke-svar-0101', 'soke-svar-0201']
     },
     intervju7: {
         alternativ: [
