@@ -90,10 +90,10 @@ const temaLogikk = {
     hverdagJobbsok2: {
         alternativ: ['soke-svar-0201', 'soke-svar-0202']
     },
-    hverdagJobbsok3: {
+    hverdagJobbsok4: {
         alternativ: ['intervju-svar-0407']
     },
-    hverdagJobbsok4: {
+    hverdagJobbsok5: {
         alternativ: ['intervju-svar-0403']
     },
     begynnSelv1: {
@@ -107,7 +107,7 @@ const temaLogikk = {
         alternativ: ['intervju-svar-0403', 'intervju-svar-0405']
     },
     begynnSelv7: {
-        alternativ: ['intervju-svar-0405']
+        alternativ: ['intervju-svar-0403', 'intervju-svar-0405']
     },
     begynnSelv8: {
         alternativ: ['intervju-svar-0403']
