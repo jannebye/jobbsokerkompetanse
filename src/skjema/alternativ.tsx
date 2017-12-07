@@ -37,7 +37,7 @@ function Alternativ({
             />
             <label
                 htmlFor={alternativ.id}
-                className={`alternativ__label ${kanVelges
+                className={`typo-undertittel alternativ__label ${kanVelges
                     ? erValgt ? 'markert' : ''
                     : 'disabled'}`}
                 onClick={e => {
