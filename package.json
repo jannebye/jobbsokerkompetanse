@@ -1,5 +1,5 @@
 {
-  "name": "fo-jobbsokerkompetanse",
+  "name": "jobbsokerkompetanse",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -60,7 +60,7 @@
     "redux-thunk": "2.2.0",
     "xml-js": "1.5.2"
   },
-  "homepage": "https://navikt.github.io/fo-jobbsokerkompetanse",
+  "homepage": "https://navikt.github.io/jobbsokerkompetanse",
   "devDependencies": {
     "@types/jest": "21.1.4",
     "@types/node": "8.0.46",
