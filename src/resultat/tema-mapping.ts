@@ -66,7 +66,8 @@ const temaLogikk = {
             'intervju-svar-0102',
             'intervju-svar-0201',
             'intervju-svar-0202',
-            'intervju-svar-0301'
+            'intervju-svar-0301',
+            'intervju-svar-0302'
         ]
     },
     intervju6: {

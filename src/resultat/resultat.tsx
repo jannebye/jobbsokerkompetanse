@@ -8,11 +8,12 @@ import { sorterSvar } from '../svar/svar-selector';
 import { fasteTemaer, leggesTilTemaer } from './tema';
 import temaLogikk from './tema-mapping';
 import { TemaModell } from './tema-modell';
+import TemaVisning from "./temavisning";
 
 function temaSkalBehandles(tema: TemaModell, alternativId: string) {
-    if (temaLogikk[tema.id]) {
+    if (temaLogikk[tema.ref]) {
         if (
-            temaLogikk[tema.id].alternativ.find(function(alt: string) {
+            temaLogikk[tema.ref].alternativ.find(function(alt: string) {
                 return alt === alternativId;
             })
         ) {
@@ -94,10 +95,9 @@ function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
             </h3>
             <ul className="temaliste">
                 {resultat.map(tema => (
-                    <li className="tema blokk-xs">
-                        <h3>{tema.tekst}</h3>
-                    </li>
-                ))}
+                    <TemaVisning
+                        tema={tema}
+                    /> ))}
             </ul>
             <button
                 className="knapp knapp--hoved"

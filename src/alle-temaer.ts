@@ -53,7 +53,7 @@ export const temaer =  {
                         }
                     },
                     {
-                        'id': '454067',
+                        'id': '540674',
                         'tittel': 'Beskriv kompetansen din',
                         'ingress': {
                             '__cdata': ' Tenk gjennom hva du har gjort, hva du har lært og hva du kan gjøre.',
@@ -1528,6 +1528,21 @@ export const temaer =  {
                             '__cdata': ' Det kan være nervepirrende å møte opp på sitt første jobbintervju. Vær godt forberedt, men hva bør du forberede deg på? ',
                             'toString': [
                                 null
+                            ]
+                        },
+                        'aktiviteter': {
+                            'aktivitet': [
+                                {
+                                    'id': '000000',
+                                    'tittel': 'Blablabla',
+                                    'innhold': {
+                                        '__cdata': 'blabla',
+                                        'toString': [
+                                            null
+                                        ]
+                                    },
+                                    'collapsable': 'true'
+                                }
                             ]
                         }
                     },

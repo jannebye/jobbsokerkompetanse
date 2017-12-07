@@ -1,297 +1,399 @@
-import { defaultType } from './tema-modell';
+import { defaultType, TemaKategori } from './tema-modell';
 
 export const alleTemaer = [
     {
-        id: 'finnJobb1',
+        ref: 'finnJobb1',
+        id: '454089',
         tekst: 'Finn jobben på nav.no',
         prioritet: 31,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        id: 'finnJobb2',
-        tekst: 'Abonner på stillinger',
+        ref: 'finnJobb2',
+        id: '454091',
+        tekst: 'Opprett et automatisk stillingssøk',
         prioritet: 9,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        id: 'finnJobb3',
-        tekst: 'Registrer deg flere steder',
+        ref: 'finnJobb3',
+        id: '454090',
+        tekst: 'Registrer CV-en flere steder',
         prioritet: 23,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        id: 'finnJobb4',
+        ref: 'finnJobb4',
+        id: '454097',
         tekst: 'Bruk nettverket ditt',
         prioritet: 10,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        id: 'finnJobb5',
-        tekst: 'Bruk sosiale medier i jobbjakten',
+        ref: 'finnJobb5',
+        id: '454092',
+        tekst: 'Bruk sosiale medier',
         prioritet: 24,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        id: 'finnJobb6',
+        ref: 'finnJobb6',
+        id: '454094',
         tekst: 'Bruk LinkedIn',
         prioritet: 22,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        id: 'finnJobb7',
+        ref: 'finnJobb7',
+        id: '454095',
         tekst: 'Delta på jobbmesser',
         prioritet: 30,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        id: 'finnJobb8',
-        tekst: 'Brede vs. smale søk "NY"',
+        ref: 'finnJobb8',
+        id: '525215',
+        tekst: 'Søk jobb i ulike bransjer',
         prioritet: 1,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        id: 'finnJobb9',
-        tekst: 'Under 18 og vil ha fast jobb',
+        ref: 'finnJobb9',
+        id: '454805',
+        tekst: 'Under 18 og vil ha jobb',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        id: 'finnJobb10',
+        ref: 'finnJobb10',
+        id: '454799',
         tekst: 'Hvordan få ny jobb som nyutdannet',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        id: 'finnJobb11',
+        ref: 'finnJobb11',
+        id: '454808',
         tekst: 'Ung og jobb i utlandet',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        id: 'finnJobb12',
+        ref: 'finnJobb12',
+        id: '454096',
         tekst: 'Delta på karrieredager',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        id: 'soknadCV1',
+        ref: 'soknadCV1',
+        id: '526632',
         tekst: 'Lag en god CV',
         prioritet: 8,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        id: 'soknadCV2',
+        ref: 'soknadCV2',
+        id: '454152',
         tekst: 'Skriv en god søknad',
         prioritet: 2,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        id: 'soknadCV3',
+        ref: 'soknadCV3',
+        id: '454374',
         tekst: 'Skaff dokumentasjon på utdanning og attester',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        id: 'soknadCV4',
+        ref: 'soknadCV4',
+        id: '454375',
         tekst: 'Sjekk referansene dine',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        id: 'soknadCV5',
-        tekst: 'Logg jobbene du søker på',
+        ref: 'soknadCV5',
+        id: '454376',
+        tekst: 'Hold orden på søknadene dine',
         prioritet: 13,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        id: 'soknadCV6',
+        ref: 'soknadCV6',
+        id: '454378',
         tekst: 'Send en åpen søknad',
         prioritet: 7,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        id: 'soknadCV7',
+        ref: 'soknadCV7',
+        id: '454377',
         tekst: 'Lag en utradisjonell søknad eller CV',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        id: 'soknadCV8',
-        tekst: 'Hvordan kontakte en arbetekstsgiver',
+        ref: 'soknadCV8',
+        id: '526645',
+        tekst: 'Ta kontakt med en bedrift',
         prioritet: 3,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        id: 'soknadCV9',
+        ref: 'soknadCV9',
+        id: '454810',
         tekst: 'Hvordan skrive om hull i CV-en',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        id: 'intervju1',
-        tekst: 'Finn ut hva slags intervju',
+        ref: 'intervju1',
+        id: '454119',
+        tekst: 'Sjekk hva slags intervju du skal på',
         prioritet: 25,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        id: 'intervju2',
+        ref: 'intervju2',
+        id: '454121',
         tekst: 'Forbered deg til intervjuet',
         prioritet: 4,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        id: 'intervju3',
-        tekst: 'Hva er dine sterke stekster',
+        ref: 'intervju3',
+        id: '454123',
+        tekst: 'Forbered en liste med sterke sider',
         prioritet: 26,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        id: 'intervju4',
-        tekst: 'Hva er dine svake stekster',
+        ref: 'intervju4',
+        id: '454124',
+        tekst: 'Forbered en liste med svake sider',
         prioritet: 21,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        id: 'intervju5',
+        ref: 'intervju5',
+        id: '454126',
         tekst: 'Øv på intervjusituasjonen',
-        prioritet: 6,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        prioritet: 11,
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        id: 'intervju6',
+        ref: 'intervju6',
+        id: '454127',
         tekst: 'Gjør et godt førsteinntrykk',
-        prioritet: 19,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        prioritet: 12,
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        id: 'intervju7',
+        ref: 'intervju7',
+        id: '454130',
         tekst: 'Still spørsmål til bedriften',
         prioritet: 14,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        id: 'intervju8',
-        tekst: 'Hvordan gikk intervjuet',
+        ref: 'intervju8',
+        id: '454135',
+        tekst: 'Be om tilbakemelding på intervjuet',
         prioritet: 18,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        id: 'intervju9',
-        tekst: 'Fikk du ikke jobben',
+        ref: 'intervju9',
+        id: '454132',
+        tekst: 'Vurder innsatsen din etter intervjuet',
         prioritet: 29,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        id: 'hverdagJobbsok1',
+        ref: 'hverdagJobbsok1',
+        id: '454137',
         tekst: 'Lag en plan',
         prioritet: 15,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.HVERDAG_JOBBSOKER
     },
     {
-        id: 'hverdagJobbsok2',
+        ref: 'hverdagJobbsok2',
+        id: '454138',
         tekst: 'Reflekter over jobbene du søker på',
         prioritet: 20,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.HVERDAG_JOBBSOKER
     },
     {
-        id: 'hverdagJobbsok3',
+        ref: 'hverdagJobbsok3',
+        id: '454140',
         tekst: 'Vær aktiv',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.HVERDAG_JOBBSOKER
     },
     {
-        id: 'hverdagJobbsok4',
+        ref: 'hverdagJobbsok4',
+        id: '454141',
         tekst: 'Delta i frivillig arbetekst',
         prioritet: 27,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.HVERDAG_JOBBSOKER
     },
     {
-        id: 'hverdagJobbsok5',
+        ref: 'hverdagJobbsok5',
+        id: '454142',
         tekst: 'Meld deg på jobbsøkerkurs',
         prioritet: 32,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.HVERDAG_JOBBSOKER
     },
     {
-        id: 'begynnSelv1',
+        ref: 'begynnSelv1',
+        id: '454071',
         tekst: 'Kom i gang',
         prioritet: 17,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        id: 'begynnSelv2',
+        ref: 'begynnSelv2',
+        id: '54067',
         tekst: 'Beskriv kompetansen din',
-        prioritet: 11,
-        defaultPosisjon: defaultType.FAST
+        prioritet: 6,
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        id: 'begynnSelv3',
+        ref: 'begynnSelv3',
+        id: '454073',
         tekst: 'Sett deg mål',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        id: 'begynnSelv4',
+        ref: 'begynnSelv4',
+        id: '454075',
         tekst: 'Ta interessetest',
         prioritet: 16,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        id: 'begynnSelv5',
+        ref: 'begynnSelv5',
+        id: '454076',
         tekst: 'Ta personlighetstest',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        id: 'begynnSelv6',
+        ref: 'begynnSelv6',
+        id: '454068',
         tekst: 'Gjør avtale med karrieresenter',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        id: 'begynnSelv7',
+        ref: 'begynnSelv7',
+        id: '454072',
         tekst: 'Meld deg på kurs',
         prioritet: 28,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        id: 'begynnSelv8',
+        ref: 'begynnSelv8',
+        id: '454077',
         tekst: 'Ta mer utdanning',
         prioritet: 19,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        id: 'begynnSelv9',
-        tekst: 'Har du krav på voksenopplæring',
+        ref: 'begynnSelv9',
+        id: '454070',
+        tekst: 'Sjekk om du har krav på voksenopplæring',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
+        ref: 'begynnSelv10',
         id: 'begynnSelv10',
         tekst: 'Google deg selv',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        id: 'begynnSelv11',
+        ref: 'begynnSelv11',
+        id: '454074',
         tekst: 'Start en egen virksomhet',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
+        ref: 'begynnSelv12',
         id: 'begynnSelv12',
-        tekst: 'Hvor kan du jobbe? Flytte eller pendle',
+        tekst: 'Søk jobb utenfor hjemstedet',
         prioritet: 5,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        id: 'begynnSelv14',
-        tekst: 'Har du språkutfordringer',
+        ref: 'begynnSelv13',
+        id: '525282',
+        tekst: 'Forbedre norskkunnskapene dine',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
+    },
+    {
+        ref: 'begynnSelv14',
+        id: '525324',
+        tekst: 'Finn ut om du kan ha lærevansker',
+        prioritet: 1000,
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     }
 ];
-
-// Pri 12 mangler, og det skal den i følge matrisen
 
 export const alleTemaerPrioritert = alleTemaer.sort(
     (temaA, temaB) => temaA.prioritet - temaB.prioritet
