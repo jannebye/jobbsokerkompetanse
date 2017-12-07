@@ -82,7 +82,7 @@ function erAlternativMulig(
     return true;
 }
 
-type SporsmalProps = OwnProps & DispatchProps & StateProps & InjectedIntlProps;
+type SporsmalProps = OwnProps & DispatchProps & StateProps;
 
 class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
     spmStart: HTMLElement;
@@ -248,4 +248,4 @@ const mapDispatchToProps = (dispatch: Dispatch,
         dispatch(marker(sporsmalId, alternativ))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Sporsmal));
+export default connect(mapStateToProps, mapDispatchToProps)(Sporsmal);
