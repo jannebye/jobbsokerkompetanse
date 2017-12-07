@@ -2,6 +2,7 @@ import * as React from 'react';
 import { TemaModell } from './tema-modell';
 import EkspanderbartPanel from 'nav-frontend-ekspanderbartpanel';
 import { temaer } from '../alle-temaer';
+import {FormattedHTMLMessage} from 'react-intl';
 
 // interface AktModell {
 //     id: string;
@@ -27,6 +28,12 @@ import { temaer } from '../alle-temaer';
 //
 // }
 
+interface AktivitetModell {
+    id: string;
+    tittel: string;
+    innhold: {['__cdata']: string};
+}
+
 interface TemaProps {
     tema: TemaModell;
 }
@@ -34,30 +41,25 @@ interface TemaProps {
 function TemaVisning({tema}: TemaProps) {
     const kategorier = temaer.steg.understeg;
     const temaeer = kategorier.map(k => k.temaer.tema);
-    // console.log(temaeer);
     const riktigTema = temaeer.find(t => t.some(tt => tt.id === tema.id)!);
-    let aktiviteter: any = []; // tslint:disable-line:no-any
+    let aktiviteter: AktivitetModell[] = []; // tslint:disable-line:no-any
     if (riktigTema !== undefined) {
         aktiviteter = riktigTema!.find(k => k.id === tema.id)!.aktiviteter!.aktivitet;
         console.log(aktiviteter);
     }
-    // const vetkje = temaeer.map(t => t.map(tt => tt.aktiviteter!.aktivitet));
-    // console.log(vetkje);
-    // if (temaer.steg.understeg.filter(us => us.temaer.tema.find(t => t.id === tema.id));
-
-    // console.log(temaIVeiviser.map(t => t.map(a => a)!));
     return (
-        <li>
+        <li className="enkelt__tema blokk-xs">
         <EkspanderbartPanel
             apen={false}
             tittel={tema.tekst}
-            tittelProps="systemtittel"
         >
         <div>
-            {aktiviteter.length !== 0 && aktiviteter.map((aktivitet: any) => ( // tslint:disable-line:no-any
+            {aktiviteter.length !== 0 && aktiviteter.map((aktivitet) => (
                 <div>
                     <h4>{aktivitet.tittel}</h4>
-                <p>{aktivitet.innhold.__cdata}</p>
+                    <p className="aktivitet">
+                        <FormattedHTMLMessage id={aktivitet.id} defaultMessage={aktivitet.innhold.__cdata} />
+                    </p>
                 </div>
             ))}
         </div>
