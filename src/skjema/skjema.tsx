@@ -90,7 +90,6 @@ class Skjema extends React.Component<SkjemaProps, {}> {
                 ];
                 nesteSpm.focus();
                 nesteSpm.scrollIntoView();
-                console.log(nesteSpm);
             });
     }
 

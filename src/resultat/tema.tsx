@@ -180,14 +180,14 @@ export const alleTemaer = [
         referanse: 'raad-27',
         kategori: 'intervju',
         tekst: 'Øv på intervjusituasjonen',
-        prioritet: 6,
+        prioritet: 11,
         defaultPosisjon: defaultType.LEGGES_TIL
     },
     {
         referanse: 'raad-28',
         kategori: 'intervju',
         tekst: 'Gjør et godt førsteinntrykk',
-        prioritet: 19,
+        prioritet: 12,
         defaultPosisjon: defaultType.LEGGES_TIL
     },
     {
@@ -257,7 +257,7 @@ export const alleTemaer = [
         referanse: 'raad-38',
         kategori: 'begynnSelv',
         tekst: 'Beskriv kompetansen din',
-        prioritet: 11,
+        prioritet: 6,
         defaultPosisjon: defaultType.FAST
     },
     {

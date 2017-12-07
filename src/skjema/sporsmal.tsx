@@ -1,18 +1,20 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
 import AlleSporsmal from '../sporsmal/sporsmal-alle';
-import {marker} from '../svar/svar-duck';
-import {Dispatch} from '../types';
-import {AppState} from '../ducks/reducer';
+import { marker } from '../svar/svar-duck';
+import { Dispatch } from '../types';
+import { AppState } from '../ducks/reducer';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
 import Alternativ from './alternativ';
-import {FormattedMessage, FormattedHTMLMessage} from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 
 interface DispatchProps {
-    markerAlternativ: (sporsmalId: string,
-                       alternativ: SvarAlternativModell[]) => void;
+    markerAlternativ: (
+        sporsmalId: string,
+        alternativ: SvarAlternativModell[]
+    ) => void;
 }
 
 interface OwnProps {
@@ -31,22 +33,18 @@ interface EgenStateProps {
     feil: boolean;
 }
 
-function prepMarkerAlternativ(alternativ: SvarAlternativModell,
-                              erValgt: boolean,
-                              alternativListe: SvarAlternativModell[],
-                              sporsmal: SporsmalModell,
-                              type: string): SvarAlternativModell[] {
-    let sporsmalAlternativer = [...sporsmal.alternativer];
+function prepMarkerAlternativ(
+    alternativ: SvarAlternativModell,
+    alternativListe: SvarAlternativModell[],
+    sporsmal: SporsmalModell,
+    type: string
+): SvarAlternativModell[] {
+    const erValgt = !!alternativListe.find(
+        alt => alt.id === alternativ.id
+    );
     if (erValgt) {
-        if (type === 'ettvalg') {
+        if (type === 'ettvalg' || type === 'skala') {
             return alternativListe;
-        } else if (type === 'skala') {
-            return alternativListe.filter(
-                alt =>
-                    !sporsmalAlternativer.find(
-                        a => alt.id === a.id && a.skalaId! > alternativ.skalaId!
-                    )
-            );
         }
         return alternativListe.filter(alt => alt.id !== alternativ.id);
     } else {
@@ -56,23 +54,24 @@ function prepMarkerAlternativ(alternativ: SvarAlternativModell,
         ) {
             return [alternativ];
         }
-        if (type === 'ettvalg') {
+        if (type === 'ettvalg' || type === 'skala') {
             return [alternativ];
-        } else if (type === 'skala') {
-            alternativListe = [];
-            return [
-                ...sporsmalAlternativer.filter(alt => {
-                    return alternativ.skalaId! >= alt.skalaId!;
-                })
-            ];
         }
         return [...alternativListe, alternativ];
     }
 }
 
-function erAlternativMulig(uniktAlternativId: string,
-                           gjeldendeAlternativId: string,
-                           markerteAlternativer: SvarAlternativModell[]): boolean {
+/* Gjelder for skalaSpørsmål */
+function skalAlternativMarkeres(
+    markerteAlternativ: SvarAlternativModell[], alternativ: SvarAlternativModell): boolean {
+    return !!markerteAlternativ.find(altId => altId.skalaId! >= alternativ.skalaId!);
+}
+
+function erAlternativMulig(
+    uniktAlternativId: string,
+    gjeldendeAlternativId: string,
+    markerteAlternativer: SvarAlternativModell[]
+): boolean {
     if (uniktAlternativId === gjeldendeAlternativId) {
         return true;
     } else {
@@ -90,7 +89,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
 
     constructor(props: SporsmalProps) {
         super(props);
-        this.state = {feil: false};
+        this.state = { feil: false };
         this.refhandler = this.refhandler.bind(this);
     }
 
@@ -102,7 +101,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
 
     sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: string) {
         if (markerteSpm.length === 0) {
-            this.setState({feil: true});
+            this.setState({ feil: true });
         } else {
             return this.props.nesteSpm(sporsmalId);
         }
@@ -113,7 +112,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             sporsmal,
             besvarteSporsmal,
             markerAlternativ,
-            //forrigeSpm,
+            // forrigeSpm,
             spmRef,
         } = this.props;
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
@@ -123,7 +122,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             ? besvartSpm.svarAlternativer
             : [];
         if (this.state.feil && markerteAlternativer.length !== 0) {
-            this.setState({feil: false});
+            this.setState({ feil: false });
         }
         return (
             <li
@@ -172,7 +171,8 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             {sporsmal.alternativer.map(function (alternativ: SvarAlternativModell) {
                                 const erValgt = !!markerteAlternativer.find(
                                     alt => alt.id === alternativ.id
-                                );
+                                ) ? true : sporsmal.type === 'skala' ?
+                                    skalAlternativMarkeres(markerteAlternativer, alternativ) : false;
                                 const kanVelges: boolean = !!sporsmal.uniktAlternativ
                                     ? erAlternativMulig(
                                         sporsmal.uniktAlternativ,
@@ -193,7 +193,6 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                                 sporsmal.id,
                                                 prepMarkerAlternativ(
                                                     alternativ,
-                                                    erValgt,
                                                     markerteAlternativer,
                                                     sporsmal,
                                                     sporsmal.type
