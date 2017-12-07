@@ -154,7 +154,7 @@ export const alleTemaer = [
     {
         id: 'intervju5',
         tekst: 'Øv på intervjusituasjonen',
-        prioritet: 6,
+        prioritet: 11,
         defaultPosisjon: defaultType.LEGGES_TIL
     },
     {
@@ -220,7 +220,7 @@ export const alleTemaer = [
     {
         id: 'begynnSelv2',
         tekst: 'Beskriv kompetansen din',
-        prioritet: 11,
+        prioritet: 6,
         defaultPosisjon: defaultType.FAST
     },
     {
