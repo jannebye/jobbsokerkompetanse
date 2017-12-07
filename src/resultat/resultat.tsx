@@ -8,11 +8,12 @@ import { sorterSvar } from '../svar/svar-selector';
 import { fasteTemaer, leggesTilTemaer } from './tema';
 import temaLogikk from './tema-mapping';
 import { TemaModell } from './tema-modell';
+import TemaVisning from './temavisning';
 
 function temaSkalBehandles(tema: TemaModell, alternativId: string) {
-    if (temaLogikk[tema.referanse]) {
+    if (temaLogikk[tema.ref]) {
         if (
-            temaLogikk[tema.referanse].alternativ.find(function(alt: string) {
+            temaLogikk[tema.ref].alternativ.find(function(alt: string) {
                 return alt === alternativId;
             })
         ) {
@@ -89,15 +90,14 @@ function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
                     </li>
                 ))}
             </ul>
-            <h3 className="overskrift__tema">
+            <h1 className="overskrift__tema">
                 <FormattedMessage id="overskrift-raad" />
-            </h3>
+            </h1>
             <ul className="temaliste">
                 {resultat.map(tema => (
-                    <li className="tema blokk-xs">
-                        <h3>{tema.tekst}</h3>
-                    </li>
-                ))}
+                    <TemaVisning
+                        tema={tema}
+                    /> ))}
             </ul>
             <button
                 className="knapp knapp--hoved"

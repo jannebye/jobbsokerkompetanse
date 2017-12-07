@@ -1,345 +1,399 @@
-import { defaultType } from './tema-modell';
+import { defaultType, TemaKategori } from './tema-modell';
 
 export const alleTemaer = [
     {
-        referanse: 'raad-1',
-        kategori: 'finnJobb',
+        ref: 'finnJobb1',
+        id: '454089',
         tekst: 'Finn jobben på nav.no',
         prioritet: 31,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        referanse: 'raad-2',
-        kategori: 'finnJobb',
-        tekst: 'Abonner på stillinger',
+        ref: 'finnJobb2',
+        id: '454091',
+        tekst: 'Opprett et automatisk stillingssøk',
         prioritet: 9,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        referanse: 'raad-3',
-        kategori: 'finnJobb',
-        tekst: 'Registrer deg flere steder',
+        ref: 'finnJobb3',
+        id: '454090',
+        tekst: 'Registrer CV-en flere steder',
         prioritet: 23,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        referanse: 'raad-4',
-        kategori: 'finnJobb',
+        ref: 'finnJobb4',
+        id: '454097',
         tekst: 'Bruk nettverket ditt',
         prioritet: 10,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        referanse: 'raad-5',
-        kategori: 'finnJobb',
-        tekst: 'Bruk sosiale medier i jobbjakten',
+        ref: 'finnJobb5',
+        id: '454092',
+        tekst: 'Bruk sosiale medier',
         prioritet: 24,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        referanse: 'raad-6',
-        kategori: 'finnJobb',
+        ref: 'finnJobb6',
+        id: '454094',
         tekst: 'Bruk LinkedIn',
         prioritet: 22,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        referanse: 'raad-7',
-        kategori: 'finnJobb',
+        ref: 'finnJobb7',
+        id: '454095',
         tekst: 'Delta på jobbmesser',
         prioritet: 30,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        referanse: 'raad-8',
-        kategori: 'finnJobb',
-        tekst: 'Brede vs. smale søk "NY"',
+        ref: 'finnJobb8',
+        id: '525215',
+        tekst: 'Søk jobb i ulike bransjer',
         prioritet: 1,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        referanse: 'raad-9',
-        kategori: 'finnJobb',
-        tekst: 'Under 18 og vil ha fast jobb',
+        ref: 'finnJobb9',
+        id: '454805',
+        tekst: 'Under 18 og vil ha jobb',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        referanse: 'raad-10',
-        kategori: 'finnJobb',
+        ref: 'finnJobb10',
+        id: '454799',
         tekst: 'Hvordan få ny jobb som nyutdannet',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        referanse: 'raad-11',
-        kategori: 'finnJobb',
+        ref: 'finnJobb11',
+        id: '454808',
         tekst: 'Ung og jobb i utlandet',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        referanse: 'raad-12',
-        kategori: 'finnJobb',
+        ref: 'finnJobb12',
+        id: '454096',
         tekst: 'Delta på karrieredager',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.FINN_JOBB
     },
     {
-        referanse: 'raad-13',
-        kategori: 'soknadCV',
+        ref: 'finnJobb13',
+        id: '525225',
+        tekst: 'Søk jobb utenfor hjemstedet',
+        prioritet: 5,
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
+    },
+    {
+        ref: 'soknadCV1',
+        id: '526632',
         tekst: 'Lag en god CV',
         prioritet: 8,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        referanse: 'raad-14',
-        kategori: 'soknadCV',
+        ref: 'soknadCV2',
+        id: '454152',
         tekst: 'Skriv en god søknad',
         prioritet: 2,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        referanse: 'raad-15',
-        kategori: 'soknadCV',
+        ref: 'soknadCV3',
+        id: '454374',
         tekst: 'Skaff dokumentasjon på utdanning og attester',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        referanse: 'raad-16',
-        kategori: 'soknadCV',
+        ref: 'soknadCV4',
+        id: '454375',
         tekst: 'Sjekk referansene dine',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        referanse: 'raad-17',
-        kategori: 'soknadCV',
-        tekst: 'Logg jobbene du søker på',
+        ref: 'soknadCV5',
+        id: '454376',
+        tekst: 'Hold orden på søknadene dine',
         prioritet: 13,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        referanse: 'raad-18',
-        kategori: 'soknadCV',
+        ref: 'soknadCV6',
+        id: '454378',
         tekst: 'Send en åpen søknad',
         prioritet: 7,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        referanse: 'raad-20',
-        kategori: 'soknadCV',
+        ref: 'soknadCV7',
+        id: '454377',
         tekst: 'Lag en utradisjonell søknad eller CV',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        referanse: 'raad-21',
-        kategori: 'soknadCV',
-        tekst: 'Hvordan kontakte en arbetekstsgiver',
+        ref: 'soknadCV8',
+        id: '526645',
+        tekst: 'Ta kontakt med en bedrift',
         prioritet: 3,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        referanse: 'raad-22',
-        kategori: 'soknadCV',
+        ref: 'soknadCV9',
+        id: '454810',
         tekst: 'Hvordan skrive om hull i CV-en',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.SOKNAD_CV
     },
     {
-        referanse: 'raad-23',
-        kategori: 'intervju',
-        tekst: 'Finn ut hva slags intervju',
+        ref: 'intervju1',
+        id: '454119',
+        tekst: 'Sjekk hva slags intervju du skal på',
         prioritet: 25,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        referanse: 'raad-24',
-        kategori: 'intervju',
+        ref: 'intervju2',
+        id: '454121',
         tekst: 'Forbered deg til intervjuet',
         prioritet: 4,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        referanse: 'raad-25',
-        kategori: 'intervju',
-        tekst: 'Hva er dine sterke stekster',
+        ref: 'intervju3',
+        id: '454123',
+        tekst: 'Forbered en liste med sterke sider',
         prioritet: 26,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        referanse: 'raad-26',
-        kategori: 'intervju',
-        tekst: 'Hva er dine svake stekster',
+        ref: 'intervju4',
+        id: '454124',
+        tekst: 'Forbered en liste med svake sider',
         prioritet: 21,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        referanse: 'raad-27',
-        kategori: 'intervju',
+        ref: 'intervju5',
+        id: '454126',
         tekst: 'Øv på intervjusituasjonen',
         prioritet: 11,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        referanse: 'raad-28',
-        kategori: 'intervju',
+        ref: 'intervju6',
+        id: '454127',
         tekst: 'Gjør et godt førsteinntrykk',
         prioritet: 12,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        referanse: 'raad-29',
-        kategori: 'intervju',
+        ref: 'intervju7',
+        id: '454130',
         tekst: 'Still spørsmål til bedriften',
         prioritet: 14,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        referanse: 'raad-30',
-        kategori: 'intervju',
-        tekst: 'Hvordan gikk intervjuet',
+        ref: 'intervju8',
+        id: '454135',
+        tekst: 'Be om tilbakemelding på intervjuet',
         prioritet: 18,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        referanse: 'raad-31',
-        kategori: 'intervju',
-        tekst: 'Fikk du ikke jobben',
+        ref: 'intervju9',
+        id: '454132',
+        tekst: 'Vurder innsatsen din etter intervjuet',
         prioritet: 29,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.INTERVJU
     },
     {
-        referanse: 'raad-32',
-        kategori: 'hverdagJobbsok',
+        ref: 'hverdagJobbsok1',
+        id: '454137',
         tekst: 'Lag en plan',
         prioritet: 15,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.HVERDAG_JOBBSOKER
     },
     {
-        referanse: 'raad-33',
-        kategori: 'hverdagJobbsok',
+        ref: 'hverdagJobbsok2',
+        id: '454138',
         tekst: 'Reflekter over jobbene du søker på',
         prioritet: 20,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.HVERDAG_JOBBSOKER
     },
     {
-        referanse: 'raad-34',
-        kategori: 'hverdagJobbsok',
+        ref: 'hverdagJobbsok3',
+        id: '454140',
         tekst: 'Vær aktiv',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.HVERDAG_JOBBSOKER
     },
     {
-        referanse: 'raad-35',
-        kategori: 'hverdagJobbsok',
+        ref: 'hverdagJobbsok4',
+        id: '454141',
         tekst: 'Delta i frivillig arbetekst',
         prioritet: 27,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.HVERDAG_JOBBSOKER
     },
     {
-        referanse: 'raad-36',
-        kategori: 'hverdagJobbsok',
+        ref: 'hverdagJobbsok5',
+        id: '454142',
         tekst: 'Meld deg på jobbsøkerkurs',
         prioritet: 32,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.HVERDAG_JOBBSOKER
     },
     {
-        referanse: 'raad-37',
-        kategori: 'begynnSelv',
+        ref: 'begynnSelv1',
+        id: '454071',
         tekst: 'Kom i gang',
         prioritet: 17,
-        defaultPosisjon: defaultType.LEGGES_TIL
+        defaultPosisjon: defaultType.LEGGES_TIL,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        referanse: 'raad-38',
-        kategori: 'begynnSelv',
+        ref: 'begynnSelv2',
+        id: '54067',
         tekst: 'Beskriv kompetansen din',
         prioritet: 6,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        referanse: 'raad-39',
-        kategori: 'begynnSelv',
+        ref: 'begynnSelv3',
+        id: '454073',
         tekst: 'Sett deg mål',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        referanse: 'raad-40',
-        kategori: 'begynnSelv',
+        ref: 'begynnSelv4',
+        id: '454075',
         tekst: 'Ta interessetest',
         prioritet: 16,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        referanse: 'raad-41',
-        kategori: 'begynnSelv',
+        ref: 'begynnSelv5',
+        id: '454076',
         tekst: 'Ta personlighetstest',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        referanse: 'raad-42',
-        kategori: 'begynnSelv',
+        ref: 'begynnSelv6',
+        id: '454068',
         tekst: 'Gjør avtale med karrieresenter',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        referanse: 'raad-43',
-        kategori: 'begynnSelv',
+        ref: 'begynnSelv7',
+        id: '454072',
         tekst: 'Meld deg på kurs',
         prioritet: 28,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        referanse: 'raad-44',
-        kategori: 'begynnSelv',
+        ref: 'begynnSelv8',
+        id: '454077',
         tekst: 'Ta mer utdanning',
         prioritet: 19,
-        defaultPosisjon: defaultType.FAST
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        referanse: 'raad-45',
-        kategori: 'begynnSelv',
-        tekst: 'Har du krav på voksenopplæring',
+        ref: 'begynnSelv9',
+        id: '454070',
+        tekst: 'Sjekk om du har krav på voksenopplæring',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        referanse: 'raad-46',
-        kategori: 'begynnSelv',
+        ref: 'begynnSelv10',
+        id: 'begynnSelv10',
         tekst: 'Google deg selv',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        referanse: 'raad-47',
-        kategori: 'begynnSelv',
+        ref: 'begynnSelv11',
+        id: '454074',
         tekst: 'Start en egen virksomhet',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {
-        referanse: 'raad-48',
-        kategori: 'begynnSelv',
-        tekst: 'Hvor kan du jobbe? Flytte eller pendle',
-        prioritet: 5,
-        defaultPosisjon: defaultType.FAST
-    },
-    {
-        referanse: 'raad-49',
-        kategori: 'begynnSelv',
-        tekst: 'Har du språkutfordringer',
+        ref: 'begynnSelv13',
+        id: '525282',
+        tekst: 'Forbedre norskkunnskapene dine',
         prioritet: 1000,
-        defaultPosisjon: defaultType.INGEN
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
+    },
+    {
+        ref: 'begynnSelv14',
+        id: '525324',
+        tekst: 'Finn ut om du kan ha lærevansker',
+        prioritet: 1000,
+        defaultPosisjon: defaultType.INGEN,
+        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     }
 ];
-
-// Pri 12 mangler, og det skal den i følge matrisen
 
 export const alleTemaerPrioritert = alleTemaer.sort(
     (temaA, temaB) => temaA.prioritet - temaB.prioritet
