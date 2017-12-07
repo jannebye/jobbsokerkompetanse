@@ -160,7 +160,7 @@ export const alleTemaer = [
     {
         id: 'intervju6',
         tekst: 'Gjør et godt førsteinntrykk',
-        prioritet: 19,
+        prioritet: 12,
         defaultPosisjon: defaultType.LEGGES_TIL
     },
     {
