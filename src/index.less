@@ -10,8 +10,8 @@
 @import '../node_modules/nav-frontend-ekspanderbartpanel-style/src/index';
 @import '../node_modules/nav-frontend-chevron-style/src/mixins';
 
-@import "./less/sporsmal";
 @import "./less/sporsmal-start";
+@import "./less/sporsmal";
 @import "./less/alternativ";
 @import "./less/resultat";
 
@@ -37,3 +37,8 @@ body {
 	color: @redError;
 }
 
+@media (min-width: 769px) {
+	.limit {
+		width: 960px;
+	}
+}

@@ -6,11 +6,43 @@
 .sporsmal {
     margin: 2rem 0;
 
-    &:first-child {
-        margin-top: 1rem;
+    &__start-lukket {
+        display: block;
+        position: static;
+
+        .sporsmal__paginering {
+            display: none;
+        }
+
+        .sporsmal__innhold {
+            margin-top: 5%;
+            //transition: margin-top 0.5s;
+        }
+
+        .sporsmal__overskrift {
+            font-size: 1.375rem;
+            //transition: font-size 0.5s;
+        }
+
+        & + .sporsmal__full {
+            display: block;
+            //transform: translateY(0);
+            //transition: transform 0.5s;
+        }
+
+        .sporsmal__ikon {
+            width: 49px;
+            height: 63px;
+            //transition: width 0.5s, height 0.5s;
+        }
+
+        .sporsmal__videre {
+            display: none;
+        }
     }
 
-    &.active {
+    &:first-child {
+        margin-top: 1rem;
     }
 
     &:focus {
@@ -18,11 +50,7 @@
         box-shadow: none;
     }
 
-    &__paginering {
-        display: none;
-    }
-
-    &__start {
+    .sporsmal__innhold {
         text-align: center;
     }
 
@@ -31,10 +59,10 @@
     }
 
     &__knapp {
-        margin: 0 auto;
+        margin: 1rem auto;
         display: block;
-        width: 52px;
-        height: 52px;
+        width: 56px;
+        height: 56px;
         background-color: @navBla;
         border-radius: 50%;
         font: ~'0/0' a;
@@ -51,9 +79,5 @@
             border-right: 2px solid @white;
             transform: rotate(45deg);
         }
-    }
-
-    &__videre {
-        display: none;
     }
 }
