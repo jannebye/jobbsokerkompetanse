@@ -104,13 +104,13 @@ const temaLogikk = {
         ]
     },
     begynnSelv4: {
-        alternativ: ['intervju-svar-0403', 'intervju-svar-0405']
+        alternativ: ['intervju-svar-0401']
     },
     begynnSelv7: {
         alternativ: ['intervju-svar-0403', 'intervju-svar-0405']
     },
     begynnSelv8: {
-        alternativ: ['intervju-svar-0403']
+        alternativ: ['intervju-svar-0405']
     },
     begynnSelv12: {
         alternativ: [
