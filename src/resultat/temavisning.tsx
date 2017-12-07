@@ -2,31 +2,7 @@ import * as React from 'react';
 import { TemaModell } from './tema-modell';
 import EkspanderbartPanel from 'nav-frontend-ekspanderbartpanel';
 import { temaer } from '../alle-temaer';
-import {FormattedHTMLMessage} from 'react-intl';
-
-// interface AktModell {
-//     id: string;
-//     tittal: string;
-//     collapsable?: string;
-//     innhold: any; // tslint:disable-line:no-any
-//     tags?: any; // tslint:disable-line:no-any
-// }
-//
-// interface AktivitetModell {
-//     aktivitet: AktModell[];
-// }
-//
-// interface TemaIVeisviserModell {
-//     id: string;
-//     title: string;
-//     ingress: any; // tslint:disable-line:no-any
-//     aktiviteter?: AktivitetModell;
-//
-// }
-
-// function finnKategori() {
-//
-// }
+import { FormattedHTMLMessage } from 'react-intl';
 
 interface AktivitetModell {
     id: string;
@@ -45,7 +21,6 @@ function TemaVisning({tema}: TemaProps) {
     let aktiviteter: AktivitetModell[] = []; // tslint:disable-line:no-any
     if (riktigTema !== undefined) {
         aktiviteter = riktigTema!.find(k => k.id === tema.id)!.aktiviteter!.aktivitet;
-        console.log(aktiviteter);
     }
     return (
         <li className="enkelt__tema blokk-xs">

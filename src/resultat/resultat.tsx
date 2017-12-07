@@ -8,7 +8,7 @@ import { sorterSvar } from '../svar/svar-selector';
 import { fasteTemaer, leggesTilTemaer } from './tema';
 import temaLogikk from './tema-mapping';
 import { TemaModell } from './tema-modell';
-import TemaVisning from "./temavisning";
+import TemaVisning from './temavisning';
 
 function temaSkalBehandles(tema: TemaModell, alternativId: string) {
     if (temaLogikk[tema.ref]) {
