@@ -90,9 +90,9 @@ function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
                     </li>
                 ))}
             </ul>
-            <h3 className="overskrift__tema">
+            <h1 className="overskrift__tema">
                 <FormattedMessage id="overskrift-raad" />
-            </h3>
+            </h1>
             <ul className="temaliste">
                 {resultat.map(tema => (
                     <TemaVisning
