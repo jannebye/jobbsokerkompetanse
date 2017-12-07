@@ -98,6 +98,14 @@ export const alleTemaer = [
         kategori: TemaKategori.FINN_JOBB
     },
     {
+        ref: 'finnJobb13',
+        id: '525225',
+        tekst: 'Søk jobb utenfor hjemstedet',
+        prioritet: 5,
+        defaultPosisjon: defaultType.FAST,
+        kategori: TemaKategori.FINN_JOBB
+    },
+    {
         ref: 'soknadCV1',
         id: '526632',
         tekst: 'Lag en god CV',
@@ -367,14 +375,6 @@ export const alleTemaer = [
         tekst: 'Start en egen virksomhet',
         prioritet: 1000,
         defaultPosisjon: defaultType.INGEN,
-        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
-    },
-    {
-        ref: 'begynnSelv12',
-        id: 'begynnSelv12',
-        tekst: 'Søk jobb utenfor hjemstedet',
-        prioritet: 5,
-        defaultPosisjon: defaultType.FAST,
         kategori: TemaKategori.BEGYNN_MED_DEG_SELV
     },
     {

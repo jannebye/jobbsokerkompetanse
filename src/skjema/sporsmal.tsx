@@ -36,22 +36,16 @@ interface EgenStateProps {
 
 function prepMarkerAlternativ(
     alternativ: SvarAlternativModell,
-    erValgt: boolean,
     alternativListe: SvarAlternativModell[],
     sporsmal: SporsmalModell,
     type: string
 ): SvarAlternativModell[] {
-    let sporsmalAlternativer = [...sporsmal.alternativer];
+    const erValgt = !!alternativListe.find(
+        alt => alt.id === alternativ.id
+    );
     if (erValgt) {
-        if (type === 'ettvalg') {
+        if (type === 'ettvalg' || type === 'skala') {
             return alternativListe;
-        } else if (type === 'skala') {
-            return alternativListe.filter(
-                alt =>
-                    !sporsmalAlternativer.find(
-                        a => alt.id === a.id && a.skalaId! > alternativ.skalaId!
-                    )
-            );
         }
         return alternativListe.filter(alt => alt.id !== alternativ.id);
     } else {
@@ -61,18 +55,17 @@ function prepMarkerAlternativ(
         ) {
             return [alternativ];
         }
-        if (type === 'ettvalg') {
+        if (type === 'ettvalg' || type === 'skala') {
             return [alternativ];
-        } else if (type === 'skala') {
-            alternativListe = [];
-            return [
-                ...sporsmalAlternativer.filter(alt => {
-                    return alternativ.skalaId! >= alt.skalaId!;
-                })
-            ];
         }
         return [...alternativListe, alternativ];
     }
+}
+
+/* Gjelder for skalaSpørsmål */
+function skalAlternativMarkeres(
+    markerteAlternativ: SvarAlternativModell[], alternativ: SvarAlternativModell): boolean {
+    return !!markerteAlternativ.find(altId => altId.skalaId! >= alternativ.skalaId!);
 }
 
 function erAlternativMulig(
@@ -178,7 +171,8 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                         ) {
                             const erValgt = !!markerteAlternativer.find(
                                 alt => alt.id === alternativ.id
-                            );
+                            ) ? true : sporsmal.type === 'skala' ?
+                                skalAlternativMarkeres(markerteAlternativer, alternativ) : false;
                             const kanVelges: boolean = !!sporsmal.uniktAlternativ
                                 ? erAlternativMulig(
                                       sporsmal.uniktAlternativ,
@@ -199,7 +193,6 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                             sporsmal.id,
                                             prepMarkerAlternativ(
                                                 alternativ,
-                                                erValgt,
                                                 markerteAlternativer,
                                                 sporsmal,
                                                 sporsmal.type

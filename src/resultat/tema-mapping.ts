@@ -21,8 +21,16 @@ const temaLogikk = {
         alternativ: ['finn-svar-0102']
     },
     finnJobb8: {
-        sporsmalId: 3,
         alternativ: ['finn-svar-0302', 'finn-svar-0303']
+    },
+    finnJobb13: {
+        alternativ: [
+            'finn-svar-0203',
+            'finn-svar-0204',
+            'finn-svar-0205',
+            'finn-svar-0206',
+            'intervju-svar-0406'
+        ]
     },
     soknadCV2: {
         alternativ: [
@@ -105,22 +113,13 @@ const temaLogikk = {
         ]
     },
     begynnSelv4: {
-        alternativ: ['intervju-svar-0403', 'intervju-svar-0405']
+        alternativ: ['intervju-svar-0401']
     },
     begynnSelv7: {
         alternativ: ['intervju-svar-0403', 'intervju-svar-0405']
     },
     begynnSelv8: {
-        alternativ: ['intervju-svar-0403']
-    },
-    begynnSelv12: {
-        alternativ: [
-            'finn-svar-0203',
-            'finn-svar-0204',
-            'finn-svar-0205',
-            'finn-svar-0206',
-            'intervju-svar-0406'
-        ]
+        alternativ: ['intervju-svar-0405']
     },
     begynnSelv13: {
         alternativ: [
