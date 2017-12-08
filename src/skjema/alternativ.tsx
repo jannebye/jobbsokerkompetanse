@@ -51,7 +51,7 @@ function Alternativ({
                 {skalHaHjelpetekst && (
                     <OverskriftMedHjelpeTekst
                         overskriftId=""
-                        hjelpetekstId="Papiravis, oppslagstavler, butikkvinduer mm."
+                        hjelpetekstId="finn-svar-0111-hjelpetekst"
                     />
                 )}
             </label>

@@ -9,6 +9,7 @@ export default { 'nb': {
 'flervalg': 'Marker de alternativene som passer for deg.',
 'fortsett-knapp': 'Fortsett',
 'intervju-overskrift': 'I intervjuet skal du overbevise om at du passer inn i bedriften og at du er et trygt valg. Hvilke erfaringer har du med jobbintervju?',
+'les-mer-link': 'Les mer',
 'overskrift-raad': 'Vi har uthevet 4 råd til deg',
 'send-inn': 'Send inn',
 'skala': 'Marker på en skala fra 1 til 5 hvor 1 er "utrygg" og 5 er "trygg".',
@@ -132,5 +133,7 @@ export default { 'nb': {
 'soke-svar-0303': 'Flere',
 'soke-svar-0401': 'Sender samme søknad til alle',
 'soke-svar-0402': 'Gjør noen tilpasninger',
-'soke-svar-0403': 'Skreddersyr alle søknader'
+'soke-svar-0403': 'Skreddersyr alle søknader',
+'veiviser-innhold': 'Ønsker du å lese mer om jobbsøkerprosessen?',
+'veiviser-overskrift': 'Gå til vår veiviser for arbeidssøkere'
  }, 'en': {} };
