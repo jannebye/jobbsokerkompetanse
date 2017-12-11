@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 interface InnholdsContainerProps {
     overskrift: string;
-    innhold?: string;
+    innhold: string;
     link?: string;
 }
 
@@ -11,8 +11,8 @@ function InnholdsContainer({overskrift, innhold, link}: InnholdsContainerProps) 
     return (
         <section className="innholdscontainer" >
             <FormattedMessage id={overskrift} tagName="h3"/>
-            <p>{innhold}</p>
-            <FormattedMessage id={'les-mer-link'} tagName="a" ref={link} />
+            <FormattedMessage id={innhold}  tagName="p"/>
+            <FormattedMessage id={'les-mer-link'} tagName="a" />
         </section>
     );
 }
