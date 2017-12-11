@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import getStore from './store';
 import Innhold from './innhold';
 import IntlProvider from './Intl-provider';
@@ -11,11 +11,7 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <IntlProvider>
-                    <div className="content">
-                        <div className="limit">
-                            <Innhold/>
-                        </div>
-                    </div>
+                    <Innhold/>
                 </IntlProvider>
             </Provider>
         );
