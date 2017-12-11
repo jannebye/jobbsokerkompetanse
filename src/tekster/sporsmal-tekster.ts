@@ -110,7 +110,7 @@ export default {
         'soke-spm-02':
             'Hvor mange ganger har du blitt innkalt til intervju det siste året?',
         'soke-spm-03':
-            'Hvor mange ganger stillinger har du fått tilbud om det siste året?',
+            'Hvor mange stillinger har du fått tilbud om det siste året?',
         'soke-spm-04':
             'Tilpasser du søknaden til hver enkelt stillingsannonse?',
         'soke-svar-0101': 'Ingen',
