@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 
 interface InnholdsContainerProps {
     overskrift: string;
     innhold: string;
-    link?: string;
+    link: string;
 }
 
 function InnholdsContainer({overskrift, innhold, link}: InnholdsContainerProps) {
@@ -12,7 +12,7 @@ function InnholdsContainer({overskrift, innhold, link}: InnholdsContainerProps) 
         <section className="innholdscontainer" >
             <FormattedMessage id={overskrift} tagName="h3"/>
             <FormattedMessage id={innhold}  tagName="p"/>
-            <FormattedMessage id={'les-mer-link'} tagName="a" />
+            <FormattedHTMLMessage id={'les-mer-link'} values={{link}} />
         </section>
     );
 }
