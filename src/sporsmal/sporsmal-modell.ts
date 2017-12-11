@@ -9,6 +9,7 @@ interface SporsmalModell {
     erForsteSpm?: boolean;
     erSisteSpm?: boolean;
     uniktAlternativ?: string; // Gjelder når ett alternativ nuller ut og disabler de andre
+    egenUndertekst?: string;
 }
 
 export default SporsmalModell;

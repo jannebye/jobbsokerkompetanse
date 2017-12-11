@@ -105,7 +105,8 @@ const spm: Sporsmal[] = [
             { id: 'cv-svar-0404', skalaId: 4 },
             { id: 'cv-svar-0405', skalaId: 5 }
         ],
-        type: AlternativTyper.SKALA
+        type: AlternativTyper.SKALA,
+        egenUndertekst: 'mellomtekst-spm-cv-04'
     },
     {
         id: 'cv-spm-05',
