@@ -133,18 +133,8 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             >
                 <section>
                     <div className="sporsmal__start" ref={this.refhandler}>
-                        {!sporsmal.erForsteSpm && (
-                            <button
-                                className="sporsmal__knapp__tilbake"
-                                key="tilbake"
-                                onClick={e => {
-                                    e.preventDefault();
-                                    forrigeSpm();
-                                }}
-                            >
-                                Tilbake
-                            </button>
-                        )}
+                        {!sporsmal.erForsteSpm &&
+                        <div className="tilbake__ikon" onClick={e => {e.preventDefault(); forrigeSpm(); }} /> }
                         <div className="sporsmal__paginering typo-normal">
                             <strong>
                                 {besvarteSporsmal.findIndex(besvarelse => besvarelse.sporsmalId === sporsmal.id) + 1}
