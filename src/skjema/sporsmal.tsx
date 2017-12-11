@@ -150,7 +150,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 </p>
                             )}
                             <p className="sporsmal__ingress typo-undertekst">
-                                <FormattedMessage id={sporsmal.type}/>
+                                <FormattedMessage id={sporsmal.egenUndertekst || sporsmal.type}/>
                             </p>
                         </div>
                         <button
