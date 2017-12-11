@@ -35,10 +35,8 @@ function finnNesteSpmIListe(id: string): string {
         .id;
 }
 
-function finnNesteSpm(
-    sporsmalId: string,
-    forelopigBesvarelse: BesvarelseModell[]
-): string {
+function finnNesteSpm(sporsmalId: string,
+                      forelopigBesvarelse: BesvarelseModell[]): string {
     const avhengighet: AvhengighetModell | undefined = Avhengigheter.find(
         avh => avh.sporsmalId === sporsmalId
     );
@@ -75,6 +73,7 @@ type SkjemaProps = OwnProps & StateProps & DispatchProps;
 
 class Skjema extends React.Component<SkjemaProps, {}> {
     private sporsmalRefs = {};
+
     constructor(props: SkjemaProps) {
         super(props);
 
@@ -87,7 +86,7 @@ class Skjema extends React.Component<SkjemaProps, {}> {
             .then(res => {
                 const nesteSpm = this.sporsmalRefs[
                     this.props.gjeldendeSporsmalId
-                ];
+                    ];
                 nesteSpm.focus();
                 nesteSpm.scrollIntoView();
             });
@@ -107,38 +106,70 @@ class Skjema extends React.Component<SkjemaProps, {}> {
 
         return (
             <form>
-                <ul className="sporsmalsliste">
-                    {forelopigBesvarelse.map(spm => (
-                        <Sporsmal
-                            key={spm.sporsmalId}
-                            sporsmal={
-                                alleSporsmal.find(
-                                    sporsmal => sporsmal.id === spm.sporsmalId
-                                )!
-                            }
-                            spmRef={(ref: {}) =>
-                                (sporsmalRefs[spm.sporsmalId] = ref)}
-                            nesteSpm={(id: string) => this.byttSpmOgFokus(id)}
-                            forrigeSpm={() =>
-                                byttSpm(
-                                    forrigeSporsmal(
-                                        gjeldendeSporsmalId,
-                                        forelopigBesvarelse
-                                    )
-                                )}
-                        />
-                    ))}
-                    {gjeldendeSporsmal!.erSisteSpm && (
-                        <button
-                            className="knapp knapp--hoved"
-                            onClick={() => handleSubmit()}
-                        >
-                            <FormattedMessage id="send-inn" />
-                        </button>
-                    )}
-                </ul>
+                <Sporsmal
+                    key={gjeldendeSporsmalId}
+                    sporsmal={
+                        alleSporsmal.find(
+                            sporsmal => sporsmal.id === gjeldendeSporsmalId
+                        )!
+                    }
+                    spmRef={(ref: {}) =>
+                        (sporsmalRefs[gjeldendeSporsmalId] = ref)}
+                    nesteSpm={(id: string) => this.byttSpmOgFokus(id)}
+                    forrigeSpm={() =>
+                        byttSpm(
+                            forrigeSporsmal(
+                                gjeldendeSporsmalId,
+                                forelopigBesvarelse
+                            )
+                        )}
+                />
+                {gjeldendeSporsmal!.erSisteSpm && (
+                    <button
+                        className="knapp knapp--hoved"
+                        onClick={() => handleSubmit()}
+                    >
+                        <FormattedMessage id="send-inn"/>
+                    </button>
+                )}
             </form>
         );
+
+        /* Lar denne stå, i tilfelle den skal brukes igjen */
+        // return (
+        //     <form>
+        //         <ul className="sporsmalsliste">
+        //             {forelopigBesvarelse.map(spm => (
+        //                 <Sporsmal
+        //                     key={spm.sporsmalId}
+        //                     sporsmal={
+        //                         alleSporsmal.find(
+        //                             sporsmal => sporsmal.id === spm.sporsmalId
+        //                         )!
+        //                     }
+        //                     spmRef={(ref: {}) =>
+        //                         (sporsmalRefs[spm.sporsmalId] = ref)}
+        //                     nesteSpm={(id: string) => this.byttSpmOgFokus(id)}
+        //                     forrigeSpm={() =>
+        //                         byttSpm(
+        //                             forrigeSporsmal(
+        //                                 gjeldendeSporsmalId,
+        //                                 forelopigBesvarelse
+        //                             )
+        //                         )}
+        //                 />
+        //             ))}
+        //             {gjeldendeSporsmal!.erSisteSpm && (
+        //                 <button
+        //                     className="knapp knapp--hoved"
+        //                     onClick={() => handleSubmit()}
+        //                 >
+        //                     <FormattedMessage id="send-inn" />
+        //                 </button>
+        //             )}
+        //         </ul>
+        //     </form>
+        // );
     }
 }
 

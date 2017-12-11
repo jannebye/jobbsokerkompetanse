@@ -112,7 +112,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             sporsmal,
             besvarteSporsmal,
             markerAlternativ,
-            // forrigeSpm,
+            forrigeSpm,
             spmRef,
         } = this.props;
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
@@ -125,7 +125,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             this.setState({ feil: false });
         }
         return (
-            <li
+            <div
                 ref={spmRef}
                 id={'sp-' + sporsmal.id}
                 className={'sporsmal'}
@@ -133,9 +133,21 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             >
                 <section>
                     <div className="sporsmal__start" ref={this.refhandler}>
+                        {!sporsmal.erForsteSpm && (
+                            <button
+                                className="sporsmal__knapp__tilbake"
+                                key="tilbake"
+                                onClick={e => {
+                                    e.preventDefault();
+                                    forrigeSpm();
+                                }}
+                            >
+                                Tilbake
+                            </button>
+                        )}
                         <div className="sporsmal__paginering typo-normal">
                             <strong>
-                                {Number(sporsmal.id.split('-')[2])}
+                                {besvarteSporsmal.findIndex(besvarelse => besvarelse.sporsmalId === sporsmal.id) + 1}
                             </strong>{' '}
                             av <strong>{AlleSporsmal.length}</strong>
                         </div>
@@ -157,7 +169,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             className="sporsmal__knapp sporsmal__videre"
                             onClick={e => {
                                 e.preventDefault();
-                                window.scrollTo(0, (document.body.scrollHeight - 600));
+                                window.scrollTo(0, (document.body.scrollHeight - 800));
                                 this.spmStart.classList.contains('sporsmal__start-lukket') ?
                                     this.spmStart.classList.remove('sporsmal__start-lukket') :
                                     this.spmStart.classList.add('sporsmal__start-lukket');
@@ -202,20 +214,6 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 );
                             })}
                         </ul>
-{/*
-                        {!sporsmal.erForsteSpm && (
-                            <button
-                                className="knapp"
-                                key="tilbake"
-                                onClick={e => {
-                                    e.preventDefault();
-                                    forrigeSpm();
-                                }}
-                            >
-                                Tilbake
-                            </button>
-                        )}
-*/}
                         {!sporsmal.erSisteSpm && (
                             <button
                                 className="sporsmal__knapp"
@@ -233,7 +231,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                         )}
                     </div>
                 </section>
-            </li>
+            </div>
         );
     }
 }
