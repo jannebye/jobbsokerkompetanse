@@ -4,12 +4,7 @@
 
     .alternativ {
         list-style: none;
-        padding: 0;
-        border-top: 1px solid @navGra20;
-
-        &:last-child {
-            border-bottom: 1px solid @navGra20;
-        }
+        padding: 0.5rem;
 
         .alternativ__radio {
             position: absolute;
@@ -20,20 +15,24 @@
             & + .alternativ__label {
                 display: flex;
                 justify-content: space-between;
-                padding: 1.2rem 3rem;
+                padding: 1.2rem 3rem 1.2rem 1.5rem;
                 width: 100%;
+                height: 100%;
+                border: 1px solid @navGra20;
+                color: @navGra60;
 
                 &:hover {
-                    background-color: @navLysGra;
+                    background-color: @navLysBlaLighten80;
                 }
             }
 
             & + .markert {
-                background-color: @navBla;
-                color: @white;
+                color: @navMorkGra;
+                border-color: @navBla;
+                background: data-uri('../src/ikoner/checkmark-03.svg') ~'calc(100% - 1rem)' center no-repeat;
+                background-size: 32px 32px;
 
                 &:hover {
-                    background-color: @navBla;
                 }
             }
 
@@ -69,16 +68,13 @@
     }
 }
 
-@media (min-width: 769px) {
+@media (min-width: @screen-sm-min) {
     .alternativer {
         display: flex;
         justify-content: space-between;
         flex-flow: row wrap;
         .alternativ {
-            width: 49%;
-            &:nth-last-child(2) {
-                border-bottom: 1px solid @navGra20;
-            }
+            width: 50%;
         }
     }
 }

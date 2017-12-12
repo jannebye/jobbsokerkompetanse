@@ -8,7 +8,7 @@ interface StartsideProps {
 
 function Startside({ startKartlegging }: StartsideProps) {
     return (
-        <div>
+        <div className="startside">
             <h1 className="typo-sidetittel">Startside</h1>
             <img src={sporsmalImg} alt="Forstørrelseglass" />
             <button
@@ -16,7 +16,7 @@ function Startside({ startKartlegging }: StartsideProps) {
                 onClick={() => startKartlegging()}
             >
                 Start
-            </button>;
+            </button>
         </div>
     );
 }
