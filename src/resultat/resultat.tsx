@@ -3,7 +3,6 @@ import { AppState } from '../ducks/reducer';
 import BesvarelseModell from '../svar/svar-modell';
 import { connect } from 'react-redux';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import alleSporsmal from '../sporsmal/sporsmal-alle';
 import { fasteTemaer, leggesTilTemaer } from './tema';
 import temaLogikk from './tema-mapping';
 import { TemaModell } from './tema-modell';
