@@ -187,10 +187,6 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             className="sporsmal__knapp sporsmal__videre"
                             onClick={e => {
                                 e.preventDefault();
-                                console.log(
-                                    'classList-neste-1',
-                                    this.spmStart.classList
-                                );
                                 this.spmStart.classList.contains(
                                     'sporsmal__start-lukket'
                                 )
@@ -200,10 +196,6 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                     : this.spmStart.classList.add(
                                           'sporsmal__start-lukket'
                                       );
-                                console.log(
-                                    'classList-neste-2',
-                                    this.spmStart.classList
-                                );
                             }}
                         >
                             <FormattedMessage id="fortsett-knapp" />
