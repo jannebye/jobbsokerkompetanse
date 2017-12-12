@@ -13,7 +13,6 @@ import {
 import { FormattedMessage } from 'react-intl';
 
 // TODO: Legg til feilhåndtering hvis spørsmål ikke finnes
-//''''
 
 function forrigeSporsmal(gjeldendeSpm: string, besvarelse: BesvarelseModell[]) {
     const svarListe: BesvarelseModell[] = [...besvarelse];
