@@ -1,1 +1,1 @@
-Les mer
+<a href={link}>Les mer</a>

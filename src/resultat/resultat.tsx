@@ -48,8 +48,7 @@ function genererTema(fullfortBesvarelse: BesvarelseModell[]) {
         .concat(resultatLeggesTil)
         .sort((temaA, temaB) => temaA.prioritet - temaB.prioritet);
 
-    // return resultat.splice(0, 4);  // TODO: Denne skal brukes
-    return resultat; // Kun for at fag skal få teste
+    return resultat.splice(0, 4);
 }
 
 interface StateProps {
@@ -63,35 +62,9 @@ interface ResultatProps {
 type Props = StateProps & ResultatProps;
 
 function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
-    // sorterSvar(besvarteSporsmal);
     const resultat = genererTema(besvarteSporsmal);
     return (
         <div className="resultatside">
-            <FormattedMessage id="din-besvarelse" />:
-            <ul className="resultatliste">
-                {besvarteSporsmal.map(spm => (
-                    <li className="sporsmal__besvarelse">
-                        <FormattedMessage id={spm.sporsmalId} tagName="h3" />
-                        <h4>
-                            {
-                                alleSporsmal.find(
-                                    spom => spom.id === spm.sporsmalId
-                                )!.id
-                            }
-                        </h4>
-                        <p>
-                            <FormattedMessage id="dine-svar" />:{' '}
-                        </p>
-                        <ul>
-                            {spm.svarAlternativer.map(alt => (
-                                <li key={alt.id}>
-                                    <FormattedMessage id={alt.id} />
-                                </li>
-                            ))}
-                        </ul>
-                    </li>
-                ))}
-            </ul>
             <h1 className="overskrift__tema">
                 <FormattedMessage id="overskrift-raad" />
             </h1>
