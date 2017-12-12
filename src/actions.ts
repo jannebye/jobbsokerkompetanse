@@ -8,7 +8,9 @@ export enum ActionType {
     NESTE_SPORSMAL,
     FORRIGE_SPORSMAL,
     RESET,
-    ENDRE_SIDE
+    ENDRE_SIDE,
+    VIS_TIPS,
+    SKJUL_TIPS
 }
 
 export interface BesvarAction {
@@ -39,7 +41,16 @@ export interface EndreSideAction {
     data: Sidetype;
 }
 
+export interface VisTipsAction {
+    type: ActionType.VIS_TIPS;
+    data: string;
+}
+
+export interface SkjulTipsAction {
+    type: ActionType.SKJUL_TIPS;
+}
+
 export type Handling =
     BesvarAction | EndreAlternativAction
-    | NesteSporsmalAction | ForrigeSporsmalAction | ResetAction | EndreSideAction
+    | NesteSporsmalAction | ForrigeSporsmalAction | ResetAction | EndreSideAction | VisTipsAction | SkjulTipsAction
     ;

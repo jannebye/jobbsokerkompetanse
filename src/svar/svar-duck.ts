@@ -5,20 +5,32 @@ import {
     BesvarAction,
     EndreAlternativAction,
     NesteSporsmalAction,
-    ResetAction
+    ResetAction, VisTipsAction, SkjulTipsAction
 } from '../actions';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 
-const { BESVAR, ENDRE_ALTERNATIV, NESTE_SPORSMAL, RESET } = ActionType;
+const { BESVAR, ENDRE_ALTERNATIV, NESTE_SPORSMAL, RESET, VIS_TIPS, SKJUL_TIPS } = ActionType;
+
+export enum FlytType {
+    FREMOVER,
+    BAKOVER
+}
 
 export interface SvarState {
     data: BesvarelseModell[];
     gjeldendeSpmId: string;
+    flyt: FlytType;
+    tips: {
+        skalVises: boolean;
+        id: string;
+    };
 }
 
 export const initialState = {
-    data: [{ sporsmalId: 'finn-spm-01', svarAlternativer: [], tipsId: '' }],
-    gjeldendeSpmId: 'finn-spm-01'
+    data: [{ sporsmalId: 'finn-spm-01', svarAlternativer: [] }],
+    gjeldendeSpmId: 'finn-spm-01',
+    flyt: FlytType.FREMOVER,
+    tips: {skalVises: false, id: ''}
 };
 
 //  Reducer
@@ -53,8 +65,7 @@ export default function reducer(
                         ...state.data,
                         {
                             sporsmalId: action.data.sporsmalId,
-                            svarAlternativer: action.data.svarAlternativer,
-                            tipsId: ''
+                            svarAlternativer: action.data.svarAlternativer
                         }
                     ]
                 };
@@ -68,20 +79,34 @@ export default function reducer(
             ) {
                 return {
                     ...state,
-                    gjeldendeSpmId: action.data
+                    gjeldendeSpmId: action.data,
+                    flyt: FlytType.BAKOVER
                 };
             } else {
                 return {
                     ...state,
                     data: [
                         ...state.data,
-                        { sporsmalId: action.data, svarAlternativer: [], tipsId: '' }
+                        { sporsmalId: action.data, svarAlternativer: [] }
                     ],
-                    gjeldendeSpmId: action.data
+                    gjeldendeSpmId: action.data,
+                    flyt: FlytType.FREMOVER
                 };
             }
+
         case ActionType.RESET:
             return initialState;
+        case ActionType.VIS_TIPS:
+            return {
+                ...state,
+                tips: {skalVises: true, id: action.data}
+            };
+        case ActionType.SKJUL_TIPS:
+            console.log('SKJUL');
+            return {
+                ...state,
+                tips: {skalVises: false, id: state.tips.id}
+            };
         default:
             return state;
     }
@@ -118,5 +143,18 @@ export function nesteSporsmal(sporsmal: string): NesteSporsmalAction {
 export function reset(): ResetAction {
     return {
         type: RESET
+    };
+}
+
+export function visTips(tipsId: string): VisTipsAction {
+    return {
+        type: VIS_TIPS,
+        data: tipsId
+    };
+}
+
+export function skjulTips(): SkjulTipsAction {
+    return {
+        type: SKJUL_TIPS
     };
 }

@@ -5,12 +5,15 @@
         justify-content: space-between;
         flex-direction: column;
         position: fixed;
-        background-color: rgb(236, 247, 251);
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
         z-index: 100;
+
+        & + .alternativer {
+            display: none;
+        }
 
         .sporsmal__paginering {
             display: block;
@@ -22,7 +25,6 @@
             margin: 0 auto 1rem;
             width: 65px;
             height: 90px;
-            background-image: data-uri('../src/ikoner/forstorrelsesglass.svg');
         }
 
         .sporsmal__videre {
@@ -39,6 +41,9 @@
             .sporsmal__knapp__tilbake {
                 display: block;
             }
+            & + .alternativer {
+                display: block;
+            }
         }
     }
 }
@@ -50,7 +55,7 @@
     }
 }
 
-@media (min-width: 769px) {
+@media (min-width: @screen-sm-min) {
     .sporsmal {
         &__start {
             position: static;

@@ -14,6 +14,9 @@
 @import "./less/sporsmal";
 @import "./less/alternativ";
 @import "./less/resultat";
+@import "./less/tips";
+
+@navLysBlaLighten90:mix(@navLysBla,#fff,10%);
 
 * {
 	box-sizing: border-box;
@@ -28,7 +31,7 @@ html, body, form {
 }
 
 body {
-	background-color: rgb(236, 247, 251);
+	background-color: @navLysBlaLighten90;
 }
 
 .limit {
@@ -41,8 +44,17 @@ body {
 	color: @redError;
 }
 
-@media (min-width: 769px) {
+.startside {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	height: 100%;
+	text-align: center;
+
+}
+
+@media (min-width: @screen-sm-min) {
 	.limit {
-		width: 960px;
+		width: 740px;
 	}
 }
