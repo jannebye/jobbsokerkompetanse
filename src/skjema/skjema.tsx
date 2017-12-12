@@ -56,13 +56,7 @@ function finnNesteSpm(
     ) {
         return avhengighet.sendesTilSporsmalId;
     }
-    finnTips();
     return finnNesteSpmIListe(sporsmalId);
-}
-
-function finnTips() {
-    // const alternativListe = [...svarAlternativer];
-    Object.entries(tipsLogikk).map((key, val) => console.log(key, val));
 }
 
 interface OwnProps {
