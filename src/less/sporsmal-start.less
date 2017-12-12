@@ -11,6 +11,10 @@
         left: 0;
         z-index: 100;
 
+        & + .alternativer {
+            display: none;
+        }
+
         .sporsmal__paginering {
             display: block;
             margin: 1rem auto 0;
@@ -35,6 +39,9 @@
 
         &-lukket {
             .sporsmal__knapp__tilbake {
+                display: block;
+            }
+            & + .alternativer {
                 display: block;
             }
         }

@@ -13,7 +13,7 @@ const OverskriftMedHjelpeTekst = ({
     hjelpetekstId
 }: OverskriftMedHjelpeTekstProps) => (
     <div className="overskrift-med-hjelpetekst">
-        <Element tag="h3">{overskriftId}</Element>
+        <Element tag="strong">{overskriftId}</Element>
         <HjelpetekstAuto>{hjelpetekstId}</HjelpetekstAuto>
     </div>
 );

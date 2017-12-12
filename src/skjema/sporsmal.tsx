@@ -128,7 +128,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                 className={'sporsmal'}
                 tabIndex={0}
             >
-                <section>
+                <section className={skalVaereLukket ? 'lukket' : ''}>
                     <div
                         className={skalVaereLukket ? 'sporsmal__start sporsmal__start-lukket' : 'sporsmal__start'}
                         ref={this.refhandler}

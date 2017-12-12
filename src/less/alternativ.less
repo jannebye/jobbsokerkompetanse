@@ -1,80 +1,99 @@
 .alternativer {
-    list-style: none;
-    padding: 0;
+	list-style: none;
+	padding: 0;
+	.alternativ {
+		list-style: none;
+		border-bottom: 1px solid @navGra20;
 
-    .alternativ {
-        list-style: none;
-        padding: 0.5rem;
+		&:first-child {
+			border-top: 1px solid @navGra20;
+		}
 
-        .alternativ__radio {
-            position: absolute;
-            opacity: 0;
-            height: 0;
-            width: 0;
+		.alternativ__radio {
+			position: absolute;
+			opacity: 0;
+			height: 0;
+			width: 0;
 
-            & + .alternativ__label {
-                display: flex;
-                justify-content: space-between;
-                padding: 1.2rem 3rem 1.2rem 1.5rem;
-                width: 100%;
-                height: 100%;
-                border: 1px solid @navGra20;
-                color: @navGra60;
+			& + .alternativ__label {
+				display: block;
+				padding: 1.2rem 3rem 1.2rem 1.5rem;
+				width: 100%;
+				height: 100%;
+				color: @navGra60;
+			}
 
-                &:hover {
-                    background-color: @navLysBlaLighten80;
-                }
-            }
+			& + .disabled {
+				background-color: @navLysGra;
+				color: black;
+			}
 
-            & + .markert {
-                color: @navMorkGra;
-                border-color: @navBla;
-                background: data-uri('../src/ikoner/checkmark-03.svg') ~'calc(100% - 1rem)' center no-repeat;
-                background-size: 32px 32px;
+			& + .markert {
+				color: @navMorkGra;
+				border-color: @navBla;
+				background: data-uri('../src/ikoner/checkmark-03.svg') ~'calc(100% - 1rem)' center no-repeat;
+				background-size: 32px 32px;
 
-                &:hover {
-                }
-            }
+				&:hover {
+				}
+			}
+		}
 
-            & + .disabled {
-                background-color: @navLysGra;
-                color: black;
-            }
-        }
+		.alternativ__radio:checked {
+			& + .alternativ__label {
+				background-color: @navBlaLighten80;
+			}
+		}
 
-        .alternativ__radio:checked {
-            & + .alternativ__label {
-                background-color: @navBlaLighten80;
-            }
-        }
+		.alternativ__radio:focus {
+			& + .alternativ__label {
+				outline: none;
+				box-shadow: 0 0 0 3px @orangeFocus;
+			}
+		}
 
-        .alternativ__radio:focus {
-            & + .alternativ__label {
-                outline: none;
-                box-shadow: 0 0 0 3px @orangeFocus;
-            }
-        }
-
-        .overskrift-med-hjelpetekst {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-
-            svg {
-                height: 16px;
-                width: 16px;
-            }
-        }
-    }
+		.overskrift-med-hjelpetekst {
+			display: inline;
+			.hjelpetekst {
+				padding-left: 0.5rem;
+			}
+			svg {
+				height: 16px;
+				width: 16px;
+			}
+		}
+	}
 }
 
 @media (min-width: @screen-sm-min) {
-    .alternativer {
-        display: flex;
-        justify-content: space-between;
-        flex-flow: row wrap;
-        .alternativ {
-            width: 50%;
-        }
-    }
+	.sporsmal__start + .alternativer,
+	.sporsmal__start-lukket + .alternativer {
+		display: flex;
+		justify-content: space-between;
+		flex-flow: row wrap;
+		.alternativ {
+			width: 49%;
+			padding: 0.5rem;
+			border-bottom: 0;
+			&:first-child {
+				border-top: 0;
+			}
+			.alternativ__radio {
+				width: 50%;
+				& + .alternativ__label {
+					display: flex;
+					justify-content: space-between;
+					padding: 1.2rem 3rem 1.2rem 1.5rem;
+					width: 100%;
+					height: 100%;
+					border: 1px solid @navGra20;
+					color: @navGra60;
+
+					&:hover {
+						background-color: @navLysBlaLighten80;
+					}
+				}
+			}
+		}
+	}
 }
