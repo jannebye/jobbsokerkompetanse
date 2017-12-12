@@ -1,10 +1,11 @@
 .sporsmal {
     &__start {
         display: flex;
+        height: 100%;
         justify-content: space-between;
         flex-direction: column;
         position: fixed;
-        background-color: @navLysBlaLighten80;
+        background-color: rgb(236, 247, 251);
         top: 0;
         right: 0;
         bottom: 0;
@@ -19,9 +20,9 @@
 
         .sporsmal__ikon {
             margin: 0 auto 1rem;
-            width: 70px;
+            width: 65px;
             height: 90px;
-            border: 2px solid @navGra20;
+            background-image: data-uri('../src/ikoner/forstorrelsesglass.svg');
         }
 
         .sporsmal__videre {
@@ -30,15 +31,21 @@
             animation: sprett 2s infinite alternate;
         }
 
-        & + .sporsmal__full {
+        .sporsmal__knapp__tilbake {
             display: none;
-            //transform: translateY(500px);
+        }
+
+        &-lukket {
+            .sporsmal__knapp__tilbake {
+                display: block;
+            }
         }
     }
 }
 
 @keyframes sprett {
-    30%, 100% {
+    30%,
+    100% {
         transform: translate(0px, -10px);
     }
 }
@@ -57,7 +64,7 @@
             }
 
             .sporsmal__ikon {
-                width: 70px;
+                width: 65px;
                 height: 90px;
             }
 
@@ -65,7 +72,7 @@
                 display: none;
             }
 
-            & + .sporsmal__full {
+            .sporsmal__knapp__tilbake {
                 display: block;
             }
         }

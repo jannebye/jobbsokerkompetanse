@@ -4,11 +4,11 @@ import BesvarelseModell from '../svar/svar-modell';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import alleSporsmal from '../sporsmal/sporsmal-alle';
-import { sorterSvar } from '../svar/svar-selector';
 import { fasteTemaer, leggesTilTemaer } from './tema';
 import temaLogikk from './tema-mapping';
 import { TemaModell } from './tema-modell';
 import TemaVisning from './temavisning';
+import InnholdsContainer from './innholdscontainer';
 
 function temaSkalBehandles(tema: TemaModell, alternativId: string) {
     if (temaLogikk[tema.ref]) {
@@ -63,7 +63,7 @@ interface ResultatProps {
 type Props = StateProps & ResultatProps;
 
 function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
-    sorterSvar(besvarteSporsmal);
+    // sorterSvar(besvarteSporsmal);
     const resultat = genererTema(besvarteSporsmal);
     return (
         <div className="resultatside">
@@ -71,7 +71,7 @@ function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
             <ul className="resultatliste">
                 {besvarteSporsmal.map(spm => (
                     <li className="sporsmal__besvarelse">
-                        <h3>Spørsmål {spm.sporsmalId}:</h3>
+                        <FormattedMessage id={spm.sporsmalId} tagName="h3" />
                         <h4>
                             {
                                 alleSporsmal.find(
@@ -84,7 +84,9 @@ function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
                         </p>
                         <ul>
                             {spm.svarAlternativer.map(alt => (
-                                <li key={alt.id}>{alt.id}</li>
+                                <li key={alt.id}>
+                                    <FormattedMessage id={alt.id} />
+                                </li>
                             ))}
                         </ul>
                     </li>
@@ -95,16 +97,28 @@ function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
             </h1>
             <ul className="temaliste">
                 {resultat.map(tema => (
-                    <TemaVisning
-                        tema={tema}
-                    /> ))}
+                    <TemaVisning tema={tema} key={tema.id} />
+                ))}
             </ul>
-            <button
-                className="knapp knapp--hoved"
-                onClick={() => startPaNytt()}
-            >
-                Ta testen på nytt
-            </button>
+            <section className="resultat__info blokk-m">
+                <p className="resultat__infotekst">
+                    Dine råd er lagret, og du kan finne dem igjen på Ditt Nav.
+                    Du kan også svare på spørsmålene på nytt, om du ønsker
+                </p>
+                <button
+                    className="knapp knapp__startigjen"
+                    onClick={() => startPaNytt()}
+                >
+                    Start på nytt
+                </button>
+            </section>
+            <InnholdsContainer
+                overskrift="veiviser-overskrift"
+                innhold="veiviser-innhold"
+                link={
+                    'https://tjenester.nav.no/veiviserarbeidssoker/?situasjon=mistet-jobben'
+                }
+            />
         </div>
     );
 }

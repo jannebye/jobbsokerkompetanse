@@ -10,5 +10,8 @@ declare module 'nav-frontend-ekspanderbartpanel' {
         children?: {};
     }
 
-    export default class EkspanderbartPanel extends React.Component<EkspanderbartanelProps, {}> {}
+    export default class EkspanderbartPanel extends React.Component<
+        EkspanderbartanelProps,
+        {}
+    > {}
 }

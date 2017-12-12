@@ -10,6 +10,8 @@ import BesvarelseModell from '../svar/svar-modell';
 import Alternativ from './alternativ';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 
+const sporsmalImg = require('../ikoner/forstorrelsesglass.svg');
+
 interface DispatchProps {
     markerAlternativ: (
         sporsmalId: string,
@@ -39,9 +41,7 @@ function prepMarkerAlternativ(
     sporsmal: SporsmalModell,
     type: string
 ): SvarAlternativModell[] {
-    const erValgt = !!alternativListe.find(
-        alt => alt.id === alternativ.id
-    );
+    const erValgt = !!alternativListe.find(alt => alt.id === alternativ.id);
     if (erValgt) {
         if (type === 'ettvalg' || type === 'skala') {
             return alternativListe;
@@ -63,8 +63,12 @@ function prepMarkerAlternativ(
 
 /* Gjelder for skalaSpørsmål */
 function skalAlternativMarkeres(
-    markerteAlternativ: SvarAlternativModell[], alternativ: SvarAlternativModell): boolean {
-    return !!markerteAlternativ.find(altId => altId.skalaId! >= alternativ.skalaId!);
+    markerteAlternativ: SvarAlternativModell[],
+    alternativ: SvarAlternativModell
+): boolean {
+    return !!markerteAlternativ.find(
+        altId => altId.skalaId! >= alternativ.skalaId!
+    );
 }
 
 function erAlternativMulig(
@@ -112,8 +116,8 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             sporsmal,
             besvarteSporsmal,
             markerAlternativ,
-            // forrigeSpm,
-            spmRef,
+            forrigeSpm,
+            spmRef
         } = this.props;
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
             besvarelse => besvarelse.sporsmalId === sporsmal.id
@@ -125,7 +129,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             this.setState({ feil: false });
         }
         return (
-            <li
+            <div
                 ref={spmRef}
                 id={'sp-' + sporsmal.id}
                 className={'sporsmal'}
@@ -133,107 +137,135 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             >
                 <section>
                     <div className="sporsmal__start" ref={this.refhandler}>
-                        <div className="sporsmal__paginering typo-normal">
-                            <strong>
-                                {Number(sporsmal.id.split('-')[2])}
-                            </strong>{' '}
-                            av <strong>{AlleSporsmal.length}</strong>
+                        <div className="sporsmal__header">
+                            {!sporsmal.erForsteSpm && (
+                                <button
+                                    className="sporsmal__knapp__tilbake"
+                                    onClick={e => {
+                                        e.preventDefault();
+                                        forrigeSpm();
+                                    }}
+                                >
+                                    <FormattedMessage id="forrige-knapp" />
+                                </button>
+                            )}
+                            <div className="sporsmal__paginering typo-normal">
+                                <strong>
+                                    {besvarteSporsmal.findIndex(
+                                        besvarelse =>
+                                            besvarelse.sporsmalId ===
+                                            sporsmal.id
+                                    ) + 1}
+                                </strong>{' '}
+                                <FormattedMessage id="paginering-av" />
+                                <strong>{AlleSporsmal.length}</strong>
+                            </div>
                         </div>
                         <div className="sporsmal__innhold">
-                            <div className="sporsmal__ikon"/>
-                            <h1 className="sporsmal__overskrift typo-sidetittel blokk-xs">
-                                <FormattedHTMLMessage id={sporsmal.id}/>
+                            <img
+                                src={sporsmalImg}
+                                className="sporsmal__ikon"
+                                alt="Forstørrelsesglass"
+                            />
+                            <h1 className="sporsmal__overskrift typo-innholdstittel blokk-xs">
+                                <FormattedHTMLMessage id={sporsmal.id} />
                             </h1>
                             {this.state.feil && (
                                 <p className="skjemaelement__feilmelding">
-                                    <FormattedMessage id="feilmelding-mangler-svar"/>
+                                    <FormattedMessage id="feilmelding-mangler-svar" />
                                 </p>
                             )}
                             <p className="sporsmal__ingress typo-undertekst">
-                                <FormattedMessage id={sporsmal.type}/>
+                                <FormattedMessage
+                                    id={
+                                        sporsmal.egenUndertekst || sporsmal.type
+                                    }
+                                />
                             </p>
                         </div>
                         <button
                             className="sporsmal__knapp sporsmal__videre"
                             onClick={e => {
                                 e.preventDefault();
-                                window.scrollTo(0, (document.body.scrollHeight - 600));
-                                this.spmStart.classList.contains('sporsmal__start-lukket') ?
-                                    this.spmStart.classList.remove('sporsmal__start-lukket') :
-                                    this.spmStart.classList.add('sporsmal__start-lukket');
+                                console.log(
+                                    'classList-neste-1',
+                                    this.spmStart.classList
+                                );
+                                this.spmStart.classList.contains(
+                                    'sporsmal__start-lukket'
+                                )
+                                    ? this.spmStart.classList.remove(
+                                          'sporsmal__start-lukket'
+                                      )
+                                    : this.spmStart.classList.add(
+                                          'sporsmal__start-lukket'
+                                      );
+                                console.log(
+                                    'classList-neste-2',
+                                    this.spmStart.classList
+                                );
                             }}
                         >
-                            <FormattedMessage id="fortsett-knapp"/>
+                            <FormattedMessage id="fortsett-knapp" />
                         </button>
                     </div>
-                    <div className="sporsmal__full">
-                        <ul className="alternativer">
-                            {sporsmal.alternativer.map(function (alternativ: SvarAlternativModell) {
-                                const erValgt = !!markerteAlternativer.find(
-                                    alt => alt.id === alternativ.id
-                                ) ? true : sporsmal.type === 'skala' ?
-                                    skalAlternativMarkeres(markerteAlternativer, alternativ) : false;
-                                const kanVelges: boolean = !!sporsmal.uniktAlternativ
-                                    ? erAlternativMulig(
-                                        sporsmal.uniktAlternativ,
-                                        alternativ.id,
-                                        markerteAlternativer
-                                    )
-                                    : true;
-                                return (
-                                    <Alternativ
-                                        key={alternativ.id}
-                                        alternativ={alternativ}
-                                        erValgt={erValgt}
-                                        sporsmalId={sporsmal.id}
-                                        sporsmalType={sporsmal.type}
-                                        kanVelges={kanVelges}
-                                        markerAlternativ={() =>
-                                            markerAlternativ(
-                                                sporsmal.id,
-                                                prepMarkerAlternativ(
-                                                    alternativ,
-                                                    markerteAlternativer,
-                                                    sporsmal,
-                                                    sporsmal.type
-                                                )
-                                            )}
-                                    />
-                                );
-                            })}
-                        </ul>
-{/*
-                        {!sporsmal.erForsteSpm && (
-                            <button
-                                className="knapp"
-                                key="tilbake"
-                                onClick={e => {
-                                    e.preventDefault();
-                                    forrigeSpm();
-                                }}
-                            >
-                                Tilbake
-                            </button>
-                        )}
-*/}
-                        {!sporsmal.erSisteSpm && (
-                            <button
-                                className="sporsmal__knapp"
-                                key="besvar"
-                                onClick={e => {
-                                    e.preventDefault();
-                                    this.sjekkSvar(
+                    <ul className="alternativer">
+                        {sporsmal.alternativer.map(function(
+                            alternativ: SvarAlternativModell
+                        ) {
+                            const erValgt = !!markerteAlternativer.find(
+                                alt => alt.id === alternativ.id
+                            )
+                                ? true
+                                : sporsmal.type === 'skala'
+                                  ? skalAlternativMarkeres(
                                         markerteAlternativer,
-                                        sporsmal.id
-                                    );
-                                }}
-                            >
-                                <FormattedMessage id="fortsett-knapp"/>
-                            </button>
-                        )}
-                    </div>
+                                        alternativ
+                                    )
+                                  : false;
+                            const kanVelges: boolean = !!sporsmal.uniktAlternativ
+                                ? erAlternativMulig(
+                                      sporsmal.uniktAlternativ,
+                                      alternativ.id,
+                                      markerteAlternativer
+                                  )
+                                : true;
+                            return (
+                                <Alternativ
+                                    key={alternativ.id}
+                                    alternativ={alternativ}
+                                    erValgt={erValgt}
+                                    sporsmalId={sporsmal.id}
+                                    sporsmalType={sporsmal.type}
+                                    kanVelges={kanVelges}
+                                    markerAlternativ={() =>
+                                        markerAlternativ(
+                                            sporsmal.id,
+                                            prepMarkerAlternativ(
+                                                alternativ,
+                                                markerteAlternativer,
+                                                sporsmal,
+                                                sporsmal.type
+                                            )
+                                        )}
+                                />
+                            );
+                        })}
+                    </ul>
                 </section>
-            </li>
+                {!sporsmal.erSisteSpm && (
+                    <button
+                        className="sporsmal__knapp"
+                        key="besvar"
+                        onClick={e => {
+                            e.preventDefault();
+                            this.sjekkSvar(markerteAlternativer, sporsmal.id);
+                        }}
+                    >
+                        <FormattedMessage id="fortsett-knapp" />
+                    </button>
+                )}
+            </div>
         );
     }
 }
@@ -242,8 +274,10 @@ const mapStateToProps = (state: AppState): StateProps => ({
     besvarteSporsmal: state.svar.data
 });
 
-const mapDispatchToProps = (dispatch: Dispatch,
-                            props: OwnProps): DispatchProps => ({
+const mapDispatchToProps = (
+    dispatch: Dispatch,
+    props: OwnProps
+): DispatchProps => ({
     markerAlternativ: (sporsmalId, alternativ: SvarAlternativModell[]) =>
         dispatch(marker(sporsmalId, alternativ))
 });

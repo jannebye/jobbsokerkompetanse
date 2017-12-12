@@ -4,7 +4,13 @@
 }
 
 .sporsmal {
-    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    section {
+        flex: 1 0 auto;
+    }
 
     &__start-lukket {
         display: block;
@@ -15,7 +21,7 @@
         }
 
         .sporsmal__innhold {
-            margin-top: 5%;
+            margin: 3rem 0;
             //transition: margin-top 0.5s;
         }
 
@@ -24,25 +30,16 @@
             //transition: font-size 0.5s;
         }
 
-        & + .sporsmal__full {
-            display: block;
-            //transform: translateY(0);
-            //transition: transform 0.5s;
-        }
-
         .sporsmal__ikon {
-            width: 49px;
+            width: 46px;
             height: 63px;
             //transition: width 0.5s, height 0.5s;
+            background-image: data-uri('../src/ikoner/forstorrelsesglass.svg');
         }
 
         .sporsmal__videre {
             display: none;
         }
-    }
-
-    &:first-child {
-        margin-top: 1rem;
     }
 
     &:focus {
@@ -79,5 +76,36 @@
             border-right: 2px solid @white;
             transform: rotate(45deg);
         }
+    }
+
+    &__knapp__tilbake {
+        margin: 2rem auto 0;
+        display: block;
+        padding: 3px 0;
+        border: 0;
+        background: none;
+        cursor: pointer;
+        border-bottom: 1px solid @navGra40;
+        &:before {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            margin-top: -16px;
+            left: ~'calc(50% - 6px)';
+            border-top: 2px solid black;
+            border-left: 2px solid black;
+            transform: rotate(45deg);
+        }
+    }
+}
+
+@media (min-width: 769px) {
+    .sporsmal__knapp {
+        margin-bottom: 2rem;
+    }
+    .sporsmal__knapp__tilbake {
+        margin-top: 3rem;
     }
 }
