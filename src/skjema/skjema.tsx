@@ -11,10 +11,6 @@ import {
     AvhengighetModell
 } from '../utils/avhengigheter';
 import { FormattedMessage } from 'react-intl';
-import tipsLogikk from './tips-mapping';
-
-// TODO: Legg til feilhåndtering hvis spørsmål ikke finnes
-//''''
 
 function forrigeSporsmal(gjeldendeSpm: string, besvarelse: BesvarelseModell[]) {
     const svarListe: BesvarelseModell[] = [...besvarelse];
