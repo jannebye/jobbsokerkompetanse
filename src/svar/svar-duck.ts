@@ -65,7 +65,7 @@ export default function reducer(
                     ]
                 };
             }
-        }
+        } 
         case ActionType.NESTE_SPORSMAL:
             if (
                 state.data.find(
