@@ -11,6 +11,7 @@ import {
     AvhengighetModell
 } from '../utils/avhengigheter';
 import { FormattedMessage } from 'react-intl';
+import tipsLogikk from './tips-mapping';
 
 // TODO: Legg til feilhåndtering hvis spørsmål ikke finnes
 
@@ -52,8 +53,13 @@ function finnNesteSpm(sporsmalId: string,
     ) {
         return avhengighet.sendesTilSporsmalId;
     }
-
+    finnTips();
     return finnNesteSpmIListe(sporsmalId);
+}
+
+function finnTips() {
+    // const alternativListe = [...svarAlternativer];
+    Object.entries(tipsLogikk).map((key, val) => console.log(key, val));
 }
 
 interface OwnProps {
@@ -81,6 +87,7 @@ class Skjema extends React.Component<SkjemaProps, {}> {
     }
 
     byttSpmOgFokus(spmId: string) {
+
         this.props
             .byttSpm(finnNesteSpm(spmId, this.props.forelopigBesvarelse))
             .then(res => {
