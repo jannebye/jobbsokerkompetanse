@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+const sporsmalImg = require('../ikoner/forstorrelsesglass.svg');
+
 interface StartsideProps {
     startKartlegging: () => void;
 }
@@ -7,7 +9,8 @@ interface StartsideProps {
 function Startside({ startKartlegging }: StartsideProps) {
     return (
         <div>
-            Startside
+            <h1 className="typo-sidetittel">Startside</h1>
+            <img src={sporsmalImg} alt="Forstørrelseglass" />
             <button
                 className="knapp knapp--hoved"
                 onClick={() => startKartlegging()}

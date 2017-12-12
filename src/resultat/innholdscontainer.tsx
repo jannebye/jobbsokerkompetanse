@@ -7,12 +7,16 @@ interface InnholdsContainerProps {
     link: string;
 }
 
-function InnholdsContainer({overskrift, innhold, link}: InnholdsContainerProps) {
+function InnholdsContainer({
+    overskrift,
+    innhold,
+    link
+}: InnholdsContainerProps) {
     return (
-        <section className="innholdscontainer" >
-            <FormattedMessage id={overskrift} tagName="h3"/>
-            <FormattedMessage id={innhold}  tagName="p"/>
-            <FormattedHTMLMessage id={'les-mer-link'} values={{link}} />
+        <section className="innholdscontainer">
+            <FormattedMessage id={overskrift} tagName="h3" />
+            <FormattedMessage id={innhold} tagName="p" />
+            <FormattedHTMLMessage id={'les-mer-link'} values={{ link }} />
         </section>
     );
 }

@@ -17,7 +17,7 @@ export interface SvarState {
 }
 
 export const initialState = {
-    data: [{ sporsmalId: 'finn-spm-01', svarAlternativer: [] }],
+    data: [{ sporsmalId: 'finn-spm-01', svarAlternativer: [], tipsId: '' }],
     gjeldendeSpmId: 'finn-spm-01'
 };
 
@@ -53,7 +53,8 @@ export default function reducer(
                         ...state.data,
                         {
                             sporsmalId: action.data.sporsmalId,
-                            svarAlternativer: action.data.svarAlternativer
+                            svarAlternativer: action.data.svarAlternativer,
+                            tipsId: ''
                         }
                     ]
                 };
@@ -74,7 +75,7 @@ export default function reducer(
                     ...state,
                     data: [
                         ...state.data,
-                        { sporsmalId: action.data, svarAlternativer: [] }
+                        { sporsmalId: action.data, svarAlternativer: [], tipsId: '' }
                     ],
                     gjeldendeSpmId: action.data
                 };

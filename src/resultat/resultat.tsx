@@ -71,7 +71,7 @@ function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
             <ul className="resultatliste">
                 {besvarteSporsmal.map(spm => (
                     <li className="sporsmal__besvarelse">
-                        <FormattedMessage id={spm.sporsmalId} tagName="h3"/>
+                        <FormattedMessage id={spm.sporsmalId} tagName="h3" />
                         <h4>
                             {
                                 alleSporsmal.find(
@@ -84,7 +84,9 @@ function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
                         </p>
                         <ul>
                             {spm.svarAlternativer.map(alt => (
-                                <li key={alt.id}><FormattedMessage id={alt.id} /></li>
+                                <li key={alt.id}>
+                                    <FormattedMessage id={alt.id} />
+                                </li>
                             ))}
                         </ul>
                     </li>
@@ -95,26 +97,27 @@ function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
             </h1>
             <ul className="temaliste">
                 {resultat.map(tema => (
-                    <TemaVisning
-                        tema={tema}
-                    /> ))}
+                    <TemaVisning tema={tema} key={tema.id} />
+                ))}
             </ul>
             <section className="resultat__info blokk-m">
-            <p className="resultat__infotekst">
-                Dine råd er lagret, og du kan finne dem igjen på Ditt Nav. Du kan også svare på spørsmålene på nytt,
-                om du ønsker
-            </p>
-            <button
-                className="knapp knapp__startigjen"
-                onClick={() => startPaNytt()}
-            >
-                Start på nytt
-            </button>
+                <p className="resultat__infotekst">
+                    Dine råd er lagret, og du kan finne dem igjen på Ditt Nav.
+                    Du kan også svare på spørsmålene på nytt, om du ønsker
+                </p>
+                <button
+                    className="knapp knapp__startigjen"
+                    onClick={() => startPaNytt()}
+                >
+                    Start på nytt
+                </button>
             </section>
             <InnholdsContainer
                 overskrift="veiviser-overskrift"
                 innhold="veiviser-innhold"
-                link={'https://tjenester.nav.no/veiviserarbeidssoker/?situasjon=mistet-jobben'}
+                link={
+                    'https://tjenester.nav.no/veiviserarbeidssoker/?situasjon=mistet-jobben'
+                }
             />
         </div>
     );

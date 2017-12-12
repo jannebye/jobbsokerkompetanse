@@ -14,6 +14,7 @@ import { FormattedMessage } from 'react-intl';
 import tipsLogikk from './tips-mapping';
 
 // TODO: Legg til feilhåndtering hvis spørsmål ikke finnes
+//''''
 
 function forrigeSporsmal(gjeldendeSpm: string, besvarelse: BesvarelseModell[]) {
     const svarListe: BesvarelseModell[] = [...besvarelse];
@@ -36,8 +37,10 @@ function finnNesteSpmIListe(id: string): string {
         .id;
 }
 
-function finnNesteSpm(sporsmalId: string,
-                      forelopigBesvarelse: BesvarelseModell[]): string {
+function finnNesteSpm(
+    sporsmalId: string,
+    forelopigBesvarelse: BesvarelseModell[]
+): string {
     const avhengighet: AvhengighetModell | undefined = Avhengigheter.find(
         avh => avh.sporsmalId === sporsmalId
     );
@@ -93,9 +96,8 @@ class Skjema extends React.Component<SkjemaProps, {}> {
             .then(res => {
                 const nesteSpm = this.sporsmalRefs[
                     this.props.gjeldendeSporsmalId
-                    ];
+                ];
                 nesteSpm.focus();
-                nesteSpm.scrollIntoView();
             });
     }
 
@@ -136,7 +138,7 @@ class Skjema extends React.Component<SkjemaProps, {}> {
                         className="knapp knapp--hoved"
                         onClick={() => handleSubmit()}
                     >
-                        <FormattedMessage id="send-inn"/>
+                        <FormattedMessage id="send-inn" />
                     </button>
                 )}
             </form>
