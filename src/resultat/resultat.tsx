@@ -2,7 +2,7 @@ import * as React from 'react';
 import { AppState } from '../ducks/reducer';
 import BesvarelseModell from '../svar/svar-modell';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { fasteTemaer, leggesTilTemaer } from './tema';
 import temaLogikk from './tema-mapping';
 import { TemaModell } from './tema-modell';
@@ -74,8 +74,7 @@ function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
             </ul>
             <section className="resultat__info blokk-m">
                 <p className="resultat__infotekst">
-                    Dine råd er lagret, og du kan finne dem igjen på Ditt Nav.
-                    Du kan også svare på spørsmålene på nytt, om du ønsker
+                    <FormattedHTMLMessage id="tekst-er-lagret" />
                 </p>
                 <button
                     className="knapp knapp__startigjen"

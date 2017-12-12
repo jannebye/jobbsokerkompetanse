@@ -25,16 +25,10 @@
             //transition: margin-top 0.5s;
         }
 
-        .sporsmal__overskrift {
-            font-size: 1.375rem;
-            //transition: font-size 0.5s;
-        }
-
         .sporsmal__ikon {
             width: 46px;
             height: 63px;
             //transition: width 0.5s, height 0.5s;
-            background-image: data-uri('../src/ikoner/forstorrelsesglass.svg');
         }
 
         .sporsmal__videre {
@@ -101,7 +95,12 @@
     }
 }
 
-@media (min-width: 769px) {
+.knapperad {
+    padding-top: 0;
+    margin-top: -3.5rem;
+}
+
+@media (min-width: @screen-sm-min) {
     .sporsmal__knapp {
         margin-bottom: 2rem;
     }
