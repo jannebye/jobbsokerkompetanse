@@ -102,7 +102,6 @@ export default function reducer(
                 tips: {skalVises: true, id: action.data}
             };
         case ActionType.SKJUL_TIPS:
-            console.log('SKJUL');
             return {
                 ...state,
                 tips: {skalVises: false, id: state.tips.id}
