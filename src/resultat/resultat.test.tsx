@@ -14,16 +14,21 @@ let store = getStore();
 describe('<Resultat />', function() {
     let besvarteSpm: BesvarelseModell[];
     let svarAlternativer: SvarAlternativModell[];
+    let node: JSX.Element;
 
     beforeEach(() => {
         svarAlternativer = new Array<SvarAlternativModell>();
         besvarteSpm = new Array<BesvarelseModell>();
+        node = (
+            <Provider store={store}>
+                <IntlProvider>
+                    <Resultat besvarteSporsmal={besvarteSpm} startPaNytt={() => {return; }}/>
+                </IntlProvider>
+            </Provider>
+        );
     });
 
     it('skal vise overskrift', () => {
-        let node = (<Provider store={store}><IntlProvider>
-                        <Resultat besvarteSporsmal={besvarteSpm} startPaNytt={() => {return; }}/>
-                    </IntlProvider></Provider>);
         let wrapper = mount(node);
         expect(wrapper.find('.overskrift__tema').text()).to.contain('Vi har uthevet 4 råd til deg');
     });
@@ -31,13 +36,12 @@ describe('<Resultat />', function() {
     it('skal foreslå å søke på flere bransjer', () => {
         svarAlternativer.push({id: 'finn-svar-0301'});
         besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer});
-        let node = (<Provider store={store}><IntlProvider>
-                        <Resultat besvarteSporsmal={besvarteSpm} startPaNytt={() => {return; }}/>
-                    </IntlProvider></Provider>);
+
         let wrapper = mount(node);
         let fantTema = wrapper.find('.enkelt__tema')
                               .filterWhere(x => x.length === 1 && x.text() === 'Søk jobb i ulike bransjer')
                               .exists();
+
         expect(fantTema).to.equal(true);
 
     });
@@ -45,9 +49,6 @@ describe('<Resultat />', function() {
         svarAlternativer.push({id: 'finn-svar-0302'});
         besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer});
 
-        let node = (<Provider store={store}><IntlProvider>
-                        <Resultat besvarteSporsmal={besvarteSpm} startPaNytt={() => {return; }}/>
-                    </IntlProvider></Provider>);
         let wrapper = mount(node);
         let fantTema = wrapper.find('.enkelt__tema')
                               .filterWhere(x => x.length === 1 && x.text() === 'Søk jobb i ulike bransjer')
