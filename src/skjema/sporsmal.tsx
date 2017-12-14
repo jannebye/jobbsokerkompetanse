@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
 import AlleSporsmal from '../sporsmal/sporsmal-alle';
-import { marker } from '../svar/svar-duck';
+import { marker, visAlternativer } from '../svar/svar-duck';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
@@ -13,6 +13,8 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string,
                        alternativ: SvarAlternativModell[]) => void;
+
+    visAlternativer: () => void;
 }
 
 interface OwnProps {
@@ -20,11 +22,12 @@ interface OwnProps {
     forrigeSpm: () => void;
     sporsmal: SporsmalModell;
     spmRef: any; // tslint:disable-line:no-any
-    skalVaereLukket: boolean;
+    viserAlternativer: boolean;
 }
 
 interface StateProps {
     besvarteSporsmal: BesvarelseModell[];
+    viserAlternativer: boolean;
 }
 
 interface EgenStateProps {
@@ -79,18 +82,10 @@ function erAlternativMulig(uniktAlternativId: string,
 type SporsmalProps = OwnProps & DispatchProps & StateProps;
 
 class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
-    spmStart: HTMLElement;
 
     constructor(props: SporsmalProps) {
         super(props);
         this.state = {feil: false};
-        this.refhandler = this.refhandler.bind(this);
-    }
-
-    refhandler(spmStart: HTMLElement | null) {
-        if (spmStart != null) {
-            this.spmStart = spmStart;
-        }
     }
 
     sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: string) {
@@ -108,8 +103,11 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             markerAlternativ,
             forrigeSpm,
             spmRef,
-            skalVaereLukket
+            viserAlternativer,
+            visAlternativer
         } = this.props;
+
+
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
             besvarelse => besvarelse.sporsmalId === sporsmal.id
         );
@@ -125,14 +123,11 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             <div
                 ref={spmRef}
                 id={'sp-' + sporsmal.id}
-                className={'sporsmal'}
+                className={viserAlternativer ? 'sporsmal vis_alternativer' : 'sporsmal'}
                 tabIndex={0}
             >
-                <section className={skalVaereLukket ? 'lukket' : ''}>
-                    <div
-                        className={skalVaereLukket ? 'sporsmal__start sporsmal__start-lukket' : 'sporsmal__start'}
-                        ref={this.refhandler}
-                    >
+                <section>
+                    <div className={'sporsmal__start'}>
                         <div className="sporsmal__header">
                             {!sporsmal.erForsteSpm && (
                                 <button
@@ -153,7 +148,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                             sporsmal.id
                                     ) + 1}
                                 </strong>{' '}
-                                <FormattedMessage id="paginering-av"/>
+                                <FormattedMessage id="paginering-av"/>{' '}
                                 <strong>{AlleSporsmal.length}</strong>
                             </div>
                         </div>
@@ -172,26 +167,14 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 </p>
                             )}
                             <p className="sporsmal__ingress typo-undertekst">
-                                <FormattedMessage
-                                    id={
-                                        sporsmal.egenUndertekst || sporsmal.type
-                                    }
-                                />
+                                <FormattedMessage id={sporsmal.egenUndertekst || sporsmal.type} />
                             </p>
                         </div>
                         <button
                             className="sporsmal__knapp sporsmal__videre"
                             onClick={e => {
                                 e.preventDefault();
-                                this.spmStart.classList.contains(
-                                    'sporsmal__start-lukket'
-                                )
-                                    ? this.spmStart.classList.remove(
-                                          'sporsmal__start-lukket'
-                                      )
-                                    : this.spmStart.classList.add(
-                                          'sporsmal__start-lukket'
-                                      );
+                                visAlternativer();
                             }}
                         >
                             <FormattedMessage id="fortsett-knapp"/>
@@ -241,7 +224,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                 </section>
                 {!sporsmal.erSisteSpm && (
                     <button
-                        className="sporsmal__knapp"
+                        className={'sporsmal__knapp'}
                         key="besvar"
                         onClick={e => {
                             e.preventDefault();
@@ -257,13 +240,15 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    besvarteSporsmal: state.svar.data
+    besvarteSporsmal: state.svar.data,
+    viserAlternativer: state.svar.viserAlternativer
 });
 
 const mapDispatchToProps = (dispatch: Dispatch,
                             props: OwnProps): DispatchProps => ({
     markerAlternativ: (sporsmalId, alternativ: SvarAlternativModell[]) =>
-        dispatch(marker(sporsmalId, alternativ))
+        dispatch(marker(sporsmalId, alternativ)),
+    visAlternativer: () => dispatch(visAlternativer)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sporsmal);
