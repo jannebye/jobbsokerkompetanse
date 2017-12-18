@@ -23,6 +23,7 @@ function Alternativ({
 }: AlternativProps) {
     const skalHaHjelpetekst: boolean = alternativ.id === 'finn-svar-0111';
 
+    let alternativKlasser = 'alternativ ';
     let inputKlasser = 'skjemaelement__input alternativ__input ';
     let inputType;
     switch(sporsmalType) {
@@ -35,12 +36,13 @@ function Alternativ({
             inputType = 'checkbox';
             break;
         case AlternativTyper.SKALA:
+            alternativKlasser += 'alternativ__skala';
             inputKlasser += 'skala';
-            inputType = 'range';
+            inputType = 'radio';
     }
 
     return (
-        <li key={alternativ.id} className="alternativ">
+        <li key={alternativ.id} className={alternativKlasser}>
             <input
                 id={alternativ.id}
                 className={inputKlasser}

@@ -29,6 +29,11 @@
 				background: data-uri('../src/ikoner/checkmark-03.svg') ~'calc(100% - 1rem)' center no-repeat;
 				background-size: 32px 32px;
 			}
+
+			&.skala {
+				opacity: 0;
+				height: 0;
+			}
 		}
 
 		.alternativ__input:checked {
@@ -63,20 +68,49 @@
 }
 
 @media (min-width: @screen-sm-min) {
-	.sporsmal__start + .alternativer,
-	.sporsmal__start-lukket + .alternativer {
+	.sporsmal__start + .alternativer {
 		display: flex;
 		justify-content: space-between;
 		flex-flow: row wrap;
+
 		.alternativ {
 			width: 49%;
 			padding: 0.5rem;
 			border-bottom: 0;
+
+			&.alternativ__skala {
+				width: 20%;
+			}
+
 			&:first-child {
 				border-top: 0;
 			}
+
 			.alternativ__input {
 				width: 50%;
+
+				&.skala {
+					& + .alternativ__label {
+						display: block;
+						text-align: center;
+						cursor: pointer;
+
+						&:hover {
+							background-color: @navBlaLighten20;
+							color: @white;
+						}
+
+						&.markert {
+							background: @navBla none;
+							color: @white;
+
+							&:hover {
+								background-color: @navBlaLighten20;
+							}
+						}
+					}
+				}
+
 				& + .alternativ__label {
 					border: 1px solid @navGra20;
 
