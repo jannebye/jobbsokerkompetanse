@@ -114,7 +114,7 @@ class Skjema extends React.Component<SkjemaProps, {}> {
                             sporsmal => sporsmal.id === gjeldendeSporsmalId
                         )!
                     }
-                    skalVaereLukket={flytRetning === FlytType.BAKOVER}
+                    viserAlternativer={flytRetning === FlytType.BAKOVER}
                     spmRef={(ref: {}) =>
                         (sporsmalRefs[gjeldendeSporsmalId] = ref)}
                     nesteSpm={(id: string) => this.byttSpmOgFokus(id)}

@@ -5,11 +5,17 @@ import {
     BesvarAction,
     EndreAlternativAction,
     NesteSporsmalAction,
-    ResetAction
+    ResetAction, VisAlternativerAction
 } from '../actions';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 
-const { BESVAR, ENDRE_ALTERNATIV, NESTE_SPORSMAL, RESET } = ActionType;
+const {
+    BESVAR,
+    ENDRE_ALTERNATIV,
+    VIS_ALTERNATIVER,
+    NESTE_SPORSMAL,
+    RESET
+} = ActionType;
 
 export enum FlytType {
     FREMOVER,
@@ -20,12 +26,14 @@ export interface SvarState {
     data: BesvarelseModell[];
     gjeldendeSpmId: string;
     flyt: FlytType;
+    viserAlternativer: boolean;
 }
 
 export const initialState = {
     data: [{ sporsmalId: 'finn-spm-01', svarAlternativer: [] }],
     gjeldendeSpmId: 'finn-spm-01',
-    flyt: FlytType.FREMOVER
+    flyt: FlytType.FREMOVER,
+    viserAlternativer: false
 };
 
 //  Reducer
@@ -65,7 +73,7 @@ export default function reducer(
                     ]
                 };
             }
-        } 
+        }
         case ActionType.NESTE_SPORSMAL:
             if (
                 state.data.find(
@@ -75,7 +83,8 @@ export default function reducer(
                 return {
                     ...state,
                     gjeldendeSpmId: action.data,
-                    flyt: FlytType.BAKOVER
+                    flyt: FlytType.BAKOVER,
+                    viserAlternativer: true
                 };
             } else {
                 return {
@@ -85,10 +94,15 @@ export default function reducer(
                         { sporsmalId: action.data, svarAlternativer: [] }
                     ],
                     gjeldendeSpmId: action.data,
-                    flyt: FlytType.FREMOVER
+                    flyt: FlytType.FREMOVER,
+                    viserAlternativer: false
                 };
             }
-
+        case ActionType.VIS_ALTERNATIVER:
+            return {
+                ...state,
+                viserAlternativer: true
+            };
         case ActionType.RESET:
             return initialState;
         default:
@@ -116,6 +130,10 @@ export function marker(
         }
     };
 }
+
+export const visHeleSporsmal: VisAlternativerAction = {
+    type: VIS_ALTERNATIVER
+};
 
 export function nesteSporsmal(sporsmal: string): NesteSporsmalAction {
     return {

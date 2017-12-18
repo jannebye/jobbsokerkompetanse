@@ -4,6 +4,7 @@ import { Sidetype } from './utils/konstanter';
 export enum ActionType {
     BESVAR,
     ENDRE_ALTERNATIV,
+    VIS_ALTERNATIVER,
     FJERN_MARKERING,
     NESTE_SPORSMAL,
     FORRIGE_SPORSMAL,
@@ -19,6 +20,10 @@ export interface BesvarAction {
 export interface EndreAlternativAction {
     type: ActionType.ENDRE_ALTERNATIV;
     data: Svar;
+}
+
+export interface VisAlternativerAction {
+    type: ActionType.VIS_ALTERNATIVER;
 }
 
 export interface NesteSporsmalAction {
@@ -40,6 +45,11 @@ export interface EndreSideAction {
 }
 
 export type Handling =
-    BesvarAction | EndreAlternativAction
-    | NesteSporsmalAction | ForrigeSporsmalAction | ResetAction | EndreSideAction
+    BesvarAction
+    | EndreAlternativAction
+    | NesteSporsmalAction
+    | VisAlternativerAction
+    | ForrigeSporsmalAction
+    | ResetAction
+    | EndreSideAction
     ;
