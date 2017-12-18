@@ -24,7 +24,7 @@ function TemaVisning({ tema }: TemaProps) {
             .aktivitet;
     }
     return (
-        <li className="enkelt__tema blokk-xs">
+        <li className="enkelt__tema blokk-xs" key={tema.id}>
             <EkspanderbartPanel apen={false} tittel={tema.tekst}>
                 <div>
                     {aktiviteter.length !== 0 &&

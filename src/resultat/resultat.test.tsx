@@ -36,29 +36,29 @@ describe('<Resultat />', function() {
         expect(wrapper.find('.overskrift__tema').text()).to.contain('Vi har uthevet 4 råd til deg');
     });
 
-    it('skal foreslå å søke på flere bransjer', () => {
+    it('skal foreslå å søke i flere bransjer', () => {
         svarAlternativer.push({id: 'finn-svar-0301'});
         besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer});
 
         let wrapper = mount(getJSXElement(besvarteSpm));
         let fantTema = wrapper.find('.enkelt__tema')
-                              .filterWhere(x => x.length === 1 && x.text() === 'Søk jobb i ulike bransjer')
+                              .filterWhere(x => x.key() === '525215')
                               .exists();
-
         expect(fantTema).to.equal(true);
 
     });
 
-    it('skal ikke foreslå å søke på flere bransjer', () => {
+    it('skal ikke foreslå å søke i flere bransjer', () => {
         svarAlternativer.push({id: 'finn-svar-0302'});
         besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer});
 
         let wrapper = mount(getJSXElement(besvarteSpm));
         let fantTema = wrapper.find('.enkelt__tema')
-                              .filterWhere(x => x.length === 1 && x.text() === 'Søk jobb i ulike bransjer')
+                              .filterWhere(x => x.key() === '525215')
                               .exists();
 
         expect(fantTema).to.equal(false);
 
     });
+
 });
