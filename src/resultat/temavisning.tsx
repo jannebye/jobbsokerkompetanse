@@ -29,7 +29,7 @@ function TemaVisning({ tema }: TemaProps) {
                 <div>
                     {aktiviteter.length !== 0 &&
                         aktiviteter.map(aktivitet => (
-                            <div key={aktivitet.id}>
+                            <div key={aktivitet.id}> 
                                 <h4>{aktivitet.tittel}</h4>
                                 <p className="aktivitet">
                                     <FormattedHTMLMessage
