@@ -20,17 +20,12 @@ export interface SvarState {
     data: BesvarelseModell[];
     gjeldendeSpmId: string;
     flyt: FlytType;
-    tips: {
-        skalVises: boolean;
-        id: string;
-    };
 }
 
 export const initialState = {
-    data: [{ sporsmalId: 'finn-spm-01', svarAlternativer: [] }],
+    data: [{ sporsmalId: 'finn-spm-01', svarAlternativer: [], tips: undefined }],
     gjeldendeSpmId: 'finn-spm-01',
-    flyt: FlytType.FREMOVER,
-    tips: {skalVises: false, id: ''}
+    flyt: FlytType.FREMOVER
 };
 
 //  Reducer
@@ -65,7 +60,8 @@ export default function reducer(
                         ...state.data,
                         {
                             sporsmalId: action.data.sporsmalId,
-                            svarAlternativer: action.data.svarAlternativer
+                            svarAlternativer: action.data.svarAlternativer,
+                            tips: undefined
                         }
                     ]
                 };
@@ -87,7 +83,7 @@ export default function reducer(
                     ...state,
                     data: [
                         ...state.data,
-                        { sporsmalId: action.data, svarAlternativer: [] }
+                        { sporsmalId: action.data, svarAlternativer: [], tips: undefined }
                     ],
                     gjeldendeSpmId: action.data,
                     flyt: FlytType.FREMOVER
@@ -99,12 +95,14 @@ export default function reducer(
         case ActionType.VIS_TIPS:
             return {
                 ...state,
-                tips: {skalVises: true, id: action.data}
+                data: [...state.data.map(besvarelse => (besvarelse.sporsmalId === state.gjeldendeSpmId) ?
+                    {...besvarelse, tips: action.data} : besvarelse ) ]
             };
         case ActionType.SKJUL_TIPS:
             return {
                 ...state,
-                tips: {skalVises: false, id: state.tips.id}
+                data: [...state.data.map(besvarelse => (besvarelse.sporsmalId === state.gjeldendeSpmId) ?
+                    {...besvarelse, tips: undefined} : besvarelse ) ]
             };
         default:
             return state;

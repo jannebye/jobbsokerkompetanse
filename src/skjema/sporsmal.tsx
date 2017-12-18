@@ -9,8 +9,9 @@ import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
 import Alternativ from './alternativ';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import TipsVisning from './tipsvisning';
-import { finnTips, default as tipsLogikk } from './tips-mapping';
+import TipsVisning from './tips/tipsvisning';
+import { visTipsEtterSpørsmål } from './tips/tips-generering';
+import { isUndefined } from 'util';
 
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string,
@@ -24,10 +25,6 @@ interface OwnProps {
     sporsmal: SporsmalModell;
     spmRef: any; // tslint:disable-line:no-any
     skalVaereLukket: boolean;
-    tips: {
-        skalVises: boolean;
-        id: string;
-    };
 }
 
 interface StateProps {
@@ -100,27 +97,18 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         }
     }
 
-    sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: string) {
+    sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: string,
+              besvarteSporsmal: BesvarelseModell[], besvartSpm: BesvarelseModell) {
         if (markerteSpm.length === 0) {
             this.setState({feil: true});
         } else {
-            const tip = this.visTips();
-            if (!this.props.tips.skalVises && !!tip) {
-                this.props.visTips(tip);
+            const tip = visTipsEtterSpørsmål(sporsmalId, besvarteSporsmal);
+            if (isUndefined(besvartSpm.tips) && !isUndefined(tip)) {
+                return this.props.visTips(tip);
             } else {
                 return this.props.nesteSpm(sporsmalId);
             }
         }
-    }
-
-    visTips() {
-        const gjeldendeSpmBesvarelse =
-            this.props.besvarteSporsmal.find(besvarelse => besvarelse.sporsmalId === this.props.sporsmal.id)!;
-        const tips = finnTips(gjeldendeSpmBesvarelse.sporsmalId, gjeldendeSpmBesvarelse.svarAlternativer);
-        if (!!tips) {
-            return tips;
-        }
-        return false;
     }
 
     render() {
@@ -130,20 +118,16 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             markerAlternativ,
             forrigeSpm,
             spmRef,
-            skalVaereLukket,
-            tips
+            skalVaereLukket
         } = this.props;
-        const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
+        const besvartSpm: BesvarelseModell = besvarteSporsmal.find(
             besvarelse => besvarelse.sporsmalId === sporsmal.id
-        );
-        const markerteAlternativer: SvarAlternativModell[] = besvartSpm
-            ? besvartSpm.svarAlternativer
-            : [];
+        )!; // Vil alltid ligge i listen
+        const markerteAlternativer: SvarAlternativModell[] = besvartSpm.svarAlternativer;
+        const sporsmalImg = require('../ikoner/' + sporsmal.id + '.svg');
         if (this.state.feil && markerteAlternativer.length !== 0) {
             this.setState({feil: false});
         }
-        const sporsmalImg = require('../ikoner/' + sporsmal.id + '.svg');
-
         return (
             <div
                 ref={spmRef}
@@ -262,15 +246,15 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                         })}
                     </ul>
                 </section>
-                {tips.skalVises && tipsLogikk.find(tip => tip.id === tips.id)!.visesEtterSpm === sporsmal.id &&
-                    <TipsVisning id={tips.id} />}
+                {!isUndefined(besvartSpm.tips) &&
+                    <TipsVisning id={besvartSpm.tips!} />}
                 {!sporsmal.erSisteSpm && (
                     <button
                         className="sporsmal__knapp"
                         key="besvar"
                         onClick={e => {
                             e.preventDefault();
-                            this.sjekkSvar(markerteAlternativer, sporsmal.id);
+                            this.sjekkSvar(markerteAlternativer, sporsmal.id, besvarteSporsmal, besvartSpm);
                         }}
                     >
                         <FormattedMessage id="fortsett-knapp"/>

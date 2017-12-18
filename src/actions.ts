@@ -1,5 +1,6 @@
 import Svar from './svar/svar-modell';
 import { Sidetype } from './utils/konstanter';
+import SvarAlternativModell from './sporsmal/svaralternativ';
 
 export enum ActionType {
     BESVAR,
@@ -20,7 +21,10 @@ export interface BesvarAction {
 
 export interface EndreAlternativAction {
     type: ActionType.ENDRE_ALTERNATIV;
-    data: Svar;
+    data: {
+        sporsmalId: string;
+        svarAlternativer: SvarAlternativModell[]
+    };
 }
 
 export interface NesteSporsmalAction {

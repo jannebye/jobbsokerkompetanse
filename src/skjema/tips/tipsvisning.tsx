@@ -9,7 +9,7 @@ function TipsVisning({ id }: TipsProps) {
     return (
         <div className="tips">
             <h3 className="tips__overskrift">
-                VÅRT TIPS TIL DEG
+                <FormattedMessage id="tips-standard-overskrift" />
             </h3>
             <FormattedMessage id={id} />
 
