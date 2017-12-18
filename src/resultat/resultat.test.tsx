@@ -33,7 +33,7 @@ describe('<Resultat />', function() {
 
     it('skal vise overskrift', () => {
         let wrapper = mount(getJSXElement(besvarteSpm));
-        expect(wrapper.find('.overskrift__tema').text()).to.contain('Vi har uthevet 4 råd til deg');
+        expect(wrapper.find('#overskrift-raad').text()).to.contain('Vi har uthevet 4 råd til deg');
     });
 
     it('skal foreslå å søke i flere bransjer', () => {
