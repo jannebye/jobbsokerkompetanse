@@ -1,110 +1,161 @@
 .sporsmalsliste {
-    list-style: none;
-    padding: 0;
+	list-style: none;
+	padding: 0;
 }
 
 .sporsmal {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
 
-    section {
-        flex: 1 0 auto;
-    }
+	&__start {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 96vh;
+	}
 
-    &__start-lukket {
-        display: block;
-        position: static;
+	section {
+		flex: 1 0 auto;
+	}
 
-        .sporsmal__paginering {
-            display: none;
-        }
+	.sporsmal__knapp__tilbake {
+		display: none;
+	}
 
-        .sporsmal__innhold {
-            margin: 3rem 0;
-            //transition: margin-top 0.5s;
-        }
+	.sporsmal__paginering {
+		display: block;
+		margin: 1rem auto 0;
+		text-align: center;
+	}
 
-        .sporsmal__ikon {
-            width: 46px;
-            height: 63px;
-            //transition: width 0.5s, height 0.5s;
-        }
+	.sporsmal__innhold {
+		margin: 3rem 0;
+	}
 
-        .sporsmal__videre {
-            display: none;
-        }
-    }
+	.sporsmal__ikon {
+		margin: 0 auto 1rem;
+		width: 65px;
+		height: 90px;
+	}
 
-    &:focus {
-        outline: none;
-        box-shadow: none;
-    }
+	.sporsmal__videre {
+		animation: sprett 2s infinite alternate;
+	}
 
-    .sporsmal__innhold {
-        text-align: center;
-    }
+	.alternativer {
+		display: none;
+	}
 
-    &__ingress {
-        margin-bottom: 1rem;
-    }
+	.sporsmal__knapp {
+		display: none;
 
-    &__knapp {
-        margin: 1rem auto;
-        display: block;
-        width: 56px;
-        height: 56px;
-        background-color: @navBla;
-        border-radius: 50%;
-        font: ~'0/0' a;
-        color: transparent;
-        border: 0;
-        cursor: pointer;
-        &:before {
-            content: '';
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            margin-top: -2px;
-            border-bottom: 2px solid @white;
-            border-right: 2px solid @white;
-            transform: rotate(45deg);
-        }
-    }
+		&.sporsmal__videre {
+			display: block;
+		}
+	}
 
-    &__knapp__tilbake {
-        margin: 2rem auto 0;
-        display: block;
-        padding: 3px 0;
-        border: 0;
-        background: none;
-        cursor: pointer;
-        border-bottom: 1px solid @navGra40;
-        &:before {
-            content: '';
-            display: inline-block;
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            margin-top: -16px;
-            left: ~'calc(50% - 6px)';
-            border-top: 2px solid black;
-            border-left: 2px solid black;
-            transform: rotate(45deg);
-        }
-    }
+	&.vis_alternativer {
+		display: block;
+		position: static;
+
+		.sporsmal__start {
+			display: block;
+			height: auto;
+		}
+
+		.sporsmal__knapp__tilbake {
+			display: block;
+		}
+
+		.sporsmal__paginering {
+			display: none;
+		}
+
+		.sporsmal__innhold {
+			margin: 3rem 0;
+			//transition: margin-top 0.5s;
+		}
+
+		.sporsmal__ikon {
+			width: 46px;
+			height: 63px;
+			//transition: width 0.5s, height 0.5s;
+		}
+
+		.alternativer {
+			display: block;
+		}
+
+		.sporsmal__knapp {
+			display: block;
+
+			&.sporsmal__videre {
+				display: none;
+			}
+		}
+	}
+
+	&:focus {
+		outline: none;
+		box-shadow: none;
+	}
+
+	.sporsmal__innhold {
+		text-align: center;
+	}
+
+	&__ingress {
+		margin-bottom: 1rem;
+	}
+
 }
 
-.knapperad {
-    padding-top: 0;
-    margin-top: -3.5rem;
+@keyframes sprett {
+	30%,
+	100% {
+		transform: translate(0px, -10px);
+	}
 }
 
 @media (min-width: @screen-sm-min) {
-    .sporsmal__knapp {
-        margin-bottom: 2rem;
-    }
-    .sporsmal__knapp__tilbake {
-        margin-top: 3rem;
-    }
+
+	.sporsmal {
+
+		.sporsmal__start {
+			display: block;
+			height: auto;
+		}
+
+		.sporsmal__knapp__tilbake {
+			display: block;
+			margin-top: 3rem;
+		}
+
+		.sporsmal__paginering {
+			display: none;
+		}
+
+		.sporsmal__innhold {
+			margin: 5% 0;
+		}
+
+		.sporsmal__ikon {
+			width: 65px;
+			height: 90px;
+		}
+
+		.alternativer {
+			display: block;
+		}
+
+		.sporsmal__knapp {
+			display: block;
+			margin-bottom: 2rem;
+
+			&.sporsmal__videre {
+				display: none;
+			}
+		}
+	}
 }

@@ -22,26 +22,45 @@ function Alternativ({
     kanVelges
 }: AlternativProps) {
     const skalHaHjelpetekst: boolean = alternativ.id === 'finn-svar-0111';
+
+    let alternativKlasser = 'alternativ ';
+    let inputKlasser = 'skjemaelement__input alternativ__input ';
+    let inputType;
+    switch (sporsmalType) {
+        case AlternativTyper.ETTVALG:
+            inputKlasser += 'radioknapp ';
+            inputType = 'radio';
+            break;
+        case AlternativTyper.FLERVALG:
+            inputKlasser += 'checkboks';
+            inputType = 'checkbox';
+            break;
+        case AlternativTyper.SKALA:
+            alternativKlasser += 'alternativ__skala';
+            inputKlasser += 'skala';
+            inputType = 'radio';
+            break;
+        default:
+            inputKlasser += '';
+            inputType = 'readio';
+            break;
+    }
+
     return (
-        <li key={alternativ.id} className="alternativ">
+        <li key={alternativ.id} className={alternativKlasser}>
             <input
                 id={alternativ.id}
-                className="alternativ__radio"
-                type={
-                    sporsmalType !== AlternativTyper.SKALA
-                        ? sporsmalType
-                        : 'radio'
-                }
+                className={inputKlasser}
+                type={inputType}
                 name={sporsmalId.toString()}
                 defaultValue={alternativ.id}
             />
             <label
                 htmlFor={alternativ.id}
-                className={`typo-undertittel alternativ__label ${kanVelges
+                className={`skjemaelement__label alternativ__label ${kanVelges
                     ? erValgt ? 'markert' : ''
                     : 'disabled'}`}
                 onClick={e => {
-                    e.preventDefault();
                     if (kanVelges) {
                         markerAlternativ();
                     }

@@ -2,14 +2,20 @@ import BesvarelseModell from './svar-modell';
 import {
     Handling,
     ActionType,
-    BesvarAction,
     EndreAlternativAction,
     NesteSporsmalAction,
-    ResetAction, VisTipsAction, SkjulTipsAction
+    ResetAction, VisTipsAction, SkjulTipsAction, VisAlternativerAction
 } from '../actions';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 
-const { BESVAR, ENDRE_ALTERNATIV, NESTE_SPORSMAL, RESET, VIS_TIPS, SKJUL_TIPS } = ActionType;
+const {
+    ENDRE_ALTERNATIV,
+    VIS_ALTERNATIVER,
+    NESTE_SPORSMAL,
+    RESET,
+    VIS_TIPS,
+    SKJUL_TIPS
+} = ActionType;
 
 export enum FlytType {
     FREMOVER,
@@ -20,12 +26,14 @@ export interface SvarState {
     data: BesvarelseModell[];
     gjeldendeSpmId: string;
     flyt: FlytType;
+    viserAlternativer: boolean;
 }
 
 export const initialState = {
     data: [{ sporsmalId: 'finn-spm-01', svarAlternativer: [], tips: undefined }],
     gjeldendeSpmId: 'finn-spm-01',
-    flyt: FlytType.FREMOVER
+    flyt: FlytType.FREMOVER,
+    viserAlternativer: false
 };
 
 //  Reducer
@@ -76,7 +84,8 @@ export default function reducer(
                 return {
                     ...state,
                     gjeldendeSpmId: action.data,
-                    flyt: FlytType.BAKOVER
+                    flyt: FlytType.BAKOVER,
+                    viserAlternativer: true
                 };
             } else {
                 return {
@@ -86,10 +95,15 @@ export default function reducer(
                         { sporsmalId: action.data, svarAlternativer: [], tips: undefined }
                     ],
                     gjeldendeSpmId: action.data,
-                    flyt: FlytType.FREMOVER
+                    flyt: FlytType.FREMOVER,
+                    viserAlternativer: false
                 };
             }
-
+        case ActionType.VIS_ALTERNATIVER:
+            return {
+                ...state,
+                viserAlternativer: true
+            };
         case ActionType.RESET:
             return initialState;
         case ActionType.VIS_TIPS:
@@ -110,12 +124,6 @@ export default function reducer(
 }
 
 // Action Creators
-export function besvar(svar: BesvarelseModell): BesvarAction {
-    return {
-        type: BESVAR,
-        data: svar
-    };
-}
 
 export function marker(
     sporsmalId: string,
@@ -129,6 +137,10 @@ export function marker(
         }
     };
 }
+
+export const visHeleSporsmal: VisAlternativerAction = {
+    type: VIS_ALTERNATIVER
+};
 
 export function nesteSporsmal(sporsmal: string): NesteSporsmalAction {
     return {

@@ -1,6 +1,7 @@
 .alternativer {
 	list-style: none;
 	padding: 0;
+
 	.alternativ {
 		list-style: none;
 		border-bottom: 1px solid @navGra20;
@@ -9,17 +10,11 @@
 			border-top: 1px solid @navGra20;
 		}
 
-		.alternativ__radio {
-			position: absolute;
-			opacity: 0;
-			height: 0;
-			width: 0;
+		.alternativ__input {
 
 			& + .alternativ__label {
 				display: block;
-				padding: 1.2rem 3rem 1.2rem 1.5rem;
-				width: 100%;
-				height: 100%;
+				padding: 1.2rem 3rem 1.2rem 3.2rem;
 				color: @navGra60;
 			}
 
@@ -33,23 +28,30 @@
 				border-color: @navBla;
 				background: data-uri('../src/ikoner/checkmark-03.svg') ~'calc(100% - 1rem)' center no-repeat;
 				background-size: 32px 32px;
+			}
 
-				&:hover {
-				}
+			&.skala {
+				opacity: 0;
+				height: 0;
 			}
 		}
 
-		.alternativ__radio:checked {
+		.alternativ__input:checked {
 			& + .alternativ__label {
 				background-color: @navBlaLighten80;
 			}
 		}
 
-		.alternativ__radio:focus {
+		.alternativ__input:focus {
 			& + .alternativ__label {
 				outline: none;
 				box-shadow: 0 0 0 3px @orangeFocus;
 			}
+		}
+
+		.alternativ__label:before {
+			top: auto;
+			left: 1.5rem;
 		}
 
 		.overskrift-med-hjelpetekst {
@@ -66,28 +68,51 @@
 }
 
 @media (min-width: @screen-sm-min) {
-	.sporsmal__start + .alternativer,
-	.sporsmal__start-lukket + .alternativer {
+	.sporsmal__start + .alternativer {
 		display: flex;
 		justify-content: space-between;
 		flex-flow: row wrap;
+
 		.alternativ {
 			width: 49%;
 			padding: 0.5rem;
 			border-bottom: 0;
+
+			&.alternativ__skala {
+				width: 20%;
+			}
+
 			&:first-child {
 				border-top: 0;
 			}
-			.alternativ__radio {
+
+			.alternativ__input {
 				width: 50%;
+
+				&.skala {
+					& + .alternativ__label {
+						display: block;
+						text-align: center;
+						cursor: pointer;
+
+						&:hover {
+							background-color: @navBlaLighten20;
+							color: @white;
+						}
+
+						&.markert {
+							background: @navBla none;
+							color: @white;
+
+							&:hover {
+								background-color: @navBlaLighten20;
+							}
+						}
+					}
+				}
+
 				& + .alternativ__label {
-					display: flex;
-					justify-content: space-between;
-					padding: 1.2rem 3rem 1.2rem 1.5rem;
-					width: 100%;
-					height: 100%;
 					border: 1px solid @navGra20;
-					color: @navGra60;
 
 					&:hover {
 						background-color: @navLysBlaLighten80;

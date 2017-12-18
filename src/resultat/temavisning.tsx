@@ -24,12 +24,12 @@ function TemaVisning({ tema }: TemaProps) {
             .aktivitet;
     }
     return (
-        <li className="enkelt__tema blokk-xs">
+        <li className="enkelt__tema blokk-xs" key={tema.id}>
             <EkspanderbartPanel apen={false} tittel={tema.tekst}>
                 <div>
                     {aktiviteter.length !== 0 &&
                         aktiviteter.map(aktivitet => (
-                            <div>
+                            <div key={aktivitet.id}> 
                                 <h4>{aktivitet.tittel}</h4>
                                 <p className="aktivitet">
                                     <FormattedHTMLMessage

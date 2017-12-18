@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Sidetittel } from 'nav-frontend-typografi';
 
 const sporsmalImg = require('../ikoner/forside.svg');
 
@@ -9,7 +10,9 @@ interface StartsideProps {
 function Startside({startKartlegging}: StartsideProps) {
     return (
         <div className="startside">
-            <h1 className="typo-sidetittel">Startside</h1>
+            <Sidetittel tag="h1">
+                Startside
+            </Sidetittel>
             <img src={sporsmalImg} alt="Forstørrelseglass"/>
             <div className="knapperad">
                 <button
