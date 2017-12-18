@@ -26,7 +26,7 @@ function Alternativ({
     let alternativKlasser = 'alternativ ';
     let inputKlasser = 'skjemaelement__input alternativ__input ';
     let inputType;
-    switch(sporsmalType) {
+    switch (sporsmalType) {
         case AlternativTyper.ETTVALG:
             inputKlasser += 'radioknapp ';
             inputType = 'radio';
@@ -39,6 +39,11 @@ function Alternativ({
             alternativKlasser += 'alternativ__skala';
             inputKlasser += 'skala';
             inputType = 'radio';
+            break;
+        default:
+            inputKlasser += '';
+            inputType = 'readio';
+            break;
     }
 
     return (

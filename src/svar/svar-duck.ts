@@ -131,7 +131,7 @@ export function marker(
     };
 }
 
-export const visAlternativer: VisAlternativerAction = {
+export const visHeleSporsmal: VisAlternativerAction = {
     type: VIS_ALTERNATIVER
 };
 

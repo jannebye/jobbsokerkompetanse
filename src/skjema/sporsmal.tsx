@@ -2,14 +2,14 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
 import AlleSporsmal from '../sporsmal/sporsmal-alle';
-import { marker, visAlternativer } from '../svar/svar-duck';
+import { marker, visHeleSporsmal } from '../svar/svar-duck';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
 import Alternativ from './alternativ';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { Innholdstittel, Undertekst } from "nav-frontend-typografi";
+import { Innholdstittel, Undertekst } from 'nav-frontend-typografi';
 
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string,
@@ -107,7 +107,6 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             viserAlternativer,
             visAlternativer
         } = this.props;
-
 
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
             besvarelse => besvarelse.sporsmalId === sporsmal.id
@@ -249,7 +248,7 @@ const mapDispatchToProps = (dispatch: Dispatch,
                             props: OwnProps): DispatchProps => ({
     markerAlternativ: (sporsmalId, alternativ: SvarAlternativModell[]) =>
         dispatch(marker(sporsmalId, alternativ)),
-    visAlternativer: () => dispatch(visAlternativer)
+    visAlternativer: () => dispatch(visHeleSporsmal)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sporsmal);

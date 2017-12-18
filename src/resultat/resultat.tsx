@@ -8,7 +8,7 @@ import temaLogikk from './tema-mapping';
 import { TemaModell } from './tema-modell';
 import TemaVisning from './temavisning';
 import InnholdsContainer from './innholdscontainer';
-import { Innholdstittel } from "nav-frontend-typografi";
+import { Innholdstittel } from 'nav-frontend-typografi';
 
 function temaSkalBehandles(tema: TemaModell, alternativId: string) {
     if (temaLogikk[tema.ref]) {

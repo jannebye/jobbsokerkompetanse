@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Sidetittel } from "nav-frontend-typografi";
+import { Sidetittel } from 'nav-frontend-typografi';
 
 const sporsmalImg = require('../ikoner/forside.svg');
 
