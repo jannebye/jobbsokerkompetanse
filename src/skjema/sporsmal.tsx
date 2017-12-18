@@ -9,6 +9,7 @@ import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
 import Alternativ from './alternativ';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { Innholdstittel, Undertekst } from "nav-frontend-typografi";
 
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string,
@@ -158,17 +159,17 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 className="sporsmal__ikon"
                                 alt=""
                             />
-                            <h1 className="sporsmal__overskrift typo-innholdstittel blokk-xs">
+                            <Innholdstittel className="sporsmal__overskrift typo-innholdstittel blokk-xs" tag="h1">
                                 <FormattedHTMLMessage id={sporsmal.id}/>
-                            </h1>
+                            </Innholdstittel>
                             {this.state.feil && (
                                 <p className="skjemaelement__feilmelding">
                                     <FormattedMessage id="feilmelding-mangler-svar"/>
                                 </p>
                             )}
-                            <p className="sporsmal__ingress typo-undertekst">
+                            <Undertekst className="sporsmal__ingress" tag="p">
                                 <FormattedMessage id={sporsmal.egenUndertekst || sporsmal.type} />
-                            </p>
+                            </Undertekst>
                         </div>
                         <button
                             className="sporsmal__knapp sporsmal__videre"
