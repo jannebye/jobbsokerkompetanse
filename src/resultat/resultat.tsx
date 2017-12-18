@@ -61,7 +61,7 @@ interface ResultatProps {
 
 type Props = StateProps & ResultatProps;
 
-function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
+export function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
     const resultat = genererTema(besvarteSporsmal);
     return (
         <div className="resultatside">
