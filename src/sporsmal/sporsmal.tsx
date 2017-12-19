@@ -7,9 +7,9 @@ import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
-import Alternativ from './alternativ';
+import Alternativ from '../alternativ/alternativ';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { Innholdstittel, Undertekst } from 'nav-frontend-typografi';
+import { Sidetittel, Undertekst } from 'nav-frontend-typografi';
 
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string,
@@ -153,21 +153,23 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             </div>
                         </div>
                         <div className="sporsmal__innhold">
-                            <img
-                                src={sporsmalImg}
-                                className="sporsmal__ikon"
-                                alt=""
-                            />
-                            <Innholdstittel className="sporsmal__overskrift typo-innholdstittel blokk-xs" tag="h1">
-                                <FormattedHTMLMessage id={sporsmal.id}/>
-                            </Innholdstittel>
-                            {this.state.feil && (
-                                <p className="skjemaelement__feilmelding">
-                                    <FormattedMessage id="feilmelding-mangler-svar"/>
-                                </p>
-                            )}
+                            <div className="sporsmal__hode">
+                                <img
+                                    src={sporsmalImg}
+                                    className="sporsmal__ikon"
+                                    alt=""
+                                />
+                                <Sidetittel className="sporsmal__overskrift blokk-xs" tag="h1">
+                                    <FormattedHTMLMessage id={sporsmal.id}/>
+                                </Sidetittel>
+                                {this.state.feil && (
+                                    <p className="skjemaelement__feilmelding">
+                                        <FormattedMessage id="feilmelding-mangler-svar"/>
+                                    </p>
+                                )}
+                            </div>
                             <Undertekst className="sporsmal__ingress" tag="p">
-                                <FormattedMessage id={sporsmal.egenUndertekst || sporsmal.type} />
+                                <FormattedMessage id={sporsmal.egenUndertekst || sporsmal.type}/>
                             </Undertekst>
                         </div>
                         <button

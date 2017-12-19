@@ -8,7 +8,7 @@ import temaLogikk from './tema-mapping';
 import { TemaModell } from './tema-modell';
 import TemaVisning from './temavisning';
 import InnholdsContainer from './innholdscontainer';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 
 function temaSkalBehandles(tema: TemaModell, alternativId: string) {
     if (temaLogikk[tema.ref]) {
@@ -74,9 +74,9 @@ export function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
                 ))}
             </ul>
             <section className="resultat__info blokk-m">
-                <p className="resultat__infotekst">
+                <Normaltekst className="resultat__infotekst" tag="p">
                     <FormattedHTMLMessage id="tekst-er-lagret" />
-                </p>
+                </Normaltekst>
                 <button
                     className="knapp knapp__startigjen"
                     onClick={() => startPaNytt()}
