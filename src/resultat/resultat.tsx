@@ -73,17 +73,17 @@ export function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
                     <TemaVisning tema={tema} key={tema.id} />
                 ))}
             </ul>
-            <section className="resultat__info blokk-m">
+            <div className="resultat__info">
                 <Normaltekst className="resultat__infotekst" tag="p">
                     <FormattedHTMLMessage id="tekst-er-lagret" />
                 </Normaltekst>
                 <button
-                    className="knapp knapp__startigjen"
+                    className="knapp"
                     onClick={() => startPaNytt()}
                 >
                     Start på nytt
                 </button>
-            </section>
+            </div>
             <InnholdsContainer
                 overskrift="veiviser-overskrift"
                 innhold="veiviser-innhold"

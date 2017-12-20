@@ -10,6 +10,7 @@ import BesvarelseModell from '../svar/svar-modell';
 import Alternativ from '../alternativ/alternativ';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Sidetittel, Undertekst } from 'nav-frontend-typografi';
+import SVG from 'react-inlinesvg';
 
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string,
@@ -154,11 +155,23 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                         </div>
                         <div className="sporsmal__innhold">
                             <div className="sporsmal__hode">
-                                <img
-                                    src={sporsmalImg}
-                                    className="sporsmal__ikon"
-                                    alt=""
-                                />
+                                <FormattedMessage id={sporsmal.id + ''}>
+                                    {(tekst: string) =>
+                                        <SVG
+                                            src={sporsmalImg}
+                                            className="sporsmal__ikon"
+                                            role="img"
+                                            aria-label={tekst}
+                                        >
+                                            <img
+                                                src={sporsmalImg}
+                                                className="sporsmal__ikon"
+                                                alt={tekst}
+                                            />
+                                        </SVG>
+                                    }
+                                </FormattedMessage>
+
                                 <Sidetittel className="sporsmal__overskrift blokk-xs" tag="h1">
                                     <FormattedHTMLMessage id={sporsmal.id}/>
                                 </Sidetittel>
@@ -231,6 +244,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                         onClick={e => {
                             e.preventDefault();
                             this.sjekkSvar(markerteAlternativer, sporsmal.id);
+                            window.scrollTo(0, 0);
                         }}
                     >
                         <FormattedMessage id="fortsett-knapp"/>

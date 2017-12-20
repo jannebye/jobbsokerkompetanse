@@ -31,10 +31,11 @@
 	}
 
 	.sporsmal__innhold {
-		margin: 3rem 0 0;
+		margin: 1rem 0 0;
 	}
 
 	.sporsmal__ikon {
+		display: inline-block;
 		margin: 0 auto 1rem;
 		width: 65px;
 		height: 90px;
@@ -124,11 +125,12 @@
 
 @keyframes skeilOpp {
 	0% { transform: scale(1); }
+	10% { transform: scale(1); }
 	100% { transform: scale(0.75); }
 }
 
 @keyframes slaidOpp {
-	0% { transform: translateY(100%)}
+	0% { transform: translateY(40%)}
 	100% { transform: translateY(0)}
 }
 
@@ -164,6 +166,12 @@
 
 		.alternativer {
 			display: block;
+		}
+
+		&.vis_alternativer {
+			.alternativer {
+				display: flex;
+			}
 		}
 
 		.sporsmal__knapp {
