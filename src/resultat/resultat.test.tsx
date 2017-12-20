@@ -10,7 +10,7 @@ import IntlProvider from '../Intl-provider';
 import { Provider } from 'react-redux';
 
 configure({ adapter: new Adapter() });
-let store = getStore();
+const store = getStore();
 
 function getJSXElement (besvarteSpm: Array<BesvarelseModell>) {
     return (
@@ -22,11 +22,14 @@ function getJSXElement (besvarteSpm: Array<BesvarelseModell>) {
     );
 }
 
+// key : se id i alle-temaer.ts
 function hentTema(wrapper: ReactWrapper, key: string) {
+
     return wrapper.find('.enkelt__tema')
                   .filterWhere(x => key.length === 0 ? true : x.key() === key);
 }
 
+// besvarteSpm.Id, svarAlternativer.sporsmalId: se alle-tekster.ts
 describe('<Resultat />', function() {
     let besvarteSpm: BesvarelseModell[];
     let svarAlternativer: SvarAlternativModell[];
@@ -37,7 +40,7 @@ describe('<Resultat />', function() {
     });
 
     it('skal vise overskrift', () => {
-        let wrapper = mount(getJSXElement(besvarteSpm));
+        const wrapper = mount(getJSXElement(besvarteSpm));
         expect(wrapper.find('#overskrift-raad').text()).to.contain('Vi har uthevet 4 råd til deg');
     });
 
@@ -45,8 +48,8 @@ describe('<Resultat />', function() {
         svarAlternativer.push({id: 'finn-svar-0301'});
         besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer});
 
-        let wrapper = mount(getJSXElement(besvarteSpm));
-        let fantTema = hentTema(wrapper, '525215').exists();
+        const wrapper = mount(getJSXElement(besvarteSpm));
+        const fantTema = hentTema(wrapper, '525215').exists();
 
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(fantTema).to.equal(true);
@@ -57,8 +60,8 @@ describe('<Resultat />', function() {
         svarAlternativer.push({id: 'finn-svar-0302'});
         besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer});
 
-        let wrapper = mount(getJSXElement(besvarteSpm));
-        let fantTema = hentTema(wrapper, '525215').exists();
+        const wrapper = mount(getJSXElement(besvarteSpm));
+        const fantTema = hentTema(wrapper, '525215').exists();
 
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(fantTema).to.equal(false);
@@ -69,8 +72,8 @@ describe('<Resultat />', function() {
         svarAlternativer.push({id: 'cv-svar-0506'});
         besvarteSpm.push({sporsmalId: 'cv-spm-05', svarAlternativer: svarAlternativer});
 
-        let wrapper = mount(getJSXElement(besvarteSpm));
-        let fantTema = hentTema(wrapper, '454152').exists();
+        const wrapper = mount(getJSXElement(besvarteSpm));
+        const fantTema = hentTema(wrapper, '454152').exists();
 
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(fantTema).to.equal(false);
@@ -80,8 +83,8 @@ describe('<Resultat />', function() {
         svarAlternativer.push({id: 'cv-svar-0507'});
         besvarteSpm.push({sporsmalId: 'cv-spm-05', svarAlternativer: svarAlternativer});
 
-        let wrapper = mount(getJSXElement(besvarteSpm));
-        let fantTema = hentTema(wrapper, '454152').exists();
+        const wrapper = mount(getJSXElement(besvarteSpm));
+        const fantTema = hentTema(wrapper, '454152').exists();
 
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(fantTema).to.equal(true);
@@ -91,8 +94,8 @@ describe('<Resultat />', function() {
         svarAlternativer.push({id: 'soke-svar-0101'});
         besvarteSpm.push({sporsmalId: 'soke-spm-01', svarAlternativer: svarAlternativer});
 
-        let wrapper = mount(getJSXElement(besvarteSpm));
-        let fantTema = hentTema(wrapper, '454152').exists();
+        const wrapper = mount(getJSXElement(besvarteSpm));
+        const fantTema = hentTema(wrapper, '454152').exists();
 
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(fantTema).to.equal(true);
@@ -102,8 +105,8 @@ describe('<Resultat />', function() {
         svarAlternativer.push({id: 'soke-svar-0201'});
         besvarteSpm.push({sporsmalId: 'soke-spm-02', svarAlternativer: svarAlternativer});
 
-        let wrapper = mount(getJSXElement(besvarteSpm));
-        let fantTema = hentTema(wrapper, '454152').exists();
+        const wrapper = mount(getJSXElement(besvarteSpm));
+        const fantTema = hentTema(wrapper, '454152').exists();
 
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(fantTema).to.equal(true);
@@ -113,8 +116,8 @@ describe('<Resultat />', function() {
         svarAlternativer.push({id: 'soke-svar-0401'});
         besvarteSpm.push({sporsmalId: 'soke-spm-04', svarAlternativer: svarAlternativer});
 
-        let wrapper = mount(getJSXElement(besvarteSpm));
-        let fantTema = hentTema(wrapper, '454152').exists();
+        const wrapper = mount(getJSXElement(besvarteSpm));
+        const fantTema = hentTema(wrapper, '454152').exists();
 
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(fantTema).to.equal(true);
@@ -125,17 +128,17 @@ describe('<Resultat />', function() {
         svarAlternativer.push({id: 'finn-svar-0108'});
         besvarteSpm.push({sporsmalId: 'finn-spm-01', svarAlternativer: svarAlternativer});
 
-        let wrapper = mount(getJSXElement(besvarteSpm));
+        const wrapper = mount(getJSXElement(besvarteSpm));
 
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(hentTema(wrapper, '526645').exists()).to.equal(true);
     });
 
-    it('skal ikke foreslå å ta kontakt med en bedrift', () => {
+    it('skal ikke foreslå å ta kontakt med en bedrift hvis man har kontaktet arbeidsgivere direkte', () => {
         svarAlternativer.push({id: 'finn-svar-0110'});
         besvarteSpm.push({sporsmalId: 'finn-spm-01', svarAlternativer: svarAlternativer});
 
-        let wrapper = mount(getJSXElement(besvarteSpm));
+        const wrapper = mount(getJSXElement(besvarteSpm));
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(hentTema(wrapper, '526645').exists()).to.equal(false);
     });
@@ -146,7 +149,7 @@ describe('<Resultat />', function() {
         svarAlternativer.push({id: 'finn-svar-0109'});
         besvarteSpm.push({sporsmalId: 'finn-spm-01', svarAlternativer: svarAlternativer});
 
-        let wrapper = mount(getJSXElement(besvarteSpm));
+        const wrapper = mount(getJSXElement(besvarteSpm));
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(hentTema(wrapper, '526645').exists()).to.equal(false);
     });
@@ -155,7 +158,7 @@ describe('<Resultat />', function() {
         svarAlternativer.push({id: 'soke-svar-0201'});
         besvarteSpm.push({sporsmalId: 'soke-spm-02', svarAlternativer: svarAlternativer});
 
-        let wrapper = mount(getJSXElement(besvarteSpm));
+        const wrapper = mount(getJSXElement(besvarteSpm));
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(hentTema(wrapper, '454121').exists()).to.equal(true);
     });
@@ -166,7 +169,7 @@ describe('<Resultat />', function() {
         svarAlternativer.push({id: 'finn-svar-0302'});
         besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer});
 
-        let wrapper = mount(getJSXElement(besvarteSpm));
+        const wrapper = mount(getJSXElement(besvarteSpm));
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(hentTema(wrapper, '54067').exists()).to.equal(true);
         expect(hentTema(wrapper, '525225').exists()).to.equal(true);
@@ -176,7 +179,7 @@ describe('<Resultat />', function() {
         svarAlternativer.push({id: 'soke-svar-0401'});
         besvarteSpm.push({sporsmalId: 'soke-spm-04', svarAlternativer: svarAlternativer});
 
-        let wrapper = mount(getJSXElement(besvarteSpm));
+        const wrapper = mount(getJSXElement(besvarteSpm));
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(hentTema(wrapper, '54067').exists()).to.equal(false);
     });
@@ -189,7 +192,7 @@ describe('<Resultat />', function() {
         svarAlternativer.push({id: 'finn-svar-0203'});
         besvarteSpm.push({sporsmalId: 'finn-spm-02', svarAlternativer: svarAlternativer});
 
-        let wrapper = mount(getJSXElement(besvarteSpm));
+        const wrapper = mount(getJSXElement(besvarteSpm));
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(hentTema(wrapper, '454378').exists()).to.equal(true);
         expect(hentTema(wrapper, '525225').exists()).to.equal(false);
