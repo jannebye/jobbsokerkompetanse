@@ -201,7 +201,7 @@ export function marker(sporsmalId: string,
         data: {
             sporsmalId: sporsmalId,
             svarAlternativer: svarAlternativ
-        }
+        } 
     };
 }
 
