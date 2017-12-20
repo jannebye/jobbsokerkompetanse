@@ -7,9 +7,9 @@ import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
-import Alternativ from './alternativ';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Innholdstittel, Undertekst } from 'nav-frontend-typografi';
+import AlternativContainer from "./alternativ-container";
 
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string,
@@ -35,51 +35,6 @@ interface EgenStateProps {
     feil: boolean;
 }
 
-function prepMarkerAlternativ(alternativ: SvarAlternativModell,
-                              alternativListe: SvarAlternativModell[],
-                              sporsmal: SporsmalModell,
-                              type: string): SvarAlternativModell[] {
-    const erValgt = !!alternativListe.find(alt => alt.id === alternativ.id);
-    if (erValgt) {
-        if (type === 'ettvalg' || type === 'skala') {
-            return alternativListe;
-        }
-        return alternativListe.filter(alt => alt.id !== alternativ.id);
-    } else {
-        if (
-            !!sporsmal.uniktAlternativ &&
-            sporsmal.uniktAlternativ === alternativ.id
-        ) {
-            return [alternativ];
-        }
-        if (type === 'ettvalg' || type === 'skala') {
-            return [alternativ];
-        }
-        return [...alternativListe, alternativ];
-    }
-}
-
-/* Gjelder for skalaSpørsmål */
-function skalAlternativMarkeres(markerteAlternativ: SvarAlternativModell[],
-                                alternativ: SvarAlternativModell): boolean {
-    return !!markerteAlternativ.find(
-        altId => altId.skalaId! >= alternativ.skalaId!
-    );
-}
-
-function erAlternativMulig(uniktAlternativId: string,
-                           gjeldendeAlternativId: string,
-                           markerteAlternativer: SvarAlternativModell[]): boolean {
-    if (uniktAlternativId === gjeldendeAlternativId) {
-        return true;
-    } else {
-        if (!!markerteAlternativer.find(alt => alt.id === uniktAlternativId)) {
-            return gjeldendeAlternativId === 'intervju-svar-0202';
-        }
-    }
-    return true;
-}
-
 type SporsmalProps = OwnProps & DispatchProps & StateProps;
 
 class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
@@ -94,6 +49,12 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             this.setState({feil: true});
         } else {
             return this.props.nesteSpm(sporsmalId);
+        }
+    }
+
+    fjernFeil(markerteAlternativer: SvarAlternativModell[]) {
+        if (this.state.feil && markerteAlternativer.length !== 0) {
+            this.setState({feil: false});
         }
     }
 
@@ -114,9 +75,6 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         const markerteAlternativer: SvarAlternativModell[] = besvartSpm
             ? besvartSpm.svarAlternativer
             : [];
-        if (this.state.feil && markerteAlternativer.length !== 0) {
-            this.setState({feil: false});
-        }
         const sporsmalImg = require('../ikoner/' + sporsmal.id + '.svg');
 
         return (
@@ -180,47 +138,18 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             <FormattedMessage id="fortsett-knapp"/>
                         </button>
                     </div>
-                    <ul className="alternativer">
-                        {sporsmal.alternativer.map(function (alternativ: SvarAlternativModell) {
-                            const erValgt = !!markerteAlternativer.find(
-                                alt => alt.id === alternativ.id
-                            )
-                                ? true
-                                : sporsmal.type === 'skala'
-                                    ? skalAlternativMarkeres(
-                                        markerteAlternativer,
-                                        alternativ
-                                    )
-                                    : false;
-                            const kanVelges: boolean = !!sporsmal.uniktAlternativ
-                                ? erAlternativMulig(
-                                    sporsmal.uniktAlternativ,
-                                    alternativ.id,
-                                    markerteAlternativer
-                                )
-                                : true;
-                            return (
-                                <Alternativ
-                                    key={alternativ.id}
-                                    alternativ={alternativ}
-                                    erValgt={erValgt}
-                                    sporsmalId={sporsmal.id}
-                                    sporsmalType={sporsmal.type}
-                                    kanVelges={kanVelges}
-                                    markerAlternativ={() =>
-                                        markerAlternativ(
-                                            sporsmal.id,
-                                            prepMarkerAlternativ(
-                                                alternativ,
-                                                markerteAlternativer,
-                                                sporsmal,
-                                                sporsmal.type
-                                            )
-                                        )}
-                                />
-                            );
-                        })}
-                    </ul>
+                    <AlternativContainer
+                        alternativer={sporsmal.alternativer}
+                            markerteAlternativer={
+                                        markerteAlternativer}
+                                        sporsmal={
+                                    sporsmal}
+                                    markerAlternativ={(id,
+                                    alternativ) => {this.fjernFeil(markerteAlternativer);
+                                    markerAlternativ(id,
+
+                                                alternativ);}}
+                                                />
                 </section>
                 {!sporsmal.erSisteSpm && (
                     <button
