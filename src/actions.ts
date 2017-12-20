@@ -1,9 +1,11 @@
 import Svar from './svar/svar-modell';
-import { Sidetype } from './utils/konstanter';
+import {Sidetype} from './utils/konstanter';
+import SvarAlternativModell from "./sporsmal/svaralternativ";
 
 export enum ActionType {
     BESVAR,
     ENDRE_ALTERNATIV,
+    ENDRE_ALTERNATIV_OG_ANTALL,
     VIS_ALTERNATIVER,
     FJERN_MARKERING,
     NESTE_SPORSMAL,
@@ -20,6 +22,15 @@ export interface BesvarAction {
 export interface EndreAlternativAction {
     type: ActionType.ENDRE_ALTERNATIV;
     data: Svar;
+}
+
+export interface EndreAlternativOgAntallAction {
+    type: ActionType.ENDRE_ALTERNATIV_OG_ANTALL;
+    data: {
+        sporsmalId: string;
+        svarAlternativer: SvarAlternativModell[];
+        totalAntallSpm: number;
+    };
 }
 
 export interface VisAlternativerAction {
@@ -47,6 +58,7 @@ export interface EndreSideAction {
 export type Handling =
     BesvarAction
     | EndreAlternativAction
+    | EndreAlternativOgAntallAction
     | NesteSporsmalAction
     | VisAlternativerAction
     | ForrigeSporsmalAction

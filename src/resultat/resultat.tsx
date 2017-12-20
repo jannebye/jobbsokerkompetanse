@@ -87,9 +87,7 @@ export function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
             <InnholdsContainer
                 overskrift="veiviser-overskrift"
                 innhold="veiviser-innhold"
-                link={
-                    'https://tjenester.nav.no/veiviserarbeidssoker/?situasjon=mistet-jobben'
-                }
+                link="veiviser-link"
             />
         </div>
     );

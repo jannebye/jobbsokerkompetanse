@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import AlleSporsmal from '../sporsmal/sporsmal-alle';
 import { marker, visHeleSporsmal } from '../svar/svar-duck';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
@@ -29,6 +28,7 @@ interface OwnProps {
 interface StateProps {
     besvarteSporsmal: BesvarelseModell[];
     viserAlternativer: boolean;
+    totaltAntallSpm: number;
 }
 
 interface EgenStateProps {
@@ -66,15 +66,12 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             forrigeSpm,
             spmRef,
             viserAlternativer,
-            visAlternativer
+            visAlternativer,
+            totaltAntallSpm
         } = this.props;
 
-        const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
-            besvarelse => besvarelse.sporsmalId === sporsmal.id
-        );
-        const markerteAlternativer: SvarAlternativModell[] = besvartSpm
-            ? besvartSpm.svarAlternativer
-            : [];
+        const markerteAlternativer: SvarAlternativModell[] = besvarteSporsmal.find(
+            besvarelse => besvarelse.sporsmalId === sporsmal.id)!.svarAlternativer;
         const sporsmalImg = require('../ikoner/' + sporsmal.id + '.svg');
 
         return (
@@ -99,15 +96,11 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 </button>
                             )}
                             <div className="sporsmal__paginering typo-normal">
-                                <strong>
-                                    {besvarteSporsmal.findIndex(
-                                        besvarelse =>
-                                            besvarelse.sporsmalId ===
-                                            sporsmal.id
-                                    ) + 1}
-                                </strong>{' '}
-                                <FormattedMessage id="paginering-av"/>{' '}
-                                <strong>{AlleSporsmal.length}</strong>
+                                <FormattedMessage
+                                    id="paginering"
+                                    values={{indeks: besvarteSporsmal.findIndex(
+                                    besvarelse => besvarelse.sporsmalId === sporsmal.id) + 1, total: totaltAntallSpm}}
+                                />
                             </div>
                         </div>
                         <div className="sporsmal__innhold">
@@ -140,8 +133,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                     </div>
                     <AlternativContainer
                         alternativer={sporsmal.alternativer}
-                        markerteAlternativer={
-                                        markerteAlternativer}
+                        markerteAlternativer={markerteAlternativer}
                         sporsmal={sporsmal}
                         markerAlternativ={(id, alternativ) => {this.fjernFeil(markerteAlternativer);
                                                                markerAlternativ(id, alternativ); }}
@@ -166,7 +158,8 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     besvarteSporsmal: state.svar.data,
-    viserAlternativer: state.svar.viserAlternativer
+    viserAlternativer: state.svar.viserAlternativer,
+    totaltAntallSpm: state.svar.totalAntallSpm
 });
 
 const mapDispatchToProps = (dispatch: Dispatch,
