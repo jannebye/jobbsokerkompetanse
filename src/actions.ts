@@ -1,6 +1,6 @@
 import Svar from './svar/svar-modell';
-import {Sidetype} from './utils/konstanter';
-import SvarAlternativModell from "./sporsmal/svaralternativ";
+import { Sidetype } from './utils/konstanter';
+import SvarAlternativModell from './sporsmal/svaralternativ';
 
 export enum ActionType {
     BESVAR,
