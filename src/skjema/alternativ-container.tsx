@@ -1,7 +1,7 @@
 import * as React from 'react';
-import SvarAlternativModell from "../sporsmal/svaralternativ";
-import SporsmalModell from "../sporsmal/sporsmal-modell";
-import Alternativ from "./alternativ";
+import SvarAlternativModell from '../sporsmal/svaralternativ';
+import SporsmalModell from '../sporsmal/sporsmal-modell';
+import Alternativ from './alternativ';
 
 interface AlternativContainerProps {
     alternativer: SvarAlternativModell[];
@@ -56,7 +56,8 @@ function prepMarkerAlternativ(alternativ: SvarAlternativModell,
     }
 }
 
-function AlternativContainer({alternativer, markerteAlternativer, sporsmal, markerAlternativ}: AlternativContainerProps) {
+function AlternativContainer({alternativer, markerteAlternativer, sporsmal, markerAlternativ}:
+                                 AlternativContainerProps) {
     return (
         <ul className="alternativer">
             {alternativer.map(function (alternativ: SvarAlternativModell) {

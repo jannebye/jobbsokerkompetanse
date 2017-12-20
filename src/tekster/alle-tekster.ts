@@ -30,7 +30,7 @@ export default { 'nb': {
 'forrige-knapp': 'Forrige',
 'fortsett-knapp': 'Fortsett',
 'intervju-overskrift': 'I intervjuet skal du overbevise om at du passer inn i bedriften og at du er et trygt valg. Hvilke erfaringer har du med jobbintervju?',
-'les-mer-link': 'Les mer',
+'les-mer-link': '<a href={link}>Les mer</a>',
 'mellomtekst-spm-cv-04': 'Marker hva du tror på en skala fra 1 til 5, hvor 1 er "ingen etterspørsel" og 5 er "stor etterspørsel".',
 'overskrift-raad': 'Vi har uthevet 4 råd til deg',
 'paginering-av': 'av',

@@ -9,7 +9,7 @@ import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Innholdstittel, Undertekst } from 'nav-frontend-typografi';
-import AlternativContainer from "./alternativ-container";
+import AlternativContainer from './alternativ-container';
 
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string,
@@ -140,16 +140,12 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                     </div>
                     <AlternativContainer
                         alternativer={sporsmal.alternativer}
-                            markerteAlternativer={
+                        markerteAlternativer={
                                         markerteAlternativer}
-                                        sporsmal={
-                                    sporsmal}
-                                    markerAlternativ={(id,
-                                    alternativ) => {this.fjernFeil(markerteAlternativer);
-                                    markerAlternativ(id,
-
-                                                alternativ);}}
-                                                />
+                        sporsmal={sporsmal}
+                        markerAlternativ={(id, alternativ) => {this.fjernFeil(markerteAlternativer);
+                                                               markerAlternativ(id, alternativ); }}
+                    />
                 </section>
                 {!sporsmal.erSisteSpm && (
                     <button
