@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import { AlternativTyper } from '../utils/konstanter';
-import OverskriftMedHjelpeTekst from './overskrift-med-hjelpetekst';
+import OverskriftMedHjelpeTekst from '../skjema/overskrift-med-hjelpetekst';
 
 interface AlternativProps {
     alternativ: SvarAlternativModell;
@@ -54,6 +54,7 @@ function Alternativ({
                 type={inputType}
                 name={sporsmalId.toString()}
                 defaultValue={alternativ.id}
+                checked={erValgt}
             />
             <label
                 htmlFor={alternativ.id}

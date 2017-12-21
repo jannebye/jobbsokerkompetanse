@@ -1,0 +1,64 @@
+.resultatside {
+	padding: 1rem;
+	background-color: @navLysBlaLighten90;
+
+	.resultatliste {
+		list-style: none;
+
+		.sporsmal__besvarelse {
+			border: 1px solid @navBlaLighten20;
+			padding: 1rem;
+			margin-top: 1rem;
+			-webkit-padding-start: 0;
+		}
+	}
+
+	.overskrift__tema {
+		text-align: center;
+		margin-bottom: 1.5rem;
+	}
+
+	.temaliste {
+		list-style: none;
+		padding: 0;
+
+		.enkelt__tema {
+			.aktivitet {
+				ul {
+					margin-top: 1rem;
+					margin-bottom: 1rem;
+					font-weight: bold;
+					padding-bottom: 0.5rem;
+				}
+				ul li {
+					font-weight: normal;
+					padding-bottom: 0;
+				}
+			}
+		}
+	}
+
+	.resultat__info {
+		text-align: center;
+		margin: 2rem 0;
+	}
+
+	.resultat__infotekst {
+		text-align: center;
+		margin: 1rem auto 2rem;
+		width: 240px;
+	}
+
+	.innholdscontainer {
+		background-color: white;
+		padding: 1rem;
+	}
+}
+
+@media (min-width: @screen-sm-min) {
+	.resultatside {
+		.resultat__infotekst {
+			width: auto;
+		}
+	}
+}

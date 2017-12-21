@@ -25,10 +25,12 @@ function getJSXElement (besvarteSpm: Array<BesvarelseModell>) {
 describe('<Resultat />', function() {
     let besvarteSpm: BesvarelseModell[];
     let svarAlternativer: SvarAlternativModell[];
+    let tips: string | undefined;
 
     beforeEach(() => {
         svarAlternativer = new Array<SvarAlternativModell>();
         besvarteSpm = new Array<BesvarelseModell>();
+        tips = undefined;
     });
 
     it('skal vise overskrift', () => {
@@ -38,7 +40,7 @@ describe('<Resultat />', function() {
 
     it('skal foreslå å søke i flere bransjer', () => {
         svarAlternativer.push({id: 'finn-svar-0301'});
-        besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer});
+        besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer, tips: tips});
 
         let wrapper = mount(getJSXElement(besvarteSpm));
         let fantTema = wrapper.find('.enkelt__tema')
@@ -50,7 +52,7 @@ describe('<Resultat />', function() {
 
     it('skal ikke foreslå å søke i flere bransjer', () => {
         svarAlternativer.push({id: 'finn-svar-0302'});
-        besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer});
+        besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer, tips: tips});
 
         let wrapper = mount(getJSXElement(besvarteSpm));
         let fantTema = wrapper.find('.enkelt__tema')

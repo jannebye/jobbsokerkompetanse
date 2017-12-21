@@ -27,13 +27,15 @@
 		display: block;
 		margin: 1rem auto 0;
 		text-align: center;
+		animation: feidInn 1s both;
 	}
 
 	.sporsmal__innhold {
-		margin: 3rem 0;
+		margin: 1rem 0 0;
 	}
 
 	.sporsmal__ikon {
+		display: inline-block;
 		margin: 0 auto 1rem;
 		width: 65px;
 		height: 90px;
@@ -60,31 +62,29 @@
 		position: static;
 
 		.sporsmal__start {
-			display: block;
 			height: auto;
 		}
 
 		.sporsmal__knapp__tilbake {
 			display: block;
+			animation: feidInn 1s both;
 		}
 
 		.sporsmal__paginering {
 			display: none;
 		}
 
-		.sporsmal__innhold {
-			margin: 3rem 0;
-			//transition: margin-top 0.5s;
+		.sporsmal__hode {
+			animation: skeilOpp 1s both;
 		}
 
-		.sporsmal__ikon {
-			width: 46px;
-			height: 63px;
-			//transition: width 0.5s, height 0.5s;
+		.sporsmal__innhold {
+			animation: slaidOpp 1s both;
 		}
 
 		.alternativer {
 			display: block;
+			animation: skliFraBunn 1s both;
 		}
 
 		.sporsmal__knapp {
@@ -118,10 +118,29 @@
 	}
 }
 
+@keyframes feidInn {
+	0%   { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+@keyframes skeilOpp {
+	0% { transform: scale(1); }
+	10% { transform: scale(1); }
+	100% { transform: scale(0.75); }
+}
+
+@keyframes slaidOpp {
+	0% { transform: translateY(40%)}
+	100% { transform: translateY(0)}
+}
+
+@keyframes skliFraBunn {
+	0% { transform: translateY(100vh); }
+	100% { transform: translateY(0); }
+}
+
 @media (min-width: @screen-sm-min) {
-
 	.sporsmal {
-
 		.sporsmal__start {
 			display: block;
 			height: auto;
@@ -149,6 +168,12 @@
 			display: block;
 		}
 
+		&.vis_alternativer {
+			.alternativer {
+				display: flex;
+			}
+		}
+
 		.sporsmal__knapp {
 			display: block;
 			margin-bottom: 2rem;
@@ -159,3 +184,4 @@
 		}
 	}
 }
+

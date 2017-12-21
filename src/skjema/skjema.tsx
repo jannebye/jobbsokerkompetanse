@@ -1,6 +1,6 @@
 import * as React from 'react';
 import alleSporsmal from '../sporsmal/sporsmal-alle';
-import Sporsmal from './sporsmal';
+import Sporsmal from '../sporsmal/sporsmal';
 import { connect } from 'react-redux';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
@@ -77,14 +77,16 @@ class Skjema extends React.Component<SkjemaProps, {}> {
     }
 
     byttSpmOgFokus(spmId: string) {
+        const nesteSpmId = finnNesteSpm(spmId, this.props.forelopigBesvarelse);
         this.props
-            .byttSpm(finnNesteSpm(spmId, this.props.forelopigBesvarelse))
-            .then(res => {
-                const nesteSpm = this.sporsmalRefs[
-                    this.props.gjeldendeSporsmalId
-                    ];
-                nesteSpm.focus();
-            });
+                .byttSpm(nesteSpmId)
+                .then(res => {
+                    const nesteSpm = this.sporsmalRefs[
+                        this.props.gjeldendeSporsmalId
+                        ];
+                    nesteSpm.focus();
+                });
+
     }
 
     render() {
