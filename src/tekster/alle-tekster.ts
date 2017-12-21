@@ -30,7 +30,7 @@ export default { 'nb': {
 'forrige-knapp': 'Forrige',
 'fortsett-knapp': 'Fortsett',
 'intervju-overskrift': 'I intervjuet skal du overbevise om at du passer inn i bedriften og at du er et trygt valg. Hvilke erfaringer har du med jobbintervju?',
-'les-mer-link': 'Les mer',
+'les-mer-link': '<a href={link}>Les mer</a>',
 'mellomtekst-spm-cv-04': 'Marker hva du tror på en skala fra 1 til 5, hvor 1 er "ingen etterspørsel" og 5 er "stor etterspørsel".',
 'overskrift-raad': 'Vi har uthevet 4 råd til deg',
 'paginering-av': 'av',
@@ -157,7 +157,7 @@ export default { 'nb': {
 'soke-svar-0401': 'Sender samme søknad til alle',
 'soke-svar-0402': 'Gjør noen tilpasninger',
 'soke-svar-0403': 'Skreddersyr alle søknader',
-'tekst-er-lagret': 'Dine råd er lagret, og du kan finne dem igjen på Ditt Nav.<br>Du kan også svare på spørsmålene på nytt, om du ønsker.',
+'tekst-er-lagret': 'Dine råd er lagret, og du kan finne dem igjen på Ditt Nav.<br><br>Du kan også svare på spørsmålene på nytt, om du ønsker.',
 'veiviser-innhold': 'Ønsker du å lese mer om jobbsøkerprosessen?',
 'veiviser-overskrift': 'Gå til vår veiviser for arbeidssøkere'
  }, 'en': {} };

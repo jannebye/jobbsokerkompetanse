@@ -8,7 +8,7 @@ import temaLogikk from './tema-mapping';
 import { TemaModell } from './tema-modell';
 import TemaVisning from './temavisning';
 import InnholdsContainer from './innholdscontainer';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 
 function temaSkalBehandles(tema: TemaModell, alternativId: string) {
     if (temaLogikk[tema.ref]) {
@@ -73,17 +73,17 @@ export function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
                     <TemaVisning tema={tema} key={tema.id} />
                 ))}
             </ul>
-            <section className="resultat__info blokk-m">
-                <p className="resultat__infotekst">
+            <div className="resultat__info">
+                <Normaltekst className="resultat__infotekst" tag="p">
                     <FormattedHTMLMessage id="tekst-er-lagret" />
-                </p>
+                </Normaltekst>
                 <button
-                    className="knapp knapp__startigjen"
+                    className="knapp"
                     onClick={() => startPaNytt()}
                 >
                     Start på nytt
                 </button>
-            </section>
+            </div>
             <InnholdsContainer
                 overskrift="veiviser-overskrift"
                 innhold="veiviser-innhold"
