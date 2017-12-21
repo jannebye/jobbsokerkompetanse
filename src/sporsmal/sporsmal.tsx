@@ -7,12 +7,13 @@ import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
-import Alternativ from './alternativ';
+import Alternativ from '../alternativ/alternativ';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import TipsVisning from './tips/tipsvisning';
 import { visTipsEtterSpørsmål } from './tips/tips-generering';
 import { isUndefined } from 'util';
-import { Innholdstittel, Undertekst } from 'nav-frontend-typografi';
+import { Sidetittel, Undertekst } from 'nav-frontend-typografi';
+import SVG from 'react-inlinesvg';
 
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string,
@@ -161,21 +162,35 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             </div>
                         </div>
                         <div className="sporsmal__innhold">
-                            <img
-                                src={sporsmalImg}
-                                className="sporsmal__ikon"
-                                alt=""
-                            />
-                            <Innholdstittel className="sporsmal__overskrift typo-innholdstittel blokk-xs" tag="h1">
-                                <FormattedHTMLMessage id={sporsmal.id}/>
-                            </Innholdstittel>
-                            {this.state.feil && (
-                                <p className="skjemaelement__feilmelding">
-                                    <FormattedMessage id="feilmelding-mangler-svar"/>
-                                </p>
-                            )}
+                            <div className="sporsmal__hode">
+                                <FormattedMessage id={sporsmal.id + ''}>
+                                    {(tekst: string) =>
+                                        <SVG
+                                            src={sporsmalImg}
+                                            className="sporsmal__ikon"
+                                            role="img"
+                                            aria-label={tekst}
+                                        >
+                                            <img
+                                                src={sporsmalImg}
+                                                className="sporsmal__ikon"
+                                                alt={tekst}
+                                            />
+                                        </SVG>
+                                    }
+                                </FormattedMessage>
+
+                                <Sidetittel className="sporsmal__overskrift blokk-xs" tag="h1">
+                                    <FormattedHTMLMessage id={sporsmal.id}/>
+                                </Sidetittel>
+                                {this.state.feil && (
+                                    <p className="skjemaelement__feilmelding">
+                                        <FormattedMessage id="feilmelding-mangler-svar"/>
+                                    </p>
+                                )}
+                            </div>
                             <Undertekst className="sporsmal__ingress" tag="p">
-                                <FormattedMessage id={sporsmal.egenUndertekst || sporsmal.type} />
+                                <FormattedMessage id={sporsmal.egenUndertekst || sporsmal.type}/>
                             </Undertekst>
                         </div>
                         <button
@@ -238,6 +253,8 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                         key="besvar"
                         onClick={e => {
                             e.preventDefault();
+                            this.sjekkSvar(markerteAlternativer, sporsmal.id);
+                            window.scrollTo(0, 0);
                             this.sjekkSvar(markerteAlternativer, sporsmal.id, besvarteSporsmal, besvartSpm);
                         }}
                     >

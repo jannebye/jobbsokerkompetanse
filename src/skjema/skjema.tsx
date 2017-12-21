@@ -1,6 +1,6 @@
 import * as React from 'react';
 import alleSporsmal from '../sporsmal/sporsmal-alle';
-import Sporsmal from './sporsmal';
+import Sporsmal from '../sporsmal/sporsmal';
 import { connect } from 'react-redux';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
