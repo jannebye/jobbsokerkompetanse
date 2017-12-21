@@ -2,16 +2,13 @@ import BesvarelseModell from './svar-modell';
 import {
     Handling,
     ActionType,
-    BesvarAction,
     EndreAlternativAction,
     NesteSporsmalAction,
-    ResetAction, VisAlternativerAction, EndreAlternativOgAntallAction
-    ResetAction, VisTipsAction, SkjulTipsAction, VisAlternativerAction
+    ResetAction, VisTipsAction, SkjulTipsAction, VisAlternativerAction, EndreAlternativOgAntallAction
 } from '../actions';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 
 const {
-    BESVAR,
     ENDRE_ALTERNATIV,
     ENDRE_ALTERNATIV_OG_ANTALL,
     VIS_ALTERNATIVER,
@@ -35,7 +32,6 @@ export interface SvarState {
 }
 
 export const initialState = {
-    data: [{sporsmalId: 'finn-spm-01', svarAlternativer: []}],
     data: [{ sporsmalId: 'finn-spm-01', svarAlternativer: [], tips: undefined }],
     gjeldendeSpmId: 'finn-spm-01',
     flyt: FlytType.FREMOVER,
@@ -107,7 +103,8 @@ export default function reducer(state: SvarState = initialState,
                         ...state.data,
                         {
                             sporsmalId: action.data.sporsmalId,
-                            svarAlternativer: action.data.svarAlternativer
+                            svarAlternativer: action.data.svarAlternativer,
+                            tips: undefined
                         }
                     ],
                     totalAntallSpm: action.data.totalAntallSpm
@@ -160,14 +157,6 @@ export default function reducer(state: SvarState = initialState,
         default:
             return state;
     }
-}
-
-// Action Creators
-export function besvar(svar: BesvarelseModell): BesvarAction {
-    return {
-        type: BESVAR,
-        data: svar
-    };
 }
 
 export function marker(sporsmalId: string,

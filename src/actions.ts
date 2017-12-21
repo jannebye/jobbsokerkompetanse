@@ -1,4 +1,3 @@
-import Svar from './svar/svar-modell';
 import { Sidetype } from './utils/konstanter';
 import SvarAlternativModell from './sporsmal/svaralternativ';
 
@@ -65,8 +64,7 @@ export interface SkjulTipsAction {
 }
 
 export type Handling =
-    BesvarAction
-    | EndreAlternativAction
+    EndreAlternativAction
     | EndreAlternativOgAntallAction
     | NesteSporsmalAction
     | VisAlternativerAction
