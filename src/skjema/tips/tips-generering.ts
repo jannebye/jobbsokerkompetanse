@@ -1,7 +1,7 @@
 import { isUndefined } from 'util';
 import BesvarelseModell from '../../svar/svar-modell';
 
-export function visTipsEtterSpørsmål(sporsmalId: string, fullBesvarelse: BesvarelseModell[]) {
+export function visTipsEtterSporsmal(sporsmalId: string, fullBesvarelse: BesvarelseModell[]) {
     switch (sporsmalId) {
         case 'finn-spm-02':
             return tipsSokUtenforHjemsted(fullBesvarelse);

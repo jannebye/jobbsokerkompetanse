@@ -9,8 +9,8 @@ import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
 import Alternativ from '../alternativ/alternativ';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import TipsVisning from './tips/tipsvisning';
-import { visTipsEtterSpørsmål } from './tips/tips-generering';
+import TipsVisning from '../skjema/tips/tipsvisning';
+import { visTipsEtterSporsmal } from '../skjema/tips/tips-generering';
 import { isUndefined } from 'util';
 import { Sidetittel, Undertekst } from 'nav-frontend-typografi';
 import SVG from 'react-inlinesvg';
@@ -99,7 +99,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         if (markerteSpm.length === 0) {
             this.setState({feil: true});
         } else {
-            const tip = visTipsEtterSpørsmål(sporsmalId, besvarteSporsmal);
+            const tip = visTipsEtterSporsmal(sporsmalId, besvarteSporsmal);
             if (isUndefined(besvartSpm.tips) && !isUndefined(tip)) {
                 return this.props.visTips(tip);
             } else {
@@ -253,9 +253,8 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                         key="besvar"
                         onClick={e => {
                             e.preventDefault();
-                            this.sjekkSvar(markerteAlternativer, sporsmal.id);
-                            window.scrollTo(0, 0);
                             this.sjekkSvar(markerteAlternativer, sporsmal.id, besvarteSporsmal, besvartSpm);
+                            window.scrollTo(0, 0);
                         }}
                     >
                         <FormattedMessage id="fortsett-knapp"/>
