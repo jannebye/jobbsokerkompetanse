@@ -33,10 +33,12 @@ function hentTema(wrapper: ReactWrapper, key: string) {
 describe('<Resultat />', function() {
     let besvarteSpm: BesvarelseModell[];
     let svarAlternativer: SvarAlternativModell[];
+    let tips: string | undefined;
 
     beforeEach(() => {
         svarAlternativer = new Array<SvarAlternativModell>();
         besvarteSpm = new Array<BesvarelseModell>();
+        tips = undefined;
     });
 
     it('skal vise overskrift', () => {
@@ -46,7 +48,7 @@ describe('<Resultat />', function() {
 
     it('skal foreslå å søke i flere bransjer hvis man søker på en type stilling', () => {
         svarAlternativer.push({id: 'finn-svar-0301'});
-        besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer});
+        besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer, tips: tips});
 
         const wrapper = mount(getJSXElement(besvarteSpm));
         const fantTema = hentTema(wrapper, '525215').exists();
@@ -58,7 +60,7 @@ describe('<Resultat />', function() {
 
     it('skal ikke foreslå å søke i flere bransjer hvis man søker på flere typer stilling', () => {
         svarAlternativer.push({id: 'finn-svar-0302'});
-        besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer});
+        besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer, tips: tips});
 
         const wrapper = mount(getJSXElement(besvarteSpm));
         const fantTema = hentTema(wrapper, '525215').exists();

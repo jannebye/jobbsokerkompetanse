@@ -2,18 +2,23 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
 import AlleSporsmal from '../sporsmal/sporsmal-alle';
-import { marker, visHeleSporsmal } from '../svar/svar-duck';
+import { marker, skjulTips, visTips, visHeleSporsmal } from '../svar/svar-duck';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
-import Alternativ from './alternativ';
+import Alternativ from '../alternativ/alternativ';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { Innholdstittel, Undertekst } from 'nav-frontend-typografi';
+import TipsVisning from '../skjema/tips/tipsvisning';
+import { visTipsEtterSporsmal } from '../skjema/tips/tips-generering';
+import { isUndefined } from 'util';
+import { Sidetittel, Undertekst } from 'nav-frontend-typografi';
+import SVG from 'react-inlinesvg';
 
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string,
                        alternativ: SvarAlternativModell[]) => void;
+    visTips: (tipsId: string) => void;
 
     visAlternativer: () => void;
 }
@@ -89,11 +94,17 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         this.state = {feil: false};
     }
 
-    sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: string) {
+    sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: string,
+              besvarteSporsmal: BesvarelseModell[], besvartSpm: BesvarelseModell) {
         if (markerteSpm.length === 0) {
             this.setState({feil: true});
         } else {
-            return this.props.nesteSpm(sporsmalId);
+            const tip = visTipsEtterSporsmal(sporsmalId, besvarteSporsmal);
+            if (isUndefined(besvartSpm.tips) && !isUndefined(tip)) {
+                return this.props.visTips(tip);
+            } else {
+                return this.props.nesteSpm(sporsmalId);
+            }
         }
     }
 
@@ -110,10 +121,8 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
 
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
             besvarelse => besvarelse.sporsmalId === sporsmal.id
-        );
-        const markerteAlternativer: SvarAlternativModell[] = besvartSpm
-            ? besvartSpm.svarAlternativer
-            : [];
+        )!; // Vil alltid ligge i listen
+        const markerteAlternativer: SvarAlternativModell[] = besvartSpm.svarAlternativer;
         if (this.state.feil && markerteAlternativer.length !== 0) {
             this.setState({feil: false});
         }
@@ -153,21 +162,35 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             </div>
                         </div>
                         <div className="sporsmal__innhold">
-                            <img
-                                src={sporsmalImg}
-                                className="sporsmal__ikon"
-                                alt=""
-                            />
-                            <Innholdstittel className="sporsmal__overskrift typo-innholdstittel blokk-xs" tag="h1">
-                                <FormattedHTMLMessage id={sporsmal.id}/>
-                            </Innholdstittel>
-                            {this.state.feil && (
-                                <p className="skjemaelement__feilmelding">
-                                    <FormattedMessage id="feilmelding-mangler-svar"/>
-                                </p>
-                            )}
+                            <div className="sporsmal__hode">
+                                <FormattedMessage id={sporsmal.id + ''}>
+                                    {(tekst: string) =>
+                                        <SVG
+                                            src={sporsmalImg}
+                                            className="sporsmal__ikon"
+                                            role="img"
+                                            aria-label={tekst}
+                                        >
+                                            <img
+                                                src={sporsmalImg}
+                                                className="sporsmal__ikon"
+                                                alt={tekst}
+                                            />
+                                        </SVG>
+                                    }
+                                </FormattedMessage>
+
+                                <Sidetittel className="sporsmal__overskrift blokk-xs" tag="h1">
+                                    <FormattedHTMLMessage id={sporsmal.id}/>
+                                </Sidetittel>
+                                {this.state.feil && (
+                                    <p className="skjemaelement__feilmelding">
+                                        <FormattedMessage id="feilmelding-mangler-svar"/>
+                                    </p>
+                                )}
+                            </div>
                             <Undertekst className="sporsmal__ingress" tag="p">
-                                <FormattedMessage id={sporsmal.egenUndertekst || sporsmal.type} />
+                                <FormattedMessage id={sporsmal.egenUndertekst || sporsmal.type}/>
                             </Undertekst>
                         </div>
                         <button
@@ -216,19 +239,22 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                                 sporsmal,
                                                 sporsmal.type
                                             )
-                                        )}
+                                        ) }
                                 />
                             );
                         })}
                     </ul>
                 </section>
+                {!isUndefined(besvartSpm.tips) &&
+                    <TipsVisning id={besvartSpm.tips!} />}
                 {!sporsmal.erSisteSpm && (
                     <button
                         className={'sporsmal__knapp'}
                         key="besvar"
                         onClick={e => {
                             e.preventDefault();
-                            this.sjekkSvar(markerteAlternativer, sporsmal.id);
+                            this.sjekkSvar(markerteAlternativer, sporsmal.id, besvarteSporsmal, besvartSpm);
+                            window.scrollTo(0, 0);
                         }}
                     >
                         <FormattedMessage id="fortsett-knapp"/>
@@ -246,8 +272,11 @@ const mapStateToProps = (state: AppState): StateProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch,
                             props: OwnProps): DispatchProps => ({
-    markerAlternativ: (sporsmalId, alternativ: SvarAlternativModell[]) =>
-        dispatch(marker(sporsmalId, alternativ)),
+    visTips: (tipsId: string) => dispatch(visTips(tipsId)),
+    markerAlternativ: (sporsmalId, alternativ: SvarAlternativModell[]) => {
+        dispatch(marker(sporsmalId, alternativ));
+        dispatch(skjulTips());
+    },
     visAlternativer: () => dispatch(visHeleSporsmal)
 });
 
