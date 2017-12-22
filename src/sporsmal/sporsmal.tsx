@@ -1,16 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import AlleSporsmal from '../sporsmal/sporsmal-alle';
 import { marker, skjulTips, visTips, visHeleSporsmal } from '../svar/svar-duck';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
-import Alternativ from '../alternativ/alternativ';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { Innholdstittel, Undertekst } from 'nav-frontend-typografi';
-import AlternativContainer from './alternativ-container';
+import AlternativContainer from '../skjema/alternativ-container';
 import TipsVisning from '../skjema/tips/tipsvisning';
 import { visTipsEtterSporsmal } from '../skjema/tips/tips-generering';
 import { isUndefined } from 'util';
@@ -84,6 +81,9 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             totaltAntallSpm
         } = this.props;
 
+        const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
+            besvarelse => besvarelse.sporsmalId === sporsmal.id
+        )!; // Vil alltid ligge i listen
         const markerteAlternativer: SvarAlternativModell[] = besvarteSporsmal.find(
             besvarelse => besvarelse.sporsmalId === sporsmal.id)!.svarAlternativer;
         const sporsmalImg = require('../ikoner/' + sporsmal.id + '.svg');

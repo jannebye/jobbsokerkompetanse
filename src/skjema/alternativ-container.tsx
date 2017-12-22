@@ -1,7 +1,7 @@
 import * as React from 'react';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import Alternativ from './alternativ';
+import Alternativ from '../alternativ/alternativ';
 
 interface AlternativContainerProps {
     alternativer: SvarAlternativModell[];
