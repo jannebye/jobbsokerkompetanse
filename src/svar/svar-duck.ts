@@ -2,19 +2,20 @@ import BesvarelseModell from './svar-modell';
 import {
     Handling,
     ActionType,
-    BesvarAction,
     EndreAlternativAction,
     NesteSporsmalAction,
-    ResetAction, VisAlternativerAction
+    ResetAction, VisTipsAction, SkjulTipsAction, VisAlternativerAction, EndreAlternativOgAntallAction
 } from '../actions';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 
 const {
-    BESVAR,
     ENDRE_ALTERNATIV,
+    ENDRE_ALTERNATIV_OG_ANTALL,
     VIS_ALTERNATIVER,
     NESTE_SPORSMAL,
-    RESET
+    RESET,
+    VIS_TIPS,
+    SKJUL_TIPS
 } = ActionType;
 
 export enum FlytType {
@@ -27,20 +28,20 @@ export interface SvarState {
     gjeldendeSpmId: string;
     flyt: FlytType;
     viserAlternativer: boolean;
+    totalAntallSpm: number;
 }
 
 export const initialState = {
-    data: [{ sporsmalId: 'finn-spm-01', svarAlternativer: [] }],
+    data: [{ sporsmalId: 'finn-spm-01', svarAlternativer: [], tips: undefined }],
     gjeldendeSpmId: 'finn-spm-01',
     flyt: FlytType.FREMOVER,
-    viserAlternativer: false
+    viserAlternativer: false,
+    totalAntallSpm: 19
 };
 
 //  Reducer
-export default function reducer(
-    state: SvarState = initialState,
-    action: Handling
-): SvarState {
+export default function reducer(state: SvarState = initialState,
+                                action: Handling): SvarState {
     switch (action.type) {
         case ActionType.ENDRE_ALTERNATIV: {
             if (
@@ -54,10 +55,10 @@ export default function reducer(
                         besvarelse =>
                             besvarelse.sporsmalId === action.data.sporsmalId
                                 ? {
-                                      ...besvarelse,
-                                      svarAlternativer:
-                                          action.data.svarAlternativer
-                                  }
+                                    ...besvarelse,
+                                    svarAlternativer:
+                                    action.data.svarAlternativer
+                                }
                                 : besvarelse
                     )
                 };
@@ -68,9 +69,45 @@ export default function reducer(
                         ...state.data,
                         {
                             sporsmalId: action.data.sporsmalId,
-                            svarAlternativer: action.data.svarAlternativer
+                            svarAlternativer: action.data.svarAlternativer,
+                            tips: undefined
                         }
                     ]
+                };
+            }
+        }
+        case ActionType.ENDRE_ALTERNATIV_OG_ANTALL: {
+            if (
+                state.data.find(
+                    spm => spm.sporsmalId === action.data.sporsmalId
+                )
+            ) {
+                return {
+                    ...state,
+                    data: state.data.map(
+                        besvarelse =>
+                            besvarelse.sporsmalId === action.data.sporsmalId
+                                ? {
+                                    ...besvarelse,
+                                    svarAlternativer:
+                                    action.data.svarAlternativer
+                                }
+                                : besvarelse
+                    ),
+                    totalAntallSpm: action.data.totalAntallSpm
+                };
+            } else {
+                return {
+                    ...state,
+                    data: [
+                        ...state.data,
+                        {
+                            sporsmalId: action.data.sporsmalId,
+                            svarAlternativer: action.data.svarAlternativer,
+                            tips: undefined
+                        }
+                    ],
+                    totalAntallSpm: action.data.totalAntallSpm
                 };
             }
         }
@@ -91,7 +128,7 @@ export default function reducer(
                     ...state,
                     data: [
                         ...state.data,
-                        { sporsmalId: action.data, svarAlternativer: [] }
+                        { sporsmalId: action.data, svarAlternativer: [], tips: undefined }
                     ],
                     gjeldendeSpmId: action.data,
                     flyt: FlytType.FREMOVER,
@@ -105,23 +142,66 @@ export default function reducer(
             };
         case ActionType.RESET:
             return initialState;
+        case ActionType.VIS_TIPS:
+            return {
+                ...state,
+                data: [...state.data.map(besvarelse => (besvarelse.sporsmalId === state.gjeldendeSpmId) ?
+                    {...besvarelse, tips: action.data} : besvarelse ) ]
+            };
+        case ActionType.SKJUL_TIPS:
+            return {
+                ...state,
+                data: [...state.data.map(besvarelse => (besvarelse.sporsmalId === state.gjeldendeSpmId) ?
+                    {...besvarelse, tips: undefined} : besvarelse ) ]
+            };
         default:
             return state;
     }
 }
 
-// Action Creators
-export function besvar(svar: BesvarelseModell): BesvarAction {
-    return {
-        type: BESVAR,
-        data: svar
-    };
-}
-
-export function marker(
-    sporsmalId: string,
-    svarAlternativ: SvarAlternativModell[]
-): EndreAlternativAction {
+export function marker(sporsmalId: string,
+                       svarAlternativ: SvarAlternativModell[]): EndreAlternativAction | EndreAlternativOgAntallAction {
+    if (sporsmalId === 'soke-spm-01') {
+        if (svarAlternativ.some(alternativ => alternativ.id === 'soke-svar-0101')) {
+            return {
+                type: ENDRE_ALTERNATIV_OG_ANTALL,
+                data: {
+                    sporsmalId: sporsmalId,
+                    svarAlternativer: svarAlternativ,
+                    totalAntallSpm: 17
+                }
+            };
+        } else {
+            return {
+                type: ENDRE_ALTERNATIV_OG_ANTALL,
+                data: {
+                    sporsmalId: sporsmalId,
+                    svarAlternativer: svarAlternativ,
+                    totalAntallSpm: 19
+                }
+            };
+        }
+    } else if (sporsmalId === 'soke-spm-02' && svarAlternativ.some(alternativ => alternativ.id === 'soke-svar-0201')) {
+        if (svarAlternativ.some(alternativ => alternativ.id === 'soke-svar-0201')) {
+            return {
+                type: ENDRE_ALTERNATIV_OG_ANTALL,
+                data: {
+                    sporsmalId: sporsmalId,
+                    svarAlternativer: svarAlternativ,
+                    totalAntallSpm: 18
+                }
+            };
+        } else {
+            return {
+                type: ENDRE_ALTERNATIV_OG_ANTALL,
+                data: {
+                    sporsmalId: sporsmalId,
+                    svarAlternativer: svarAlternativ,
+                    totalAntallSpm: 19
+                }
+            };
+        }
+    }
     return {
         type: ENDRE_ALTERNATIV,
         data: {
@@ -145,5 +225,18 @@ export function nesteSporsmal(sporsmal: string): NesteSporsmalAction {
 export function reset(): ResetAction {
     return {
         type: RESET
+    };
+}
+
+export function visTips(tipsId: string): VisTipsAction {
+    return {
+        type: VIS_TIPS,
+        data: tipsId
+    };
+}
+
+export function skjulTips(): SkjulTipsAction {
+    return {
+        type: SKJUL_TIPS
     };
 }

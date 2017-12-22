@@ -1,20 +1,23 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import AlleSporsmal from '../sporsmal/sporsmal-alle';
-import { marker, visHeleSporsmal } from '../svar/svar-duck';
+import { marker, skjulTips, visTips, visHeleSporsmal } from '../svar/svar-duck';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import BesvarelseModell from '../svar/svar-modell';
-import Alternativ from '../alternativ/alternativ';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import AlternativContainer from '../skjema/alternativ-container';
+import TipsVisning from '../skjema/tips/tipsvisning';
+import { visTipsEtterSporsmal } from '../skjema/tips/tips-generering';
+import { isUndefined } from 'util';
 import { Sidetittel, Undertekst } from 'nav-frontend-typografi';
 import SVG from 'react-inlinesvg';
 
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string,
                        alternativ: SvarAlternativModell[]) => void;
+    visTips: (tipsId: string) => void;
 
     visAlternativer: () => void;
 }
@@ -30,55 +33,11 @@ interface OwnProps {
 interface StateProps {
     besvarteSporsmal: BesvarelseModell[];
     viserAlternativer: boolean;
+    totaltAntallSpm: number;
 }
 
 interface EgenStateProps {
     feil: boolean;
-}
-
-function prepMarkerAlternativ(alternativ: SvarAlternativModell,
-                              alternativListe: SvarAlternativModell[],
-                              sporsmal: SporsmalModell,
-                              type: string): SvarAlternativModell[] {
-    const erValgt = !!alternativListe.find(alt => alt.id === alternativ.id);
-    if (erValgt) {
-        if (type === 'ettvalg' || type === 'skala') {
-            return alternativListe;
-        }
-        return alternativListe.filter(alt => alt.id !== alternativ.id);
-    } else {
-        if (
-            !!sporsmal.uniktAlternativ &&
-            sporsmal.uniktAlternativ === alternativ.id
-        ) {
-            return [alternativ];
-        }
-        if (type === 'ettvalg' || type === 'skala') {
-            return [alternativ];
-        }
-        return [...alternativListe, alternativ];
-    }
-}
-
-/* Gjelder for skalaSpørsmål */
-function skalAlternativMarkeres(markerteAlternativ: SvarAlternativModell[],
-                                alternativ: SvarAlternativModell): boolean {
-    return !!markerteAlternativ.find(
-        altId => altId.skalaId! >= alternativ.skalaId!
-    );
-}
-
-function erAlternativMulig(uniktAlternativId: string,
-                           gjeldendeAlternativId: string,
-                           markerteAlternativer: SvarAlternativModell[]): boolean {
-    if (uniktAlternativId === gjeldendeAlternativId) {
-        return true;
-    } else {
-        if (!!markerteAlternativer.find(alt => alt.id === uniktAlternativId)) {
-            return gjeldendeAlternativId === 'intervju-svar-0202';
-        }
-    }
-    return true;
 }
 
 type SporsmalProps = OwnProps & DispatchProps & StateProps;
@@ -90,11 +49,23 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         this.state = {feil: false};
     }
 
-    sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: string) {
+    sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: string,
+              besvarteSporsmal: BesvarelseModell[], besvartSpm: BesvarelseModell) {
         if (markerteSpm.length === 0) {
             this.setState({feil: true});
         } else {
-            return this.props.nesteSpm(sporsmalId);
+            const tip = visTipsEtterSporsmal(sporsmalId, besvarteSporsmal);
+            if (isUndefined(besvartSpm.tips) && !isUndefined(tip)) {
+                return this.props.visTips(tip);
+            } else {
+                return this.props.nesteSpm(sporsmalId);
+            }
+        }
+    }
+
+    fjernFeil(markerteAlternativer: SvarAlternativModell[]) {
+        if (this.state.feil && markerteAlternativer.length !== 0) {
+            this.setState({feil: false});
         }
     }
 
@@ -106,18 +77,15 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             forrigeSpm,
             spmRef,
             viserAlternativer,
-            visAlternativer
+            visAlternativer,
+            totaltAntallSpm
         } = this.props;
 
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
             besvarelse => besvarelse.sporsmalId === sporsmal.id
-        );
-        const markerteAlternativer: SvarAlternativModell[] = besvartSpm
-            ? besvartSpm.svarAlternativer
-            : [];
-        if (this.state.feil && markerteAlternativer.length !== 0) {
-            this.setState({feil: false});
-        }
+        )!; // Vil alltid ligge i listen
+        const markerteAlternativer: SvarAlternativModell[] = besvarteSporsmal.find(
+            besvarelse => besvarelse.sporsmalId === sporsmal.id)!.svarAlternativer;
         const sporsmalImg = require('../ikoner/' + sporsmal.id + '.svg');
 
         return (
@@ -142,15 +110,11 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 </button>
                             )}
                             <div className="sporsmal__paginering typo-normal">
-                                <strong>
-                                    {besvarteSporsmal.findIndex(
-                                        besvarelse =>
-                                            besvarelse.sporsmalId ===
-                                            sporsmal.id
-                                    ) + 1}
-                                </strong>{' '}
-                                <FormattedMessage id="paginering-av"/>{' '}
-                                <strong>{AlleSporsmal.length}</strong>
+                                <FormattedMessage
+                                    id="paginering"
+                                    values={{indeks: besvarteSporsmal.findIndex(
+                                    besvarelse => besvarelse.sporsmalId === sporsmal.id) + 1, total: totaltAntallSpm}}
+                                />
                             </div>
                         </div>
                         <div className="sporsmal__innhold">
@@ -195,55 +159,23 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             <FormattedMessage id="fortsett-knapp"/>
                         </button>
                     </div>
-                    <ul className="alternativer">
-                        {sporsmal.alternativer.map(function (alternativ: SvarAlternativModell) {
-                            const erValgt = !!markerteAlternativer.find(
-                                alt => alt.id === alternativ.id
-                            )
-                                ? true
-                                : sporsmal.type === 'skala'
-                                    ? skalAlternativMarkeres(
-                                        markerteAlternativer,
-                                        alternativ
-                                    )
-                                    : false;
-                            const kanVelges: boolean = !!sporsmal.uniktAlternativ
-                                ? erAlternativMulig(
-                                    sporsmal.uniktAlternativ,
-                                    alternativ.id,
-                                    markerteAlternativer
-                                )
-                                : true;
-                            return (
-                                <Alternativ
-                                    key={alternativ.id}
-                                    alternativ={alternativ}
-                                    erValgt={erValgt}
-                                    sporsmalId={sporsmal.id}
-                                    sporsmalType={sporsmal.type}
-                                    kanVelges={kanVelges}
-                                    markerAlternativ={() =>
-                                        markerAlternativ(
-                                            sporsmal.id,
-                                            prepMarkerAlternativ(
-                                                alternativ,
-                                                markerteAlternativer,
-                                                sporsmal,
-                                                sporsmal.type
-                                            )
-                                        )}
-                                />
-                            );
-                        })}
-                    </ul>
+                    <AlternativContainer
+                        alternativer={sporsmal.alternativer}
+                        markerteAlternativer={markerteAlternativer}
+                        sporsmal={sporsmal}
+                        markerAlternativ={(id, alternativ) => {this.fjernFeil(markerteAlternativer);
+                                                               markerAlternativ(id, alternativ); }}
+                    />
                 </section>
+                {!isUndefined(besvartSpm.tips) &&
+                    <TipsVisning id={besvartSpm.tips!} />}
                 {!sporsmal.erSisteSpm && (
                     <button
                         className={'sporsmal__knapp'}
                         key="besvar"
                         onClick={e => {
                             e.preventDefault();
-                            this.sjekkSvar(markerteAlternativer, sporsmal.id);
+                            this.sjekkSvar(markerteAlternativer, sporsmal.id, besvarteSporsmal, besvartSpm);
                             window.scrollTo(0, 0);
                         }}
                     >
@@ -257,13 +189,17 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     besvarteSporsmal: state.svar.data,
-    viserAlternativer: state.svar.viserAlternativer
+    viserAlternativer: state.svar.viserAlternativer,
+    totaltAntallSpm: state.svar.totalAntallSpm
 });
 
 const mapDispatchToProps = (dispatch: Dispatch,
                             props: OwnProps): DispatchProps => ({
-    markerAlternativ: (sporsmalId, alternativ: SvarAlternativModell[]) =>
-        dispatch(marker(sporsmalId, alternativ)),
+    visTips: (tipsId: string) => dispatch(visTips(tipsId)),
+    markerAlternativ: (sporsmalId, alternativ: SvarAlternativModell[]) => {
+        dispatch(marker(sporsmalId, alternativ));
+        dispatch(skjulTips());
+    },
     visAlternativer: () => dispatch(visHeleSporsmal)
 });
 
