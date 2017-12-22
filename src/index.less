@@ -13,6 +13,7 @@
 @import '../node_modules/nav-frontend-chevron-style/src/mixins';
 
 @import './less/knapper';
+@import './skjema/tips/tips';
 @import './sporsmal/sporsmal';
 @import './alternativ/alternativ';
 @import './resultat/resultat';
@@ -52,6 +53,20 @@ body {
 	height: 100%;
 	text-align: center;
 
+	.bakgrunn {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 35%;
+		background-color: #cce1f3;
+	}
+
+	.forside-bilde {
+		width: 60%;
+		margin: 1rem auto 0;
+		z-index: 1;
+	}
 }
 
 @media (min-width: @screen-sm-min) {

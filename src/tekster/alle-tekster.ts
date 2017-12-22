@@ -157,6 +157,10 @@ export default { 'nb': {
 'soke-svar-0401': 'Sender samme søknad til alle',
 'soke-svar-0402': 'Gjør noen tilpasninger',
 'soke-svar-0403': 'Skreddersyr alle søknader',
+'start-knapp': 'Start',
+'startside-image-alt': 'Forstørrelsesglass',
+'startside-ingress': 'Svar på våre spørsmål og vi gir deg<br>tips som støtter deg i søkeprosessen',
+'startside-tittel': 'Jobbklar?',
 'tekst-er-lagret': 'Dine råd er lagret, og du kan finne dem igjen på Ditt Nav.<br><br>Du kan også svare på spørsmålene på nytt, om du ønsker.',
 'veiviser-innhold': 'Ønsker du å lese mer om jobbsøkerprosessen?',
 'veiviser-overskrift': 'Gå til vår veiviser for arbeidssøkere'
