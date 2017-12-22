@@ -139,6 +139,7 @@ export default { 'nb': {
 'intervju-svar-0503': 'Kan gjøre en større innsats',
 'intervju-svar-0504': 'Synes jeg har gjort en brukbar jobb',
 'intervju-svar-0505': 'Er veldig fornøyd med egen innsats',
+'paginering': '{indeks} av {total}',
 'soke-spm-01': 'Hvor mange stillinger<br>har du søkt siste året?',
 'soke-spm-02': 'Hvor mange ganger<br>har du blitt innkalt til<br>intervju det siste året?',
 'soke-spm-03': 'Hvor mange stillinger<br>har du fått tilbud om<br>det siste året?',
@@ -172,5 +173,6 @@ export default { 'nb': {
 'tips-standard-overskrift': 'VÅRT TIPS TIL DEG',
 'vikariat-deltid': 'Et vikariat eller deltidsjobb kan føre til fast arbeid. Det er lettere å få en ny jobb når du allerede er i arbeid.',
 'veiviser-innhold': 'Ønsker du å lese mer om jobbsøkerprosessen?',
+'veiviser-link': 'https://tjenester.nav.no/veiviserarbeidssoker/?situasjon=mistet-jobben',
 'veiviser-overskrift': 'Gå til vår veiviser for arbeidssøkere'
  }, 'en': {} };

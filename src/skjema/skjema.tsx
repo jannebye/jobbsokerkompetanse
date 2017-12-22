@@ -6,10 +6,7 @@ import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import { FlytType, nesteSporsmal } from '../svar/svar-duck';
 import BesvarelseModell from '../svar/svar-modell';
-import {
-    default as Avhengigheter,
-    AvhengighetModell
-} from '../utils/avhengigheter';
+import { default as Avhengigheter, AvhengighetModell } from '../utils/avhengigheter';
 import { FormattedMessage } from 'react-intl';
 
 function forrigeSporsmal(gjeldendeSpm: string, besvarelse: BesvarelseModell[]) {
