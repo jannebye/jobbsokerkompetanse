@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Sporsmal } from './sporsmal';
-import {configure, mount, shallow} from 'enzyme';
+import { configure, mount, shallow } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import getStore from '../store';
 import IntlProvider from '../Intl-provider';
 import { Provider } from 'react-redux';
-import { SinonSpy } from 'sinon';
 import spm from '../sporsmal/sporsmal-alle';
 import BesvarelseModell from '../svar/svar-modell';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import SvarAlternativModell from "./svaralternativ";
+import SvarAlternativModell from './svaralternativ';
+import { SinonSpy } from 'sinon';
 var sinon = require('sinon');
 
 configure({ adapter: new Adapter() });
@@ -38,35 +38,44 @@ function getJSXElement (besvarteSpm: Array<BesvarelseModell>, spmModell: Sporsma
 
 describe('<Sporsmal />', function() {
     let tips: string | undefined;
+    let spy: SinonSpy;
+    let svarAlternativer: Array<SvarAlternativModell>;
+    const preventDefault = function () { return; };
+
+    beforeEach(() => {
+        spy = sinon.spy();
+        svarAlternativer = new Array<SvarAlternativModell>();
+    });
 
     it('skal rendre komponent', () => {
 
         const sisteSpm = spm.find(x => x.erSisteSpm === true)!;
-        const svarAlternativer = [{id: sisteSpm!.alternativer[0].id}];
+        svarAlternativer.push({id: sisteSpm!.alternativer[0].id});
         const besvarteSpm = [{sporsmalId: sisteSpm!.id, svarAlternativer: svarAlternativer, tips: tips}];
         const spmModell = spm.find(x => x.id === sisteSpm.id)!;
 
-        shallow(getJSXElement(besvarteSpm, spmModell, sinon.spy()));
+        shallow(getJSXElement(besvarteSpm, spmModell, spy));
     });
 
     it('skal vise tilbakeknapp hvis det er siste spørsmål', () => {
 
         const sisteSpm = spm.find(x => x.erSisteSpm === true)!;
-        const svarAlternativer = new Array<SvarAlternativModell>();
         const besvarteSpm = [{sporsmalId: sisteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
         const spmModell = spm.find(x => x.id === sisteSpm.id);
-        const wrapper = mount(getJSXElement(besvarteSpm, spmModell!, sinon.spy()));
+        const wrapper = mount(getJSXElement(besvarteSpm, spmModell!, spy));
+        const knapp = wrapper.find('.sporsmal__knapp__tilbake');
 
         expect(wrapper.find('.sporsmal__knapp__tilbake').exists()).toBe(true);
+        knapp.simulate('click', preventDefault);
+        expect(spy.calledOnce).toBeTruthy();
     });
 
     it('skal vise tilbakeknapp hvis det hverken er første eller siste spørsmål', () => {
 
         const sporsmal = spm.find(x => !x.erSisteSpm && !x.erForsteSpm)!;
-        const svarAlternativer = new Array<SvarAlternativModell>();
         const besvarteSpm = [{sporsmalId: sporsmal.id, svarAlternativer: svarAlternativer, tips: tips}];
         const spmModell = spm.find(x => x.id === sporsmal.id);
-        const wrapper = mount(getJSXElement(besvarteSpm, spmModell!, sinon.spy()));
+        const wrapper = mount(getJSXElement(besvarteSpm, spmModell!, spy));
 
         expect(wrapper.find('.sporsmal__knapp__tilbake').exists()).toBe(true);
     });
@@ -74,12 +83,51 @@ describe('<Sporsmal />', function() {
     it('skal ikke vise tilbakeknapp dersom det er første spørsmål', () => {
 
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
-        let svarAlternativer = new Array<SvarAlternativModell>();
         const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
         const spmModell = spm.find(x => x.id === forsteSpm.id);
-        const wrapper = mount(getJSXElement(besvarteSpm, spmModell!, sinon.spy()));
+        const wrapper = mount(getJSXElement(besvarteSpm, spmModell!, spy));
 
         expect(wrapper.find('.sporsmal__knapp__tilbake').exists()).toBe(false);
+    });
+
+    it('skal vise fortsettknapp', () => {
+
+        const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
+        const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
+        const spmModell = spm.find(x => x.id === forsteSpm.id);
+        const wrapper = mount(getJSXElement(besvarteSpm, spmModell!, spy));
+
+        expect(wrapper.find('.sporsmal__videre').exists()).toBe(true);
+    });
+
+    it('skal vise feilmelding dersom man trykker på nesteknapp og spørsmål ikke er besvart', () => {
+
+        const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
+        const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
+        const spmModell = spm.find(x => x.id === forsteSpm.id);
+        const wrapper = mount(getJSXElement(besvarteSpm, spmModell!, spy));
+
+        wrapper.find( '.sporsmal__knapp')
+               .last()
+               .simulate('click', preventDefault);
+
+        expect(wrapper.find('.skjemaelement__feilmelding')).toHaveLength(1);
+    });
+
+    it('skal ikke vise feilmelding dersom man trykker på nesteknapp og spørsmål er besvart', () => {
+
+        const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
+        svarAlternativer.push({id: forsteSpm!.alternativer[0].id});
+        const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
+        const spmModell = spm.find(x => x.id === forsteSpm.id);
+        const wrapper = mount(getJSXElement(besvarteSpm, spmModell!, spy));
+
+        wrapper.find('.sporsmal__knapp')
+               .last()
+               .simulate('click', preventDefault);
+
+        expect(wrapper.find('.skjemaelement__feilmelding')).toHaveLength(0);
+        expect(spy.calledOnce).toBeTruthy();
     });
 
 });
