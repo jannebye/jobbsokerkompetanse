@@ -38,7 +38,7 @@ describe('<Resultat />', function() {
 
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(hentTema(wrapper, '525225').exists()).to.equal(true);
-        expect(hentTema(wrapper, '54067').exists()).to.equal(true);
+        expect(hentTema(wrapper, '540674').exists()).to.equal(true);
 
     });
 
