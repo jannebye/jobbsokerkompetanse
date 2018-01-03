@@ -21,6 +21,10 @@ export function visTipsEtterSporsmal(sporsmalId: string, fullBesvarelse: Besvare
             return tipsIntervjuFokus(fullBesvarelse);
         case 'soke-spm-04':
             return tipsSoknadSvarPaaAnnonsen(fullBesvarelse);
+        case 'intervju-spm-01':
+            return tekstIkkeIntervju(fullBesvarelse);
+        case 'intervju-spm-02':
+            return tipsIntervjuHvorforDeg(fullBesvarelse);
         case 'intervju-spm-03':
             return tipsIntervjuTrygg(fullBesvarelse);
         case 'intervju-spm-04':
@@ -156,6 +160,31 @@ export function tipsSoknadSvarPaaAnnonsen(fullBesvarelse: BesvarelseModell[]): (
         return 'soknad-svar-paa-annonsen';
     } else {
         return undefined;
+    }
+}
+
+/* OBS! Ikke et tips. Returnerer tekstId hvis bruker har svart alt 1 på spm 11 eller 12.
+ * Skal vises i forbindelse med spm 15 */
+export function tekstIkkeIntervju(fullBesvarelse: BesvarelseModell[]): (string | undefined) {
+    const besvarelse12 = fullBesvarelse.find(besvarelse => besvarelse.sporsmalId === 'soke-spm-02');
+    const besvarelse11 = fullBesvarelse.find(besvarelse => besvarelse.sporsmalId === 'soke-spm-01');
+    if (manglerBesvarelse(besvarelse12) || manglerBesvarelse(besvarelse11)) {
+        return undefined;
+    } else if (erAlternativPaaEttvalgsSpmValgt('soke-svar-0201', besvarelse12!) &&
+        erAlternativPaaEttvalgsSpmValgt('soke-svar-0101', besvarelse11!)) {
+        return 'mellomtekst-ikke-vaert-paa-intervju';
+    } else {
+        return undefined;
+    }
+}
+
+/* Returnerer tipsId hvis spm 16 er besvart */
+export function tipsIntervjuHvorforDeg(fullBesvarelse: BesvarelseModell[]): (string | undefined) {
+    const besvarelse16 = fullBesvarelse.find(besvarelse => besvarelse.sporsmalId === 'intervju-spm-02');
+    if (manglerBesvarelse(besvarelse16)) {
+        return undefined;
+    } else {
+        return 'intervju-hvorfor-deg';
     }
 }
 
