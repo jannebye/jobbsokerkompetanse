@@ -44,7 +44,7 @@ const temaLogikk = {
         alternativ: ['soke-svar-0103', 'soke-svar-0104', 'soke-svar-0105']
     },
     soknadCV6: {
-        alternativ: ['cv-svar-0104']
+        alternativ: ['cv-svar-0504']
     },
     soknadCV8: {
         alternativ: ['finn-svar-0110']
@@ -82,7 +82,7 @@ const temaLogikk = {
         ]
     },
     intervju6: {
-        alternativ: ['soke-svar-0101', 'soke-svar-0201']
+        alternativ: ['intervju-svar-0203', 'intervju-svar-0204']
     },
     intervju7: {
         alternativ: [
