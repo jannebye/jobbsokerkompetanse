@@ -58,7 +58,7 @@ function Alternativ({
             markerAlternativ();
         } else if (e.currentTarget.type === 'radio' && ARROW_KEYCODES.some(keycode => keycode === e.which)) {
             markerAlternativ();
-        }
+        } 
     }
 
     return (
