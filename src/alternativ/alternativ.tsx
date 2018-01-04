@@ -47,13 +47,16 @@ function Alternativ({
     }
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-        const valgt = e.target.checked;
-        e.target.checked = !valgt;
+            const valgt = e.target.checked;
+            e.target.checked = !valgt;
     }
 
     function onKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
         const ENTER_KEYCODE = 13;
-        if (e.which === ENTER_KEYCODE) {
+        const ARROW_KEYCODES = [37, 38, 39, 40];
+        if (e.currentTarget.type === 'checkbox' && e.which === ENTER_KEYCODE) {
+            markerAlternativ();
+        } else if (e.currentTarget.type === 'radio' && ARROW_KEYCODES.some(keycode => keycode === e.which)) {
             markerAlternativ();
         }
     }
