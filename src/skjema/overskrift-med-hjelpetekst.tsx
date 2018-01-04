@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Element } from 'nav-frontend-typografi';
 import { HjelpetekstAuto } from 'nav-frontend-hjelpetekst';
-import {FormattedMessage} from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 interface OverskriftMedHjelpeTekstProps {
     overskriftId: string;
