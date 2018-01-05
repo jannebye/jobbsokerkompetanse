@@ -222,7 +222,7 @@ export const alleTemaer = [
         id: '454127',
         tekst: 'Gjør et godt førsteinntrykk',
         prioritet: 12,
-        defaultPosisjon: defaultTemaType.LEGGES_TIL,
+        defaultPosisjon: defaultTemaType.FAST,
         kategori: TemaKategori.INTERVJU
     },
     {
