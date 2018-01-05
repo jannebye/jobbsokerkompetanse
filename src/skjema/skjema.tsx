@@ -99,7 +99,7 @@ class Skjema extends React.Component<SkjemaProps, {}> {
         let sporsmalRefs = this.sporsmalRefs;
 
         return (
-            <form>
+            <form onKeyPress={e => {if (e.which === 13 /* Enter */) {e.preventDefault(); }}}>
                 <Sporsmal
                     key={gjeldendeSporsmalId}
                     sporsmal={

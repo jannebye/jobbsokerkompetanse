@@ -104,7 +104,6 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 <button
                                     className="sporsmal__knapp__tilbake"
                                     onClick={e => {
-                                        e.preventDefault();
                                         forrigeSpm();
                                     }}
                                 >
@@ -174,6 +173,7 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                 {sporsmal.erSisteSpm ? (
                         <div className="knapperad blokk-s">
                             <button
+                                type="submit"
                                 className="knapp knapp--hoved"
                                 onClick={() => handleSubmit()}
                             >

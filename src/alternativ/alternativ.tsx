@@ -25,7 +25,7 @@ function Alternativ({
 
     let alternativKlasser = 'alternativ ';
     let inputKlasser = 'skjemaelement__input alternativ__input ';
-    let inputType;
+    let inputType: 'radio' | 'checkbox';
     switch (sporsmalType) {
         case AlternativTyper.ETTVALG:
             inputKlasser += 'radioknapp ';
@@ -53,12 +53,9 @@ function Alternativ({
 
     function onKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
         const ENTER_KEYCODE = 13;
-        const ARROW_KEYCODES = [37, 38, 39, 40];
-        if (e.currentTarget.type === 'checkbox' && e.which === ENTER_KEYCODE) {
+        if (e.which === ENTER_KEYCODE) {
             markerAlternativ();
-        } else if (e.currentTarget.type === 'radio' && ARROW_KEYCODES.some(keycode => keycode === e.which)) {
-            markerAlternativ();
-        } 
+        }
     }
 
     return (
@@ -71,8 +68,13 @@ function Alternativ({
                 defaultValue={alternativ.id}
                 checked={erValgt}
                 onChange={e => handleChange(e)}
+                onFocus={e => {
+                    if (kanVelges && inputType === 'radio') {
+                        markerAlternativ();
+                    }
+                }}
                 onKeyUp={e => {
-                    if (kanVelges) {
+                    if (kanVelges && inputType === 'checkbox') {
                         onKeyUp(e);
                     }
                 }}
