@@ -10,10 +10,10 @@ import BesvarelseModell from '../svar/svar-modell';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
 import SvarAlternativModell from './svaralternativ';
 import { SinonSpy } from 'sinon';
-var sinon = require('sinon');
+const sinon = require('sinon');
 
 configure({ adapter: new Adapter() });
-let store = getStore();
+const store = getStore();
 
 function getJSXElement (besvarteSpm: Array<BesvarelseModell>, spmModell: SporsmalModell, spy: SinonSpy) {
     return (
@@ -40,7 +40,7 @@ describe('<Sporsmal />', function() {
     let tips: string | undefined;
     let spy: SinonSpy;
     let svarAlternativer: Array<SvarAlternativModell>;
-    const preventDefault = function () { return; };
+    const preventDefault = {preventDefault: () => {return; }};
 
     beforeEach(() => {
         spy = sinon.spy();
@@ -50,22 +50,19 @@ describe('<Sporsmal />', function() {
     it('skal rendre komponent', () => {
 
         const sisteSpm = spm.find(x => x.erSisteSpm === true)!;
-        svarAlternativer.push({id: sisteSpm!.alternativer[0].id});
         const besvarteSpm = [{sporsmalId: sisteSpm!.id, svarAlternativer: svarAlternativer, tips: tips}];
-        const spmModell = spm.find(x => x.id === sisteSpm.id)!;
 
-        shallow(getJSXElement(besvarteSpm, spmModell, spy));
+        shallow(getJSXElement(besvarteSpm, sisteSpm, spy));
     });
 
-    it('skal vise tilbakeknapp hvis det er siste spørsmål', () => {
+    it('skal kunne trykke på tilbakeknapp dersom det er siste spørsmål', () => {
 
         const sisteSpm = spm.find(x => x.erSisteSpm === true)!;
         const besvarteSpm = [{sporsmalId: sisteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
-        const spmModell = spm.find(x => x.id === sisteSpm.id);
-        const wrapper = mount(getJSXElement(besvarteSpm, spmModell!, spy));
+        const wrapper = mount(getJSXElement(besvarteSpm, sisteSpm!, spy));
         const knapp = wrapper.find('.sporsmal__knapp__tilbake');
 
-        expect(wrapper.find('.sporsmal__knapp__tilbake').exists()).toBe(true);
+        expect(knapp.exists()).toBe(true);
         knapp.simulate('click', preventDefault);
         expect(spy.calledOnce).toBeTruthy();
     });
@@ -74,8 +71,7 @@ describe('<Sporsmal />', function() {
 
         const sporsmal = spm.find(x => !x.erSisteSpm && !x.erForsteSpm)!;
         const besvarteSpm = [{sporsmalId: sporsmal.id, svarAlternativer: svarAlternativer, tips: tips}];
-        const spmModell = spm.find(x => x.id === sporsmal.id);
-        const wrapper = mount(getJSXElement(besvarteSpm, spmModell!, spy));
+        const wrapper = mount(getJSXElement(besvarteSpm, sporsmal!, spy));
 
         expect(wrapper.find('.sporsmal__knapp__tilbake').exists()).toBe(true);
     });
@@ -84,8 +80,7 @@ describe('<Sporsmal />', function() {
 
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
         const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
-        const spmModell = spm.find(x => x.id === forsteSpm.id);
-        const wrapper = mount(getJSXElement(besvarteSpm, spmModell!, spy));
+        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
 
         expect(wrapper.find('.sporsmal__knapp__tilbake').exists()).toBe(false);
     });
@@ -94,8 +89,7 @@ describe('<Sporsmal />', function() {
 
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
         const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
-        const spmModell = spm.find(x => x.id === forsteSpm.id);
-        const wrapper = mount(getJSXElement(besvarteSpm, spmModell!, spy));
+        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
 
         expect(wrapper.find('.sporsmal__videre').exists()).toBe(true);
     });
@@ -104,8 +98,7 @@ describe('<Sporsmal />', function() {
 
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
         const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
-        const spmModell = spm.find(x => x.id === forsteSpm.id);
-        const wrapper = mount(getJSXElement(besvarteSpm, spmModell!, spy));
+        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
 
         wrapper.find( '.sporsmal__knapp')
                .last()
@@ -119,8 +112,7 @@ describe('<Sporsmal />', function() {
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
         svarAlternativer.push({id: forsteSpm!.alternativer[0].id});
         const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
-        const spmModell = spm.find(x => x.id === forsteSpm.id);
-        const wrapper = mount(getJSXElement(besvarteSpm, spmModell!, spy));
+        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
 
         wrapper.find('.sporsmal__knapp')
                .last()
