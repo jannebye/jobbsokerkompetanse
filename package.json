@@ -74,7 +74,7 @@
     "@types/react-dom": "16.0.3",
     "@types/react-intl": "2.3.2",
     "@types/react-redux": "5.0.14",
-    "@types/sinon": "^4.1.2",
+    "@types/sinon": "4.1.2",
     "autoless": "0.1.7",
     "chai": "4.1.2",
     "enzyme": "3.2.0",
