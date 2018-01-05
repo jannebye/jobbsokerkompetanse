@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import getStore from './store';
 import Innhold from './innhold';
 import IntlProvider from './Intl-provider';
+import 'babel-polyfill';
 
 const store = getStore();
 
