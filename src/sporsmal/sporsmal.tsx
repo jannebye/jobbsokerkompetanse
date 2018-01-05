@@ -43,7 +43,7 @@ interface EgenStateProps {
 
 type SporsmalProps = OwnProps & DispatchProps & StateProps;
 
-class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
+export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
 
     constructor(props: SporsmalProps) {
         super(props);
