@@ -119,14 +119,15 @@ export function tipsOversiktSoknader(fullBesvarelse: BesvarelseModell[]): (strin
     }
 }
 
-/* Returnerer tipsId hvis alternativ 1 er valgt på spm 12, og alternativ 5 eller 6 er valgt på spm 11 */
+/* Returnerer tipsId hvis alternativ 1 er valgt på spm 12, og alternativ 4 eller 5 er valgt på spm 11 */
 export function tipsForberedtIkkeIntervju(fullBesvarelse: BesvarelseModell[]): (string | undefined) {
     const besvarelse12 = fullBesvarelse.find(besvarelse => besvarelse.sporsmalId === 'soke-spm-02');
     const besvarelse11 = fullBesvarelse.find(besvarelse => besvarelse.sporsmalId === 'soke-spm-01');
     if (manglerBesvarelse(besvarelse12) || manglerBesvarelse(besvarelse11)) {
         return undefined;
-    } else if (erAlternativPaaEttvalgsSpmValgt('soke-svar-0201', besvarelse12!) &&
-        erAlternativPaaEttvalgsSpmValgt('soke-svar-0105', besvarelse11!)) {
+    } else if (erAlternativPaaEttvalgsSpmValgt('soke-svar-0201', besvarelse12!)
+        && (erAlternativPaaEttvalgsSpmValgt('soke-svar-0104', besvarelse11!)
+            || erAlternativPaaEttvalgsSpmValgt('soke-svar-0105', besvarelse11!))) {
         return 'forberedt-ikke-intervju';
     } else {
         return undefined;
