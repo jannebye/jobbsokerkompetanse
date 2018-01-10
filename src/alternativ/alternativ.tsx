@@ -42,7 +42,7 @@ function Alternativ({
             break;
         default:
             inputKlasser += '';
-            inputType = 'readio';
+            inputType = 'radio';
             break;
     }
 
@@ -54,7 +54,7 @@ function Alternativ({
                 type={inputType}
                 name={sporsmalId.toString()}
                 defaultValue={alternativ.id}
-                checked={erValgt}
+                defaultChecked={erValgt}
             />
             <label
                 htmlFor={alternativ.id}
