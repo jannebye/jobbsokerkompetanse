@@ -59,9 +59,7 @@ function Alternativ({
     }
 
     function hentAlternativMarkering() {
-        return kanVelges ?
-            (erValgt && sporsmalType === AlternativTyper.SKALA ? 'markert' : '')
-            : 'disabled';
+        return erValgt && sporsmalType === AlternativTyper.SKALA ? 'markert' : '';
     }
 
     return (
