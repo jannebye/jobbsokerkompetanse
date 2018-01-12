@@ -14,4 +14,4 @@ fasitResources:
   exposed:
   - alias: jobbsokerkompetanse_url
     resourceType: baseurl
-    path: /jobbsokerkompetanse/
+    url: /jobbsokerkompetanse/
