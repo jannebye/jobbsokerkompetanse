@@ -315,14 +315,14 @@ describe('TipsGenerator', () => {
         }
     );
 
-   /* it('skal foreslå å forberede til intervjuet alltid?? (spm 16)', () => {
-        svarAlternativer.push({id:'soke-svar-0402'});
+    it('skal foreslå å forberede til intervjuet alltid (spm 16)', () => {
+        svarAlternativer.push({id:'intervju-svar-0204'});
         const spmId = 'intervju-spm-02', expected = 'intervju-hvorfor-deg';
         const besvarelse = [{sporsmalId: spmId, svarAlternativer: svarAlternativer, tips: undefined}];
         const tips = visTipsEtterSporsmal(spmId, besvarelse);
 
         expect(tips).toEqual(expected);
-    });*/
+    });
 
     it('skal foreslå forberede seg til intervjuet ' +
         'dersom man ikke gjør det bra på intervju, ikke forbereder seg, ikke føler seg trygg',
