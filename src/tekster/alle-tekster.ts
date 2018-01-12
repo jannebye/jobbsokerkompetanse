@@ -171,7 +171,7 @@ export default { 'nb': {
 'oversikt-soknader': 'Lag en oversikt over alle stillingene du har søkt, kontaktpersoner og hele søknadsprosessen. Da blir det enkelt å gå tilbake hvis en arbeidsgiver tar kontakt. Du kan også opprette en aktivitetsplan på Ditt NAV og holde orden på stillingene der.',
 'passer-flere-jobber': 'Selv om kravene i annonsen ikke passer 100 prosent, må du ikke undervurdere deg selv. Kanskje passer kompetansen din til flere jobber enn du tror?',
 'registrer-CV': 'Vi vil anbefale deg å registrere CV-en din på enda flere steder enn du gjør i dag, slik at flere arbeidsgivere kan finne deg.',
-'sok-utenfor-hjemsted': 'Har du vurdert å søke jobb utenfor hjemstedet ditt? Det kan øke muligheten dine for å komme raskere i jobb',
+'sok-utenfor-hjemsted': 'Har du vurdert å søke jobb utenfor hjemstedet ditt? Det kan øke mulighetene dine for å komme raskere i jobb.',
 'soknad-svar-paa-annonsen': 'Husk at hver eneste søknad du skriver skal passe til den jobben du søker på. Søknaden skal være et direkte svar på stillingsannonsen.',
 'tilpass-cv': 'Både søknaden og CV-en må skrives og tilpasses den jobben du søker på. Søknaden skal svare direkte på stillingsannonsen.',
 'tips-standard-overskrift': 'VÅRT TIPS TIL DEG',

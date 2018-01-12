@@ -21,6 +21,8 @@ export function visTipsEtterSporsmal(sporsmalId: string, fullBesvarelse: Besvare
             return tipsIntervjuFokus(fullBesvarelse);
         case 'soke-spm-04':
             return tipsSoknadSvarPaaAnnonsen(fullBesvarelse);
+        case 'intervju-spm-02':
+            return tipsHvorforDeg(fullBesvarelse);
         case 'intervju-spm-03':
             return tipsIntervjuTrygg(fullBesvarelse);
         case 'intervju-spm-04':
@@ -119,14 +121,15 @@ export function tipsOversiktSoknader(fullBesvarelse: BesvarelseModell[]): (strin
     }
 }
 
-/* Returnerer tipsId hvis alternativ 1 er valgt på spm 12, og alternativ 5 eller 6 er valgt på spm 11 */
+/* Returnerer tipsId hvis alternativ 1 er valgt på spm 12, og alternativ 4 eller 5 er valgt på spm 11 */
 export function tipsForberedtIkkeIntervju(fullBesvarelse: BesvarelseModell[]): (string | undefined) {
     const besvarelse12 = fullBesvarelse.find(besvarelse => besvarelse.sporsmalId === 'soke-spm-02');
     const besvarelse11 = fullBesvarelse.find(besvarelse => besvarelse.sporsmalId === 'soke-spm-01');
     if (manglerBesvarelse(besvarelse12) || manglerBesvarelse(besvarelse11)) {
         return undefined;
-    } else if (erAlternativPaaEttvalgsSpmValgt('soke-svar-0201', besvarelse12!) &&
-        erAlternativPaaEttvalgsSpmValgt('soke-svar-0105', besvarelse11!)) {
+    } else if (erAlternativPaaEttvalgsSpmValgt('soke-svar-0201', besvarelse12!)
+        && (erAlternativPaaEttvalgsSpmValgt('soke-svar-0104', besvarelse11!)
+            || erAlternativPaaEttvalgsSpmValgt('soke-svar-0105', besvarelse11!))) {
         return 'forberedt-ikke-intervju';
     } else {
         return undefined;
@@ -157,6 +160,17 @@ export function tipsSoknadSvarPaaAnnonsen(fullBesvarelse: BesvarelseModell[]): (
     } else {
         return undefined;
     }
+}
+
+/* Returnerer tipsId uavhengig av valgt alternativ på spm 16*/
+export function tipsHvorforDeg(fullBesvarelse: BesvarelseModell[]): (string | undefined) {
+    const besvarelse16 = fullBesvarelse.find(besvarelse => besvarelse.sporsmalId === 'intervju-spm-02');
+    if (manglerBesvarelse(besvarelse16)) {
+        return undefined;
+    } else {
+        return 'intervju-hvorfor-deg';
+    }
+
 }
 
 /* Returner tipsId hvis alternativ 1 eller 2 er valgt på spm 17, og 1 eller 2 på spm 16, og 1 eller 2 på spm 15 */
