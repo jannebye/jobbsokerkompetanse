@@ -7,7 +7,6 @@ import { AppState } from '../ducks/reducer';
 import { FlytType, nesteSporsmal } from '../svar/svar-duck';
 import BesvarelseModell from '../svar/svar-modell';
 import { default as Avhengigheter, AvhengighetModell } from '../utils/avhengigheter';
-import { FormattedMessage } from 'react-intl';
 
 function forrigeSporsmal(gjeldendeSpm: string, besvarelse: BesvarelseModell[]) {
     const svarListe: BesvarelseModell[] = [...besvarelse];
@@ -98,12 +97,9 @@ class Skjema extends React.Component<SkjemaProps, {}> {
             flytRetning
         } = this.props;
         let sporsmalRefs = this.sporsmalRefs;
-        const gjeldendeSporsmal = alleSporsmal.find(
-            spm => spm.id === gjeldendeSporsmalId
-        );
 
         return (
-            <form>
+            <form onKeyPress={e => {if (e.which === 13 /* Enter */) {e.preventDefault(); }}}>
                 <Sporsmal
                     key={gjeldendeSporsmalId}
                     sporsmal={
@@ -122,17 +118,8 @@ class Skjema extends React.Component<SkjemaProps, {}> {
                                 forelopigBesvarelse
                             )
                         )}
+                    handleSubmit={() => handleSubmit()}
                 />
-                {gjeldendeSporsmal!.erSisteSpm && (
-                    <div className="knapperad blokk-s">
-                        <button
-                            className="knapp knapp--hoved"
-                            onClick={() => handleSubmit()}
-                        >
-                            <FormattedMessage id="send-inn"/>
-                        </button>
-                    </div>
-                )}
             </form>
         );
     }

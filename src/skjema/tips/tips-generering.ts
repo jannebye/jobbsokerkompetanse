@@ -61,7 +61,7 @@ export function tipsPasserFlereJobber(fullBesvarelse: BesvarelseModell[]): (stri
         return undefined;
     } else if (besvarelse3!.svarAlternativer
             .some(alt => alt.id === 'finn-svar-0301')) {
-        return 'sok-utenfor-hjemsted';
+        return 'passer-flere-jobber';
     } else {
         return undefined;
     }
@@ -87,7 +87,7 @@ export function tipsRegistrerCV(fullBesvarelse: BesvarelseModell[]): (string | u
     if (manglerBesvarelse(besvarelse6)) {
         return undefined;
     } else if (besvarelse6!.svarAlternativer.length <= 2) {
-        return 'vikariat-deltid';
+        return 'registrer-CV';
     } else {
         return undefined;
     }

@@ -25,7 +25,7 @@ function Alternativ({
 
     let alternativKlasser = 'alternativ ';
     let inputKlasser = 'skjemaelement__input alternativ__input ';
-    let inputType;
+    let inputType: 'radio' | 'checkbox';
     switch (sporsmalType) {
         case AlternativTyper.ETTVALG:
             inputKlasser += 'radioknapp ';
@@ -42,8 +42,20 @@ function Alternativ({
             break;
         default:
             inputKlasser += '';
-            inputType = 'readio';
+            inputType = 'radio';
             break;
+    }
+
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+            const valgt = e.target.checked;
+            e.target.checked = !valgt;
+    }
+
+    function onKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
+        const ENTER_KEYCODE = 13;
+        if (e.which === ENTER_KEYCODE) {
+            markerAlternativ();
+        }
     }
 
     return (
@@ -55,11 +67,22 @@ function Alternativ({
                 name={sporsmalId.toString()}
                 defaultValue={alternativ.id}
                 checked={erValgt}
+                onChange={e => handleChange(e)}
+                onFocus={e => {
+                    if (kanVelges && inputType === 'radio') {
+                        markerAlternativ();
+                    }
+                }}
+                onKeyUp={e => {
+                    if (kanVelges && inputType === 'checkbox') {
+                        onKeyUp(e);
+                    }
+                }}
             />
             <label
                 htmlFor={alternativ.id}
                 className={`skjemaelement__label alternativ__label ${kanVelges
-                    ? erValgt ? 'markert' : ''
+                    ? ''
                     : 'disabled'}`}
                 onClick={e => {
                     if (kanVelges) {

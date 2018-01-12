@@ -28,6 +28,7 @@ interface OwnProps {
     sporsmal: SporsmalModell;
     spmRef: any; // tslint:disable-line:no-any
     viserAlternativer: boolean;
+    handleSubmit: () => void;
 }
 
 interface StateProps {
@@ -42,7 +43,7 @@ interface EgenStateProps {
 
 type SporsmalProps = OwnProps & DispatchProps & StateProps;
 
-class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
+export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
 
     constructor(props: SporsmalProps) {
         super(props);
@@ -78,7 +79,8 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             spmRef,
             viserAlternativer,
             visAlternativer,
-            totaltAntallSpm
+            totaltAntallSpm,
+            handleSubmit
         } = this.props;
 
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
@@ -102,7 +104,6 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 <button
                                     className="sporsmal__knapp__tilbake"
                                     onClick={e => {
-                                        e.preventDefault();
                                         forrigeSpm();
                                     }}
                                 >
@@ -169,7 +170,17 @@ class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                 </section>
                 {!isUndefined(besvartSpm.tips) &&
                     <TipsVisning id={besvartSpm.tips!} />}
-                {!sporsmal.erSisteSpm && (
+                {sporsmal.erSisteSpm ? (
+                        <div className="knapperad blokk-s">
+                            <button
+                                type="submit"
+                                className="knapp knapp--hoved"
+                                onClick={() => handleSubmit()}
+                            >
+                                <FormattedMessage id="send-inn"/>
+                            </button>
+                        </div>
+                    ) : (
                     <button
                         className={'sporsmal__knapp'}
                         key="besvar"
