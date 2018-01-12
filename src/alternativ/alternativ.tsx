@@ -58,6 +58,12 @@ function Alternativ({
         }
     }
 
+    function hentAlternativMarkering(){
+        return kanVelges?
+            (erValgt && sporsmalType === AlternativTyper.SKALA? 'markert' : '')
+            : 'disabled'
+    }
+
     return (
         <li key={alternativ.id} className={alternativKlasser}>
             <input
@@ -81,9 +87,7 @@ function Alternativ({
             />
             <label
                 htmlFor={alternativ.id}
-                className={`skjemaelement__label alternativ__label ${kanVelges
-                    ? ''
-                    : 'disabled'}`}
+                className={`skjemaelement__label alternativ__label ${hentAlternativMarkering()}`}
                 onClick={e => {
                     if (kanVelges) {
                         markerAlternativ();
