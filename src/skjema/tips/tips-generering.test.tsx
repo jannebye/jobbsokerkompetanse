@@ -316,7 +316,7 @@ describe('TipsGenerator', () => {
     );
 
     it('skal foreslå å forberede til intervjuet alltid (spm 16)', () => {
-        svarAlternativer.push({id:'intervju-svar-0204'});
+        svarAlternativer.push({id: 'intervju-svar-0204'});
         const spmId = 'intervju-spm-02', expected = 'intervju-hvorfor-deg';
         const besvarelse = [{sporsmalId: spmId, svarAlternativer: svarAlternativer, tips: undefined}];
         const tips = visTipsEtterSporsmal(spmId, besvarelse);
