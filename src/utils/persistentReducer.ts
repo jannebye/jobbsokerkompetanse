@@ -28,7 +28,7 @@ function erBesvarelseEndret(
 
     return !(
         keysFromStorage.length === keysFromInitialState.length &&
-        keysFromStorage.every(key => keysFromInitialState.includes(key))
+        keysFromStorage.every(key => keysFromInitialState.some(k => k === key))
     );
 }
 
@@ -40,7 +40,6 @@ export default (
 ) => (state: any, action: any) => {
     let nState = state;
     if (
-        location.search.includes('clean') ||
         erBesvarelseEndret(scope, initialState) ||
         erBesvarelseEndret(scope, initialState)
     ) {

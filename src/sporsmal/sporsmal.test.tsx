@@ -30,6 +30,7 @@ function getJSXElement (besvarteSpm: Array<BesvarelseModell>, spmModell: Sporsma
                     besvarteSporsmal={besvarteSpm}
                     visTips={(x) => {return; }}
                     totaltAntallSpm={1}
+                    handleSubmit={() => {return; }}
                 />
             </IntlProvider>
         </Provider>
