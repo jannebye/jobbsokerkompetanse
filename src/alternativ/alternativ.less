@@ -1,34 +1,31 @@
-// TODO: Fjern .markert begge steder, hvis den ikke skal brukes
 .alternativer {
 	list-style: none;
 	padding: 0;
 
 	.alternativ {
 		list-style: none;
-		border-bottom: 1px solid @navGra20;
-
-		&:first-child {
-			border-top: 1px solid @navGra20;
-		}
 
 		.alternativ__input {
 
 			& + .alternativ__label {
 				display: block;
 				padding: 1.2rem 3.5rem 1.2rem 3.2rem;
+				margin: 0.7rem 1.4rem;
 				color: @navGra60;
+				border: 1px solid @navGra20;
+				border-radius: 4px;
 			}
 
-			& + .disabled {
-				background-color: @navLysGra;
-				color: black;
+			&:disabled {
+				& + .alternativ__label {
+					background-color: @navLysGra;
+				}
 			}
 
 			& + .markert {
 				color: @navMorkGra;
 				border-color: @navBla;
-				background: data-uri('../src/ikoner/checkmark-03.svg') ~'calc(100% - 1rem)' center no-repeat;
-				background-size: 32px 32px;
+				background-color: @navBlaLighten80;
 			}
 
 			&.skala {

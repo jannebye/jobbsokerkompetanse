@@ -61,7 +61,7 @@ describe('<Sporsmal />', function() {
         const sisteSpm = spm.find(x => x.erSisteSpm === true)!;
         const besvarteSpm = [{sporsmalId: sisteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
         const wrapper = mount(getJSXElement(besvarteSpm, sisteSpm!, spy));
-        const knapp = wrapper.find('.sporsmal__knapp__tilbake');
+        const knapp = wrapper.find('.sporsmal__knapp-tilbake');
 
         expect(knapp.exists()).toBe(true);
         knapp.simulate('click', preventDefault);
@@ -74,7 +74,7 @@ describe('<Sporsmal />', function() {
         const besvarteSpm = [{sporsmalId: sporsmal.id, svarAlternativer: svarAlternativer, tips: tips}];
         const wrapper = mount(getJSXElement(besvarteSpm, sporsmal!, spy));
 
-        expect(wrapper.find('.sporsmal__knapp__tilbake').exists()).toBe(true);
+        expect(wrapper.find('.sporsmal__knapp-tilbake').exists()).toBe(true);
     });
 
     it('skal ikke vise tilbakeknapp dersom det er første spørsmål', () => {
@@ -83,7 +83,7 @@ describe('<Sporsmal />', function() {
         const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
         const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
 
-        expect(wrapper.find('.sporsmal__knapp__tilbake').exists()).toBe(false);
+        expect(wrapper.find('.sporsmal__knapp-tilbake').exists()).toBe(false);
     });
 
     it('skal vise fortsettknapp', () => {

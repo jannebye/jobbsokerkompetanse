@@ -13,6 +13,7 @@ import { visTipsEtterSporsmal } from '../skjema/tips/tips-generering';
 import { isUndefined } from 'util';
 import { Sidetittel, Undertekst } from 'nav-frontend-typografi';
 import SVG from 'react-inlinesvg';
+import KnappBase from 'nav-frontend-knapper';
 
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string,
@@ -101,20 +102,28 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                     <div className={'sporsmal__start'}>
                         <div className="sporsmal__header">
                             {!sporsmal.erForsteSpm && (
-                                <button
-                                    className="sporsmal__knapp__tilbake"
+                                <KnappBase
+                                    type={'standard'}
+                                    className="sporsmal__knapp-tilbake"
                                     onClick={e => {
                                         forrigeSpm();
                                     }}
+                                    onKeyPress={e => {
+                                        if (e.which === 13) {
+                                            forrigeSpm();
+                                        }
+                                    }}
                                 >
                                     <FormattedMessage id="forrige-knapp"/>
-                                </button>
+                                </KnappBase>
                             )}
                             <div className="sporsmal__paginering typo-normal">
                                 <FormattedMessage
                                     id="paginering"
-                                    values={{indeks: besvarteSporsmal.findIndex(
-                                    besvarelse => besvarelse.sporsmalId === sporsmal.id) + 1, total: totaltAntallSpm}}
+                                    values={{
+                                        indeks: besvarteSporsmal.findIndex(
+                                            besvarelse => besvarelse.sporsmalId === sporsmal.id) + 1, total: totaltAntallSpm
+                                    }}
                                 />
                             </div>
                         </div>
@@ -150,49 +159,68 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 <FormattedMessage id={sporsmal.egenUndertekst || sporsmal.type}/>
                             </Undertekst>
                         </div>
-                        <button
+                        <KnappBase
+                            type={'standard'}
                             className="sporsmal__knapp sporsmal__videre"
                             onClick={e => {
                                 e.preventDefault();
                                 visAlternativer();
                             }}
+                            onKeyPress={e => {
+                                if (e.which === 13) {
+                                    e.preventDefault();
+                                    visAlternativer();
+                                }
+                            }}
                         >
                             <FormattedMessage id="fortsett-knapp"/>
-                        </button>
+                        </KnappBase>
                     </div>
                     <AlternativContainer
                         alternativer={sporsmal.alternativer}
                         markerteAlternativer={markerteAlternativer}
                         sporsmal={sporsmal}
-                        markerAlternativ={(id, alternativ) => {this.fjernFeil(markerteAlternativer);
-                                                               markerAlternativ(id, alternativ); }}
+                        markerAlternativ={(id, alternativ) => {
+                            this.fjernFeil(markerteAlternativer);
+                            markerAlternativ(id, alternativ);
+                        }}
                     />
-                </section>
-                {!isUndefined(besvartSpm.tips) &&
-                    <TipsVisning id={besvartSpm.tips!} />}
-                {sporsmal.erSisteSpm ? (
+                    {!isUndefined(besvartSpm.tips) &&
+                    <TipsVisning id={besvartSpm.tips!}/>}
+                    {sporsmal.erSisteSpm ? (
                         <div className="knapperad blokk-s">
-                            <button
-                                type="submit"
-                                className="knapp knapp--hoved"
+                            <KnappBase
+                                type={'hoved'}
                                 onClick={() => handleSubmit()}
+                                onKeyPress={e => {
+                                    if (e.which === 13) {
+                                        handleSubmit();
+                                    }
+                                }}
                             >
                                 <FormattedMessage id="send-inn"/>
-                            </button>
+                            </KnappBase>
                         </div>
                     ) : (
-                    <button
-                        className={'sporsmal__knapp'}
-                        key="besvar"
-                        onClick={e => {
-                            e.preventDefault();
-                            this.sjekkSvar(markerteAlternativer, sporsmal.id, besvarteSporsmal, besvartSpm);
-                            window.scrollTo(0, 0);
-                        }}
-                    >
-                        <FormattedMessage id="fortsett-knapp"/>
-                    </button>
-                )}
+                        <KnappBase
+                            type={'hoved'}
+                            className={'sporsmal__knapp'}
+                            key="besvar"
+                            onClick={e => {
+                                this.sjekkSvar(markerteAlternativer, sporsmal.id, besvarteSporsmal, besvartSpm);
+                                window.scrollTo(0, 0);
+                            }}
+                            onKeyPress={e => {
+                                if (e.which === 13) {
+                                    this.sjekkSvar(markerteAlternativer, sporsmal.id, besvarteSporsmal, besvartSpm);
+                                    window.scrollTo(0, 0);
+                                }
+                            }}
+                        >
+                            <FormattedMessage id="fortsett-knapp"/>
+                        </KnappBase>
+                    )}
+                </section>
             </div>
         );
     }

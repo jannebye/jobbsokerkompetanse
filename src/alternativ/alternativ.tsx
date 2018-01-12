@@ -67,6 +67,7 @@ function Alternativ({
                 name={sporsmalId.toString()}
                 defaultValue={alternativ.id}
                 checked={erValgt}
+                disabled={!kanVelges}
                 onChange={e => handleChange(e)}
                 onFocus={e => {
                     if (kanVelges && inputType === 'radio') {
@@ -81,9 +82,7 @@ function Alternativ({
             />
             <label
                 htmlFor={alternativ.id}
-                className={`skjemaelement__label alternativ__label ${kanVelges
-                    ? ''
-                    : 'disabled'}`}
+                className={`skjemaelement__label alternativ__label ${erValgt ? 'markert' : ''}`}
                 onClick={e => {
                     if (kanVelges) {
                         markerAlternativ();

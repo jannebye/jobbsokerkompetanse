@@ -1,27 +1,13 @@
-.sporsmal__knapp {
-	margin: 2rem auto 1rem;
-	display: block;
-	width: 56px;
-	height: 56px;
-	background-color: @navBla;
-	border-radius: 50%;
-	font: ~'0/0' a;
-	color: transparent;
-	border: 0;
-	cursor: pointer;
-	&:before {
-		content: '';
-		display: inline-block;
-		width: 12px;
-		height: 12px;
-		margin-top: -2px;
-		border-bottom: 2px solid @white;
-		border-right: 2px solid @white;
-		transform: rotate(45deg);
-	}
+.knapperad {
+	padding-top: 0;
+	margin: 2rem 0 1rem;
 }
 
-.sporsmal__knapp__tilbake {
+.sporsmal__knapp {
+	margin: 1rem auto;
+}
+
+.sporsmal__knapp-tilbake {
 	margin: 2rem auto 0;
 	display: block;
 	padding: 3px 0;
@@ -29,6 +15,8 @@
 	background: none;
 	cursor: pointer;
 	border-bottom: 1px solid @navGra40;
+	text-transform: none;
+	color: @navMorkGra;
 	&:before {
 		content: '';
 		display: inline-block;
@@ -41,9 +29,4 @@
 		border-left: 2px solid black;
 		transform: rotate(45deg);
 	}
-}
-
-.knapperad {
-	padding-top: 0;
-	margin: 2rem 0 1rem;
 }
