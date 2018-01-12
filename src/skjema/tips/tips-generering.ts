@@ -21,6 +21,8 @@ export function visTipsEtterSporsmal(sporsmalId: string, fullBesvarelse: Besvare
             return tipsIntervjuFokus(fullBesvarelse);
         case 'soke-spm-04':
             return tipsSoknadSvarPaaAnnonsen(fullBesvarelse);
+        case 'intervju-spm-02':
+            return tipsHvorforDeg(fullBesvarelse);
         case 'intervju-spm-03':
             return tipsIntervjuTrygg(fullBesvarelse);
         case 'intervju-spm-04':
@@ -157,6 +159,17 @@ export function tipsSoknadSvarPaaAnnonsen(fullBesvarelse: BesvarelseModell[]): (
     } else {
         return undefined;
     }
+}
+
+/* Returnerer tipsId uavhengig av valgt alternativ på spm 16*/
+export function tipsHvorforDeg(fullBesvarelse: BesvarelseModell[]): (string | undefined) {
+    const besvarelse16 = fullBesvarelse.find(besvarelse => besvarelse.sporsmalId === 'intervju-spm-02');
+    if (manglerBesvarelse(besvarelse16)) {
+        return undefined;
+    } else {
+        return 'intervju-hvorfor-deg';
+    }
+
 }
 
 /* Returner tipsId hvis alternativ 1 eller 2 er valgt på spm 17, og 1 eller 2 på spm 16, og 1 eller 2 på spm 15 */
