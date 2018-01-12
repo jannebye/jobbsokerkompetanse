@@ -12,6 +12,6 @@ healthcheck:
     path: jobbsokerkompetanse/nais/ready.txt
 fasitResources:
   exposed:
-  - alias: jobbsokerkompetanse_url
-    resourceType: baseurl
-    path: /jobbsokerkompetanse/
+  - alias: jobbsokerkompetanseUrl
+    resourceType: restservice
+    path: /jobbsokerkompetanse
