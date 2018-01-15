@@ -1,0 +1,2 @@
+https://${DomainName}/jobbsokerkompetanse/*
+https://${DomainName}/jobbsokerkompetanse
