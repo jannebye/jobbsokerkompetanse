@@ -59,9 +59,7 @@ function Alternativ({
     }
 
     function hentAlternativMarkering() {
-        return kanVelges ?
-            (erValgt && sporsmalType === AlternativTyper.SKALA ? 'markert' : '')
-            : 'disabled';
+        return erValgt && sporsmalType === AlternativTyper.SKALA ? 'markert' : '';
     }
 
     return (
@@ -73,6 +71,7 @@ function Alternativ({
                 name={sporsmalId.toString()}
                 defaultValue={alternativ.id}
                 checked={erValgt}
+                disabled={!kanVelges}
                 onChange={e => handleChange(e)}
                 onFocus={e => {
                     if (kanVelges && inputType === 'radio') {

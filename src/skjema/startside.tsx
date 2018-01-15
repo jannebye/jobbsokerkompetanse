@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Sidetittel } from 'nav-frontend-typografi';
+import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 
 const sporsmalImg = require('../ikoner/forside.svg');
 
@@ -11,13 +12,23 @@ interface StartsideProps {
 function Startside({startKartlegging}: StartsideProps) {
     return (
         <div className="startside">
-            <Sidetittel tag="h1">
-                Startside
-            </Sidetittel>
-            <img src={sporsmalImg} alt="Forstørrelseglass"/>
+            <div className="bakgrunn"/>
+            <FormattedMessage id="startside-image-alt">
+                {(tekst: string) =>
+                    <img src={sporsmalImg} alt={tekst} className="forside-bilde"/>
+                }
+            </FormattedMessage>
+            <div>
+                <Sidetittel tag="h1" className="blokk-xs">
+                    <FormattedMessage id="startside-tittel"/>
+                </Sidetittel>
+                <Normaltekst>
+                    <FormattedHTMLMessage id="startside-ingress"/>
+                </Normaltekst>
+            </div>
             <div className="knapperad">
                 <Hovedknapp onClick={() => startKartlegging()}>
-                    Start
+                    <FormattedMessage id="start-knapp"/>
                 </Hovedknapp>
             </div>
         </div>

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {  FormattedMessage } from 'react-intl';
+import { Undertittel } from 'nav-frontend-typografi';
 
 interface TipsProps {
     id: string;
@@ -7,13 +8,12 @@ interface TipsProps {
 
 function TipsVisning({ id }: TipsProps) {
     return (
-        <div className="tips">
-            <h3 className="tips__overskrift">
+        <section className="tips">
+            <Undertittel tag={'h1'} className={'tips__overskrift'}>
                 <FormattedMessage id="tips-standard-overskrift" />
-            </h3>
+            </Undertittel>
             <FormattedMessage id={id} />
-
-        </div>
+        </section>
     );
 }
 

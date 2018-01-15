@@ -9,6 +9,7 @@ import { TemaModell } from './tema-modell';
 import TemaVisning from './temavisning';
 import InnholdsContainer from './innholdscontainer';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import KnappBase from 'nav-frontend-knapper';
 
 function temaSkalBehandles(tema: TemaModell, alternativId: string) {
     if (temaLogikk[tema.ref]) {
@@ -77,12 +78,13 @@ export function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
                 <Normaltekst className="resultat__infotekst" tag="p">
                     <FormattedHTMLMessage id="tekst-er-lagret" />
                 </Normaltekst>
-                <button
+                <KnappBase
+                    type={'standard'}
                     className="knapp"
                     onClick={() => startPaNytt()}
                 >
                     Start på nytt
-                </button>
+                </KnappBase>
             </div>
             <InnholdsContainer
                 overskrift="veiviser-overskrift"
