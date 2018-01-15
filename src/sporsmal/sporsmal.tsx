@@ -122,7 +122,9 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                     id="paginering"
                                     values={{
                                         indeks: besvarteSporsmal.findIndex(
-                                            besvarelse => besvarelse.sporsmalId === sporsmal.id) + 1, total: totaltAntallSpm
+                                            besvarelse => besvarelse.sporsmalId === sporsmal.id
+                                        ) + 1,
+                                        total: totaltAntallSpm
                                     }}
                                 />
                             </div>
