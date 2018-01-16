@@ -8,12 +8,12 @@ interface TipsProps {
 
 function TipsVisning({ id }: TipsProps) {
     return (
-        <section className="tips">
+        <div>
             <Undertittel tag={'h1'} className={'tips__overskrift'}>
                 <FormattedMessage id="tips-standard-overskrift" />
             </Undertittel>
             <FormattedMessage id={id} />
-        </section>
+        </div>
     );
 }
 

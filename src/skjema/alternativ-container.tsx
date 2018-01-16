@@ -59,7 +59,7 @@ function prepMarkerAlternativ(alternativ: SvarAlternativModell,
 function AlternativContainer({alternativer, markerteAlternativer, sporsmal, markerAlternativ}:
                                  AlternativContainerProps) {
     return (
-        <ul className="alternativer">
+        <ul className={'alternativer alternativer__' + sporsmal.type}>
             {alternativer.map(function (alternativ: SvarAlternativModell) {
                 const erValgt = !!markerteAlternativer.find(
                     alt => alt.id === alternativ.id
@@ -95,7 +95,8 @@ function AlternativContainer({alternativer, markerteAlternativer, sporsmal, mark
                                     sporsmal,
                                     sporsmal.type
                                 )
-                            ) }
+                            )
+                        }
                     />
                 );
             })}
