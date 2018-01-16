@@ -1800,29 +1800,14 @@ body .blokk-xl {
 .ekspanderbartPanel--apen > .ekspanderbartPanel__hode .ekspanderbartPanel__indikator:after {
   transform: translateX(-2px) rotate(45deg);
 }
+.knapperad {
+  padding-top: 0;
+  margin: 2rem 0 1rem;
+}
 .sporsmal__knapp {
-  margin: 2rem auto 1rem;
-  display: block;
-  width: 56px;
-  height: 56px;
-  background-color: #0067C5;
-  border-radius: 50%;
-  font: 0/0 a;
-  color: transparent;
-  border: 0;
-  cursor: pointer;
+  margin: 1rem auto;
 }
-.sporsmal__knapp:before {
-  content: '';
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  margin-top: -2px;
-  border-bottom: 2px solid #FFF;
-  border-right: 2px solid #FFF;
-  transform: rotate(45deg);
-}
-.sporsmal__knapp__tilbake {
+.sporsmal__knapp-tilbake {
   margin: 2rem auto 0;
   display: block;
   padding: 3px 0;
@@ -1830,8 +1815,10 @@ body .blokk-xl {
   background: none;
   cursor: pointer;
   border-bottom: 1px solid #B7B1A9;
+  text-transform: none;
+  color: #3E3832;
 }
-.sporsmal__knapp__tilbake:before {
+.sporsmal__knapp-tilbake:before {
   content: '';
   display: inline-block;
   position: absolute;
@@ -1843,19 +1830,12 @@ body .blokk-xl {
   border-left: 2px solid black;
   transform: rotate(45deg);
 }
-.knapperad {
-  padding-top: 0;
-  margin: 2rem 0 1rem;
-}
 .tips {
-  border-left: 1px solid #005b82;
-  padding: 0 1rem 1rem;
-  color: #005b82;
-  margin-top: 1rem;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  border-left: 2px solid #0067C5;
+  padding: 0 1rem 0.4rem;
+  margin: 1.4rem;
 }
-.tips h3 {
+.tips .tips__overskrift {
   margin-top: 0;
 }
 .sporsmalsliste {
@@ -1876,7 +1856,7 @@ body .blokk-xl {
 .sporsmal section {
   flex: 1 0 auto;
 }
-.sporsmal .sporsmal__knapp__tilbake {
+.sporsmal .sporsmal__knapp-tilbake {
   display: none;
 }
 .sporsmal .sporsmal__paginering {
@@ -1913,7 +1893,7 @@ body .blokk-xl {
 .sporsmal.vis_alternativer .sporsmal__start {
   height: auto;
 }
-.sporsmal.vis_alternativer .sporsmal__knapp__tilbake {
+.sporsmal.vis_alternativer .sporsmal__knapp-tilbake {
   display: block;
   animation: feidInn 1s both;
 }
@@ -1926,7 +1906,10 @@ body .blokk-xl {
 .sporsmal.vis_alternativer .sporsmal__innhold {
   animation: slaidOpp 1s both;
 }
-.sporsmal.vis_alternativer .alternativer {
+.sporsmal.vis_alternativer .alternativer,
+.sporsmal.vis_alternativer .tips,
+.sporsmal.vis_alternativer .knapperad,
+.sporsmal.vis_alternativer .sporsmal__knapp {
   display: block;
   animation: skliFraBunn 1s both;
 }
@@ -1992,7 +1975,7 @@ body .blokk-xl {
     display: block;
     height: auto;
   }
-  .sporsmal .sporsmal__knapp__tilbake {
+  .sporsmal .sporsmal__knapp-tilbake {
     display: block;
     margin-top: 3rem;
   }
@@ -2026,25 +2009,22 @@ body .blokk-xl {
 }
 .alternativer .alternativ {
   list-style: none;
-  border-bottom: 1px solid #C6C2BF;
-}
-.alternativer .alternativ:first-child {
-  border-top: 1px solid #C6C2BF;
 }
 .alternativer .alternativ .alternativ__input + .alternativ__label {
   display: block;
   padding: 1.2rem 3.5rem 1.2rem 3.2rem;
+  margin: 0.7rem 1.4rem;
   color: #78706A;
+  border: 1px solid #C6C2BF;
+  border-radius: 4px;
 }
-.alternativer .alternativ .alternativ__input + .disabled {
+.alternativer .alternativ .alternativ__input:disabled + .alternativ__label {
   background-color: #E9E7E7;
-  color: black;
 }
 .alternativer .alternativ .alternativ__input + .markert {
   color: #3E3832;
   border-color: #0067C5;
-  background: url("data:image/svg+xml,%3Csvg%20id%3D%22Layer_1%22%20data-name%3D%22Layer%201%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cdefs%3E%3Cstyle%3E.cls-1%2C.cls-2%7Bfill%3Anone%3B%7D.cls-2%7Bclip-rule%3Aevenodd%3B%7D.cls-3%7Bclip-path%3Aurl(%23clip-path)%3B%7D.cls-4%7Bfill%3A%239ccfb0%3B%7D.cls-5%7Bclip-path%3Aurl(%23clip-path-2)%3B%7D.cls-6%7Bfill%3A%233f3932%3B%7D%3C%2Fstyle%3E%3CclipPath%20id%3D%22clip-path%22%3E%3Cpath%20class%3D%22cls-1%22%20d%3D%22M17.34%2C8.87l-7.5%2C7a.5.5%2C0%2C0%2C1-.69%2C0l-2.5-2.5a.5.5%2C0%2C0%2C1%2C.71-.71l2.16%2C2.16%2C7.15-6.67a.5.5%2C0%2C1%2C1%2C.68.73ZM12%2C0A12%2C12%2C0%2C1%2C0%2C24%2C12%2C12%2C12%2C0%2C0%2C0%2C12%2C0Z%22%2F%3E%3C%2FclipPath%3E%3CclipPath%20id%3D%22clip-path-2%22%3E%3Cpath%20class%3D%22cls-2%22%20d%3D%22M17.34%2C8.87l-7.5%2C7a.5.5%2C0%2C0%2C1-.69%2C0l-2.5-2.5a.5.5%2C0%2C0%2C1%2C.71-.71l2.16%2C2.16%2C7.15-6.67a.5.5%2C0%2C1%2C1%2C.68.73Z%22%2F%3E%3C%2FclipPath%3E%3C%2Fdefs%3E%3Ctitle%3Echeckmark%3C%2Ftitle%3E%3Cg%20class%3D%22cls-3%22%3E%3Crect%20class%3D%22cls-4%22%20x%3D%22-5%22%20y%3D%22-5%22%20width%3D%2234%22%20height%3D%2234%22%2F%3E%3C%2Fg%3E%3Cg%20class%3D%22cls-5%22%3E%3Crect%20class%3D%22cls-6%22%20x%3D%221.5%22%20y%3D%223%22%20width%3D%2221%22%20height%3D%2218%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") calc(100% - 1rem) center no-repeat;
-  background-size: 32px 32px;
+  background-color: #cce1f3;
 }
 .alternativer .alternativ .alternativ__input.skala {
   opacity: 0;
@@ -2177,7 +2157,7 @@ form {
   height: 100%;
 }
 body {
-  background-color: #f0fafd;
+  background-color: #FFF;
 }
 .limit {
   margin: 0 auto;
@@ -2193,6 +2173,19 @@ body {
   justify-content: space-around;
   height: 100%;
   text-align: center;
+}
+.startside .bakgrunn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 35%;
+  background-color: #cce1f3;
+}
+.startside .forside-bilde {
+  width: 60%;
+  margin: 1rem auto 0;
+  z-index: 1;
 }
 @media (min-width: 768px) {
   .limit {
