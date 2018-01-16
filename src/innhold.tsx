@@ -46,9 +46,10 @@ render() {
     return (
             this.props.side === Sidetype.START ? <Startside startKartlegging={() => this.startKartlegging()} />
                 : this.props.side === Sidetype.KARTLEGGING ?
-                <Skjema handleSubmit={() => this.handleSubmit()}/> : <Resultat startPaNytt={() => this.startPaNytt()}/>
-);
-}
+                <Skjema handleSubmit={() => this.handleSubmit()} startPaNytt={() => this.startPaNytt()}/>
+                : <Resultat startPaNytt={() => this.startPaNytt()}/>
+            );
+    }
 }
 
 const mapStateToProps = (state: AppState): InnholdStateProps => ({
