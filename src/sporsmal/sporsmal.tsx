@@ -26,6 +26,7 @@ interface DispatchProps {
 interface OwnProps {
     nesteSpm: (id: string) => void;
     forrigeSpm: () => void;
+    startPaNytt: () => void;
     sporsmal: SporsmalModell;
     spmRef: any; // tslint:disable-line:no-any
     viserAlternativer: boolean;
@@ -81,7 +82,8 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             viserAlternativer,
             visAlternativer,
             totaltAntallSpm,
-            handleSubmit
+            handleSubmit,
+            startPaNytt
         } = this.props;
 
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
@@ -90,6 +92,8 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         const markerteAlternativer: SvarAlternativModell[] = besvarteSporsmal.find(
             besvarelse => besvarelse.sporsmalId === sporsmal.id)!.svarAlternativer;
         const sporsmalImg = require('../ikoner/' + sporsmal.id + '.svg');
+
+        const erForsteSporsmal = () => this.props.sporsmal.erForsteSpm ? startPaNytt() : forrigeSpm();
 
         return (
             <div
@@ -100,23 +104,24 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             >
                 <section>
                     <div className={'sporsmal__start'}>
+
                         <div className="sporsmal__header">
-                            {!sporsmal.erForsteSpm && (
-                                <KnappBase
-                                    type={'standard'}
-                                    className="sporsmal__knapp-tilbake"
-                                    onClick={e => {
-                                        forrigeSpm();
-                                    }}
-                                    onKeyPress={e => {
-                                        if (e.which === 13) {
-                                            forrigeSpm();
-                                        }
-                                    }}
-                                >
-                                    <FormattedMessage id="forrige-knapp"/>
-                                </KnappBase>
-                            )}
+                            <KnappBase
+                                type={'standard'}
+                                className="sporsmal__knapp-tilbake"
+                                onClick={e => {
+                                    {erForsteSporsmal(); }
+                                }}
+                                onKeyPress={e => {
+                                    if (e.which === 13) {
+                                        {erForsteSporsmal(); }
+                                    }
+                                }}
+                            >
+                                {sporsmal.erForsteSpm ? (<FormattedMessage id="forrige-knapp-start"/>)
+                                    : (<FormattedMessage id="forrige-knapp"/>)}
+                            </KnappBase>
+
                             <div className="sporsmal__paginering typo-normal">
                                 <FormattedMessage
                                     id="paginering"
