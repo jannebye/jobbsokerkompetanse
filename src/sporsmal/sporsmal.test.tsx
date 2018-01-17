@@ -128,11 +128,11 @@ describe('<Sporsmal />', function() {
 
     it('skal vise tips', () => {
         const tipsId = 'sok-utenfor-hjemsted';
-        const forsteSpm = spm.find(x => x.id === 'finn-spm-02')!;
-        svarAlternativer.push({id: 'finn-svar-0201'});
+        const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
+        svarAlternativer.push({id: forsteSpm!.alternativer[0].id});
         const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tipsId}];
         const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
-        const tipsCss = `TipsVisning[id="${tipsId}"]`;
+        const tipsCss = `TipsVisning`;
 
         expect(wrapper.find(tipsCss)).toHaveLength(1);
     });
