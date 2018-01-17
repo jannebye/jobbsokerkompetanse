@@ -31,6 +31,7 @@ function getJSXElement (besvarteSpm: Array<BesvarelseModell>, spmModell: Sporsma
                     visTips={(x) => {return; }}
                     totaltAntallSpm={1}
                     handleSubmit={() => {return; }}
+                    startPaNytt={() => {return; }}
                 />
             </IntlProvider>
         </Provider>
@@ -77,16 +78,6 @@ describe('<Sporsmal />', function() {
 
         expect(wrapper.find(tilbakeKnappSelector)
                       .exists()).toBe(true);
-    });
-
-    it('skal ikke vise tilbakeknapp dersom det er første spørsmål', () => {
-
-        const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
-        const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
-        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
-
-        expect(wrapper.find(tilbakeKnappSelector)
-                      .exists()).toBe(false);
     });
 
     it('skal vise nesteknapp', () => {
