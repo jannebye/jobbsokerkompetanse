@@ -117,4 +117,14 @@ describe('<Sporsmal />', function() {
         expect(spy.calledOnce).toBeTruthy();
     });
 
+    it('skal vise tips', () => {
+        const tipsId = 'sok-utenfor-hjemsted';
+        const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
+        svarAlternativer.push({id: forsteSpm!.alternativer[0].id});
+        const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tipsId}];
+        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
+        const tipsCss = `TipsVisning`;
+
+        expect(wrapper.find(tipsCss)).toHaveLength(1);
+    });
 });
