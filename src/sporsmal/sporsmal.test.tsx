@@ -127,18 +127,13 @@ describe('<Sporsmal />', function() {
     });
 
     it('skal vise tips', () => {
-        const tipsId = 'sok-utenfor-hjemsted'
+        const tipsId = 'sok-utenfor-hjemsted';
         const forsteSpm = spm.find(x => x.id === 'finn-spm-02')!;
         svarAlternativer.push({id: 'finn-svar-0201'});
         const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tipsId}];
         const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
         const tipsCss = `TipsVisning[id="${tipsId}"]`;
 
-        wrapper.find('.sporsmal__knapp')
-            .last()
-            .simulate('click', preventDefault);
-
         expect(wrapper.find(tipsCss)).toHaveLength(1);
-        expect(spy.calledOnce).toBeTruthy();
     });
 });
