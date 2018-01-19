@@ -1,4 +1,4 @@
-import BesvarelseModell from './svar-modell';
+import { BesvarelseModell } from './svar-modell';
 import {
     Handling,
     ActionType,

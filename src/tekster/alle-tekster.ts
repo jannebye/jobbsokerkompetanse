@@ -163,7 +163,7 @@ export default { 'nb': {
 'startside-image-alt': 'Forstørrelsesglass',
 'startside-ingress': 'Svar på våre spørsmål og vi gir deg<br>tips som støtter deg i søkeprosessen',
 'startside-tittel': 'Jobbklar?',
-'tekst-er-lagret': 'Dine råd er lagret, og du kan finne dem igjen på Ditt Nav.<br><br>Du kan også svare på spørsmålene på nytt, om du ønsker.',
+'tekst-er-lagret': 'Du kan svare på spørsmålene på nytt, om du ønsker.',
 'forberedt-ikke-intervju': 'Vær forberedt på at du kan søke mange jobber uten å bli kalt inn til intervju. Jobb godt med CV-en og søknaden, det øker sjansene dine betraktelig.',
 'intervju-fokus': 'Husk at hvis du har blitt kalt inn til et intervju, mener arbeidsgiveren at du er kvalifisert for jobben. I intervjuet bør du fokusere på motivasjon og hva du kan bidra med i bedriften.',
 'intervju-hvorfor-deg': 'Arbeidsgiveren er først og fremst opptatt av å høre om hvem du er og hva du kan tilføre bedriften. Forbered deg på å snakke om hvorfor akkurat du bør få jobben.',

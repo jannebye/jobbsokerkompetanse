@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import { FlytType, nesteSporsmal } from '../svar/svar-duck';
-import BesvarelseModell from '../svar/svar-modell';
+import { BesvarelseModell } from '../svar/svar-modell';
 import { default as Avhengigheter, AvhengighetModell } from '../utils/avhengigheter';
 
 function forrigeSporsmal(gjeldendeSpm: string, besvarelse: BesvarelseModell[]) {
