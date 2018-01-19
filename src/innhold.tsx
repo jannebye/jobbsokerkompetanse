@@ -3,7 +3,7 @@ import Skjema from './skjema/skjema';
 import Resultat from './resultat/resultat';
 import { AppState } from './ducks/reducer';
 import { connect } from 'react-redux';
-import BesvarelseModell from './svar/svar-modell';
+import { BesvarelseModell } from './svar/svar-modell';
 import { Sidetype } from './utils/konstanter';
 import { Dispatch } from './types';
 import { endreSide } from './ducks/side-duck';
