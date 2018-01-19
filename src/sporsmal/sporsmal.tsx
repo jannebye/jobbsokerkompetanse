@@ -110,11 +110,15 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 type={'standard'}
                                 className="sporsmal__knapp-tilbake"
                                 onClick={e => {
-                                    {erForsteSporsmal(); }
+                                    {
+                                        erForsteSporsmal();
+                                    }
                                 }}
                                 onKeyPress={e => {
                                     if (e.which === 13) {
-                                        {erForsteSporsmal(); }
+                                        {
+                                            erForsteSporsmal();
+                                        }
                                     }
                                 }}
                             >
@@ -218,13 +222,11 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             onClick={e => {
                                 e.preventDefault();
                                 this.sjekkSvar(markerteAlternativer, sporsmal.id, besvarteSporsmal, besvartSpm);
-                                window.scrollTo(0, 0);
                             }}
                             onKeyPress={e => {
                                 if (e.which === 13) {
                                     e.preventDefault();
                                     this.sjekkSvar(markerteAlternativer, sporsmal.id, besvarteSporsmal, besvartSpm);
-                                    window.scrollTo(0, 0);
                                 }
                             }}
                         >

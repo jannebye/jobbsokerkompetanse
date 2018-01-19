@@ -11,14 +11,6 @@ interface AlternativContainerProps {
                        alternativ: SvarAlternativModell[]) => void;
 }
 
-/* Gjelder for skalaSpørsmål */
-function skalAlternativMarkeres(markerteAlternativ: SvarAlternativModell[],
-                                alternativ: SvarAlternativModell): boolean {
-    return !!markerteAlternativ.find(
-        altId => altId.skalaId! >= alternativ.skalaId!
-    );
-}
-
 function erAlternativMulig(uniktAlternativId: string,
                            gjeldendeAlternativId: string,
                            markerteAlternativer: SvarAlternativModell[]): boolean {
@@ -63,14 +55,7 @@ function AlternativContainer({alternativer, markerteAlternativer, sporsmal, mark
             {alternativer.map(function (alternativ: SvarAlternativModell) {
                 const erValgt = !!markerteAlternativer.find(
                     alt => alt.id === alternativ.id
-                )
-                    ? true
-                    : sporsmal.type === 'skala'
-                        ? skalAlternativMarkeres(
-                            markerteAlternativer,
-                            alternativ
-                        )
-                        : false;
+                );
                 const kanVelges: boolean = !!sporsmal.uniktAlternativ
                     ? erAlternativMulig(
                         sporsmal.uniktAlternativ,
