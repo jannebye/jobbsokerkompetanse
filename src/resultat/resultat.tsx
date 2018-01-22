@@ -2,7 +2,7 @@ import * as React from 'react';
 import { AppState } from '../ducks/reducer';
 import BesvarelseModell from '../svar/svar-modell';
 import { connect } from 'react-redux';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedHTMLMessage } from 'react-intl';
 import { fasteTemaer, leggesTilTemaer } from './tema';
 import temaLogikk from './tema-mapping';
 import { TemaModell } from './tema-modell';
@@ -67,7 +67,7 @@ export function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
     return (
         <div className="resultatside">
             <Innholdstittel className="overskrift__tema" tag="h1">
-                <FormattedMessage id="overskrift-raad" />
+                <FormattedHTMLMessage id="overskrift-raad" />
             </Innholdstittel>
             <ul className="temaliste">
                 {resultat.map(tema => (

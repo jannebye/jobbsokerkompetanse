@@ -43,7 +43,7 @@ describe('<Resultat />', function() {
 
     it('skal vise overskrift', () => {
         const wrapper = mount(getJSXElement(besvarteSpm));
-        expect(wrapper.find('#overskrift-raad').text()).to.contain('Vi har uthevet 4 råd til deg');
+        expect(wrapper.find('#overskrift-raad').text()).to.contain('Vi har uthevet4 råd til deg');
     });
 
     it('skal foreslå å søke i flere bransjer hvis man søker på en type stilling', () => {
