@@ -13,7 +13,7 @@ class TipsVisning extends React.Component<TipsProps> {
     }
 
     componentDidMount () {
-        window.scrollTo(0,document.body.scrollHeight);
+        window.scrollTo(0, document.body.scrollHeight);
     }
 
     render() {
