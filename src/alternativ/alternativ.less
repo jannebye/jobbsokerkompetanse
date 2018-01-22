@@ -1,9 +1,3 @@
-@skala_diameter_mobil: 56px;
-@skala_radius_mobil: 29px;
-
-@skala_diameter_desktop: 70px;
-@skala_radius_desktop: 37px;
-
 
 .alternativer {
 	display: none;
@@ -64,23 +58,27 @@
 		position: absolute;
 		display: block;
 		width: 80%;
-		height: @skala_radius_mobil;
+		height: 47%;
 		border-bottom: 1px solid @navGra20;
 		z-index: -1;
 	}
 	.alternativ {
 		position: relative;
+		text-align: center;
+		width: 15vw;
+		height: 15vw;
 		.skjemaelement__input {
 			opacity: 0;
 			height: 0;
 			width: 0;
+			padding: 0;
 		}
 		.skjemaelement__label {
 			border-radius: 50%;
 			border: 1px solid @navGra20;
 			background-color: @white;
-			width: @skala_diameter_mobil;
-			height: @skala_diameter_mobil;
+			width: 90%;
+			height: 90%;
 			display: inline-flex;
 			justify-content: center;
 			align-items: center;
@@ -132,15 +130,13 @@
 	.alternativer__skala {
 		margin: 0 auto;
 		width: 500px;
+		height: 100px;
 		&:before {
-			height: @skala_radius_desktop;
+			height: 40px;
 		}
 		.alternativ {
-			.skjemaelement__label {
-				width: @skala_diameter_desktop;
-				height: @skala_diameter_desktop;
-				margin-right: 12px;
-			}
+			width: 85px;
+			height: 85px;
 		}
 	}
 
@@ -151,6 +147,21 @@
 	.vis_alternativer {
 		.alternativer__ettvalg, .alternativer__flervalg {
 			display: flex;
+		}
+	}
+}
+
+@media (orientation: landscape) {
+	.alternativer__skala {
+		width: 500px;
+		height: 100px;
+		margin: 2rem auto;
+		&:before {
+			height: 40px;
+		}
+		.alternativ {
+			width: 85px;
+			height: 85px;
 		}
 	}
 }
