@@ -1830,12 +1830,13 @@ body .blokk-xl {
   border-left: 2px solid black;
   transform: rotate(45deg);
 }
-.tips {
-  border-left: 2px solid #0067C5;
+.tips div {
+  border-left: 2px solid #005B82;
+  color: #005B82;
   padding: 0 1rem 0.4rem;
   margin: 1.4rem;
 }
-.tips .tips__overskrift {
+.tips div .tips__overskrift {
   margin-top: 0;
 }
 .sporsmalsliste {
@@ -1851,7 +1852,10 @@ body .blokk-xl {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 96vh;
+  height: 100vh;
+}
+.sporsmal__ingress {
+  font-size: 1rem;
 }
 .sporsmal section {
   flex: 1 0 auto;
@@ -1866,7 +1870,7 @@ body .blokk-xl {
   animation: feidInn 1s both;
 }
 .sporsmal .sporsmal__innhold {
-  margin: 1rem 0 0;
+  margin: 1rem 1.4rem 0;
 }
 .sporsmal .sporsmal__ikon {
   display: inline-block;
@@ -1874,17 +1878,15 @@ body .blokk-xl {
   width: 65px;
   height: 90px;
 }
-.sporsmal .sporsmal__videre {
-  animation: sprett 2s infinite alternate;
-}
-.sporsmal .alternativer {
-  display: none;
-}
 .sporsmal .sporsmal__knapp {
   display: none;
+  margin: 3rem auto;
 }
 .sporsmal .sporsmal__knapp.sporsmal__videre {
   display: block;
+}
+.sporsmal .knapperad {
+  display: none;
 }
 .sporsmal.vis_alternativer {
   display: block;
@@ -1910,7 +1912,6 @@ body .blokk-xl {
 .sporsmal.vis_alternativer .tips,
 .sporsmal.vis_alternativer .knapperad,
 .sporsmal.vis_alternativer .sporsmal__knapp {
-  display: block;
   animation: skliFraBunn 1s both;
 }
 .sporsmal.vis_alternativer .sporsmal__knapp {
@@ -1918,6 +1919,9 @@ body .blokk-xl {
 }
 .sporsmal.vis_alternativer .sporsmal__knapp.sporsmal__videre {
   display: none;
+}
+.sporsmal.vis_alternativer .knapperad {
+  display: block;
 }
 .sporsmal:focus {
   outline: none;
@@ -1928,12 +1932,6 @@ body .blokk-xl {
 }
 .sporsmal__ingress {
   margin-bottom: 1rem;
-}
-@keyframes sprett {
-  30%,
-  100% {
-    transform: translate(0px, -10px);
-  }
 }
 @keyframes feidInn {
   0% {
@@ -1989,116 +1987,182 @@ body .blokk-xl {
     width: 65px;
     height: 90px;
   }
-  .sporsmal .alternativer {
-    display: block;
-  }
-  .sporsmal.vis_alternativer .alternativer {
-    display: flex;
-  }
   .sporsmal .sporsmal__knapp {
     display: block;
-    margin-bottom: 2rem;
   }
   .sporsmal .sporsmal__knapp.sporsmal__videre {
     display: none;
   }
+  .sporsmal .knapperad {
+    display: block;
+  }
+}
+@media (orientation: landscape) {
+  .sporsmal__start {
+    height: 100%;
+  }
 }
 .alternativer {
+  display: none;
   list-style: none;
   padding: 0;
 }
-.alternativer .alternativ {
-  list-style: none;
-}
-.alternativer .alternativ .alternativ__input + .alternativ__label {
-  display: block;
-  padding: 1.2rem 3.5rem 1.2rem 3.2rem;
-  margin: 0.7rem 1.4rem;
-  color: #78706A;
+.alternativer__ettvalg .alternativ,
+.alternativer__flervalg .alternativ {
   border: 1px solid #C6C2BF;
   border-radius: 4px;
+  margin: 0.7rem 1.4rem;
+  padding: 0;
 }
-.alternativer .alternativ .alternativ__input:disabled + .alternativ__label {
-  background-color: #E9E7E7;
-}
-.alternativer .alternativ .alternativ__input + .markert {
+.alternativer__ettvalg .alternativ .skjemaelement__input + .markert,
+.alternativer__flervalg .alternativ .skjemaelement__input + .markert {
   color: #3E3832;
   border-color: #0067C5;
   background-color: #cce1f3;
 }
-.alternativer .alternativ .alternativ__input.skala {
-  opacity: 0;
-  height: 0;
+.alternativer__ettvalg .alternativ .skjemaelement__input:disabled + .skjemaelement__label,
+.alternativer__flervalg .alternativ .skjemaelement__input:disabled + .skjemaelement__label {
+  background-color: #E9E7E7;
 }
-.alternativer .alternativ .alternativ__input:focus + .alternativ__label {
-  outline: none;
-  box-shadow: 0 0 0 3px #FFBD66;
-}
-.alternativer .alternativ .alternativ__label {
+.alternativer__ettvalg .alternativ .skjemaelement__label,
+.alternativer__flervalg .alternativ .skjemaelement__label {
+  display: block;
+  height: 100%;
+  padding: 1.2rem 3.5rem 1.2rem 3.2rem;
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.3;
 }
-.alternativer .alternativ .alternativ__label:before {
+.alternativer__ettvalg .alternativ .skjemaelement__label:before,
+.alternativer__flervalg .alternativ .skjemaelement__label:before {
   top: 1.45rem;
   left: 1.4rem;
 }
-.alternativer .alternativ .overskrift-med-hjelpetekst {
+.alternativer__ettvalg .alternativ .overskrift-med-hjelpetekst,
+.alternativer__flervalg .alternativ .overskrift-med-hjelpetekst {
   display: inline;
 }
-.alternativer .alternativ .overskrift-med-hjelpetekst .hjelpetekst {
+.alternativer__ettvalg .alternativ .overskrift-med-hjelpetekst .hjelpetekst,
+.alternativer__flervalg .alternativ .overskrift-med-hjelpetekst .hjelpetekst {
   padding-left: 0.5rem;
 }
-.alternativer .alternativ .overskrift-med-hjelpetekst svg {
+.alternativer__ettvalg .alternativ .overskrift-med-hjelpetekst svg,
+.alternativer__flervalg .alternativ .overskrift-med-hjelpetekst svg {
   height: 16px;
   width: 16px;
 }
+.alternativer__skala {
+  position: relative;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 2rem 1.4rem 0;
+}
+.alternativer__skala:before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 80%;
+  height: 47%;
+  border-bottom: 1px solid #C6C2BF;
+  z-index: -1;
+}
+.alternativer__skala .alternativ {
+  position: relative;
+  text-align: center;
+  width: 15vw;
+  height: 15vw;
+}
+.alternativer__skala .alternativ .skjemaelement__input {
+  opacity: 0;
+  height: 0;
+  width: 0;
+  padding: 0;
+}
+.alternativer__skala .alternativ .skjemaelement__label {
+  border-radius: 50%;
+  border: 1px solid #C6C2BF;
+  background-color: #FFF;
+  width: 90%;
+  height: 90%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.alternativer__skala .alternativ .skjemaelement__label.markert {
+  color: #3E3832;
+  border: 1px solid #0067C5;
+  background-color: #cce1f3;
+  animation: markerSkala 0.5s both;
+}
+.vis_alternativer .alternativer__ettvalg,
+.vis_alternativer .alternativer__flervalg {
+  display: block;
+}
+.vis_alternativer .alternativer__skala {
+  display: flex;
+}
+@keyframes markerSkala {
+  0% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1.35);
+  }
+}
 @media (min-width: 768px) {
-  .sporsmal__start + .alternativer {
-    display: flex;
+  .alternativer__ettvalg,
+  .alternativer__flervalg {
     justify-content: space-between;
     flex-flow: row wrap;
   }
-  .sporsmal__start + .alternativer .alternativ {
+  .alternativer__ettvalg .alternativ,
+  .alternativer__flervalg .alternativ {
     width: 49%;
-    padding: 0.5rem;
-    border-bottom: 0;
+    margin: 0.35rem 0;
   }
-  .sporsmal__start + .alternativer .alternativ.alternativ__skala {
-    width: 20%;
-  }
-  .sporsmal__start + .alternativer .alternativ:first-child {
-    border-top: 0;
-  }
-  .sporsmal__start + .alternativer .alternativ .alternativ__input {
-    width: 50%;
-  }
-  .sporsmal__start + .alternativer .alternativ .alternativ__input.skala + .alternativ__label {
-    display: block;
-    text-align: center;
-    cursor: pointer;
-  }
-  .sporsmal__start + .alternativer .alternativ .alternativ__input.skala + .alternativ__label:hover {
-    background-color: #3385d1;
-    color: #FFF;
-  }
-  .sporsmal__start + .alternativer .alternativ .alternativ__input.skala + .alternativ__label.markert {
-    background: #0067C5 none;
-    color: #FFF;
-  }
-  .sporsmal__start + .alternativer .alternativ .alternativ__input.skala + .alternativ__label.markert:hover {
-    background-color: #3385d1;
-  }
-  .sporsmal__start + .alternativer .alternativ .alternativ__input + .alternativ__label {
-    border: 1px solid #C6C2BF;
-  }
-  .sporsmal__start + .alternativer .alternativ .alternativ__input + .alternativ__label:hover {
+  .alternativer__ettvalg .alternativ .skjemaelement__label:hover,
+  .alternativer__flervalg .alternativ .skjemaelement__label:hover {
     background-color: #e0f5fb;
+  }
+  .alternativer__skala {
+    margin: 0 auto;
+    width: 500px;
+    height: 100px;
+  }
+  .alternativer__skala:before {
+    height: 40px;
+  }
+  .alternativer__skala .alternativ {
+    width: 85px;
+    height: 85px;
+  }
+  .alternativer {
+    display: flex;
+  }
+  .vis_alternativer .alternativer__ettvalg,
+  .vis_alternativer .alternativer__flervalg {
+    display: flex;
+  }
+}
+@media (orientation: landscape) {
+  .alternativer__skala {
+    width: 500px;
+    height: 100px;
+    margin: 2rem auto;
+  }
+  .alternativer__skala:before {
+    height: 40px;
+  }
+  .alternativer__skala .alternativ {
+    width: 85px;
+    height: 85px;
   }
 }
 .resultatside {
   padding: 1rem;
-  background-color: #f0fafd;
 }
 .resultatside .resultatliste {
   list-style: none;
@@ -2116,6 +2180,16 @@ body .blokk-xl {
 .resultatside .temaliste {
   list-style: none;
   padding: 0;
+}
+.resultatside .temaliste .enkelt__tema {
+  border: 1px solid #FFBD66;
+}
+.resultatside .temaliste .enkelt__tema .ekspanderbartPanel__hode,
+.resultatside .temaliste .enkelt__tema .ekspanderbartPanel__innhold {
+  background-color: #fff2e0;
+}
+.resultatside .temaliste .enkelt__tema .ekspanderbartPanel__hode:hover {
+  box-shadow: #ffbd66 0 2px 1px 0;
 }
 .resultatside .temaliste .enkelt__tema .aktivitet ul {
   margin-top: 1rem;
@@ -2139,6 +2213,10 @@ body .blokk-xl {
 .resultatside .innholdscontainer {
   background-color: white;
   padding: 1rem;
+}
+.resultatside .panel {
+  border: 1px solid #b7b1a9;
+  background-color: #E9E7E7;
 }
 @media (min-width: 768px) {
   .resultatside .resultat__infotekst {
@@ -2190,5 +2268,11 @@ body {
 @media (min-width: 768px) {
   .limit {
     width: 740px;
+  }
+}
+@media (min-width: 30em) {
+  .typo-sidetittel {
+    font-size: 1.875rem;
+    line-height: 2.125rem;
   }
 }
