@@ -1,5 +1,5 @@
 import { isUndefined } from 'util';
-import BesvarelseModell from '../../svar/svar-modell';
+import { BesvarelseModell } from '../../svar/svar-modell';
 
 export function visTipsEtterSporsmal(sporsmalId: string, fullBesvarelse: BesvarelseModell[]) {
     switch (sporsmalId) {

@@ -6,7 +6,7 @@ import getStore from '../store';
 import IntlProvider from '../Intl-provider';
 import { Provider } from 'react-redux';
 import spm from '../sporsmal/sporsmal-alle';
-import BesvarelseModell from '../svar/svar-modell';
+import { BesvarelseModell } from '../svar/svar-modell';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
 import SvarAlternativModell from './svaralternativ';
 import { SinonSpy } from 'sinon';

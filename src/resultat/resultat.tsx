@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AppState } from '../ducks/reducer';
-import BesvarelseModell from '../svar/svar-modell';
+import { BesvarelseModell } from '../svar/svar-modell';
 import { connect } from 'react-redux';
 import { FormattedHTMLMessage } from 'react-intl';
 import { fasteTemaer, leggesTilTemaer } from './tema';

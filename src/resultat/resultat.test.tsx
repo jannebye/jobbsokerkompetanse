@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { expect } from 'chai';
-import BesvarelseModell from '../svar/svar-modell';
+import { BesvarelseModell } from '../svar/svar-modell';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 import { Resultat } from './resultat';
 import { configure, mount, ReactWrapper } from 'enzyme';
