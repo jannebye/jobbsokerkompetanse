@@ -6,15 +6,26 @@ interface TipsProps {
     id: string;
 }
 
-function TipsVisning({ id }: TipsProps) {
-    return (
-        <section className="tips">
-            <Undertittel tag={'h1'} className={'tips__overskrift'}>
-                <FormattedMessage id="tips-standard-overskrift" />
-            </Undertittel>
-            <FormattedMessage id={id} />
-        </section>
-    );
+class TipsVisning extends React.Component<TipsProps> {
+
+    constructor(props: TipsProps) {
+        super(props);
+    }
+
+    componentDidMount () {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    render() {
+        return (
+            <div>
+                <Undertittel tag={'h1'} className={'tips__overskrift'}>
+                    <FormattedMessage id="tips-standard-overskrift"/>
+                </Undertittel>
+                <FormattedMessage id={this.props.id}/>
+            </div>
+        );
+    }
 }
 
 export default TipsVisning;

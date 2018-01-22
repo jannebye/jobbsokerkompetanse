@@ -110,11 +110,15 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 type={'standard'}
                                 className="sporsmal__knapp-tilbake"
                                 onClick={e => {
-                                    {erForsteSporsmal(); }
+                                    {
+                                        erForsteSporsmal();
+                                    }
                                 }}
                                 onKeyPress={e => {
                                     if (e.which === 13) {
-                                        {erForsteSporsmal(); }
+                                        {
+                                            erForsteSporsmal();
+                                        }
                                     }
                                 }}
                             >
@@ -156,11 +160,11 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 <Sidetittel className="sporsmal__overskrift blokk-xs" tag="h1">
                                     <FormattedHTMLMessage id={sporsmal.id}/>
                                 </Sidetittel>
-                                {this.state.feil && (
-                                    <p className="skjemaelement__feilmelding">
+                                <p className="skjemaelement__feilmelding" role="alert" aria-live="assertive">
+                                    {this.state.feil && (
                                         <FormattedMessage id="feilmelding-mangler-svar"/>
-                                    </p>
-                                )}
+                                    )}
+                                </p>
                             </div>
                             <Undertekst className="sporsmal__ingress" tag="p">
                                 <FormattedMessage id={sporsmal.egenUndertekst || sporsmal.type}/>
@@ -192,8 +196,10 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             markerAlternativ(id, alternativ);
                         }}
                     />
-                    {!isUndefined(besvartSpm.tips) &&
-                    <TipsVisning id={besvartSpm.tips!}/>}
+                    <section className="tips" role="alert" aria-live="polite">
+                        {!isUndefined(besvartSpm.tips) &&
+                        <TipsVisning id={besvartSpm.tips!}/>}
+                    </section>
                     {sporsmal.erSisteSpm ? (
                         <div className="knapperad blokk-s">
                             <KnappBase
@@ -214,13 +220,13 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             className={'sporsmal__knapp'}
                             key="besvar"
                             onClick={e => {
+                                e.preventDefault();
                                 this.sjekkSvar(markerteAlternativer, sporsmal.id, besvarteSporsmal, besvartSpm);
-                                window.scrollTo(0, 0);
                             }}
                             onKeyPress={e => {
                                 if (e.which === 13) {
+                                    e.preventDefault();
                                     this.sjekkSvar(markerteAlternativer, sporsmal.id, besvarteSporsmal, besvartSpm);
-                                    window.scrollTo(0, 0);
                                 }
                             }}
                         >

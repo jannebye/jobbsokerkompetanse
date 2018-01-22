@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { Sidetittel } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import { Panel } from 'nav-frontend-paneler';
 
 interface InnholdsContainerProps {
@@ -16,9 +16,9 @@ function InnholdsContainer({
 }: InnholdsContainerProps) {
     return (
         <Panel>
-            <Sidetittel tag="h1">
+            <Innholdstittel tag="h1">
                 <FormattedMessage id={overskrift} />
-            </Sidetittel>
+            </Innholdstittel>
             <FormattedMessage id={innhold} tagName="p" />
             <FormattedHTMLMessage id={'les-mer-link'} values={{ link }} />
         </Panel>

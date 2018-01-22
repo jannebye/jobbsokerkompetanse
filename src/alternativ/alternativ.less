@@ -1,47 +1,32 @@
+
 .alternativer {
+	display: none;
 	list-style: none;
 	padding: 0;
+}
 
+.alternativer__ettvalg, .alternativer__flervalg {
 	.alternativ {
-		list-style: none;
-
-		.alternativ__input {
-
-			& + .alternativ__label {
-				display: block;
-				padding: 1.2rem 3.5rem 1.2rem 3.2rem;
-				margin: 0.7rem 1.4rem;
-				color: @navGra60;
-				border: 1px solid @navGra20;
-				border-radius: 4px;
-			}
-
-			&:disabled {
-				& + .alternativ__label {
-					background-color: @navLysGra;
-				}
-			}
-
+		border: 1px solid @navGra20;
+		border-radius: 4px;
+		margin: 0.7rem 1.4rem;
+		padding: 0;
+		.skjemaelement__input {
 			& + .markert {
 				color: @navMorkGra;
 				border-color: @navBla;
 				background-color: @navBlaLighten80;
 			}
-
-			&.skala {
-				opacity: 0;
-				height: 0;
+			&:disabled {
+				& + .skjemaelement__label {
+					background-color: @navLysGra;
+				}
 			}
 		}
-
-		.alternativ__input:focus {
-			& + .alternativ__label {
-				outline: none;
-				box-shadow: 0 0 0 3px @orangeFocus;
-			}
-		}
-
-		.alternativ__label {
+		.skjemaelement__label {
+			display: block;
+			height: 100%;
+			padding: 1.2rem 3.5rem 1.2rem 3.2rem;
 			font-size: 1.25rem;
 			font-weight: 600;
 			line-height: 1.3;
@@ -50,7 +35,6 @@
 				left: 1.4rem;
 			}
 		}
-
 		.overskrift-med-hjelpetekst {
 			display: inline;
 			.hjelpetekst {
@@ -64,58 +48,120 @@
 	}
 }
 
-@media (min-width: @screen-sm-min) {
-	.sporsmal__start + .alternativer {
+.alternativer__skala {
+	position: relative;
+	flex-direction: row;
+	justify-content: space-around;
+	margin: 2rem 1.4rem 0;
+	&:before {
+		content: '';
+		position: absolute;
+		display: block;
+		width: 80%;
+		height: 47%;
+		border-bottom: 1px solid @navGra20;
+		z-index: -1;
+	}
+	.alternativ {
+		position: relative;
+		text-align: center;
+		width: 15vw;
+		height: 15vw;
+		.skjemaelement__input {
+			opacity: 0;
+			height: 0;
+			width: 0;
+			padding: 0;
+		}
+		.skjemaelement__label {
+			border-radius: 50%;
+			border: 1px solid @navGra20;
+			background-color: @white;
+			width: 90%;
+			height: 90%;
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+
+			&.markert {
+				color: @navMorkGra;
+				border: 1px solid @navBla;
+				background-color: @navBlaLighten80;
+				animation: markerSkala 0.5s both;
+			}
+		}
+	}
+}
+
+.vis_alternativer {
+	.alternativer__ettvalg, .alternativer__flervalg {
+		display: block;
+	}
+	.alternativer__skala {
 		display: flex;
+	}
+}
+
+@keyframes markerSkala {
+	0% {
+		transform: scale(1);
+	}
+	70% {
+		transform: scale(1.5);
+	}
+	100% {
+		transform: scale(1.35);
+	}
+}
+
+@media (min-width: @screen-sm-min) {
+	.alternativer__ettvalg, .alternativer__flervalg {
 		justify-content: space-between;
 		flex-flow: row wrap;
-
 		.alternativ {
 			width: 49%;
-			padding: 0.5rem;
-			border-bottom: 0;
-
-			&.alternativ__skala {
-				width: 20%;
+			margin: 0.35rem 0;
+			.skjemaelement__label:hover {
+				background-color: @navLysBlaLighten80;
 			}
+		}
+	}
 
-			&:first-child {
-				border-top: 0;
-			}
+	.alternativer__skala {
+		margin: 0 auto;
+		width: 500px;
+		height: 100px;
+		&:before {
+			height: 40px;
+		}
+		.alternativ {
+			width: 85px;
+			height: 85px;
+		}
+	}
 
-			.alternativ__input {
-				width: 50%;
+	.alternativer {
+		display: flex;
+	}
 
-				&.skala {
-					& + .alternativ__label {
-						display: block;
-						text-align: center;
-						cursor: pointer;
+	.vis_alternativer {
+		.alternativer__ettvalg, .alternativer__flervalg {
+			display: flex;
+		}
+	}
+}
 
-						&:hover {
-							background-color: @navBlaLighten20;
-							color: @white;
-						}
-
-						&.markert {
-							background: @navBla none;
-							color: @white;
-
-							&:hover {
-								background-color: @navBlaLighten20;
-							}
-						}
-					}
-				}
-
-				& + .alternativ__label {
-					border: 1px solid @navGra20;
-
-					&:hover {
-						background-color: @navLysBlaLighten80;
-					}
-				}
-			}
+@media (orientation: landscape) {
+	.alternativer__skala {
+		width: 500px;
+		height: 100px;
+		margin: 2rem auto;
+		&:before {
+			height: 40px;
+		}
+		.alternativ {
+			width: 85px;
+			height: 85px;
 		}
 	}
 }

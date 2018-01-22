@@ -11,14 +11,6 @@ interface AlternativContainerProps {
                        alternativ: SvarAlternativModell[]) => void;
 }
 
-/* Gjelder for skalaSpørsmål */
-function skalAlternativMarkeres(markerteAlternativ: SvarAlternativModell[],
-                                alternativ: SvarAlternativModell): boolean {
-    return !!markerteAlternativ.find(
-        altId => altId.skalaId! >= alternativ.skalaId!
-    );
-}
-
 function erAlternativMulig(uniktAlternativId: string,
                            gjeldendeAlternativId: string,
                            markerteAlternativer: SvarAlternativModell[]): boolean {
@@ -59,18 +51,11 @@ function prepMarkerAlternativ(alternativ: SvarAlternativModell,
 function AlternativContainer({alternativer, markerteAlternativer, sporsmal, markerAlternativ}:
                                  AlternativContainerProps) {
     return (
-        <ul className="alternativer">
+        <ul className={'alternativer alternativer__' + sporsmal.type}>
             {alternativer.map(function (alternativ: SvarAlternativModell) {
                 const erValgt = !!markerteAlternativer.find(
                     alt => alt.id === alternativ.id
-                )
-                    ? true
-                    : sporsmal.type === 'skala'
-                        ? skalAlternativMarkeres(
-                            markerteAlternativer,
-                            alternativ
-                        )
-                        : false;
+                );
                 const kanVelges: boolean = !!sporsmal.uniktAlternativ
                     ? erAlternativMulig(
                         sporsmal.uniktAlternativ,
@@ -95,7 +80,8 @@ function AlternativContainer({alternativer, markerteAlternativer, sporsmal, mark
                                     sporsmal,
                                     sporsmal.type
                                 )
-                            ) }
+                            )
+                        }
                     />
                 );
             })}

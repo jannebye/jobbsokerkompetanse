@@ -99,7 +99,7 @@ describe('<Sporsmal />', function() {
                .last()
                .simulate('click', preventDefault);
 
-        expect(wrapper.find('.skjemaelement__feilmelding')).toHaveLength(1);
+        expect(wrapper.find('#feilmelding-mangler-svar')).toHaveLength(1);
     });
 
     it('skal ikke vise feilmelding dersom man trykker på nesteknapp og spørsmål er besvart', () => {
@@ -113,7 +113,7 @@ describe('<Sporsmal />', function() {
                .last()
                .simulate('click', preventDefault);
 
-        expect(wrapper.find('.skjemaelement__feilmelding')).toHaveLength(0);
+        expect(wrapper.find('#feilmelding-mangler-svar')).toHaveLength(0);
         expect(spy.calledOnce).toBeTruthy();
     });
 

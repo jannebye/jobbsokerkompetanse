@@ -12,7 +12,11 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		height: 96vh;
+		height: 100vh;
+	}
+
+	&__ingress {
+		font-size: 1rem;
 	}
 
 	section {
@@ -31,7 +35,7 @@
 	}
 
 	.sporsmal__innhold {
-		margin: 1rem 0 0;
+		margin: 1rem 1.4rem 0;
 	}
 
 	.sporsmal__ikon {
@@ -41,20 +45,17 @@
 		height: 90px;
 	}
 
-	.sporsmal__videre {
-		animation: sprett 2s infinite alternate;
-	}
-
-	.alternativer {
-		display: none;
-	}
-
 	.sporsmal__knapp {
 		display: none;
+		margin: 3rem auto;
 
 		&.sporsmal__videre {
 			display: block;
 		}
+	}
+
+	.knapperad {
+		display: none;
 	}
 
 	&.vis_alternativer {
@@ -83,7 +84,6 @@
 		}
 
 		.alternativer, .tips, .knapperad, .sporsmal__knapp {
-			display: block;
 			animation: skliFraBunn 1s both;
 		}
 
@@ -93,6 +93,10 @@
 			&.sporsmal__videre {
 				display: none;
 			}
+		}
+
+		.knapperad {
+			display: block;
 		}
 	}
 
@@ -109,13 +113,6 @@
 		margin-bottom: 1rem;
 	}
 
-}
-
-@keyframes sprett {
-	30%,
-	100% {
-		transform: translate(0px, -10px);
-	}
 }
 
 @keyframes feidInn {
@@ -164,24 +161,22 @@
 			height: 90px;
 		}
 
-		.alternativer {
-			display: block;
-		}
-
-		&.vis_alternativer {
-			.alternativer {
-				display: flex;
-			}
-		}
-
 		.sporsmal__knapp {
 			display: block;
-			margin-bottom: 2rem;
-
 			&.sporsmal__videre {
 				display: none;
 			}
 		}
+		.knapperad {
+			display: block;
+		}
 	}
 }
 
+@media (orientation: landscape) {
+	.sporsmal {
+		&__start {
+			height: 100%;
+		}
+	}
+}

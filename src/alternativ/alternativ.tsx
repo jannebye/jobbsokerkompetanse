@@ -22,13 +22,12 @@ function Alternativ({
     kanVelges
 }: AlternativProps) {
     const skalHaHjelpetekst: boolean = alternativ.id === 'finn-svar-0111';
-
-    let alternativKlasser = 'alternativ ';
-    let inputKlasser = 'skjemaelement__input alternativ__input ';
+    let inputKlasser = 'skjemaelement__input ';
     let inputType: 'radio' | 'checkbox';
+
     switch (sporsmalType) {
         case AlternativTyper.ETTVALG:
-            inputKlasser += 'radioknapp ';
+            inputKlasser += 'radioknapp';
             inputType = 'radio';
             break;
         case AlternativTyper.FLERVALG:
@@ -36,12 +35,10 @@ function Alternativ({
             inputType = 'checkbox';
             break;
         case AlternativTyper.SKALA:
-            alternativKlasser += 'alternativ__skala';
             inputKlasser += 'skala';
             inputType = 'radio';
             break;
         default:
-            inputKlasser += '';
             inputType = 'radio';
             break;
     }
@@ -58,12 +55,8 @@ function Alternativ({
         }
     }
 
-    function hentAlternativMarkering() {
-        return erValgt && sporsmalType === AlternativTyper.SKALA ? 'markert' : '';
-    }
-
     return (
-        <li key={alternativ.id} className={alternativKlasser}>
+        <li key={alternativ.id} className="alternativ">
             <input
                 id={alternativ.id}
                 className={inputKlasser}
@@ -86,7 +79,7 @@ function Alternativ({
             />
             <label
                 htmlFor={alternativ.id}
-                className={`skjemaelement__label alternativ__label ${hentAlternativMarkering()}`}
+                className={`skjemaelement__label ${erValgt ? 'markert' : ''}`}
                 onClick={e => {
                     if (kanVelges) {
                         markerAlternativ();
