@@ -27,7 +27,7 @@ function Startside({startKartlegging}: StartsideProps) {
                 </Normaltekst>
             </div>
             <div className="knapperad">
-                <Hovedknapp onClick={() => startKartlegging()}>
+                <Hovedknapp onClick={() => startKartlegging()} className="sporsmal__knapp">
                     <FormattedMessage id="start-knapp"/>
                 </Hovedknapp>
             </div>
