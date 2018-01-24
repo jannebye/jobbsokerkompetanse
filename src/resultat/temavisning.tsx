@@ -1,41 +1,51 @@
 import * as React from 'react';
-import { TemaModell } from './tema-modell';
+import { RaadModell } from './raad-modell';
 import EkspanderbartPanel from 'nav-frontend-ekspanderbartpanel';
-import { temaer } from '../alle-temaer';
+import { veiviserdata } from '../veiviserdata';
 import { FormattedHTMLMessage } from 'react-intl';
 
 interface AktivitetModell {
     id: string;
     tittel: string;
-    innhold: { ['__cdata']: string };
+    innhold: string;
 }
 
-interface TemaProps {
-    tema: TemaModell;
+interface TemaModell {
+    id: string;
+    refid?: string;
+    tittel: string;
+    ingress: string;
+    aktiviteter?: [AktivitetModell];
 }
 
-function TemaVisning({ tema }: TemaProps) {
-    const kategorier = temaer.steg.understeg;
-    const temaeer = kategorier.map(k => k.temaer.tema);
-    const riktigTema = temaeer.find(t => t.some(tt => tt.id === tema.id)!);
+interface RaadProps {
+    raad: RaadModell;
+}
+
+function TemaVisning({ raad }: RaadProps) {
+    const understeg = veiviserdata.steg.understeg;
+    const temagrupper = understeg.map(u => u.temaer);
+    const riktiggruppe = temagrupper.find(t => t.some(tt => tt.id === raad.id)!);
+    let tema: TemaModell;
     let aktiviteter: AktivitetModell[] = []; // tslint:disable-line:no-any
-    if (riktigTema !== undefined) {
-        aktiviteter = riktigTema!.find(k => k.id === tema.id)!.aktiviteter!
-            .aktivitet;
+    if (riktiggruppe !== undefined) {
+        tema = riktiggruppe.find(t => t.id === raad.id);
+        aktiviteter = riktiggruppe.find(t => t.id === raad.id)!.aktiviteter!;
     }
+    console.log('tema', tema);
     return (
-        <li className="enkelt__tema blokk-xs" key={tema.id}>
-            <EkspanderbartPanel apen={false} tittel={tema.tekst}>
+        <li className="enkelt__tema blokk-xs" key={raad.id}>
+            <EkspanderbartPanel apen={false} tittel={raad.tekst}>
                 <div>
                     {aktiviteter.length !== 0 &&
                         aktiviteter.map(aktivitet => (
-                            <div key={aktivitet.id}> 
-                                <h4>{aktivitet.tittel}</h4>
+                            <div key={aktivitet.id}>
+                                <h1>{tema.tittel}</h1>
                                 <p className="aktivitet">
                                     <FormattedHTMLMessage
                                         id={aktivitet.id}
                                         defaultMessage={
-                                            aktivitet.innhold.__cdata
+                                            aktivitet.innhold
                                         }
                                     />
                                 </p>
