@@ -44,8 +44,8 @@ function Alternativ({
     }
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-            const valgt = e.target.checked;
-            e.target.checked = !valgt;
+        const valgt = e.target.checked;
+        e.target.checked = !valgt;
     }
 
     function onKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {

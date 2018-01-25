@@ -31,7 +31,7 @@ class Innhold extends React.Component<Props, {}> {
     }
 
     handleSubmit() {
-         return this.props.byttSide(Sidetype.RESULTAT);
+        return this.props.byttSide(Sidetype.RESULTAT);
     }
 
     startKartlegging() {
@@ -39,16 +39,22 @@ class Innhold extends React.Component<Props, {}> {
     }
 
     startPaNytt() {
-        return this.props.reset().then(res => this.props.byttSide(Sidetype.START));
+        return this.props
+            .reset()
+            .then(res => this.props.byttSide(Sidetype.START));
     }
 
-render() {
-    return (
-            this.props.side === Sidetype.START ? <Startside startKartlegging={() => this.startKartlegging()} />
-                : this.props.side === Sidetype.KARTLEGGING ?
-                <Skjema handleSubmit={() => this.handleSubmit()} startPaNytt={() => this.startPaNytt()}/>
-                : <Resultat startPaNytt={() => this.startPaNytt()}/>
-            );
+    render() {
+        return this.props.side === Sidetype.START ? (
+            <Startside startKartlegging={() => this.startKartlegging()} />
+        ) : this.props.side === Sidetype.KARTLEGGING ? (
+            <Skjema
+                handleSubmit={() => this.handleSubmit()}
+                startPaNytt={() => this.startPaNytt()}
+            />
+        ) : (
+            <Resultat startPaNytt={() => this.startPaNytt()} />
+        );
     }
 }
 
@@ -59,7 +65,7 @@ const mapStateToProps = (state: AppState): InnholdStateProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     reset: () => new Promise(resolve => resolve(dispatch(reset()))),
-   byttSide: (side: Sidetype) => dispatch(endreSide(side))
+    byttSide: (side: Sidetype) => dispatch(endreSide(side))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Innhold);

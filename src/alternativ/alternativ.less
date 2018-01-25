@@ -1,166 +1,170 @@
 .alternativer {
-	display: none;
-	list-style: none;
-	padding: 0;
+    display: none;
+    list-style: none;
+    padding: 0;
 }
 
-.alternativer__ettvalg, .alternativer__flervalg {
-	.alternativ {
-		border: 1px solid @navGra20;
-		border-radius: 4px;
-		margin: 0.7rem 0;
-		padding: 0;
-		.skjemaelement__input {
-			& + .markert {
-				color: @navMorkGra;
-				border-color: @navBla;
-				background-color: @navBlaLighten80;
-			}
-			&:disabled {
-				& + .skjemaelement__label {
-					background-color: @navLysGra;
-				}
-			}
-		}
-		.skjemaelement__label {
-			display: block;
-			height: 100%;
-			padding: 1.2rem 3.5rem 1.2rem 3.2rem;
-			font-size: 1.25rem;
-			font-weight: 600;
-			line-height: 1.3;
-			&:before {
-				top: 1.45rem;
-				left: 1.4rem;
-			}
-		}
-		.overskrift-med-hjelpetekst {
-			display: inline;
-			.hjelpetekst {
-				padding-left: 0.5rem;
-			}
-			svg {
-				height: 16px;
-				width: 16px;
-			}
-		}
-	}
+.alternativer__ettvalg,
+.alternativer__flervalg {
+    .alternativ {
+        border: 1px solid @navGra20;
+        border-radius: 4px;
+        margin: 0.7rem 0;
+        padding: 0;
+        .skjemaelement__input {
+            & + .markert {
+                color: @navMorkGra;
+                border-color: @navBla;
+                background-color: @navBlaLighten80;
+            }
+            &:disabled {
+                & + .skjemaelement__label {
+                    background-color: @navLysGra;
+                }
+            }
+        }
+        .skjemaelement__label {
+            display: block;
+            height: 100%;
+            padding: 1.2rem 3.5rem 1.2rem 3.2rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.3;
+            &:before {
+                top: 1.45rem;
+                left: 1.4rem;
+            }
+        }
+        .overskrift-med-hjelpetekst {
+            display: inline;
+            .hjelpetekst {
+                padding-left: 0.5rem;
+            }
+            svg {
+                height: 16px;
+                width: 16px;
+            }
+        }
+    }
 }
 
 .alternativer__skala {
-	position: relative;
-	flex-direction: row;
-	justify-content: space-around;
-	margin: 2rem 0 0;
-	&:before {
-		content: '';
-		position: absolute;
-		display: block;
-		width: 80%;
-		height: 47%;
-		border-bottom: 1px solid @navGra20;
-		z-index: -1;
-	}
-	.alternativ {
-		position: relative;
-		text-align: center;
-		width: 15vw;
-		height: 15vw;
-		.skjemaelement__input {
-			opacity: 0;
-			height: 0;
-			width: 0;
-			padding: 0;
-		}
-		.skjemaelement__label {
-			border-radius: 50%;
-			border: 1px solid @navGra20;
-			background-color: @white;
-			width: 90%;
-			height: 90%;
-			display: inline-flex;
-			justify-content: center;
-			align-items: center;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 2rem 0 0;
+    &:before {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 80%;
+        height: 47%;
+        border-bottom: 1px solid @navGra20;
+        z-index: -1;
+    }
+    .alternativ {
+        position: relative;
+        text-align: center;
+        width: 15vw;
+        height: 15vw;
+        .skjemaelement__input {
+            opacity: 0;
+            height: 0;
+            width: 0;
+            padding: 0;
+        }
+        .skjemaelement__label {
+            border-radius: 50%;
+            border: 1px solid @navGra20;
+            background-color: @white;
+            width: 90%;
+            height: 90%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
 
-			&.markert {
-				color: @navMorkGra;
-				border: 1px solid @navBla;
-				background-color: @navBlaLighten80;
-				animation: markerSkala 0.5s both;
-			}
-		}
-	}
+            &.markert {
+                color: @navMorkGra;
+                border: 1px solid @navBla;
+                background-color: @navBlaLighten80;
+                animation: markerSkala 0.5s both;
+            }
+        }
+    }
 }
 
 .vis_alternativer {
-	.alternativer__ettvalg, .alternativer__flervalg {
-		display: block;
-	}
-	.alternativer__skala {
-		display: flex;
-	}
+    .alternativer__ettvalg,
+    .alternativer__flervalg {
+        display: block;
+    }
+    .alternativer__skala {
+        display: flex;
+    }
 }
 
 @keyframes markerSkala {
-	0% {
-		transform: scale(1);
-	}
-	70% {
-		transform: scale(1.5);
-	}
-	100% {
-		transform: scale(1.35);
-	}
+    0% {
+        transform: scale(1);
+    }
+    70% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1.35);
+    }
 }
 
 @media (min-width: @screen-sm-min) {
-	.alternativer__ettvalg, .alternativer__flervalg {
-		justify-content: space-between;
-		flex-flow: row wrap;
-		.alternativ {
-			width: 49%;
-			margin: 0.35rem 0;
-			.skjemaelement__label:hover {
-				background-color: @navLysBlaLighten80;
-			}
-		}
-	}
+    .alternativer__ettvalg,
+    .alternativer__flervalg {
+        justify-content: space-between;
+        flex-flow: row wrap;
+        .alternativ {
+            width: 49%;
+            margin: 0.35rem 0;
+            .skjemaelement__label:hover {
+                background-color: @navLysBlaLighten80;
+            }
+        }
+    }
 
-	.alternativer__skala {
-		margin: 0 auto;
-		width: 500px;
-		height: 100px;
-		&:before {
-			height: 40px;
-		}
-		.alternativ {
-			width: 85px;
-			height: 85px;
-		}
-	}
+    .alternativer__skala {
+        margin: 0 auto;
+        width: 500px;
+        height: 100px;
+        &:before {
+            height: 40px;
+        }
+        .alternativ {
+            width: 85px;
+            height: 85px;
+        }
+    }
 
-	.alternativer {
-		display: flex;
-	}
+    .alternativer {
+        display: flex;
+    }
 
-	.vis_alternativer {
-		.alternativer__ettvalg, .alternativer__flervalg {
-			display: flex;
-		}
-	}
+    .vis_alternativer {
+        .alternativer__ettvalg,
+        .alternativer__flervalg {
+            display: flex;
+        }
+    }
 }
 
 @media (orientation: landscape) {
-	.alternativer__skala {
-		width: 500px;
-		height: 100px;
-		margin: 2rem auto;
-		&:before {
-			height: 40px;
-		}
-		.alternativ {
-			width: 85px;
-			height: 85px;
-		}
-	}
+    .alternativer__skala {
+        width: 500px;
+        height: 100px;
+        margin: 2rem auto;
+        &:before {
+            height: 40px;
+        }
+        .alternativ {
+            width: 85px;
+            height: 85px;
+        }
+    }
 }

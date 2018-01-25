@@ -12,11 +12,16 @@ import { Provider } from 'react-redux';
 configure({ adapter: new Adapter() });
 const store = getStore();
 
-function getJSXElement (besvarteSpm: Array<BesvarelseModell>) {
+function getJSXElement(besvarteSpm: Array<BesvarelseModell>) {
     return (
         <Provider store={store}>
             <IntlProvider>
-                <Resultat besvarteSporsmal={besvarteSpm} startPaNytt={() => {return; }}/>
+                <Resultat
+                    besvarteSporsmal={besvarteSpm}
+                    startPaNytt={() => {
+                        return;
+                    }}
+                />
             </IntlProvider>
         </Provider>
     );
@@ -24,9 +29,9 @@ function getJSXElement (besvarteSpm: Array<BesvarelseModell>) {
 
 // key : se id i alle-temaer.ts
 function hentTema(wrapper: ReactWrapper, key: string) {
-
-    return wrapper.find('.enkelt__tema')
-                  .filterWhere(x => key.length === 0 ? true : x.key() === key);
+    return wrapper
+        .find('.enkelt__tema')
+        .filterWhere(x => (key.length === 0 ? true : x.key() === key));
 }
 
 // besvarteSpm.Id, svarAlternativer.sporsmalId: se alle-tekster.ts
@@ -43,36 +48,48 @@ describe('<Resultat />', function() {
 
     it('skal vise overskrift', () => {
         const wrapper = mount(getJSXElement(besvarteSpm));
-        expect(wrapper.find('#overskrift-raad').text()).to.contain('Vi har uthevet4 råd til deg');
+        expect(wrapper.find('#overskrift-raad').text()).to.contain(
+            'Vi har uthevet4 råd til deg'
+        );
     });
 
     it('skal foreslå å søke i flere bransjer hvis man søker på en type stilling', () => {
-        svarAlternativer.push({id: 'finn-svar-0301'});
-        besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer, tips: tips});
+        svarAlternativer.push({ id: 'finn-svar-0301' });
+        besvarteSpm.push({
+            sporsmalId: 'finn-spm-03',
+            svarAlternativer: svarAlternativer,
+            tips: tips
+        });
 
         const wrapper = mount(getJSXElement(besvarteSpm));
         const fantTema = hentTema(wrapper, '525215').exists();
 
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(fantTema).to.equal(true);
-
     });
 
     it('skal ikke foreslå å søke i flere bransjer hvis man søker på flere typer stilling', () => {
-        svarAlternativer.push({id: 'finn-svar-0302'});
-        besvarteSpm.push({sporsmalId: 'finn-spm-03', svarAlternativer: svarAlternativer, tips: tips});
+        svarAlternativer.push({ id: 'finn-svar-0302' });
+        besvarteSpm.push({
+            sporsmalId: 'finn-spm-03',
+            svarAlternativer: svarAlternativer,
+            tips: tips
+        });
 
         const wrapper = mount(getJSXElement(besvarteSpm));
         const fantTema = hentTema(wrapper, '525215').exists();
 
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(fantTema).to.equal(false);
-
     });
 
     it('skal ikke foreslå hjelp til å skrive søknad', () => {
-        svarAlternativer.push({id: 'cv-svar-0506'});
-        besvarteSpm.push({sporsmalId: 'cv-spm-05', svarAlternativer: svarAlternativer, tips: ''});
+        svarAlternativer.push({ id: 'cv-svar-0506' });
+        besvarteSpm.push({
+            sporsmalId: 'cv-spm-05',
+            svarAlternativer: svarAlternativer,
+            tips: ''
+        });
 
         const wrapper = mount(getJSXElement(besvarteSpm));
         const fantTema = hentTema(wrapper, '454152').exists();
@@ -82,8 +99,12 @@ describe('<Resultat />', function() {
     });
 
     it('skal foreslå hjelp til å skrive søknad hvis man har lite erfaring med å søke', () => {
-        svarAlternativer.push({id: 'cv-svar-0507'});
-        besvarteSpm.push({sporsmalId: 'cv-spm-05', svarAlternativer: svarAlternativer, tips: ''});
+        svarAlternativer.push({ id: 'cv-svar-0507' });
+        besvarteSpm.push({
+            sporsmalId: 'cv-spm-05',
+            svarAlternativer: svarAlternativer,
+            tips: ''
+        });
 
         const wrapper = mount(getJSXElement(besvarteSpm));
         const fantTema = hentTema(wrapper, '454152').exists();
@@ -93,8 +114,12 @@ describe('<Resultat />', function() {
     });
 
     it('skal foreslå hjelp til å skrive søknad hvis man ikke har søkt det siste året', () => {
-        svarAlternativer.push({id: 'soke-svar-0101'});
-        besvarteSpm.push({sporsmalId: 'soke-spm-01', svarAlternativer: svarAlternativer, tips: ''});
+        svarAlternativer.push({ id: 'soke-svar-0101' });
+        besvarteSpm.push({
+            sporsmalId: 'soke-spm-01',
+            svarAlternativer: svarAlternativer,
+            tips: ''
+        });
 
         const wrapper = mount(getJSXElement(besvarteSpm));
         const fantTema = hentTema(wrapper, '454152').exists();
@@ -104,8 +129,12 @@ describe('<Resultat />', function() {
     });
 
     it('skal foreslå hjelp til å skrive søknad hvis man ikke har vært på intervju det siste året', () => {
-        svarAlternativer.push({id: 'soke-svar-0201'});
-        besvarteSpm.push({sporsmalId: 'soke-spm-02', svarAlternativer: svarAlternativer, tips: ''});
+        svarAlternativer.push({ id: 'soke-svar-0201' });
+        besvarteSpm.push({
+            sporsmalId: 'soke-spm-02',
+            svarAlternativer: svarAlternativer,
+            tips: ''
+        });
 
         const wrapper = mount(getJSXElement(besvarteSpm));
         const fantTema = hentTema(wrapper, '454152').exists();
@@ -115,20 +144,27 @@ describe('<Resultat />', function() {
     });
 
     it('skal foreslå hjelp til å skrive søknad hvis man ikke tilpasser søknaden', () => {
-        svarAlternativer.push({id: 'soke-svar-0401'});
-        besvarteSpm.push({sporsmalId: 'soke-spm-04', svarAlternativer: svarAlternativer, tips: ''});
+        svarAlternativer.push({ id: 'soke-svar-0401' });
+        besvarteSpm.push({
+            sporsmalId: 'soke-spm-04',
+            svarAlternativer: svarAlternativer,
+            tips: ''
+        });
 
         const wrapper = mount(getJSXElement(besvarteSpm));
         const fantTema = hentTema(wrapper, '454152').exists();
 
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(fantTema).to.equal(true);
-
     });
 
     it('skal foreslå å ta kontakt med en bedrift', () => {
-        svarAlternativer.push({id: 'finn-svar-0108'});
-        besvarteSpm.push({sporsmalId: 'finn-spm-01', svarAlternativer: svarAlternativer, tips: ''});
+        svarAlternativer.push({ id: 'finn-svar-0108' });
+        besvarteSpm.push({
+            sporsmalId: 'finn-spm-01',
+            svarAlternativer: svarAlternativer,
+            tips: ''
+        });
 
         const wrapper = mount(getJSXElement(besvarteSpm));
 
@@ -137,8 +173,12 @@ describe('<Resultat />', function() {
     });
 
     it('skal ikke foreslå å ta kontakt med en bedrift hvis man har kontaktet arbeidsgivere direkte', () => {
-        svarAlternativer.push({id: 'finn-svar-0110'});
-        besvarteSpm.push({sporsmalId: 'finn-spm-01', svarAlternativer: svarAlternativer, tips: ''});
+        svarAlternativer.push({ id: 'finn-svar-0110' });
+        besvarteSpm.push({
+            sporsmalId: 'finn-spm-01',
+            svarAlternativer: svarAlternativer,
+            tips: ''
+        });
 
         const wrapper = mount(getJSXElement(besvarteSpm));
         expect(hentTema(wrapper, '').length).to.equal(4);
@@ -146,10 +186,14 @@ describe('<Resultat />', function() {
     });
 
     it('skal ikke foreslå å ta kontakt med en bedrift selv om man krysser av for flere alternativer', () => {
-        svarAlternativer.push({id: 'finn-svar-0101'});
-        svarAlternativer.push({id: 'finn-svar-0110'});
-        svarAlternativer.push({id: 'finn-svar-0109'});
-        besvarteSpm.push({sporsmalId: 'finn-spm-01', svarAlternativer: svarAlternativer, tips: ''});
+        svarAlternativer.push({ id: 'finn-svar-0101' });
+        svarAlternativer.push({ id: 'finn-svar-0110' });
+        svarAlternativer.push({ id: 'finn-svar-0109' });
+        besvarteSpm.push({
+            sporsmalId: 'finn-spm-01',
+            svarAlternativer: svarAlternativer,
+            tips: ''
+        });
 
         const wrapper = mount(getJSXElement(besvarteSpm));
         expect(hentTema(wrapper, '').length).to.equal(4);
@@ -157,8 +201,12 @@ describe('<Resultat />', function() {
     });
 
     it('skal foreslå å forberede seg til intervju hvis man ikke har blitt innkalt det siste året', () => {
-        svarAlternativer.push({id: 'soke-svar-0201'});
-        besvarteSpm.push({sporsmalId: 'soke-spm-02', svarAlternativer: svarAlternativer, tips: ''});
+        svarAlternativer.push({ id: 'soke-svar-0201' });
+        besvarteSpm.push({
+            sporsmalId: 'soke-spm-02',
+            svarAlternativer: svarAlternativer,
+            tips: ''
+        });
 
         const wrapper = mount(getJSXElement(besvarteSpm));
         expect(hentTema(wrapper, '').length).to.equal(4);
@@ -166,12 +214,15 @@ describe('<Resultat />', function() {
     });
 
     it('skal ikke foreslå å beskrive kompetanse', () => {
-        svarAlternativer.push({id: 'soke-svar-0401'});
-        besvarteSpm.push({sporsmalId: 'soke-spm-04', svarAlternativer: svarAlternativer, tips: ''});
+        svarAlternativer.push({ id: 'soke-svar-0401' });
+        besvarteSpm.push({
+            sporsmalId: 'soke-spm-04',
+            svarAlternativer: svarAlternativer,
+            tips: ''
+        });
 
         const wrapper = mount(getJSXElement(besvarteSpm));
         expect(hentTema(wrapper, '').length).to.equal(4);
         expect(hentTema(wrapper, '54067').exists()).to.equal(false);
     });
-
 });

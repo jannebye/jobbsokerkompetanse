@@ -4,13 +4,14 @@ import reducer, { AppState } from './ducks/reducer';
 
 function create() {
     /* tslint:disable-next-line */
-    const useExtension = (window as any).__REDUX_DEVTOOLS_EXTENSION__ !== undefined;
+    const useExtension =
+        (window as any).__REDUX_DEVTOOLS_EXTENSION__ !== undefined;
     /* tslint:disable-next-line */
-    const composer = useExtension ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
+    const composer = useExtension
+        ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+        : compose;
 
-    const composed = composer(
-        applyMiddleware(thunkMiddleware)
-    );
+    const composed = composer(applyMiddleware(thunkMiddleware));
 
     return composed(createStore)(reducer, {});
 }
