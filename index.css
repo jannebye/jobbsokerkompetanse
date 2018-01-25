@@ -1806,6 +1806,8 @@ body .blokk-xl {
 }
 .sporsmal__knapp {
   margin: 1rem auto;
+  width: 100%;
+  padding: 18px 40px 21px;
 }
 .sporsmal__knapp-tilbake {
   margin: 2rem auto 0;
@@ -1830,11 +1832,18 @@ body .blokk-xl {
   border-left: 2px solid black;
   transform: rotate(45deg);
 }
+@media (min-width: 768px) {
+  .sporsmal__knapp {
+    margin: 1rem auto;
+    width: auto;
+    padding: 0.5em 2.5em calc(.5em + .125em + 1px) 2.5em;
+  }
+}
 .tips div {
   border-left: 2px solid #005B82;
   color: #005B82;
   padding: 0 1rem 0.4rem;
-  margin: 1.4rem;
+  margin: 1.4rem 0;
 }
 .tips div .tips__overskrift {
   margin-top: 0;
@@ -1847,6 +1856,7 @@ body .blokk-xl {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  padding: 1rem 1.4rem;
 }
 .sporsmal__start {
   display: flex;
@@ -1870,7 +1880,7 @@ body .blokk-xl {
   animation: feidInn 1s both;
 }
 .sporsmal .sporsmal__innhold {
-  margin: 1rem 1.4rem 0;
+  margin: 1rem 0 0;
 }
 .sporsmal .sporsmal__ikon {
   display: inline-block;
@@ -2011,7 +2021,7 @@ body .blokk-xl {
 .alternativer__flervalg .alternativ {
   border: 1px solid #C6C2BF;
   border-radius: 4px;
-  margin: 0.7rem 1.4rem;
+  margin: 0.7rem 0;
   padding: 0;
 }
 .alternativer__ettvalg .alternativ .skjemaelement__input + .markert,
@@ -2055,7 +2065,7 @@ body .blokk-xl {
   position: relative;
   flex-direction: row;
   justify-content: space-around;
-  margin: 2rem 1.4rem 0;
+  margin: 2rem 0 0;
 }
 .alternativer__skala:before {
   content: '';
@@ -2250,6 +2260,7 @@ body {
   flex-direction: column;
   justify-content: space-around;
   height: 100%;
+  padding: 0 1.4rem;
   text-align: center;
 }
 .startside .bakgrunn {
@@ -2264,6 +2275,9 @@ body {
   width: 60%;
   margin: 1rem auto 0;
   z-index: 1;
+}
+.startside .knapperad {
+  margin: 2rem 0 1rem;
 }
 @media (min-width: 768px) {
   .limit {
