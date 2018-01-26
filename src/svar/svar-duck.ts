@@ -4,7 +4,11 @@ import {
     ActionType,
     EndreAlternativAction,
     NesteSporsmalAction,
-    ResetAction, VisTipsAction, SkjulTipsAction, VisAlternativerAction, EndreAlternativOgAntallAction
+    ResetAction,
+    VisTipsAction,
+    SkjulTipsAction,
+    VisAlternativerAction,
+    EndreAlternativOgAntallAction
 } from '../actions';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
 
@@ -32,7 +36,9 @@ export interface SvarState {
 }
 
 export const initialState = {
-    data: [{ sporsmalId: 'finn-spm-01', svarAlternativer: [], tips: undefined }],
+    data: [
+        { sporsmalId: 'finn-spm-01', svarAlternativer: [], tips: undefined }
+    ],
     gjeldendeSpmId: 'finn-spm-01',
     flyt: FlytType.FREMOVER,
     viserAlternativer: false,
@@ -40,8 +46,10 @@ export const initialState = {
 };
 
 //  Reducer
-export default function reducer(state: SvarState = initialState,
-                                action: Handling): SvarState {
+export default function reducer(
+    state: SvarState = initialState,
+    action: Handling
+): SvarState {
     switch (action.type) {
         case ActionType.ENDRE_ALTERNATIV: {
             if (
@@ -55,10 +63,10 @@ export default function reducer(state: SvarState = initialState,
                         besvarelse =>
                             besvarelse.sporsmalId === action.data.sporsmalId
                                 ? {
-                                    ...besvarelse,
-                                    svarAlternativer:
-                                    action.data.svarAlternativer
-                                }
+                                      ...besvarelse,
+                                      svarAlternativer:
+                                          action.data.svarAlternativer
+                                  }
                                 : besvarelse
                     )
                 };
@@ -88,10 +96,10 @@ export default function reducer(state: SvarState = initialState,
                         besvarelse =>
                             besvarelse.sporsmalId === action.data.sporsmalId
                                 ? {
-                                    ...besvarelse,
-                                    svarAlternativer:
-                                    action.data.svarAlternativer
-                                }
+                                      ...besvarelse,
+                                      svarAlternativer:
+                                          action.data.svarAlternativer
+                                  }
                                 : besvarelse
                     ),
                     totalAntallSpm: action.data.totalAntallSpm
@@ -128,7 +136,11 @@ export default function reducer(state: SvarState = initialState,
                     ...state,
                     data: [
                         ...state.data,
-                        { sporsmalId: action.data, svarAlternativer: [], tips: undefined }
+                        {
+                            sporsmalId: action.data,
+                            svarAlternativer: [],
+                            tips: undefined
+                        }
                     ],
                     gjeldendeSpmId: action.data,
                     flyt: FlytType.FREMOVER,
@@ -145,24 +157,42 @@ export default function reducer(state: SvarState = initialState,
         case ActionType.VIS_TIPS:
             return {
                 ...state,
-                data: [...state.data.map(besvarelse => (besvarelse.sporsmalId === state.gjeldendeSpmId) ?
-                    {...besvarelse, tips: action.data} : besvarelse ) ]
+                data: [
+                    ...state.data.map(
+                        besvarelse =>
+                            besvarelse.sporsmalId === state.gjeldendeSpmId
+                                ? { ...besvarelse, tips: action.data }
+                                : besvarelse
+                    )
+                ]
             };
         case ActionType.SKJUL_TIPS:
             return {
                 ...state,
-                data: [...state.data.map(besvarelse => (besvarelse.sporsmalId === state.gjeldendeSpmId) ?
-                    {...besvarelse, tips: undefined} : besvarelse ) ]
+                data: [
+                    ...state.data.map(
+                        besvarelse =>
+                            besvarelse.sporsmalId === state.gjeldendeSpmId
+                                ? { ...besvarelse, tips: undefined }
+                                : besvarelse
+                    )
+                ]
             };
         default:
             return state;
     }
 }
 
-export function marker(sporsmalId: string,
-                       svarAlternativ: SvarAlternativModell[]): EndreAlternativAction | EndreAlternativOgAntallAction {
+export function marker(
+    sporsmalId: string,
+    svarAlternativ: SvarAlternativModell[]
+): EndreAlternativAction | EndreAlternativOgAntallAction {
     if (sporsmalId === 'soke-spm-01') {
-        if (svarAlternativ.some(alternativ => alternativ.id === 'soke-svar-0101')) {
+        if (
+            svarAlternativ.some(
+                alternativ => alternativ.id === 'soke-svar-0101'
+            )
+        ) {
             return {
                 type: ENDRE_ALTERNATIV_OG_ANTALL,
                 data: {
@@ -181,8 +211,15 @@ export function marker(sporsmalId: string,
                 }
             };
         }
-    } else if (sporsmalId === 'soke-spm-02' && svarAlternativ.some(alternativ => alternativ.id === 'soke-svar-0201')) {
-        if (svarAlternativ.some(alternativ => alternativ.id === 'soke-svar-0201')) {
+    } else if (
+        sporsmalId === 'soke-spm-02' &&
+        svarAlternativ.some(alternativ => alternativ.id === 'soke-svar-0201')
+    ) {
+        if (
+            svarAlternativ.some(
+                alternativ => alternativ.id === 'soke-svar-0201'
+            )
+        ) {
             return {
                 type: ENDRE_ALTERNATIV_OG_ANTALL,
                 data: {

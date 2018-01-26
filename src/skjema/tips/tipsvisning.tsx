@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {  FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { Undertittel } from 'nav-frontend-typografi';
 
 interface TipsProps {
@@ -7,12 +7,11 @@ interface TipsProps {
 }
 
 class TipsVisning extends React.Component<TipsProps> {
-
     constructor(props: TipsProps) {
         super(props);
     }
 
-    componentDidMount () {
+    componentDidMount() {
         window.scrollTo(0, document.body.scrollHeight);
     }
 
@@ -20,9 +19,9 @@ class TipsVisning extends React.Component<TipsProps> {
         return (
             <div>
                 <Undertittel tag={'h1'} className={'tips__overskrift'}>
-                    <FormattedMessage id="tips-standard-overskrift"/>
+                    <FormattedMessage id="tips-standard-overskrift" />
                 </Undertittel>
-                <FormattedMessage id={this.props.id}/>
+                <FormattedMessage id={this.props.id} />
             </div>
         );
     }

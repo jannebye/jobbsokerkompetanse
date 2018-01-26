@@ -7,13 +7,17 @@ interface AlternativContainerProps {
     alternativer: SvarAlternativModell[];
     markerteAlternativer: SvarAlternativModell[];
     sporsmal: SporsmalModell;
-    markerAlternativ: (sporsmalId: string,
-                       alternativ: SvarAlternativModell[]) => void;
+    markerAlternativ: (
+        sporsmalId: string,
+        alternativ: SvarAlternativModell[]
+    ) => void;
 }
 
-function erAlternativMulig(uniktAlternativId: string,
-                           gjeldendeAlternativId: string,
-                           markerteAlternativer: SvarAlternativModell[]): boolean {
+function erAlternativMulig(
+    uniktAlternativId: string,
+    gjeldendeAlternativId: string,
+    markerteAlternativer: SvarAlternativModell[]
+): boolean {
     if (uniktAlternativId === gjeldendeAlternativId) {
         return true;
     } else {
@@ -24,10 +28,12 @@ function erAlternativMulig(uniktAlternativId: string,
     return true;
 }
 
-function prepMarkerAlternativ(alternativ: SvarAlternativModell,
-                              alternativListe: SvarAlternativModell[],
-                              sporsmal: SporsmalModell,
-                              type: string): SvarAlternativModell[] {
+function prepMarkerAlternativ(
+    alternativ: SvarAlternativModell,
+    alternativListe: SvarAlternativModell[],
+    sporsmal: SporsmalModell,
+    type: string
+): SvarAlternativModell[] {
     const erValgt = !!alternativListe.find(alt => alt.id === alternativ.id);
     if (erValgt) {
         if (type === 'ettvalg' || type === 'skala') {
@@ -48,20 +54,24 @@ function prepMarkerAlternativ(alternativ: SvarAlternativModell,
     }
 }
 
-function AlternativContainer({alternativer, markerteAlternativer, sporsmal, markerAlternativ}:
-                                 AlternativContainerProps) {
+function AlternativContainer({
+    alternativer,
+    markerteAlternativer,
+    sporsmal,
+    markerAlternativ
+}: AlternativContainerProps) {
     return (
         <ul className={'alternativer alternativer__' + sporsmal.type}>
-            {alternativer.map(function (alternativ: SvarAlternativModell) {
+            {alternativer.map(function(alternativ: SvarAlternativModell) {
                 const erValgt = !!markerteAlternativer.find(
                     alt => alt.id === alternativ.id
                 );
                 const kanVelges: boolean = !!sporsmal.uniktAlternativ
                     ? erAlternativMulig(
-                        sporsmal.uniktAlternativ,
-                        alternativ.id,
-                        markerteAlternativer
-                    )
+                          sporsmal.uniktAlternativ,
+                          alternativ.id,
+                          markerteAlternativer
+                      )
                     : true;
                 return (
                     <Alternativ

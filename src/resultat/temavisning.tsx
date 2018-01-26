@@ -66,6 +66,7 @@ function TemaVisning({raad}: RaadProps) {
     ));
 
     return (
+<<<<<<< HEAD
         <li className="enkelt__tema" key={raad.id}>
             <section className="ekspenderbartPanel ekspanderbartPanel--lukket">
                 <button className="ekspanderbartPanel__hode" aria-expanded="false"
@@ -81,6 +82,27 @@ function TemaVisning({raad}: RaadProps) {
                 </button>
                 <div className="ekspanderbartPanel__innhold" dangerouslySetInnerHTML={{__html: html_innhold}}/>
             </section>
+=======
+        <li className="enkelt__tema blokk-xs" key={tema.id}>
+            <EkspanderbartPanel apen={false} tittel={tema.tekst}>
+                <div>
+                    {aktiviteter.length !== 0 &&
+                        aktiviteter.map(aktivitet => (
+                            <div key={aktivitet.id}>
+                                <h4>{aktivitet.tittel}</h4>
+                                <p className="aktivitet">
+                                    <FormattedHTMLMessage
+                                        id={aktivitet.id}
+                                        defaultMessage={
+                                            aktivitet.innhold.__cdata
+                                        }
+                                    />
+                                </p>
+                            </div>
+                        ))}
+                </div>
+            </EkspanderbartPanel>
+>>>>>>> 15e8d83bcaf18764705087ac1df0c46ecfc1615c
         </li>
     );
 }

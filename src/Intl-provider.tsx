@@ -6,9 +6,8 @@ import tekster from './tekster/alle-tekster';
 addLocaleData(nb);
 
 class IntlProvider extends React.Component {
-
     render() {
-        const {children, ...props} = this.props;
+        const { children, ...props } = this.props;
         const locale = 'nb';
 
         return (

@@ -6,7 +6,10 @@ import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import { FlytType, nesteSporsmal } from '../svar/svar-duck';
 import { BesvarelseModell } from '../svar/svar-modell';
-import { default as Avhengigheter, AvhengighetModell } from '../utils/avhengigheter';
+import {
+    default as Avhengigheter,
+    AvhengighetModell
+} from '../utils/avhengigheter';
 
 function forrigeSporsmal(gjeldendeSpm: string, besvarelse: BesvarelseModell[]) {
     const svarListe: BesvarelseModell[] = [...besvarelse];
@@ -29,8 +32,10 @@ function finnNesteSpmIListe(id: string): string {
         .id;
 }
 
-function finnNesteSpm(sporsmalId: string,
-                      forelopigBesvarelse: BesvarelseModell[]): string {
+function finnNesteSpm(
+    sporsmalId: string,
+    forelopigBesvarelse: BesvarelseModell[]
+): string {
     const avhengighet: AvhengighetModell | undefined = Avhengigheter.find(
         avh => avh.sporsmalId === sporsmalId
     );
@@ -78,15 +83,10 @@ class Skjema extends React.Component<SkjemaProps, {}> {
 
     byttSpmOgFokus(spmId: string) {
         const nesteSpmId = finnNesteSpm(spmId, this.props.forelopigBesvarelse);
-        this.props
-                .byttSpm(nesteSpmId)
-                .then(res => {
-                    const nesteSpm = this.sporsmalRefs[
-                        this.props.gjeldendeSporsmalId
-                        ];
-                    nesteSpm.focus();
-                });
-
+        this.props.byttSpm(nesteSpmId).then(res => {
+            const nesteSpm = this.sporsmalRefs[this.props.gjeldendeSporsmalId];
+            nesteSpm.focus();
+        });
     }
 
     render() {
@@ -101,7 +101,13 @@ class Skjema extends React.Component<SkjemaProps, {}> {
         let sporsmalRefs = this.sporsmalRefs;
 
         return (
-            <form onKeyPress={e => {if (e.which === 13 /* Enter */) {e.preventDefault(); }}}>
+            <form
+                onKeyPress={e => {
+                    if (e.which === 13 /* Enter */) {
+                        e.preventDefault();
+                    }
+                }}
+            >
                 <Sporsmal
                     key={gjeldendeSporsmalId}
                     sporsmal={
@@ -110,8 +116,7 @@ class Skjema extends React.Component<SkjemaProps, {}> {
                         )!
                     }
                     viserAlternativer={flytRetning === FlytType.BAKOVER}
-                    spmRef={(ref: {}) =>
-                        (sporsmalRefs[gjeldendeSporsmalId] = ref)}
+                    spmRef={(ref: {}) => (sporsmalRefs[gjeldendeSporsmalId] = ref)}
                     nesteSpm={(id: string) => this.byttSpmOgFokus(id)}
                     forrigeSpm={() =>
                         byttSpm(
@@ -119,7 +124,8 @@ class Skjema extends React.Component<SkjemaProps, {}> {
                                 gjeldendeSporsmalId,
                                 forelopigBesvarelse
                             )
-                        )}
+                        )
+                    }
                     handleSubmit={() => handleSubmit()}
                     startPaNytt={() => startPaNytt()}
                 />

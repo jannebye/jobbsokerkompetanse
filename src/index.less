@@ -21,63 +21,70 @@
 @navLysBlaLighten90: mix(@navLysBla, #fff, 10%);
 
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html {
-	font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-family: 'Source Sans Pro', Arial, sans-serif;
 }
 
-html, body, form {
-	height: 100%;
+html,
+body,
+form {
+    height: 100%;
 }
 
 body {
-	background-color: @white;
+    background-color: @white;
 }
 
 .limit {
-	margin: 0 auto;
-	height: 100%;
+    margin: 0 auto;
+    height: 100%;
 }
 
 .skjemaelement__feilmelding {
-	font-style: italic;
-	color: @redError;
+    font-style: italic;
+    color: @redError;
 }
 
 .startside {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	height: 100%;
-	text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    padding: 0 1.4rem;
+    text-align: center;
 
-	.bakgrunn {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 35%;
-		background-color: #cce1f3;
-	}
+    .bakgrunn {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 35%;
+        background-color: #cce1f3;
+    }
 
-	.forside-bilde {
-		width: 60%;
-		margin: 1rem auto 0;
-		z-index: 1;
-	}
+    .forside-bilde {
+        width: 60%;
+        margin: 1rem auto 0;
+        z-index: 1;
+    }
+
+    .knapperad {
+        margin: 2rem 0 1rem;
+    }
 }
 
 @media (min-width: @screen-sm-min) {
-	.limit {
-		width: 740px;
-	}
+    .limit {
+        width: 740px;
+    }
 }
 
 @media (min-width: 30em) {
-	.typo-sidetittel {
-		font-size: 1.875rem;
-		line-height: 2.125rem;
-	}
+    .typo-sidetittel {
+        font-size: 1.875rem;
+        line-height: 2.125rem;
+    }
 }
