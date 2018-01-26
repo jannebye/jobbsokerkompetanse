@@ -56,23 +56,24 @@ function TemaVisning({raad}: RaadProps) {
             tema = riktigtema;
         }
         aktiviteter = riktiggruppe.find(t => t.id === raad.id)!.aktiviteter!;
-        console.log('aktiviteter', aktiviteter);
     }
 
-    let html_innhold = '';
-    aktiviteter.length !== 0 &&
-    aktiviteter.map(a => (
-        html_innhold += `<p>${a.innhold}</p>`
-    ));
+    let htmlInnhold = '';
+    if (aktiviteter.length !== 0) {
+        aktiviteter.map(a => (
+            htmlInnhold += `<p>${a.innhold}</p>`
+        ));
+    }
 
     return (
-<<<<<<< HEAD
         <li className="enkelt__tema" key={raad.id}>
             <section className="ekspenderbartPanel ekspanderbartPanel--lukket">
-                <button className="ekspanderbartPanel__hode" aria-expanded="false"
-                        onClick={(event: React.SyntheticEvent<HTMLButtonElement>) => {
-                            toggleEkspander(event)
-                        }}
+                <button
+                    className="ekspanderbartPanel__hode"
+                    aria-expanded="false"
+                    onClick={(event: React.SyntheticEvent<HTMLButtonElement>) => {
+                        toggleEkspander(event);
+                    }}
                 >
                     <Undertittel tag="h1" className="ekspanderbartPanel__heading">
                         {tema.tittel}
@@ -80,29 +81,8 @@ function TemaVisning({raad}: RaadProps) {
                     <Normaltekst>{tema.ingress}</Normaltekst>
                     <span className="ekspanderbartPanel__indikator"/>
                 </button>
-                <div className="ekspanderbartPanel__innhold" dangerouslySetInnerHTML={{__html: html_innhold}}/>
+                <div className="ekspanderbartPanel__innhold" dangerouslySetInnerHTML={{__html: htmlInnhold}}/>
             </section>
-=======
-        <li className="enkelt__tema blokk-xs" key={tema.id}>
-            <EkspanderbartPanel apen={false} tittel={tema.tekst}>
-                <div>
-                    {aktiviteter.length !== 0 &&
-                        aktiviteter.map(aktivitet => (
-                            <div key={aktivitet.id}>
-                                <h4>{aktivitet.tittel}</h4>
-                                <p className="aktivitet">
-                                    <FormattedHTMLMessage
-                                        id={aktivitet.id}
-                                        defaultMessage={
-                                            aktivitet.innhold.__cdata
-                                        }
-                                    />
-                                </p>
-                            </div>
-                        ))}
-                </div>
-            </EkspanderbartPanel>
->>>>>>> 15e8d83bcaf18764705087ac1df0c46ecfc1615c
         </li>
     );
 }
