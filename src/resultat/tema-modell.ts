@@ -12,11 +12,43 @@ export enum TemaKategori {
     HVERDAG_JOBBSOKER = 'Hverdagen som jobbsøker'
 }
 
-export interface TemaModell {
+export interface UtledetRaadModell {
     ref: string;
     id: string;
     tekst: string;
     prioritet: number;
     defaultPosisjon: defaultTemaType;
     kategori: TemaKategori;
+}
+
+interface AktivitetModell {
+    id: string;
+    tittel: string;
+    innhold: string;
+    tags: {
+        tag: string[];
+    };
+    collapsable:  boolean;
+}
+
+interface TemaModell {
+    id: string;
+    tittel: string;
+    ingress: string;
+    aktiviteter: AktivitetModell[];
+}
+
+interface StegModell {
+    id: string;
+    tittel: string;
+    forsidetekst: string;
+    innhold: string;
+    ikon: string;
+    temaer: TemaModell[];
+}
+
+export interface RaadModell {
+    steg: {
+        understeg: StegModell[];
+    };
 }

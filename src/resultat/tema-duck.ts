@@ -1,14 +1,15 @@
 import * as xml2js from 'xml2js';
 import { Handling, ActionType, HentRaadAction } from '../actions';
+import { RaadModell } from './tema-modell';
 
 const { HENT_RAAD_OK } = ActionType;
 
 export interface TemaState {
-    data: any;
+    data: RaadModell | {};
 }
 
 export const initialState = {
-    data: [],
+    data: {},
 };
 
 //  Reducer
@@ -22,17 +23,17 @@ export default function reducer(state: TemaState = initialState, action: Handlin
     }
 }
 
-export function hentRaad(raad: any): HentRaadAction {
+export function hentRaad(raad: RaadModell): HentRaadAction {
     return {
         type: HENT_RAAD_OK,
         data: raad
     };
 }
 
-export function fetchRaad(): Promise<string> {
-    function parseXml(text: string): Promise<string> {
+export function fetchRaad(): Promise<RaadModell> {
+    function parseXml(text: string): Promise<RaadModell> {
         return new Promise((resolve, reject) => {
-            xml2js.parseString(text, {explicitArray: false}, (err: string, res: string) => {
+            xml2js.parseString(text, {explicitArray: false}, (err: string, res: RaadModell) => {
                 resolve(res);
             });
         });

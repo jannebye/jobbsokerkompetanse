@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TemaModell } from './tema-modell';
+import { UtledetRaadModell } from './tema-modell';
 import EkspanderbartPanel from 'nav-frontend-ekspanderbartpanel';
 import { temaer } from '../alle-temaer';
 import { FormattedHTMLMessage } from 'react-intl';
@@ -11,7 +11,7 @@ interface AktivitetModell {
 }
 
 interface TemaProps {
-    tema: TemaModell;
+    tema: UtledetRaadModell;
 }
 
 function TemaVisning({ tema }: TemaProps) {

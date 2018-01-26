@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import { FormattedHTMLMessage } from 'react-intl';
 import { fasteTemaer, leggesTilTemaer } from './tema';
 import temaLogikk from './tema-mapping';
-import { TemaModell } from './tema-modell';
+import { UtledetRaadModell } from './tema-modell';
 import TemaVisning from './temavisning';
 import InnholdsContainer from './innholdscontainer';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
 
-function temaSkalBehandles(tema: TemaModell, alternativId: string) {
+function temaSkalBehandles(tema: UtledetRaadModell, alternativId: string) {
     if (temaLogikk[tema.ref]) {
         if (
             temaLogikk[tema.ref].alternativ.find(function(alt: string) {
