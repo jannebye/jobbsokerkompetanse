@@ -16,8 +16,10 @@ import SVG from 'react-inlinesvg';
 import KnappBase from 'nav-frontend-knapper';
 
 interface DispatchProps {
-    markerAlternativ: (sporsmalId: string,
-                       alternativ: SvarAlternativModell[]) => void;
+    markerAlternativ: (
+        sporsmalId: string,
+        alternativ: SvarAlternativModell[]
+    ) => void;
     visTips: (tipsId: string) => void;
 
     visAlternativer: () => void;
@@ -46,16 +48,19 @@ interface EgenStateProps {
 type SporsmalProps = OwnProps & DispatchProps & StateProps;
 
 export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
-
     constructor(props: SporsmalProps) {
         super(props);
-        this.state = {feil: false};
+        this.state = { feil: false };
     }
 
-    sjekkSvar(markerteSpm: SvarAlternativModell[], sporsmalId: string,
-              besvarteSporsmal: BesvarelseModell[], besvartSpm: BesvarelseModell) {
+    sjekkSvar(
+        markerteSpm: SvarAlternativModell[],
+        sporsmalId: string,
+        besvarteSporsmal: BesvarelseModell[],
+        besvartSpm: BesvarelseModell
+    ) {
         if (markerteSpm.length === 0) {
-            this.setState({feil: true});
+            this.setState({ feil: true });
         } else {
             const tip = visTipsEtterSporsmal(sporsmalId, besvarteSporsmal);
             if (isUndefined(besvartSpm.tips) && !isUndefined(tip)) {
@@ -68,7 +73,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
 
     fjernFeil(markerteAlternativer: SvarAlternativModell[]) {
         if (this.state.feil && markerteAlternativer.length !== 0) {
-            this.setState({feil: false});
+            this.setState({ feil: false });
         }
     }
 
@@ -90,21 +95,24 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             besvarelse => besvarelse.sporsmalId === sporsmal.id
         )!; // Vil alltid ligge i listen
         const markerteAlternativer: SvarAlternativModell[] = besvarteSporsmal.find(
-            besvarelse => besvarelse.sporsmalId === sporsmal.id)!.svarAlternativer;
+            besvarelse => besvarelse.sporsmalId === sporsmal.id
+        )!.svarAlternativer;
         const sporsmalImg = require('../ikoner/' + sporsmal.id + '.svg');
 
-        const erForsteSporsmal = () => this.props.sporsmal.erForsteSpm ? startPaNytt() : forrigeSpm();
+        const erForsteSporsmal = () =>
+            this.props.sporsmal.erForsteSpm ? startPaNytt() : forrigeSpm();
 
         return (
             <div
                 ref={spmRef}
                 id={'sp-' + sporsmal.id}
-                className={viserAlternativer ? 'sporsmal vis_alternativer' : 'sporsmal'}
+                className={
+                    viserAlternativer ? 'sporsmal vis_alternativer' : 'sporsmal'
+                }
                 tabIndex={0}
             >
                 <section>
                     <div className={'sporsmal__start'}>
-
                         <div className="sporsmal__header">
                             <KnappBase
                                 type={'standard'}
@@ -122,17 +130,23 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                     }
                                 }}
                             >
-                                {sporsmal.erForsteSpm ? (<FormattedMessage id="forrige-knapp-start"/>)
-                                    : (<FormattedMessage id="forrige-knapp"/>)}
+                                {sporsmal.erForsteSpm ? (
+                                    <FormattedMessage id="forrige-knapp-start" />
+                                ) : (
+                                    <FormattedMessage id="forrige-knapp" />
+                                )}
                             </KnappBase>
 
                             <div className="sporsmal__paginering typo-normal">
                                 <FormattedMessage
                                     id="paginering"
                                     values={{
-                                        indeks: besvarteSporsmal.findIndex(
-                                            besvarelse => besvarelse.sporsmalId === sporsmal.id
-                                        ) + 1,
+                                        indeks:
+                                            besvarteSporsmal.findIndex(
+                                                besvarelse =>
+                                                    besvarelse.sporsmalId ===
+                                                    sporsmal.id
+                                            ) + 1,
                                         total: totaltAntallSpm
                                     }}
                                 />
@@ -141,7 +155,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                         <div className="sporsmal__innhold">
                             <div className="sporsmal__hode">
                                 <FormattedMessage id={sporsmal.id + ''}>
-                                    {(tekst: string) =>
+                                    {(tekst: string) => (
                                         <SVG
                                             src={sporsmalImg}
                                             className="sporsmal__ikon"
@@ -154,20 +168,31 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                                 alt={tekst}
                                             />
                                         </SVG>
-                                    }
+                                    )}
                                 </FormattedMessage>
 
-                                <Sidetittel className="sporsmal__overskrift blokk-xs" tag="h1">
-                                    <FormattedHTMLMessage id={sporsmal.id}/>
+                                <Sidetittel
+                                    className="sporsmal__overskrift blokk-xs"
+                                    tag="h1"
+                                >
+                                    <FormattedHTMLMessage id={sporsmal.id} />
                                 </Sidetittel>
-                                <p className="skjemaelement__feilmelding" role="alert" aria-live="assertive">
+                                <p
+                                    className="skjemaelement__feilmelding"
+                                    role="alert"
+                                    aria-live="assertive"
+                                >
                                     {this.state.feil && (
-                                        <FormattedMessage id="feilmelding-mangler-svar"/>
+                                        <FormattedMessage id="feilmelding-mangler-svar" />
                                     )}
                                 </p>
                             </div>
                             <Undertekst className="sporsmal__ingress" tag="p">
-                                <FormattedMessage id={sporsmal.egenUndertekst || sporsmal.type}/>
+                                <FormattedMessage
+                                    id={
+                                        sporsmal.egenUndertekst || sporsmal.type
+                                    }
+                                />
                             </Undertekst>
                         </div>
                         <KnappBase
@@ -184,7 +209,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 }
                             }}
                         >
-                            <FormattedMessage id="fortsett-knapp"/>
+                            <FormattedMessage id="fortsett-knapp" />
                         </KnappBase>
                     </div>
                     <AlternativContainer
@@ -197,8 +222,9 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                         }}
                     />
                     <section className="tips" role="alert" aria-live="polite">
-                        {!isUndefined(besvartSpm.tips) &&
-                        <TipsVisning id={besvartSpm.tips!}/>}
+                        {!isUndefined(besvartSpm.tips) && (
+                            <TipsVisning id={besvartSpm.tips!} />
+                        )}
                     </section>
                     {sporsmal.erSisteSpm ? (
                         <div className="knapperad blokk-s">
@@ -211,7 +237,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                     }
                                 }}
                             >
-                                <FormattedMessage id="send-inn"/>
+                                <FormattedMessage id="send-inn" />
                             </KnappBase>
                         </div>
                     ) : (
@@ -221,16 +247,26 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             key="besvar"
                             onClick={e => {
                                 e.preventDefault();
-                                this.sjekkSvar(markerteAlternativer, sporsmal.id, besvarteSporsmal, besvartSpm);
+                                this.sjekkSvar(
+                                    markerteAlternativer,
+                                    sporsmal.id,
+                                    besvarteSporsmal,
+                                    besvartSpm
+                                );
                             }}
                             onKeyPress={e => {
                                 if (e.which === 13) {
                                     e.preventDefault();
-                                    this.sjekkSvar(markerteAlternativer, sporsmal.id, besvarteSporsmal, besvartSpm);
+                                    this.sjekkSvar(
+                                        markerteAlternativer,
+                                        sporsmal.id,
+                                        besvarteSporsmal,
+                                        besvartSpm
+                                    );
                                 }
                             }}
                         >
-                            <FormattedMessage id="fortsett-knapp"/>
+                            <FormattedMessage id="fortsett-knapp" />
                         </KnappBase>
                     )}
                 </section>
@@ -245,8 +281,10 @@ const mapStateToProps = (state: AppState): StateProps => ({
     totaltAntallSpm: state.svar.totalAntallSpm
 });
 
-const mapDispatchToProps = (dispatch: Dispatch,
-                            props: OwnProps): DispatchProps => ({
+const mapDispatchToProps = (
+    dispatch: Dispatch,
+    props: OwnProps
+): DispatchProps => ({
     visTips: (tipsId: string) => dispatch(visTips(tipsId)),
     markerAlternativ: (sporsmalId, alternativ: SvarAlternativModell[]) => {
         dispatch(marker(sporsmalId, alternativ));

@@ -8,9 +8,7 @@ function create() {
     /* tslint:disable-next-line */
     const composer = useExtension ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
 
-    const composed = composer(
-        applyMiddleware(thunkMiddleware)
-    );
+    const composed = composer(applyMiddleware(thunkMiddleware));
 
     return composed(createStore)(reducer, {});
 }

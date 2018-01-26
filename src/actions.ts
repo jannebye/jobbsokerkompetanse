@@ -19,7 +19,7 @@ export interface EndreAlternativAction {
     type: ActionType.ENDRE_ALTERNATIV;
     data: {
         sporsmalId: string;
-        svarAlternativer: SvarAlternativModell[]
+        svarAlternativer: SvarAlternativModell[];
     };
 }
 
@@ -64,7 +64,7 @@ export interface SkjulTipsAction {
 }
 
 export type Handling =
-    EndreAlternativAction
+    | EndreAlternativAction
     | EndreAlternativOgAntallAction
     | NesteSporsmalAction
     | VisAlternativerAction
@@ -72,5 +72,4 @@ export type Handling =
     | ResetAction
     | EndreSideAction
     | VisTipsAction
-    | SkjulTipsAction
-    ;
+    | SkjulTipsAction;

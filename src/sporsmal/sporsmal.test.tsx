@@ -15,7 +15,11 @@ const sinon = require('sinon');
 configure({ adapter: new Adapter() });
 const store = getStore();
 
-function getJSXElement (besvarteSpm: Array<BesvarelseModell>, spmModell: SporsmalModell, spy: SinonSpy) {
+function getJSXElement(
+    besvarteSpm: Array<BesvarelseModell>,
+    spmModell: SporsmalModell,
+    spy: SinonSpy
+) {
     return (
         <Provider store={store}>
             <IntlProvider>
@@ -24,14 +28,24 @@ function getJSXElement (besvarteSpm: Array<BesvarelseModell>, spmModell: Sporsma
                     forrigeSpm={spy}
                     sporsmal={spmModell}
                     spmRef={spmModell}
-                    markerAlternativ={() => {return; }}
-                    visAlternativer={() => {return; }}
+                    markerAlternativ={() => {
+                        return;
+                    }}
+                    visAlternativer={() => {
+                        return;
+                    }}
                     viserAlternativer={false}
                     besvarteSporsmal={besvarteSpm}
-                    visTips={(x) => {return; }}
+                    visTips={x => {
+                        return;
+                    }}
                     totaltAntallSpm={1}
-                    handleSubmit={() => {return; }}
-                    startPaNytt={() => {return; }}
+                    handleSubmit={() => {
+                        return;
+                    }}
+                    startPaNytt={() => {
+                        return;
+                    }}
                 />
             </IntlProvider>
         </Provider>
@@ -42,8 +56,13 @@ describe('<Sporsmal />', function() {
     let tips: string | undefined;
     let spy: SinonSpy;
     let svarAlternativer: Array<SvarAlternativModell>;
-    const preventDefault = {preventDefault: () => {return; }};
-    const tilbakeKnappSelector = 'KnappBase[className="sporsmal__knapp-tilbake"] > button';
+    const preventDefault = {
+        preventDefault: () => {
+            return;
+        }
+    };
+    const tilbakeKnappSelector =
+        'KnappBase[className="sporsmal__knapp-tilbake"] > button';
 
     beforeEach(() => {
         spy = sinon.spy();
@@ -51,17 +70,27 @@ describe('<Sporsmal />', function() {
     });
 
     it('skal rendre komponent', () => {
-
         const sisteSpm = spm.find(x => x.erSisteSpm === true)!;
-        const besvarteSpm = [{sporsmalId: sisteSpm!.id, svarAlternativer: svarAlternativer, tips: tips}];
+        const besvarteSpm = [
+            {
+                sporsmalId: sisteSpm!.id,
+                svarAlternativer: svarAlternativer,
+                tips: tips
+            }
+        ];
 
         shallow(getJSXElement(besvarteSpm, sisteSpm, spy));
     });
 
     it('skal kunne trykke på tilbakeknapp dersom det er siste spørsmål', () => {
-
         const sisteSpm = spm.find(x => x.erSisteSpm === true)!;
-        const besvarteSpm = [{sporsmalId: sisteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
+        const besvarteSpm = [
+            {
+                sporsmalId: sisteSpm.id,
+                svarAlternativer: svarAlternativer,
+                tips: tips
+            }
+        ];
         const wrapper = mount(getJSXElement(besvarteSpm, sisteSpm!, spy));
         const knapp = wrapper.find(tilbakeKnappSelector);
 
@@ -71,47 +100,68 @@ describe('<Sporsmal />', function() {
     });
 
     it('skal vise tilbakeknapp hvis det hverken er første eller siste spørsmål', () => {
-
         const sporsmal = spm.find(x => !x.erSisteSpm && !x.erForsteSpm)!;
-        const besvarteSpm = [{sporsmalId: sporsmal.id, svarAlternativer: svarAlternativer, tips: tips}];
+        const besvarteSpm = [
+            {
+                sporsmalId: sporsmal.id,
+                svarAlternativer: svarAlternativer,
+                tips: tips
+            }
+        ];
         const wrapper = mount(getJSXElement(besvarteSpm, sporsmal!, spy));
 
-        expect(wrapper.find(tilbakeKnappSelector)
-                      .exists()).toBe(true);
+        expect(wrapper.find(tilbakeKnappSelector).exists()).toBe(true);
     });
 
     it('skal vise nesteknapp', () => {
-
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
-        const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
+        const besvarteSpm = [
+            {
+                sporsmalId: forsteSpm.id,
+                svarAlternativer: svarAlternativer,
+                tips: tips
+            }
+        ];
         const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
 
         expect(wrapper.find('.sporsmal__videre').exists()).toBe(true);
     });
 
     it('skal vise feilmelding dersom man trykker på nesteknapp og spørsmål ikke er besvart', () => {
-
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
-        const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
+        const besvarteSpm = [
+            {
+                sporsmalId: forsteSpm.id,
+                svarAlternativer: svarAlternativer,
+                tips: tips
+            }
+        ];
         const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
 
-        wrapper.find( '.sporsmal__knapp')
-               .last()
-               .simulate('click', preventDefault);
+        wrapper
+            .find('.sporsmal__knapp')
+            .last()
+            .simulate('click', preventDefault);
 
         expect(wrapper.find('#feilmelding-mangler-svar')).toHaveLength(1);
     });
 
     it('skal ikke vise feilmelding dersom man trykker på nesteknapp og spørsmål er besvart', () => {
-
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
-        svarAlternativer.push({id: forsteSpm!.alternativer[0].id});
-        const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tips}];
+        svarAlternativer.push({ id: forsteSpm!.alternativer[0].id });
+        const besvarteSpm = [
+            {
+                sporsmalId: forsteSpm.id,
+                svarAlternativer: svarAlternativer,
+                tips: tips
+            }
+        ];
         const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
 
-        wrapper.find('.sporsmal__knapp')
-               .last()
-               .simulate('click', preventDefault);
+        wrapper
+            .find('.sporsmal__knapp')
+            .last()
+            .simulate('click', preventDefault);
 
         expect(wrapper.find('#feilmelding-mangler-svar')).toHaveLength(0);
         expect(spy.calledOnce).toBeTruthy();
@@ -120,8 +170,14 @@ describe('<Sporsmal />', function() {
     it('skal vise tips', () => {
         const tipsId = 'sok-utenfor-hjemsted';
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
-        svarAlternativer.push({id: forsteSpm!.alternativer[0].id});
-        const besvarteSpm = [{sporsmalId: forsteSpm.id, svarAlternativer: svarAlternativer, tips: tipsId}];
+        svarAlternativer.push({ id: forsteSpm!.alternativer[0].id });
+        const besvarteSpm = [
+            {
+                sporsmalId: forsteSpm.id,
+                svarAlternativer: svarAlternativer,
+                tips: tipsId
+            }
+        ];
         const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
         const tipsCss = `TipsVisning`;
 
