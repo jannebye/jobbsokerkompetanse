@@ -9,7 +9,7 @@ import { Dispatch } from './types';
 import { endreSide } from './ducks/side-duck';
 import Startside from './skjema/startside';
 import { reset } from './svar/svar-duck';
-import {hentRaad, fetchRaad} from "./resultat/tema-duck";
+import { hentRaad, fetchRaad } from './resultat/tema-duck';
 
 interface DispatchProps {
     reset: () => Promise<{}>;

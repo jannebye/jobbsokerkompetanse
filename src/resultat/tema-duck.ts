@@ -1,5 +1,5 @@
 import * as xml2js from 'xml2js';
-import {Handling, ActionType, HentRaadAction } from '../actions';
+import { Handling, ActionType, HentRaadAction } from '../actions';
 
 const { HENT_RAAD_OK } = ActionType;
 
@@ -26,7 +26,7 @@ export function hentRaad(raad: any): HentRaadAction {
     return {
         type: HENT_RAAD_OK,
         data: raad
-    }
+    };
 }
 
 export function fetchRaad(): Promise<string> {

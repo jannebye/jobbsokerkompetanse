@@ -6,7 +6,7 @@ import sideReducer, {
     SideState,
     initialState as initialSideState
 } from './side-duck';
-import temaReducer, {TemaState} from '../resultat/tema-duck';
+import temaReducer, { TemaState } from '../resultat/tema-duck';
 
 export interface AppState {
     svar: SvarState;
