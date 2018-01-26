@@ -118,6 +118,21 @@
     }
 }
 
+@media (orientation: landscape) {
+	.alternativer__skala {
+		width: @desktop_skala_bredde;
+		height: 100px;
+		margin: 2rem auto;
+		&:before {
+			height: 40px;
+		}
+		.alternativ {
+			width: @desktop_skala_diameter;
+			height: @desktop_skala_diameter;
+		}
+	}
+}
+
 @media (min-width: @screen-sm-min) {
     .alternativer__ettvalg,
     .alternativer__flervalg {
@@ -157,17 +172,3 @@
     }
 }
 
-@media (orientation: landscape) {
-    .alternativer__skala {
-        width: @desktop_skala_bredde;
-        height: 100px;
-        margin: 2rem auto;
-        &:before {
-            height: 40px;
-        }
-        .alternativ {
-            width: @desktop_skala_diameter;
-            height: @desktop_skala_diameter;
-        }
-    }
-}
