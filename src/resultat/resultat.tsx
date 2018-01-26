@@ -8,7 +8,7 @@ import temaLogikk from './tema-mapping';
 import { RaadModell } from './raad-modell';
 import TemaVisning from './temavisning';
 import InnholdsContainer from './innholdscontainer';
-import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
 import KnappBase from 'nav-frontend-knapper';
 
 function temaSkalBehandles(tema: RaadModell, alternativId: string) {
@@ -66,9 +66,9 @@ export function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
     const resultat = genererTema(besvarteSporsmal);
     return (
         <div className="resultatside">
-            <Innholdstittel className="overskrift__tema" tag="h1">
+            <Sidetittel className="overskrift__tema" tag="h1">
                 <FormattedHTMLMessage id="overskrift-raad" />
-            </Innholdstittel>
+            </Sidetittel>
             <ul className="temaliste">
                 {resultat.map(tema => (
                     <TemaVisning raad={tema} key={tema.id} />

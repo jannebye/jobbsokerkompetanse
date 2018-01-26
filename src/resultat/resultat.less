@@ -1,5 +1,7 @@
+@orangeBakgrunn: #fff4e8;
+
 .resultatside {
-	padding: 1rem;
+	padding: 1rem 1.4rem;
 
 	.resultatliste {
 		list-style: none;
@@ -24,7 +26,7 @@
 		.enkelt__tema {
 			border: 1px solid @orangeFocus;
 			border-radius: 4px;
-			background-color: @navOransjeLighten80;
+			background-color: @orangeBakgrunn;
 			margin-bottom: 1rem;
 			padding-bottom: 1rem;
 
@@ -71,9 +73,17 @@
 	.ekspanderbartPanel__hode {
 		background-color: transparent;
 		border: 0;
+		padding: 2rem;
 		&:hover {
 			box-shadow: #ffbd66 0 2px 1px 0;
 		}
+		.typo-normal {
+			margin-bottom: 1rem;
+		}
+	}
+
+	.ekspanderbartPanel__heading {
+		margin-bottom: 0.5rem;
 	}
 
 	.ekspanderbartPanel__innhold {
@@ -95,6 +105,9 @@
 				transition: opacity 1s ease-in-out;
 			}
 		}
+		.ekspanderbartPanel__indikator {
+			width: 25px;
+		}
 	}
 	.ekspanderbartPanel--apen {
 		.ekspanderbartPanel__innhold {
@@ -109,15 +122,18 @@
 				transition: opacity 1s ease-in-out;
 			}
 		}
+		.ekspanderbartPanel__indikator {
+			width: 25px;
+		}
 	}
 }
 
 @keyframes vis_ramme {
 	0% {
-		border-bottom-color: @orangeFocusLighten80;
+		border-bottom-color: @orangeBakgrunn;
 	}
 	99% {
-		border-bottom-color: @orangeFocusLighten80;
+		border-bottom-color: @orangeBakgrunn;
 	}
 	100% {
 		border-bottom-color: @orangeFocus;
@@ -132,7 +148,7 @@
 		border-top-color: @orangeFocus;
 	}
 	100% {
-		border-top-color: @orangeFocusLighten80;
+		border-top-color: @orangeBakgrunn;
 	}
 }
 

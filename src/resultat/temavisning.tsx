@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RaadModell } from './raad-modell';
 import { veiviserdata } from '../veiviserdata';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
 
 interface AktivitetModell {
     id: string;
@@ -75,9 +75,9 @@ function TemaVisning({raad}: RaadProps) {
                         toggleEkspander(event);
                     }}
                 >
-                    <Undertittel tag="h1" className="ekspanderbartPanel__heading">
+                    <Innholdstittel tag="h1" className="ekspanderbartPanel__heading">
                         {tema.tittel}
-                    </Undertittel>
+                    </Innholdstittel>
                     <Normaltekst>{tema.ingress}</Normaltekst>
                     <span className="ekspanderbartPanel__indikator"/>
                 </button>
