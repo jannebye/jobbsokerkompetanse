@@ -6,10 +6,12 @@ import sideReducer, {
     SideState,
     initialState as initialSideState
 } from './side-duck';
+import temaReducer, {TemaState} from '../resultat/tema-duck';
 
 export interface AppState {
     svar: SvarState;
     side: SideState;
+    tema: TemaState;
 }
 
 export default combineReducers<AppState>({
@@ -19,5 +21,6 @@ export default combineReducers<AppState>({
         svarReducer,
         initialSvarState
     ),
-    side: persistent('sideState', location, sideReducer, initialSideState)
+    side: persistent('sideState', location, sideReducer, initialSideState),
+    tema: temaReducer,
 });

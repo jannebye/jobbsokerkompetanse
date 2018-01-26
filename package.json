@@ -60,7 +60,7 @@
     "redux": "3.7.2",
     "redux-persist": "5.4.0",
     "redux-thunk": "2.2.0",
-    "xml-js": "1.5.2"
+    "xml2js": "0.4.19"
   },
   "homepage": "https://navikt.github.io/jobbsokerkompetanse",
   "devDependencies": {
@@ -75,6 +75,7 @@
     "@types/react-intl": "2.3.2",
     "@types/react-redux": "5.0.14",
     "@types/sinon": "4.1.2",
+    "@types/xml2js": "0.4.2",
     "autoless": "0.1.7",
     "chai": "4.1.2",
     "enzyme": "3.2.0",
