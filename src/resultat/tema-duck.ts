@@ -1,22 +1,53 @@
 import * as xml2js from 'xml2js';
-import { Handling, ActionType, HentRaadAction } from '../actions';
+import { ActionType, Handling, HentRaadAction } from '../actions';
 import { RaadModell } from './tema-modell';
 
-const { HENT_RAAD_OK } = ActionType;
+const {HENT_RAAD_OK} = ActionType;
 
 export interface TemaState {
-    data: RaadModell | {};
+    data: RaadModell;
 }
 
 export const initialState = {
-    data: {},
-};
+        data: {
+            steg: {
+                understeg: [{
+                    id: '',
+                    tittel: '',
+                    forsidetekst: '',
+                    innhold: '',
+                    ikon: '',
+                    temaer: {
+                        tema: [{
+                            id: '',
+                            tittel: '',
+                            refid: '',
+                            ingress: '',
+                            aktiviteter: {
+                                aktivitet: {
+                                    id: '',
+                                    tittel: '',
+                                    innhold: '',
+                                    tags: {
+                                        tag: ['']
+                                    },
+                                    collapsable: true
+                                }
+
+                            }
+                        }]
+                    }
+                }]
+            }
+        },
+    }
+;
 
 //  Reducer
 export default function reducer(state: TemaState = initialState, action: Handling): TemaState {
     switch (action.type) {
         case ActionType.HENT_RAAD_OK: {
-            return { ...state, data: action.data };
+            return {...state, data: action.data};
         }
         default:
             return state;

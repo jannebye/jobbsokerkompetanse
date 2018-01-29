@@ -15,13 +15,14 @@ export enum TemaKategori {
 export interface UtledetRaadModell {
     ref: string;
     id: string;
+    refid?: string;
     tekst: string;
     prioritet: number;
     defaultPosisjon: defaultTemaType;
     kategori: TemaKategori;
 }
 
-interface AktivitetModell {
+export interface AktivitetModell {
     id: string;
     tittel: string;
     innhold: string;
@@ -31,11 +32,20 @@ interface AktivitetModell {
     collapsable:  boolean;
 }
 
+interface Aktiviteter {
+    aktivitet: AktivitetModell[] | AktivitetModell;
+}
+
 interface TemaModell {
     id: string;
     tittel: string;
+    refid: string;
     ingress: string;
-    aktiviteter: AktivitetModell[];
+    aktiviteter: Aktiviteter;
+}
+
+interface Temaer {
+    tema: TemaModell[];
 }
 
 interface StegModell {
@@ -44,7 +54,7 @@ interface StegModell {
     forsidetekst: string;
     innhold: string;
     ikon: string;
-    temaer: TemaModell[];
+    temaer: Temaer;
 }
 
 export interface RaadModell {

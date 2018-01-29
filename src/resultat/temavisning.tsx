@@ -1,50 +1,65 @@
 import * as React from 'react';
-import { UtledetRaadModell } from './tema-modell';
+import { connect } from 'react-redux';
+import { RaadModell, UtledetRaadModell } from './tema-modell';
 import EkspanderbartPanel from 'nav-frontend-ekspanderbartpanel';
-import { temaer } from '../alle-temaer';
 import { FormattedHTMLMessage } from 'react-intl';
+import { AppState } from '../ducks/reducer';
+import { isArray } from 'util';
 
-interface AktivitetModell {
-    id: string;
-    tittel: string;
-    innhold: { ['__cdata']: string };
+interface StateProps {
+    raad: RaadModell;
 }
 
-interface TemaProps {
+interface ParentProps {
     tema: UtledetRaadModell;
 }
 
-function TemaVisning({ tema }: TemaProps) {
-    const kategorier = temaer.steg.understeg;
-    const temaeer = kategorier.map(k => k.temaer.tema);
-    const riktigTema = temaeer.find(t => t.some(tt => tt.id === tema.id)!);
-    let aktiviteter: AktivitetModell[] = []; // tslint:disable-line:no-any
-    if (riktigTema !== undefined) {
-        aktiviteter = riktigTema!.find(k => k.id === tema.id)!.aktiviteter!
-            .aktivitet;
+type TemaVisningProps = StateProps & ParentProps;
+
+function TemaVisning({tema, raad}: TemaVisningProps) {
+    const understeg = raad.steg.understeg;
+    const temaer = understeg.map(k => k.temaer.tema).reduce((a, b) => a.concat(b), []);
+    const riktigTema = temaer.find(t => t.refid === tema.refid);
+
+    let aktivitet;
+    if (riktigTema) {
+        if (isArray(riktigTema.aktiviteter.aktivitet)) {
+            aktivitet = riktigTema.aktiviteter.aktivitet.find(k => k.id === tema.id);
+        }
+        else {
+            aktivitet = riktigTema.aktiviteter.aktivitet;
+        }
     }
+
     return (
         <li className="enkelt__tema blokk-xs" key={tema.id}>
             <EkspanderbartPanel apen={false} tittel={tema.tekst}>
                 <div>
-                    {aktiviteter.length !== 0 &&
-                        aktiviteter.map(aktivitet => (
+                    {aktivitet &&
+                        (
                             <div key={aktivitet.id}>
                                 <h4>{aktivitet.tittel}</h4>
                                 <p className="aktivitet">
                                     <FormattedHTMLMessage
                                         id={aktivitet.id}
                                         defaultMessage={
-                                            aktivitet.innhold.__cdata
+                                            aktivitet.innhold
                                         }
                                     />
                                 </p>
                             </div>
-                        ))}
+                        )
+                    }
                 </div>
             </EkspanderbartPanel>
         </li>
     );
 }
 
-export default TemaVisning;
+function mapStateToProps(state: AppState): StateProps {
+    return {
+        raad: state.tema.data
+    };
+}
+
+export default connect(mapStateToProps)(TemaVisning);
