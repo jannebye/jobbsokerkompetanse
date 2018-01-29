@@ -1836,7 +1836,7 @@ body .blokk-xl {
   .sporsmal__knapp {
     margin: 1rem auto;
     width: auto;
-    padding: 0.5em 2.5em calc(.5em + .125em + 1px) 2.5em;
+    padding: 1em 3.5em calc(1em + .125em + 1px) 3.5em;
   }
 }
 .tips div {
@@ -1978,6 +1978,11 @@ body .blokk-xl {
     transform: translateY(0);
   }
 }
+@media (orientation: landscape) {
+  .sporsmal__start {
+    height: 100%;
+  }
+}
 @media (min-width: 768px) {
   .sporsmal .sporsmal__start {
     display: block;
@@ -2005,11 +2010,6 @@ body .blokk-xl {
   }
   .sporsmal .knapperad {
     display: block;
-  }
-}
-@media (orientation: landscape) {
-  .sporsmal__start {
-    height: 100%;
   }
 }
 .alternativer {
@@ -2122,6 +2122,20 @@ body .blokk-xl {
     transform: scale(1.35);
   }
 }
+@media (orientation: landscape) {
+  .alternativer__skala {
+    width: 475px;
+    height: 100px;
+    margin: 2rem auto;
+  }
+  .alternativer__skala:before {
+    height: 40px;
+  }
+  .alternativer__skala .alternativ {
+    width: 75px;
+    height: 75px;
+  }
+}
 @media (min-width: 768px) {
   .alternativer__ettvalg,
   .alternativer__flervalg {
@@ -2139,15 +2153,15 @@ body .blokk-xl {
   }
   .alternativer__skala {
     margin: 0 auto;
-    width: 500px;
+    width: 475px;
     height: 100px;
   }
   .alternativer__skala:before {
     height: 40px;
   }
   .alternativer__skala .alternativ {
-    width: 85px;
-    height: 85px;
+    width: 75px;
+    height: 75px;
   }
   .alternativer {
     display: flex;
@@ -2157,22 +2171,8 @@ body .blokk-xl {
     display: flex;
   }
 }
-@media (orientation: landscape) {
-  .alternativer__skala {
-    width: 500px;
-    height: 100px;
-    margin: 2rem auto;
-  }
-  .alternativer__skala:before {
-    height: 40px;
-  }
-  .alternativer__skala .alternativ {
-    width: 85px;
-    height: 85px;
-  }
-}
 .resultatside {
-  padding: 1rem;
+  padding: 1rem 1.4rem;
 }
 .resultatside .resultatliste {
   list-style: none;
@@ -2193,13 +2193,10 @@ body .blokk-xl {
 }
 .resultatside .temaliste .enkelt__tema {
   border: 1px solid #FFBD66;
-}
-.resultatside .temaliste .enkelt__tema .ekspanderbartPanel__hode,
-.resultatside .temaliste .enkelt__tema .ekspanderbartPanel__innhold {
-  background-color: #fff2e0;
-}
-.resultatside .temaliste .enkelt__tema .ekspanderbartPanel__hode:hover {
-  box-shadow: #ffbd66 0 2px 1px 0;
+  border-radius: 4px;
+  background-color: #fff4e8;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 .resultatside .temaliste .enkelt__tema .aktivitet ul {
   margin-top: 1rem;
@@ -2213,7 +2210,7 @@ body .blokk-xl {
 }
 .resultatside .resultat__info {
   text-align: center;
-  margin: 2rem 0;
+  margin: 1rem 0 2rem;
 }
 .resultatside .resultat__infotekst {
   text-align: center;
@@ -2227,6 +2224,80 @@ body .blokk-xl {
 .resultatside .panel {
   border: 1px solid #b7b1a9;
   background-color: #E9E7E7;
+}
+.resultatside .ekspanderbartPanel {
+  margin-top: 1rem;
+}
+.resultatside .ekspanderbartPanel__hode {
+  background-color: transparent;
+  border: 0;
+  padding: 2rem;
+}
+.resultatside .ekspanderbartPanel__hode:hover {
+  box-shadow: #ffbd66 0 2px 1px 0;
+}
+.resultatside .ekspanderbartPanel__hode .typo-normal {
+  margin-bottom: 1rem;
+}
+.resultatside .ekspanderbartPanel__heading {
+  margin-bottom: 0.5rem;
+}
+.resultatside .ekspanderbartPanel__innhold {
+  background-color: transparent;
+  border: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: -1rem;
+}
+.resultatside .ekspanderbartPanel--lukket .ekspanderbartPanel__innhold {
+  max-height: 0;
+  overflow: hidden;
+  padding-top: 0;
+  transition: max-height 1s ease-in-out;
+}
+.resultatside .ekspanderbartPanel--lukket .ekspanderbartPanel__innhold p {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+.resultatside .ekspanderbartPanel--lukket .ekspanderbartPanel__indikator {
+  width: 25px;
+}
+.resultatside .ekspanderbartPanel--apen .ekspanderbartPanel__innhold {
+  max-height: 1000px;
+  overflow: auto;
+  padding-bottom: 1rem;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+  transition: max-height 1s ease-in-out;
+}
+.resultatside .ekspanderbartPanel--apen .ekspanderbartPanel__innhold p {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+.resultatside .ekspanderbartPanel--apen .ekspanderbartPanel__indikator {
+  width: 25px;
+}
+@keyframes vis_ramme {
+  0% {
+    border-bottom-color: #fff4e8;
+  }
+  99% {
+    border-bottom-color: #fff4e8;
+  }
+  100% {
+    border-bottom-color: #FFBD66;
+  }
+}
+@keyframes skjul_ramme {
+  0% {
+    border-top-color: #FFBD66;
+  }
+  99% {
+    border-top-color: #FFBD66;
+  }
+  100% {
+    border-top-color: #fff4e8;
+  }
 }
 @media (min-width: 768px) {
   .resultatside .resultat__infotekst {
@@ -2288,5 +2359,9 @@ body {
   .typo-sidetittel {
     font-size: 1.875rem;
     line-height: 2.125rem;
+  }
+  .typo-innholdstittel {
+    font-size: 1.5rem;
+    line-height: 1.65rem;
   }
 }
