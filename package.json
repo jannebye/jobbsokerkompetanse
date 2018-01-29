@@ -65,6 +65,7 @@
   "homepage": "https://navikt.github.io/jobbsokerkompetanse",
   "devDependencies": {
     "@types/chai": "4.0.10",
+    "@types/classnames": "2.2.3",
     "@types/enzyme": "3.1.5",
     "@types/enzyme-adapter-react-16": "1.0.1",
     "@types/jest": "21.1.8",
