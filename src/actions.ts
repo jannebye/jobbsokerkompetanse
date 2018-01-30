@@ -1,6 +1,6 @@
 import { Sidetype } from './utils/konstanter';
 import SvarAlternativModell from './sporsmal/svaralternativ';
-import { RaadModell } from './resultat/tema-modell';
+import { TemaModell } from './resultat/tema-modell';
 
 export enum ActionType {
     BESVAR,
@@ -67,7 +67,7 @@ export interface SkjulTipsAction {
 
 export interface HentRaadAction {
     type: ActionType.HENT_RAAD_OK;
-    data: RaadModell;
+    data: TemaModell;
 }
 
 export type Handling =

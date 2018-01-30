@@ -22,7 +22,7 @@ export interface UtledetRaadModell {
     kategori: TemaKategori;
 }
 
-export interface AktivitetModell {
+export interface Aktivitet {
     id: string;
     tittel: string;
     innhold: string;
@@ -33,10 +33,10 @@ export interface AktivitetModell {
 }
 
 interface Aktiviteter {
-    aktivitet: AktivitetModell[] | AktivitetModell;
+    aktivitet: Aktivitet[] | Aktivitet;
 }
 
-interface TemaModell {
+interface TemaEnonic {
     id: string;
     tittel: string;
     refid: string;
@@ -44,11 +44,19 @@ interface TemaModell {
     aktiviteter: Aktiviteter;
 }
 
-interface Temaer {
-    tema: TemaModell[];
+interface Tema {
+    id: string;
+    tittel: string;
+    refid: string;
+    ingress: string;
+    aktiviteter: Aktivitet[];
 }
 
-interface StegModell {
+interface Temaer {
+    tema: TemaEnonic[];
+}
+
+interface StegEnonic {
     id: string;
     tittel: string;
     forsidetekst: string;
@@ -57,8 +65,21 @@ interface StegModell {
     temaer: Temaer;
 }
 
-export interface RaadModell {
+interface Steg {
+    id: string;
+    tittel: string;
+    forsidetekst: string;
+    innhold: string;
+    ikon: string;
+    temaer: Tema[];
+}
+
+export interface TemaModell {
     steg: {
-        understeg: StegModell[];
+        understeg: StegEnonic[];
     };
+}
+
+export interface RaadModell {
+    steg: Steg[];
 }

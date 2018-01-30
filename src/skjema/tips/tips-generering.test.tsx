@@ -303,7 +303,9 @@ describe('TipsGenerator', () => {
         expect(tips).toEqual(expected);
     });
 
-    it('skal ikke foreslå å lage en oversikt over stillinger hvis man ikke har søkt på noen stillinger det siste året', () => {
+    it(
+        'skal ikke foreslå å lage en oversikt over stillinger hvis man ikke har søkt på noen stillinger det siste året',
+        () => {
         svarAlternativer.push({ id: 'soke-svar-0101' });
         const spmId = 'soke-spm-01',
             expected = undefined;

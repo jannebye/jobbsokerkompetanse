@@ -4,7 +4,6 @@ import { RaadModell, UtledetRaadModell } from './tema-modell';
 import EkspanderbartPanel from 'nav-frontend-ekspanderbartpanel';
 import { FormattedHTMLMessage } from 'react-intl';
 import { AppState } from '../ducks/reducer';
-import { isArray } from 'util';
 
 interface StateProps {
     raad: RaadModell;
@@ -17,38 +16,27 @@ interface ParentProps {
 type TemaVisningProps = StateProps & ParentProps;
 
 function TemaVisning({tema, raad}: TemaVisningProps) {
-    const understeg = raad.steg.understeg;
-    const temaer = understeg.map(k => k.temaer.tema).reduce((a, b) => a.concat(b), []);
+    const temaer = raad.steg.map(k => k.temaer).reduce((a, b) => a.concat(b), []);
     const riktigTema = temaer.find(t => t.refid === tema.refid);
-
-    let aktivitet;
-    if (riktigTema) {
-        if (isArray(riktigTema.aktiviteter.aktivitet)) {
-            aktivitet = riktigTema.aktiviteter.aktivitet.find(k => k.id === tema.id);
-        }
-        else {
-            aktivitet = riktigTema.aktiviteter.aktivitet;
-        }
-    }
+    const aktiviteter = riktigTema ? riktigTema.aktiviteter : [];
 
     return (
         <li className="enkelt__tema blokk-xs" key={tema.id}>
             <EkspanderbartPanel apen={false} tittel={tema.tekst}>
                 <div>
-                    {aktivitet &&
-                        (
-                            <div key={aktivitet.id}>
-                                <h4>{aktivitet.tittel}</h4>
+                    {aktiviteter.map(a => (
+                            <div key={a.id}>
+                                <h4>{a.tittel}</h4>
                                 <p className="aktivitet">
                                     <FormattedHTMLMessage
-                                        id={aktivitet.id}
+                                        id={a.id}
                                         defaultMessage={
-                                            aktivitet.innhold
+                                            a.innhold
                                         }
                                     />
                                 </p>
                             </div>
-                        )
+                        ))
                     }
                 </div>
             </EkspanderbartPanel>
@@ -58,7 +46,7 @@ function TemaVisning({tema, raad}: TemaVisningProps) {
 
 function mapStateToProps(state: AppState): StateProps {
     return {
-        raad: state.tema.data
+        raad: state.raad.data
     };
 }
 
