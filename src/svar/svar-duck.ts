@@ -41,17 +41,19 @@ export const initialState = {
     totalAntallSpm: 19
 };
 
-function harBesvartSpm(state: SvarState, sporsmalId: string) {
+type SporsmalId = string;
+
+function harBesvartSpm(state: SvarState, sporsmalId: SporsmalId) {
     return state.data.find(
         besvarelse => besvarelse.sporsmalId === sporsmalId
     );
 }
 
-function sporsmalIndex(sporsmalId: string) {
+function sporsmalIndex(sporsmalId: SporsmalId) {
     return spm.map(s => s.id).indexOf(sporsmalId);
 }
 
-export function erPaVeiBakover(gjeldendeSpmId: string, sporsmalId: string) {
+export function erPaVeiBakover(gjeldendeSpmId: SporsmalId, sporsmalId: SporsmalId) {
     return sporsmalIndex(sporsmalId) < sporsmalIndex(gjeldendeSpmId);
 }
 
