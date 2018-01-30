@@ -137,17 +137,8 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             <KnappBase
                                 type={'standard'}
                                 className="sporsmal__knapp-tilbake"
-                                onClick={e => {
-                                    {
-                                        erForsteSporsmal();
-                                    }
-                                }}
-                                onKeyPress={e => {
-                                    if (e.which === 13) {
-                                        {
-                                            erForsteSporsmal();
-                                        }
-                                    }
+                                onClick={() => {
+                                    erForsteSporsmal();
                                 }}
                             >
                                 {sporsmal.erForsteSpm ? (
@@ -213,15 +204,8 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                         <KnappBase
                             type={'standard'}
                             className="sporsmal__knapp sporsmal__videre"
-                            onClick={e => {
-                                e.preventDefault();
+                            onClick={() => {
                                 visAlternativer();
-                            }}
-                            onKeyPress={e => {
-                                if (e.which === 13) {
-                                    e.preventDefault();
-                                    visAlternativer();
-                                }
                             }}
                         >
                             <FormattedMessage id="fortsett-knapp"/>
@@ -246,11 +230,6 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             <KnappBase
                                 type={'hoved'}
                                 onClick={() => handleSubmit()}
-                                onKeyPress={e => {
-                                    if (e.which === 13) {
-                                        handleSubmit();
-                                    }
-                                }}
                             >
                                 <FormattedMessage id="send-inn"/>
                             </KnappBase>
@@ -261,24 +240,12 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             className={'sporsmal__knapp'}
                             key="besvar"
                             onClick={e => {
-                                e.preventDefault();
                                 this.sjekkSvar(
                                     markerteAlternativer,
                                     sporsmal.id,
                                     besvarteSporsmal,
                                     besvartSpm
                                 );
-                            }}
-                            onKeyPress={e => {
-                                if (e.which === 13) {
-                                    e.preventDefault();
-                                    this.sjekkSvar(
-                                        markerteAlternativer,
-                                        sporsmal.id,
-                                        besvarteSporsmal,
-                                        besvartSpm
-                                    );
-                                }
                             }}
                         >
                             <FormattedMessage id="fortsett-knapp"/>

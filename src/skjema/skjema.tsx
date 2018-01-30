@@ -32,10 +32,8 @@ function finnNesteSpmIListe(id: string): string {
         .id;
 }
 
-function finnNesteSpm(
-    sporsmalId: string,
-    forelopigBesvarelse: BesvarelseModell[]
-): string {
+function finnNesteSpm(sporsmalId: string,
+                      forelopigBesvarelse: BesvarelseModell[]): string {
     const avhengighet: AvhengighetModell | undefined = Avhengigheter.find(
         avh => avh.sporsmalId === sporsmalId
     );
@@ -101,35 +99,27 @@ class Skjema extends React.Component<SkjemaProps, {}> {
         let sporsmalRefs = this.sporsmalRefs;
 
         return (
-            <form
-                onKeyPress={e => {
-                    if (e.which === 13 /* Enter */) {
-                        e.preventDefault();
-                    }
-                }}
-            >
-                <Sporsmal
-                    key={gjeldendeSporsmalId}
-                    sporsmal={
-                        alleSporsmal.find(
-                            sporsmal => sporsmal.id === gjeldendeSporsmalId
-                        )!
-                    }
-                    viserAlternativer={viserAlternativer}
-                    spmRef={(ref: {}) => (sporsmalRefs[gjeldendeSporsmalId] = ref)}
-                    nesteSpm={(id: string) => this.byttSpmOgFokus(id)}
-                    forrigeSpm={() =>
-                        byttSpm(
-                            forrigeSporsmal(
-                                gjeldendeSporsmalId,
-                                forelopigBesvarelse
-                            )
+            <Sporsmal
+                key={gjeldendeSporsmalId}
+                sporsmal={
+                    alleSporsmal.find(
+                        sporsmal => sporsmal.id === gjeldendeSporsmalId
+                    )!
+                }
+                viserAlternativer={viserAlternativer}
+                spmRef={(ref: {}) => (sporsmalRefs[gjeldendeSporsmalId] = ref)}
+                nesteSpm={(id: string) => this.byttSpmOgFokus(id)}
+                forrigeSpm={() =>
+                    byttSpm(
+                        forrigeSporsmal(
+                            gjeldendeSporsmalId,
+                            forelopigBesvarelse
                         )
-                    }
-                    handleSubmit={() => handleSubmit()}
-                    startPaNytt={() => startPaNytt()}
-                />
-            </form>
+                    )
+                }
+                handleSubmit={() => handleSubmit()}
+                startPaNytt={() => startPaNytt()}
+            />
         );
     }
 }
