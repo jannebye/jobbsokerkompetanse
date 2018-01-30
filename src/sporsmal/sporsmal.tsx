@@ -75,10 +75,6 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         }
     }
 
-    spmIndex = this.props.besvarteSporsmal.findIndex(
-        besvarelse => besvarelse.sporsmalId === this.props.sporsmal.id
-    ) + 1;
-
     componentDidMount() {
         if (this.props.paVeiBakover) {
             window.scrollTo(0, 0);
@@ -116,9 +112,13 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             tilbake: paVeiBakover,
         });
 
+        const spmIndex = this.props.besvarteSporsmal.findIndex(
+            besvarelse => besvarelse.sporsmalId === this.props.sporsmal.id
+        ) + 1;
+
         /** @type {{search: React.CSSProperties}} */
-        const framdrift_style = {
-            width: (this.spmIndex / totaltAntallSpm * 100) + '%'
+        const framdriftStyle = {
+            width: (spmIndex / totaltAntallSpm * 100) + '%'
         };
 
         return (
@@ -129,7 +129,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                 tabIndex={0}
             >
                 <div className="framdrift">
-                    <div className="andel" style={framdrift_style}/>
+                    <div className="andel" style={framdriftStyle}/>
                 </div>
                 <section>
                     <div className={'sporsmal__start'}>
@@ -161,7 +161,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 <FormattedMessage
                                     id="paginering"
                                     values={{
-                                        indeks: this.spmIndex,
+                                        indeks: spmIndex,
                                         total: totaltAntallSpm
                                     }}
                                 />
