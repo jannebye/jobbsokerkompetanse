@@ -1,10 +1,10 @@
-export enum defaultTemaType {
+export enum defaultRaadType {
     FAST,
     LEGGES_TIL,
     INGEN
 }
 
-export enum TemaKategori {
+export enum RaadKategori {
     BEGYNN_MED_DEG_SELV = 'Begynn med deg selv',
     FINN_JOBB = 'Finn jobb',
     SOKNAD_CV = 'Søknad og CV',
@@ -12,11 +12,11 @@ export enum TemaKategori {
     HVERDAG_JOBBSOKER = 'Hverdagen som jobbsøker'
 }
 
-export interface TemaModell {
+export interface RaadModell {
     ref: string;
     id: string;
     tekst: string;
     prioritet: number;
-    defaultPosisjon: defaultTemaType;
-    kategori: TemaKategori;
+    defaultPosisjon: defaultRaadType;
+    kategori: RaadKategori;
 }
