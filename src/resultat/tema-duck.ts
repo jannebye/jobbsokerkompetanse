@@ -68,12 +68,35 @@ export function fetchRaad(): Promise<TemaModell> {
     function parseXml(text: string): Promise<TemaModell> {
         return new Promise((resolve, reject) => {
             xml2js.parseString(text, {explicitArray: false}, (err: string, res: TemaModell) => {
+                if(err) {
+                    reject(err);
+                }
                 resolve(res);
             });
         });
     }
 
     return fetch('https://appres.nav.no/app/veiviserarbeidssoker/steg')
+        .then(sjekkStatuskode)
         .then((response) => response.text())
         .then(parseXml);
+}
+
+class FetchError extends Error {
+    public response: Response;
+
+    constructor(message: string, response: Response) {
+        super(message);
+        this.response = response;
+    }
+}
+
+export function sjekkStatuskode(response: any) {
+    if (response.status >= 200 && response.status < 300 && response.ok) {
+        return response;
+    }
+    if (response.status === 401) {
+        window.location.href = 'feilsider/401.html';// eslint-disable-line no-undef
+    }
+    return Promise.reject(new FetchError(response.statusText, response));
 }
