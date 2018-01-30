@@ -51,8 +51,8 @@ function sporsmalIndex(sporsmalId: string) {
     return spm.map(s => s.id).indexOf(sporsmalId);
 }
 
-function erPaVeiBakover(state: SvarState, sporsmalId: string) {
-    return sporsmalIndex(sporsmalId) < sporsmalIndex(state.gjeldendeSpmId);
+export function erPaVeiBakover(gjeldendeSpmId: string, sporsmalId: string) {
+    return sporsmalIndex(sporsmalId) < sporsmalIndex(gjeldendeSpmId);
 }
 
 //  Reducer
@@ -131,7 +131,7 @@ export default function reducer(
         }
         case ActionType.NESTE_SPORSMAL:
             const sporsmalId = action.data;
-            const paVeiBakover = erPaVeiBakover(state, sporsmalId);
+            const paVeiBakover = erPaVeiBakover(state.gjeldendeSpmId, sporsmalId);
             if (harBesvartSpm(state, sporsmalId)) {
                 return {
                     ...state,
