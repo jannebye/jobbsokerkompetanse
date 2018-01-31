@@ -62,18 +62,16 @@ export function fetchTema(): Promise<TemaModell> {
 class FetchError extends Error {
     public response: Response;
 
-    constructor(message: string, response: Response) {
-        super(message);
+    constructor(reason: string, response: Response) {
+        super(reason);
         this.response = response;
     }
 }
 
-export function sjekkStatuskode(response: any) {
+export function sjekkStatuskode(response: Response) {
     if (response.status >= 200 && response.status < 300 && response.ok) {
         return response;
     }
-    if (response.status === 401) {
-        window.location.href = 'feilsider/401.html'; // eslint-disable-line no-undef
-    }
-    return Promise.reject(new FetchError(response.statusText, response));
+    const error = new FetchError(response.statusText || response.type, response);
+    throw error;
 }
