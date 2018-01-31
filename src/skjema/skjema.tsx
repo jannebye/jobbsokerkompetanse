@@ -32,10 +32,8 @@ function finnNesteSpmIListe(id: string): string {
         .id;
 }
 
-function finnNesteSpm(
-    sporsmalId: string,
-    forelopigBesvarelse: BesvarelseModell[]
-): string {
+function finnNesteSpm(sporsmalId: string,
+                      forelopigBesvarelse: BesvarelseModell[]): string {
     const avhengighet: AvhengighetModell | undefined = Avhengigheter.find(
         avh => avh.sporsmalId === sporsmalId
     );
@@ -63,6 +61,7 @@ interface OwnProps {
 interface StateProps {
     gjeldendeSporsmalId: string;
     forelopigBesvarelse: BesvarelseModell[];
+    viserAlternativer: boolean;
 }
 
 interface DispatchProps {
@@ -82,7 +81,7 @@ class Skjema extends React.Component<SkjemaProps, {}> {
 
     byttSpmOgFokus(spmId: string) {
         const nesteSpmId = finnNesteSpm(spmId, this.props.forelopigBesvarelse);
-        this.props.byttSpm(nesteSpmId).then(() => {
+        this.props.byttSpm(nesteSpmId).then(res => {
             const nesteSpm = this.sporsmalRefs[this.props.gjeldendeSporsmalId];
             nesteSpm.focus();
         });
@@ -95,38 +94,31 @@ class Skjema extends React.Component<SkjemaProps, {}> {
             gjeldendeSporsmalId,
             byttSpm,
             forelopigBesvarelse,
+            viserAlternativer
         } = this.props;
         let sporsmalRefs = this.sporsmalRefs;
 
         return (
-            <form
-                onKeyPress={e => {
-                    if (e.which === 13 /* Enter */) {
-                        e.preventDefault();
-                    }
-                }}
-            >
-                <Sporsmal
-                    key={gjeldendeSporsmalId}
-                    sporsmal={
-                        alleSporsmal.find(
-                            sporsmal => sporsmal.id === gjeldendeSporsmalId
-                        )!
-                    }
-                    spmRef={(ref: {}) => (sporsmalRefs[gjeldendeSporsmalId] = ref)}
-                    nesteSpm={(id: string) => this.byttSpmOgFokus(id)}
-                    forrigeSpm={() =>
-                        byttSpm(
-                            forrigeSporsmal(
-                                gjeldendeSporsmalId,
-                                forelopigBesvarelse
-                            )
+            <Sporsmal
+                key={gjeldendeSporsmalId}
+                sporsmal={
+                    alleSporsmal.find(
+                        sporsmal => sporsmal.id === gjeldendeSporsmalId
+                    )!
+                }
+                spmRef={(ref: {}) => (sporsmalRefs[gjeldendeSporsmalId] = ref)}
+                nesteSpm={(id: string) => this.byttSpmOgFokus(id)}
+                forrigeSpm={() =>
+                    byttSpm(
+                        forrigeSporsmal(
+                            gjeldendeSporsmalId,
+                            forelopigBesvarelse
                         )
-                    }
-                    handleSubmit={() => handleSubmit()}
-                    startPaNytt={() => startPaNytt()}
-                />
-            </form>
+                    )
+                }
+                handleSubmit={() => handleSubmit()}
+                startPaNytt={() => startPaNytt()}
+            />
         );
     }
 }
@@ -134,6 +126,7 @@ class Skjema extends React.Component<SkjemaProps, {}> {
 const mapStateToProps = (state: AppState): StateProps => ({
     gjeldendeSporsmalId: state.svar.gjeldendeSpmId,
     forelopigBesvarelse: state.svar.data,
+    viserAlternativer: state.svar.viserAlternativer
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

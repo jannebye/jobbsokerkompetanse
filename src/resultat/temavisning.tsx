@@ -54,9 +54,11 @@ function TemaVisning({utledetRaad, raad}: TemaVisningProps) {
                         {riktigTema ? riktigTema.tittel : ''}
                     </Innholdstittel>
                     <Normaltekst>{riktigTema ? riktigTema.ingress : ''}</Normaltekst>
-                    <span className="ekspanderbartPanel__indikator"/>
+                    <div className="ekspanderbartPanel__innhold" dangerouslySetInnerHTML={{__html: htmlInnhold}}/>
+                    <div className="indikator-wrap">
+                        <span className="ekspanderbartPanel__indikator"/>
+                    </div>
                 </button>
-                <div className="ekspanderbartPanel__innhold" dangerouslySetInnerHTML={{__html: htmlInnhold}}/>
             </section>
         </li>
     );

@@ -61,7 +61,7 @@ function AlternativContainer({
     markerAlternativ
 }: AlternativContainerProps) {
     return (
-        <ul className={'alternativer alternativer__' + sporsmal.type}>
+        <ul className={'alternativer alternativer__' + sporsmal.type} role="group" aria-label={sporsmal.id}>
             {alternativer.map(function(alternativ: SvarAlternativModell) {
                 const erValgt = !!markerteAlternativer.find(
                     alt => alt.id === alternativ.id
