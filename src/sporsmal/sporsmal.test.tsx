@@ -35,6 +35,7 @@ function getJSXElement(
                         return;
                     }}
                     viserAlternativer={false}
+                    paVeiBakover={false}
                     besvarteSporsmal={besvarteSpm}
                     visTips={x => {
                         return;
