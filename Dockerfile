@@ -7,6 +7,6 @@ ENV CI=true
 WORKDIR /source
 RUN npm install && npm run build
 
-FROM nginx
+FROM ${BASE_IMAGE_PREFIX}nginx
 COPY --from=builder /source/build /usr/share/nginx/html/jobbsokerkompetanse
 EXPOSE 80
