@@ -1,45 +1,22 @@
 import * as xml2js from 'xml2js';
-import { ActionType, Handling, HentRaadAction } from '../actions';
-import { RaadModell, TemaModell } from './tema-modell';
+import { ActionType, Handling, HentTemaAction } from '../actions';
+import { TemaModell } from './tema-modell';
+import { RaadInitialState, RaadModell } from './raad-modell';
 
-const {HENT_RAAD_OK} = ActionType;
+const {HENT_TEMA_OK} = ActionType;
 
 export interface RaadState {
     data: RaadModell;
 }
 
 export const initialState: RaadState = {
-        data: {
-            steg: [{
-                id: '',
-                tittel: '',
-                forsidetekst: '',
-                innhold: '',
-                ikon: '',
-                    temaer: [{
-                        id: '',
-                        tittel: '',
-                        refid: '',
-                        ingress: '',
-                            aktiviteter: [{
-                                id: '',
-                                tittel: '',
-                                innhold: '',
-                                tags: {
-                                    tag: ['']
-                                },
-                                collapsable: true
-                            }]
-                    }]
-            }]
-        },
-    }
-;
+    data: RaadInitialState
+};
 
 //  Reducer
 export default function reducer(state: RaadState = initialState, action: Handling): RaadState {
     switch (action.type) {
-        case ActionType.HENT_RAAD_OK: {
+        case ActionType.HENT_TEMA_OK: {
             return {...state, data: sanitize(action.data)};
         }
         default:
@@ -57,18 +34,18 @@ function sanitize(raad: TemaModell): RaadModell {
     })};
 }
 
-export function hentRaad(raad: TemaModell): HentRaadAction {
+export function hentRaad(raad: TemaModell): HentTemaAction {
     return {
-        type: HENT_RAAD_OK,
+        type: HENT_TEMA_OK,
         data: raad
     };
 }
 
-export function fetchRaad(): Promise<TemaModell> {
+export function fetchTema(): Promise<TemaModell> {
     function parseXml(text: string): Promise<TemaModell> {
         return new Promise((resolve, reject) => {
             xml2js.parseString(text, {explicitArray: false}, (err: string, res: TemaModell) => {
-                if(err) {
+                if (err) {
                     reject(err);
                 }
                 resolve(res);
@@ -96,7 +73,7 @@ export function sjekkStatuskode(response: any) {
         return response;
     }
     if (response.status === 401) {
-        window.location.href = 'feilsider/401.html';// eslint-disable-line no-undef
+        window.location.href = 'feilsider/401.html'; // eslint-disable-line no-undef
     }
     return Promise.reject(new FetchError(response.statusText, response));
 }

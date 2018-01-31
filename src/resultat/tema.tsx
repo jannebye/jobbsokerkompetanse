@@ -1,4 +1,5 @@
-import { defaultTemaType, TemaKategori } from './tema-modell';
+import { RaadKategori } from './raad-modell';
+import { DefaultRaadType } from './raad-modell';
 
 export const alleTemaer = [
     {
@@ -7,8 +8,8 @@ export const alleTemaer = [
         refid: '2-1',
         tekst: 'Finn jobben på nav.no',
         prioritet: 31,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.FINN_JOBB
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.FINN_JOBB
     },
     {
         ref: 'finnJobb2',
@@ -16,8 +17,8 @@ export const alleTemaer = [
         refid: '2-2',
         tekst: 'Opprett et automatisk stillingssøk',
         prioritet: 9,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.FINN_JOBB
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.FINN_JOBB
     },
     {
         ref: 'finnJobb3',
@@ -25,8 +26,8 @@ export const alleTemaer = [
         refid: '2-7',
         tekst: 'Registrer CV-en flere steder',
         prioritet: 23,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.FINN_JOBB
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.FINN_JOBB
     },
     {
         ref: 'finnJobb4',
@@ -34,8 +35,8 @@ export const alleTemaer = [
         refid: '2-8',
         tekst: 'Bruk nettverket ditt',
         prioritet: 10,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.FINN_JOBB
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.FINN_JOBB
     },
     {
         ref: 'finnJobb5',
@@ -43,8 +44,8 @@ export const alleTemaer = [
         refid: '2-9',
         tekst: 'Bruk sosiale medier',
         prioritet: 24,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.FINN_JOBB
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.FINN_JOBB
     },
     {
         ref: 'finnJobb6',
@@ -52,8 +53,8 @@ export const alleTemaer = [
         refid: '2-10',
         tekst: 'Bruk LinkedIn',
         prioritet: 22,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.FINN_JOBB
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.FINN_JOBB
     },
     {
         ref: 'finnJobb7',
@@ -61,8 +62,8 @@ export const alleTemaer = [
         refid: '2-11',
         tekst: 'Delta på jobbmesser',
         prioritet: 30,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.FINN_JOBB
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.FINN_JOBB
     },
     {
         ref: 'finnJobb8',
@@ -70,8 +71,8 @@ export const alleTemaer = [
         refid: '2-12',
         tekst: 'Søk jobb i ulike bransjer',
         prioritet: 1,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.FINN_JOBB
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.FINN_JOBB
     },
     {
         ref: 'finnJobb9',
@@ -79,8 +80,8 @@ export const alleTemaer = [
         refid: '2-3',
         tekst: 'Under 18 og vil ha jobb',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.FINN_JOBB
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.FINN_JOBB
     },
     {
         ref: 'finnJobb10',
@@ -88,8 +89,8 @@ export const alleTemaer = [
         refid: '2-4',
         tekst: 'Hvordan få ny jobb som nyutdannet',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.FINN_JOBB
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.FINN_JOBB
     },
     {
         ref: 'finnJobb11',
@@ -97,8 +98,8 @@ export const alleTemaer = [
         refid: '2-5',
         tekst: 'Ung og jobb i utlandet',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.FINN_JOBB
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.FINN_JOBB
     },
     {
         ref: 'finnJobb12',
@@ -106,8 +107,8 @@ export const alleTemaer = [
         refid: '2-6',
         tekst: 'Delta på karrieredager',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.FINN_JOBB
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.FINN_JOBB
     },
     {
         ref: 'finnJobb13',
@@ -115,8 +116,8 @@ export const alleTemaer = [
         refid: '2-13',
         tekst: 'Søk jobb utenfor hjemstedet',
         prioritet: 5,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.FINN_JOBB
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.FINN_JOBB
     },
     {
         ref: 'soknadCV1',
@@ -124,8 +125,8 @@ export const alleTemaer = [
         refid: '3-2',
         tekst: 'Lag en god CV',
         prioritet: 8,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.SOKNAD_CV
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.SOKNAD_CV
     },
     {
         ref: 'soknadCV2',
@@ -133,8 +134,8 @@ export const alleTemaer = [
         refid: '3-1',
         tekst: 'Skriv en god søknad',
         prioritet: 2,
-        defaultPosisjon: defaultTemaType.LEGGES_TIL,
-        kategori: TemaKategori.SOKNAD_CV
+        defaultPosisjon: DefaultRaadType.LEGGES_TIL,
+        kategori: RaadKategori.SOKNAD_CV
     },
     {
         ref: 'soknadCV3',
@@ -142,8 +143,8 @@ export const alleTemaer = [
         refid: '3-4',
         tekst: 'Skaff dokumentasjon på utdanning og attester',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.SOKNAD_CV
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.SOKNAD_CV
     },
     {
         ref: 'soknadCV4',
@@ -151,8 +152,8 @@ export const alleTemaer = [
         refid: '3-5',
         tekst: 'Sjekk referansene dine',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.SOKNAD_CV
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.SOKNAD_CV
     },
     {
         ref: 'soknadCV5',
@@ -160,8 +161,8 @@ export const alleTemaer = [
         refid: '3-6',
         tekst: 'Hold orden på søknadene dine',
         prioritet: 13,
-        defaultPosisjon: defaultTemaType.LEGGES_TIL,
-        kategori: TemaKategori.SOKNAD_CV
+        defaultPosisjon: DefaultRaadType.LEGGES_TIL,
+        kategori: RaadKategori.SOKNAD_CV
     },
     {
         ref: 'soknadCV6',
@@ -169,8 +170,8 @@ export const alleTemaer = [
         refid: '3-8',
         tekst: 'Send en åpen søknad',
         prioritet: 7,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.SOKNAD_CV
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.SOKNAD_CV
     },
     {
         ref: 'soknadCV7',
@@ -178,8 +179,8 @@ export const alleTemaer = [
         refid: '3-10',
         tekst: 'Lag en utradisjonell søknad eller CV',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.SOKNAD_CV
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.SOKNAD_CV
     },
     {
         ref: 'soknadCV8',
@@ -187,8 +188,8 @@ export const alleTemaer = [
         refid: '3-9',
         tekst: 'Ta kontakt med en bedrift',
         prioritet: 3,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.SOKNAD_CV
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.SOKNAD_CV
     },
     {
         ref: 'soknadCV9',
@@ -196,8 +197,8 @@ export const alleTemaer = [
         refid: '3-3',
         tekst: 'Hvordan skrive om hull i CV-en',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.SOKNAD_CV
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.SOKNAD_CV
     },
     {
         ref: 'intervju1',
@@ -205,8 +206,8 @@ export const alleTemaer = [
         refid: '4-1',
         tekst: 'Sjekk hva slags intervju du skal på',
         prioritet: 25,
-        defaultPosisjon: defaultTemaType.LEGGES_TIL,
-        kategori: TemaKategori.INTERVJU
+        defaultPosisjon: DefaultRaadType.LEGGES_TIL,
+        kategori: RaadKategori.INTERVJU
     },
     {
         ref: 'intervju2',
@@ -214,8 +215,8 @@ export const alleTemaer = [
         refid: '4-2',
         tekst: 'Forbered deg til intervjuet',
         prioritet: 4,
-        defaultPosisjon: defaultTemaType.LEGGES_TIL,
-        kategori: TemaKategori.INTERVJU
+        defaultPosisjon: DefaultRaadType.LEGGES_TIL,
+        kategori: RaadKategori.INTERVJU
     },
     {
         ref: 'intervju3',
@@ -223,8 +224,8 @@ export const alleTemaer = [
         refid: '4-3',
         tekst: 'Forbered en liste med sterke sider',
         prioritet: 26,
-        defaultPosisjon: defaultTemaType.LEGGES_TIL,
-        kategori: TemaKategori.INTERVJU
+        defaultPosisjon: DefaultRaadType.LEGGES_TIL,
+        kategori: RaadKategori.INTERVJU
     },
     {
         ref: 'intervju4',
@@ -232,8 +233,8 @@ export const alleTemaer = [
         refid: '4-4',
         tekst: 'Forbered en liste med svake sider',
         prioritet: 21,
-        defaultPosisjon: defaultTemaType.LEGGES_TIL,
-        kategori: TemaKategori.INTERVJU
+        defaultPosisjon: DefaultRaadType.LEGGES_TIL,
+        kategori: RaadKategori.INTERVJU
     },
     {
         ref: 'intervju5',
@@ -241,8 +242,8 @@ export const alleTemaer = [
         refid: '4-5',
         tekst: 'Øv på intervjusituasjonen',
         prioritet: 11,
-        defaultPosisjon: defaultTemaType.LEGGES_TIL,
-        kategori: TemaKategori.INTERVJU
+        defaultPosisjon: DefaultRaadType.LEGGES_TIL,
+        kategori: RaadKategori.INTERVJU
     },
     {
         ref: 'intervju6',
@@ -250,8 +251,8 @@ export const alleTemaer = [
         refid: '4-6',
         tekst: 'Gjør et godt førsteinntrykk',
         prioritet: 12,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.INTERVJU
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.INTERVJU
     },
     {
         ref: 'intervju7',
@@ -259,8 +260,8 @@ export const alleTemaer = [
         refid: '4-7',
         tekst: 'Still spørsmål til bedriften',
         prioritet: 14,
-        defaultPosisjon: defaultTemaType.LEGGES_TIL,
-        kategori: TemaKategori.INTERVJU
+        defaultPosisjon: DefaultRaadType.LEGGES_TIL,
+        kategori: RaadKategori.INTERVJU
     },
     {
         ref: 'intervju8',
@@ -268,8 +269,8 @@ export const alleTemaer = [
         refid: '4-9',
         tekst: 'Be om tilbakemelding på intervjuet',
         prioritet: 18,
-        defaultPosisjon: defaultTemaType.LEGGES_TIL,
-        kategori: TemaKategori.INTERVJU
+        defaultPosisjon: DefaultRaadType.LEGGES_TIL,
+        kategori: RaadKategori.INTERVJU
     },
     {
         ref: 'intervju9',
@@ -277,8 +278,8 @@ export const alleTemaer = [
         refid: '4-8',
         tekst: 'Vurder innsatsen din etter intervjuet',
         prioritet: 29,
-        defaultPosisjon: defaultTemaType.LEGGES_TIL,
-        kategori: TemaKategori.INTERVJU
+        defaultPosisjon: DefaultRaadType.LEGGES_TIL,
+        kategori: RaadKategori.INTERVJU
     },
     {
         ref: 'hverdagJobbsok1',
@@ -286,8 +287,8 @@ export const alleTemaer = [
         refid: '5-1',
         tekst: 'Lag en plan',
         prioritet: 15,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.HVERDAG_JOBBSOKER
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.HVERDAG_JOBBSOKER
     },
     {
         ref: 'hverdagJobbsok2',
@@ -295,8 +296,8 @@ export const alleTemaer = [
         refid: '5-2',
         tekst: 'Reflekter over jobbene du søker på',
         prioritet: 20,
-        defaultPosisjon: defaultTemaType.LEGGES_TIL,
-        kategori: TemaKategori.HVERDAG_JOBBSOKER
+        defaultPosisjon: DefaultRaadType.LEGGES_TIL,
+        kategori: RaadKategori.HVERDAG_JOBBSOKER
     },
     {
         ref: 'hverdagJobbsok3',
@@ -304,8 +305,8 @@ export const alleTemaer = [
         refid: '5-3',
         tekst: 'Vær aktiv',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.HVERDAG_JOBBSOKER
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.HVERDAG_JOBBSOKER
     },
     {
         ref: 'hverdagJobbsok4',
@@ -313,8 +314,8 @@ export const alleTemaer = [
         refid: '5-4',
         tekst: 'Delta i frivillig arbeid',
         prioritet: 27,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.HVERDAG_JOBBSOKER
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.HVERDAG_JOBBSOKER
     },
     {
         ref: 'hverdagJobbsok5',
@@ -322,8 +323,8 @@ export const alleTemaer = [
         refid: '5-5',
         tekst: 'Meld deg på jobbsøkerkurs',
         prioritet: 32,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.HVERDAG_JOBBSOKER
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.HVERDAG_JOBBSOKER
     },
     {
         ref: 'begynnSelv1',
@@ -331,8 +332,8 @@ export const alleTemaer = [
         refid: '1-14',
         tekst: 'Kom i gang',
         prioritet: 17,
-        defaultPosisjon: defaultTemaType.LEGGES_TIL,
-        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
+        defaultPosisjon: DefaultRaadType.LEGGES_TIL,
+        kategori: RaadKategori.BEGYNN_MED_DEG_SELV
     },
     {
         ref: 'begynnSelv2',
@@ -340,8 +341,8 @@ export const alleTemaer = [
         refid: '1-1',
         tekst: 'Beskriv kompetansen din',
         prioritet: 6,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.BEGYNN_MED_DEG_SELV
     },
     {
         ref: 'begynnSelv3',
@@ -349,8 +350,8 @@ export const alleTemaer = [
         refid: '1-2',
         tekst: 'Sett deg mål',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.BEGYNN_MED_DEG_SELV
     },
     {
         ref: 'begynnSelv4',
@@ -358,8 +359,8 @@ export const alleTemaer = [
         refid:  '1-3',
         tekst: 'Ta interessetest',
         prioritet: 16,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.BEGYNN_MED_DEG_SELV
     },
     {
         ref: 'begynnSelv5',
@@ -367,8 +368,8 @@ export const alleTemaer = [
         refid: '1-4',
         tekst: 'Ta personlighetstest',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.BEGYNN_MED_DEG_SELV
     },
     {
         ref: 'begynnSelv6',
@@ -376,8 +377,8 @@ export const alleTemaer = [
         refid: '1-5',
         tekst: 'Gjør avtale med karrieresenter',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.BEGYNN_MED_DEG_SELV
     },
     {
         ref: 'begynnSelv7',
@@ -385,8 +386,8 @@ export const alleTemaer = [
         refid: '1-6',
         tekst: 'Meld deg på kurs',
         prioritet: 28,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.BEGYNN_MED_DEG_SELV
     },
     {
         ref: 'begynnSelv8',
@@ -394,8 +395,8 @@ export const alleTemaer = [
         refid: '1-8',
         tekst: 'Ta mer utdanning',
         prioritet: 19,
-        defaultPosisjon: defaultTemaType.FAST,
-        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
+        defaultPosisjon: DefaultRaadType.FAST,
+        kategori: RaadKategori.BEGYNN_MED_DEG_SELV
     },
     {
         ref: 'begynnSelv9',
@@ -403,8 +404,8 @@ export const alleTemaer = [
         refid: '1-9',
         tekst: 'Sjekk om du har krav på voksenopplæring',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.BEGYNN_MED_DEG_SELV
     },
     {
         ref: 'begynnSelv10',
@@ -412,8 +413,8 @@ export const alleTemaer = [
         refid: '1-11',
         tekst: 'Google deg selv',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.BEGYNN_MED_DEG_SELV
     },
     {
         ref: 'begynnSelv11',
@@ -421,8 +422,8 @@ export const alleTemaer = [
         refid: '1-12',
         tekst: 'Start en egen virksomhet',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.BEGYNN_MED_DEG_SELV
     },
     {
         ref: 'begynnSelv13',
@@ -430,8 +431,8 @@ export const alleTemaer = [
         refid: '1-7',
         tekst: 'Forbedre norskkunnskapene dine',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.BEGYNN_MED_DEG_SELV
     },
     {
         ref: 'begynnSelv14',
@@ -439,8 +440,8 @@ export const alleTemaer = [
         refid: '1-10',
         tekst: 'Finn ut om du kan ha lærevansker',
         prioritet: 1000,
-        defaultPosisjon: defaultTemaType.INGEN,
-        kategori: TemaKategori.BEGYNN_MED_DEG_SELV
+        defaultPosisjon: DefaultRaadType.INGEN,
+        kategori: RaadKategori.BEGYNN_MED_DEG_SELV
     }
 ];
 
@@ -449,8 +450,8 @@ export const alleTemaerPrioritert = alleTemaer.sort(
 );
 
 export const fasteTemaer = alleTemaerPrioritert.filter(
-    tema => tema.defaultPosisjon === defaultTemaType.FAST
+    tema => tema.defaultPosisjon === DefaultRaadType.FAST
 );
 export const leggesTilTemaer = alleTemaerPrioritert.filter(
-    tema => tema.defaultPosisjon === defaultTemaType.LEGGES_TIL
+    tema => tema.defaultPosisjon === DefaultRaadType.LEGGES_TIL
 );

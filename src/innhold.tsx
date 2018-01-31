@@ -9,7 +9,7 @@ import { Dispatch } from './types';
 import { endreSide } from './ducks/side-duck';
 import Startside from './skjema/startside';
 import { reset } from './svar/svar-duck';
-import { hentRaad, fetchRaad } from './resultat/tema-duck';
+import { hentRaad, fetchTema } from './resultat/raad-duck';
 
 interface DispatchProps {
     reset: () => Promise<{}>;
@@ -72,7 +72,7 @@ const mapStateToProps = (state: AppState): InnholdStateProps => ({
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     reset: () => new Promise(resolve => resolve(dispatch(reset()))),
     byttSide: (side: Sidetype) => dispatch(endreSide(side)),
-    doHentRaad: () => fetchRaad().then(raad => dispatch(hentRaad(raad)))
+    doHentRaad: () => fetchTema().then(raad => dispatch(hentRaad(raad)))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Innhold);

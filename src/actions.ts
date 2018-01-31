@@ -14,7 +14,7 @@ export enum ActionType {
     ENDRE_SIDE,
     VIS_TIPS,
     SKJUL_TIPS,
-    HENT_RAAD_OK,
+    HENT_TEMA_OK,
 }
 
 export interface EndreAlternativAction {
@@ -65,8 +65,8 @@ export interface SkjulTipsAction {
     type: ActionType.SKJUL_TIPS;
 }
 
-export interface HentRaadAction {
-    type: ActionType.HENT_RAAD_OK;
+export interface HentTemaAction {
+    type: ActionType.HENT_TEMA_OK;
     data: TemaModell;
 }
 
@@ -80,4 +80,4 @@ export type Handling =
     | EndreSideAction
     | VisTipsAction
     | SkjulTipsAction
-    | HentRaadAction;
+    | HentTemaAction;

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { FormattedHTMLMessage } from 'react-intl';
 import { fasteTemaer, leggesTilTemaer } from './tema';
 import temaLogikk from './tema-mapping';
-import { UtledetRaadModell } from './tema-modell';
+import { UtledetRaadModell } from './raad-modell';
 import TemaVisning from './temavisning';
 import InnholdsContainer from './innholdscontainer';
 import { Innholdstittel, Normaltekst } from 'nav-frontend-typografi';

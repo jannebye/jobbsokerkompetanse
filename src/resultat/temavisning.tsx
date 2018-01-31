@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { RaadModell, UtledetRaadModell } from './tema-modell';
+import { UtledetRaadModell } from './raad-modell';
 import EkspanderbartPanel from 'nav-frontend-ekspanderbartpanel';
 import { FormattedHTMLMessage } from 'react-intl';
 import { AppState } from '../ducks/reducer';
+import { RaadModell } from './raad-modell';
 
 interface StateProps {
     raad: RaadModell;
