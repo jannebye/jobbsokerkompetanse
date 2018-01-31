@@ -43,18 +43,6 @@ function Alternativ({
             break;
     }
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-        const valgt = e.target.checked;
-        e.target.checked = !valgt;
-    }
-
-    function onKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
-        const ENTER_KEYCODE = 13;
-        if (e.which === ENTER_KEYCODE) {
-            markerAlternativ();
-        }
-    }
-
     return (
         <li key={alternativ.id} className="alternativ">
             <input
@@ -65,26 +53,20 @@ function Alternativ({
                 defaultValue={alternativ.id}
                 checked={erValgt}
                 disabled={!kanVelges}
-                onChange={e => handleChange(e)}
-                onFocus={e => {
+                onFocus={() => {
                     if (kanVelges && inputType === 'radio') {
                         markerAlternativ();
                     }
                 }}
-                onKeyUp={e => {
-                    if (kanVelges && inputType === 'checkbox') {
-                        onKeyUp(e);
+                onChange={() => {
+                    if (kanVelges) {
+                        markerAlternativ();
                     }
                 }}
             />
             <label
                 htmlFor={alternativ.id}
                 className={`skjemaelement__label ${erValgt ? 'markert' : ''}`}
-                onClick={e => {
-                    if (kanVelges) {
-                        markerAlternativ();
-                    }
-                }}
             >
                 <FormattedMessage id={alternativ.id} />
                 {skalHaHjelpetekst && (
