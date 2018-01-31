@@ -14,6 +14,7 @@ import { isUndefined } from 'util';
 import { Sidetittel, Undertekst } from 'nav-frontend-typografi';
 import SVG from 'react-inlinesvg';
 import KnappBase from 'nav-frontend-knapper';
+import * as cls from 'classnames';
 
 interface DispatchProps {
     markerAlternativ: (
@@ -38,6 +39,7 @@ interface OwnProps {
 interface StateProps {
     besvarteSporsmal: BesvarelseModell[];
     viserAlternativer: boolean;
+    paVeiBakover: boolean;
     totaltAntallSpm: number;
 }
 
@@ -51,6 +53,12 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
     constructor(props: SporsmalProps) {
         super(props);
         this.state = { feil: false };
+    }
+
+    componentDidMount() {
+        if (this.props.paVeiBakover) {
+            window.scrollTo(0, 0);
+        }
     }
 
     sjekkSvar(
@@ -86,6 +94,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             spmRef,
             viserAlternativer,
             visAlternativer,
+            paVeiBakover,
             totaltAntallSpm,
             handleSubmit,
             startPaNytt
@@ -102,13 +111,16 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         const erForsteSporsmal = () =>
             this.props.sporsmal.erForsteSpm ? startPaNytt() : forrigeSpm();
 
+        const klassenavn = cls('sporsmal', {
+            vis_alternativer: viserAlternativer,
+            tilbake: paVeiBakover,
+        });
+
         return (
             <div
                 ref={spmRef}
                 id={'sp-' + sporsmal.id}
-                className={
-                    viserAlternativer ? 'sporsmal vis_alternativer' : 'sporsmal'
-                }
+                className={klassenavn}
                 tabIndex={0}
             >
                 <section>
@@ -278,6 +290,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
 const mapStateToProps = (state: AppState): StateProps => ({
     besvarteSporsmal: state.svar.data,
     viserAlternativer: state.svar.viserAlternativer,
+    paVeiBakover: state.svar.paVeiBakover,
     totaltAntallSpm: state.svar.totalAntallSpm
 });
 

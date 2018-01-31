@@ -306,20 +306,20 @@ describe('TipsGenerator', () => {
     it(
         'skal ikke foreslå å lage en oversikt over stillinger hvis man ikke har søkt på noen stillinger det siste året',
         () => {
-        svarAlternativer.push({ id: 'soke-svar-0101' });
-        const spmId = 'soke-spm-01',
-            expected = undefined;
-        const besvarelse = [
-            {
-                sporsmalId: spmId,
-                svarAlternativer: svarAlternativer,
-                tips: undefined
-            }
-        ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+            svarAlternativer.push({id: 'soke-svar-0101'});
+            const spmId = 'soke-spm-01',
+                expected = undefined;
+            const besvarelse = [
+                {
+                    sporsmalId: spmId,
+                    svarAlternativer: svarAlternativer,
+                    tips: undefined
+                }
+            ];
+            const tips = visTipsEtterSporsmal(spmId, besvarelse);
 
-        expect(tips).toEqual(expected);
-    });
+            expect(tips).toEqual(expected);
+        });
 
     it(
         'skal foreslå å jobbe bedre med CV og søknaden ' +

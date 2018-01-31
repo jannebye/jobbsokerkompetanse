@@ -4,7 +4,7 @@ import Sporsmal from '../sporsmal/sporsmal';
 import { connect } from 'react-redux';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
-import { FlytType, nesteSporsmal } from '../svar/svar-duck';
+import { nesteSporsmal } from '../svar/svar-duck';
 import { BesvarelseModell } from '../svar/svar-modell';
 import {
     default as Avhengigheter,
@@ -63,7 +63,7 @@ interface OwnProps {
 interface StateProps {
     gjeldendeSporsmalId: string;
     forelopigBesvarelse: BesvarelseModell[];
-    flytRetning: FlytType;
+    viserAlternativer: boolean;
 }
 
 interface DispatchProps {
@@ -96,7 +96,7 @@ class Skjema extends React.Component<SkjemaProps, {}> {
             gjeldendeSporsmalId,
             byttSpm,
             forelopigBesvarelse,
-            flytRetning
+            viserAlternativer
         } = this.props;
         let sporsmalRefs = this.sporsmalRefs;
 
@@ -115,7 +115,7 @@ class Skjema extends React.Component<SkjemaProps, {}> {
                             sporsmal => sporsmal.id === gjeldendeSporsmalId
                         )!
                     }
-                    viserAlternativer={flytRetning === FlytType.BAKOVER}
+                    viserAlternativer={viserAlternativer}
                     spmRef={(ref: {}) => (sporsmalRefs[gjeldendeSporsmalId] = ref)}
                     nesteSpm={(id: string) => this.byttSpmOgFokus(id)}
                     forrigeSpm={() =>
@@ -137,7 +137,7 @@ class Skjema extends React.Component<SkjemaProps, {}> {
 const mapStateToProps = (state: AppState): StateProps => ({
     gjeldendeSporsmalId: state.svar.gjeldendeSpmId,
     forelopigBesvarelse: state.svar.data,
-    flytRetning: state.svar.flyt
+    viserAlternativer: state.svar.viserAlternativer
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

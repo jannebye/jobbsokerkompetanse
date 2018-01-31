@@ -11,6 +11,7 @@ import {
     EndreAlternativOgAntallAction
 } from '../actions';
 import SvarAlternativModell from '../sporsmal/svaralternativ';
+import spm from '../sporsmal/sporsmal-alle';
 
 const {
     ENDRE_ALTERNATIV,
@@ -22,16 +23,11 @@ const {
     SKJUL_TIPS
 } = ActionType;
 
-export enum FlytType {
-    FREMOVER,
-    BAKOVER
-}
-
 export interface SvarState {
     data: BesvarelseModell[];
     gjeldendeSpmId: string;
-    flyt: FlytType;
     viserAlternativer: boolean;
+    paVeiBakover: boolean;
     totalAntallSpm: number;
 }
 
@@ -40,10 +36,26 @@ export const initialState = {
         { sporsmalId: 'finn-spm-01', svarAlternativer: [], tips: undefined }
     ],
     gjeldendeSpmId: 'finn-spm-01',
-    flyt: FlytType.FREMOVER,
     viserAlternativer: false,
+    paVeiBakover: false,
     totalAntallSpm: 19
 };
+
+type SporsmalId = string;
+
+function harBesvartSpm(state: SvarState, sporsmalId: SporsmalId) {
+    return state.data.find(
+        besvarelse => besvarelse.sporsmalId === sporsmalId
+    );
+}
+
+function sporsmalIndex(sporsmalId: SporsmalId) {
+    return spm.map(s => s.id).indexOf(sporsmalId);
+}
+
+export function erPaVeiBakover(gjeldendeSpmId: SporsmalId, sporsmalId: SporsmalId) {
+    return sporsmalIndex(sporsmalId) < sporsmalIndex(gjeldendeSpmId);
+}
 
 //  Reducer
 export default function reducer(
@@ -54,7 +66,7 @@ export default function reducer(
         case ActionType.ENDRE_ALTERNATIV: {
             if (
                 state.data.find(
-                    spm => spm.sporsmalId === action.data.sporsmalId
+                    (sprsm) => sprsm.sporsmalId === action.data.sporsmalId
                 )
             ) {
                 return {
@@ -87,7 +99,7 @@ export default function reducer(
         case ActionType.ENDRE_ALTERNATIV_OG_ANTALL: {
             if (
                 state.data.find(
-                    spm => spm.sporsmalId === action.data.sporsmalId
+                    sprsm => sprsm.sporsmalId === action.data.sporsmalId
                 )
             ) {
                 return {
@@ -120,16 +132,14 @@ export default function reducer(
             }
         }
         case ActionType.NESTE_SPORSMAL:
-            if (
-                state.data.find(
-                    besvarelse => besvarelse.sporsmalId === action.data
-                )
-            ) {
+            const sporsmalId = action.data;
+            const paVeiBakover = erPaVeiBakover(state.gjeldendeSpmId, sporsmalId);
+            if (harBesvartSpm(state, sporsmalId)) {
                 return {
                     ...state,
-                    gjeldendeSpmId: action.data,
-                    flyt: FlytType.BAKOVER,
-                    viserAlternativer: true
+                    gjeldendeSpmId: sporsmalId,
+                    viserAlternativer: true,
+                    paVeiBakover
                 };
             } else {
                 return {
@@ -137,14 +147,14 @@ export default function reducer(
                     data: [
                         ...state.data,
                         {
-                            sporsmalId: action.data,
+                            sporsmalId: sporsmalId,
                             svarAlternativer: [],
                             tips: undefined
                         }
                     ],
-                    gjeldendeSpmId: action.data,
-                    flyt: FlytType.FREMOVER,
-                    viserAlternativer: false
+                    gjeldendeSpmId: sporsmalId,
+                    viserAlternativer: false,
+                    paVeiBakover
                 };
             }
         case ActionType.VIS_ALTERNATIVER:
