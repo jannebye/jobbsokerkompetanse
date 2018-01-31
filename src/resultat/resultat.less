@@ -28,7 +28,6 @@
 			border-radius: 4px;
 			background-color: @orangeBakgrunn;
 			margin-bottom: 1rem;
-			padding-bottom: 1rem;
 
 			.aktivitet {
 				ul {
@@ -52,7 +51,7 @@
 
 	.resultat__infotekst {
 		text-align: center;
-		margin: 1rem auto 2rem;
+		margin: 2rem auto;
 		width: 240px;
 	}
 
@@ -74,11 +73,19 @@
 		background-color: transparent;
 		border: 0;
 		padding: 2rem;
+		text-align: left;
 		&:hover {
 			box-shadow: #ffbd66 0 2px 1px 0;
 		}
 		.typo-normal {
 			margin-bottom: 1rem;
+		}
+		.indikator-wrap {
+			margin-top: 1rem;
+			text-align: center;
+			.ekspanderbartPanel__indikator {
+				width: 25px;
+			}
 		}
 	}
 
@@ -100,13 +107,6 @@
 			overflow: hidden;
 			padding-top: 0;
 			transition: max-height 1s ease-in-out;
-			p {
-				opacity: 0;
-				transition: opacity 1s ease-in-out;
-			}
-		}
-		.ekspanderbartPanel__indikator {
-			width: 25px;
 		}
 	}
 	.ekspanderbartPanel--apen {
@@ -117,9 +117,8 @@
 			margin-top: -1rem;
 			margin-bottom: -1rem;
 			transition: max-height 1s ease-in-out;
-			p {
-				opacity: 1;
-				transition: opacity 1s ease-in-out;
+			.typo-element {
+				display: inline;
 			}
 		}
 		.ekspanderbartPanel__indikator {
@@ -130,8 +129,8 @@
 
 @media (min-width: @screen-sm-min) {
 	.resultatside {
-		.resultat__infotekst {
-			width: auto;
+		.temaliste {
+			margin: 0 7rem;
 		}
 	}
 }

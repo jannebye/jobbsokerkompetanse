@@ -9,6 +9,21 @@
     min-height: 100%;
     padding: 1rem 1.4rem;
 
+    .framdrift {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        background-color: @navLysGra;
+        z-index: 100;
+        .andel {
+            height: 18px;
+            border-top-right-radius: 9px;
+            border-bottom-right-radius: 9px;
+            background-color: @navGra60;
+        }
+    }
+
     &__start {
         display: flex;
         flex-direction: column;
@@ -181,6 +196,11 @@
 
 @media (min-width: @screen-sm-min) {
     .sporsmal {
+        .framdrift .andel {
+            height: 6px;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
         .sporsmal__start {
             display: block;
             height: auto;

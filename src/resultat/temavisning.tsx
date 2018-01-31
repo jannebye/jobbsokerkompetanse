@@ -61,7 +61,7 @@ function TemaVisning({raad}: RaadProps) {
     let htmlInnhold = '';
     if (aktiviteter.length !== 0) {
         aktiviteter.map(a => (
-            htmlInnhold += `<p>${a.innhold}</p>`
+            htmlInnhold += `<p><span class="typo-element">${a.tittel}</span> ${a.innhold}</p>`
         ));
     }
 
@@ -79,9 +79,11 @@ function TemaVisning({raad}: RaadProps) {
                         {tema.tittel}
                     </Innholdstittel>
                     <Normaltekst>{tema.ingress}</Normaltekst>
-                    <span className="ekspanderbartPanel__indikator"/>
+                    <div className="ekspanderbartPanel__innhold" dangerouslySetInnerHTML={{__html: htmlInnhold}}/>
+                    <div className="indikator-wrap">
+                        <span className="ekspanderbartPanel__indikator"/>
+                    </div>
                 </button>
-                <div className="ekspanderbartPanel__innhold" dangerouslySetInnerHTML={{__html: htmlInnhold}}/>
             </section>
         </li>
     );
