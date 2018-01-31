@@ -41,18 +41,20 @@ export const initialState = {
     totalAntallSpm: 19
 };
 
-function harBesvartSpm(state: SvarState, sporsmalId: string) {
+type SporsmalId = string;
+
+function harBesvartSpm(state: SvarState, sporsmalId: SporsmalId) {
     return state.data.find(
         besvarelse => besvarelse.sporsmalId === sporsmalId
     );
 }
 
-function sporsmalIndex(sporsmalId: string) {
+function sporsmalIndex(sporsmalId: SporsmalId) {
     return spm.map(s => s.id).indexOf(sporsmalId);
 }
 
-function erPaVeiBakover(state: SvarState, sporsmalId: string) {
-    return sporsmalIndex(sporsmalId) < sporsmalIndex(state.gjeldendeSpmId);
+export function erPaVeiBakover(gjeldendeSpmId: SporsmalId, sporsmalId: SporsmalId) {
+    return sporsmalIndex(sporsmalId) < sporsmalIndex(gjeldendeSpmId);
 }
 
 //  Reducer
@@ -131,7 +133,7 @@ export default function reducer(
         }
         case ActionType.NESTE_SPORSMAL:
             const sporsmalId = action.data;
-            const paVeiBakover = erPaVeiBakover(state, sporsmalId);
+            const paVeiBakover = erPaVeiBakover(state.gjeldendeSpmId, sporsmalId);
             if (harBesvartSpm(state, sporsmalId)) {
                 return {
                     ...state,
