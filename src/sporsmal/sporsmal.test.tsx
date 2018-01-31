@@ -37,7 +37,7 @@ function getJSXElement(
                     viserAlternativer={false}
                     paVeiBakover={false}
                     besvarteSporsmal={besvarteSpm}
-                    visTips={x => {
+                    visTips={ () => {
                         return;
                     }}
                     totaltAntallSpm={1}
@@ -67,7 +67,7 @@ describe('<Sporsmal />', function() {
 
     beforeEach(() => {
         spy = sinon.spy();
-        svarAlternativer = new Array<SvarAlternativModell>();
+        svarAlternativer = [];
     });
 
     it('skal rendre komponent', () => {

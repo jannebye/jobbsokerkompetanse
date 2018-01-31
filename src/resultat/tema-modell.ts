@@ -1,5 +1,3 @@
-
-
 export interface Aktivitet {
     id: string;
     tittel: string;
@@ -40,4 +38,3 @@ export interface TemaModell {
         understeg: StegEnonic[];
     };
 }
-

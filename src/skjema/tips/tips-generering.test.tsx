@@ -5,7 +5,7 @@ describe('TipsGenerator', () => {
     let svarAlternativer: Array<SvarAlternativModell>;
 
     beforeEach(() => {
-        svarAlternativer = new Array<SvarAlternativModell>();
+        svarAlternativer = [];
     });
 
     it('skal foreslå å søke jobb utenfor hjemsted dersom man kun ser etter jobber i nærområdet ', () => {

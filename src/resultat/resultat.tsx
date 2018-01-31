@@ -71,7 +71,7 @@ export function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
             </Sidetittel>
             <ul className="temaliste">
                 {resultat.map(tema => (
-                    <TemaVisning raad={tema} key={tema.id} />
+                    <TemaVisning utledetRaad={tema} key={tema.id} />
                 ))}
             </ul>
             <div className="resultat__info">

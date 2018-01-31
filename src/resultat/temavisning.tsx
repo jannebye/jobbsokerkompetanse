@@ -1,15 +1,15 @@
 import * as React from 'react';
-import {RaadModell, UtledetRaadModell} from './raad-modell';
-import { veiviserdata } from '../veiviserdata';
+import { RaadModell, UtledetRaadModell } from './raad-modell';
 import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
-import {AppState} from "../ducks/reducer";
+import { AppState } from '../ducks/reducer';
+import { connect } from 'react-redux';
 
 interface StateProps {
     raad: RaadModell;
 }
 
 interface ParentProps {
-    tema: UtledetRaadModell;
+    utledetRaad: UtledetRaadModell;
 }
 
 type TemaVisningProps = StateProps & ParentProps;
@@ -30,9 +30,9 @@ function toggleEkspander(e: React.SyntheticEvent<HTMLButtonElement>) {
     }
 }
 
-function TemaVisning({tema, raad}: TemaVisningProps) {
+function TemaVisning({utledetRaad, raad}: TemaVisningProps) {
     const temaer = raad.steg.map(k => k.temaer).reduce((a, b) => a.concat(b), []);
-    const riktigTema = temaer.find(t => t.refid === tema.refid);
+    const riktigTema = temaer.find(t => t.refid === utledetRaad.refid);
     const aktiviteter = riktigTema ? riktigTema.aktiviteter : [];
 
     let htmlInnhold = '';
@@ -41,7 +41,7 @@ function TemaVisning({tema, raad}: TemaVisningProps) {
     ));
 
     return (
-        <li className="enkelt__tema" key={tema.id}>
+        <li className="enkelt__tema" key={utledetRaad.id}>
             <section className="ekspenderbartPanel ekspanderbartPanel--lukket">
                 <button
                     className="ekspanderbartPanel__hode"
@@ -51,9 +51,9 @@ function TemaVisning({tema, raad}: TemaVisningProps) {
                     }}
                 >
                     <Innholdstittel tag="h1" className="ekspanderbartPanel__heading">
-                        {riktigTema.tittel}
+                        {riktigTema ? riktigTema.tittel : ''}
                     </Innholdstittel>
-                    <Normaltekst>{riktigTema.ingress}</Normaltekst>
+                    <Normaltekst>{riktigTema ? riktigTema.ingress : ''}</Normaltekst>
                     <span className="ekspanderbartPanel__indikator"/>
                 </button>
                 <div className="ekspanderbartPanel__innhold" dangerouslySetInnerHTML={{__html: htmlInnhold}}/>
