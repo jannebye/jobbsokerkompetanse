@@ -112,14 +112,14 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             tilbake: paVeiBakover,
         });
 
-        const spmIndex = this.props.besvarteSporsmal.findIndex(
+        const gjeldendeSpmIndex = this.props.besvarteSporsmal.findIndex(
             besvarelse => besvarelse.sporsmalId === this.props.sporsmal.id
         ) + 1;
 
         /** @type {{search: React.CSSProperties}} */
         const framdriftStyle = {
-            width: (spmIndex / totaltAntallSpm * 100) + '%'
-        };
+            width: (gjeldendeSpmIndex / totaltAntallSpm * 100) + '%'
+    };
 
         return (
             <div
@@ -161,7 +161,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 <FormattedMessage
                                     id="paginering"
                                     values={{
-                                        indeks: spmIndex,
+                                        indeks: gjeldendeSpmIndex,
                                         total: totaltAntallSpm
                                     }}
                                 />
