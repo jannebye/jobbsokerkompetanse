@@ -1,7 +1,7 @@
 import * as sinon from 'sinon';
 
-export function stubFetch(fetchStub: FetchStub): Promise<{}> {
-    return sinon.stub(global, 'fetch').callsFake((url: string) => getPromiseResponse(url, fetchStub));
+export function stubFetch(fetchStub: FetchStub) {
+    sinon.stub((global as any), 'fetch').callsFake((url: string) => getPromiseResponse(url, fetchStub));
 }
 
 function getPromiseResponse(url: string, fetchStub: FetchStub): Promise<Response> {
