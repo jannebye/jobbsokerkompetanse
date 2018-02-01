@@ -33,7 +33,7 @@ export default { 'nb': {
 'ingress-raad': 'Du har nå svart på alle spørsmålene. Ut fra det du har svart, har vi noen tips til deg som vi tror kan komme til nytte når du søker jobber.',
 'intervju-overskrift': 'I intervjuet skal du overbevise om at du passer inn i bedriften og at du er et trygt valg. Hvilke erfaringer har du med jobbintervju?',
 'mellomtekst-spm-cv-04': 'Velg på en skala fra 1 til 5, hvor 1 er "ingen etterspørsel" og 5 er "stor etterspørsel".',
-'overskrift-raad': 'Jobsøkertips til deg',
+'overskrift-raad': 'Jobbsøkertips til deg',
 'paginering-av': 'av',
 'send-inn': 'Send inn',
 'skala': 'Velg på en skala fra 1 til 5 hvor 1 er "utrygg" og 5 er "trygg".',
