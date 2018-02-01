@@ -1,3 +1,4 @@
+/* tslint:disable*/
 import * as qs from 'query-string';
 
 export function respondWith(handler: any) {
