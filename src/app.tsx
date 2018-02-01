@@ -4,6 +4,11 @@ import getStore from './store';
 import Innhold from './innhold';
 import IntlProvider from './Intl-provider';
 import 'babel-polyfill';
+import { setupMock } from './mocks/setup-mock';
+
+if (process.env.REACT_APP_MOCK === 'true') {
+    setupMock();
+}
 
 const store = getStore();
 
