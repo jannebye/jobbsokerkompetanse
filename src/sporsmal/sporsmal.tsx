@@ -179,12 +179,6 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                     tag="h1"
                                 >
                                     <FormattedHTMLMessage id={sporsmal.id}/>
-                                    {' '}
-                                    {sporsmal.id}
-                                    {' '}
-                                    {spmIndex}
-                                    {' '}
-                                    {totaltAntallSpm}
                                 </Sidetittel>
                                 <p
                                     className="skjemaelement__feilmelding"
