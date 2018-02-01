@@ -1,6 +1,7 @@
 import * as sinon from 'sinon';
 
 export function stubFetch(fetchStub: FetchStub) {
+    /* tslint:disable-next-line */
     sinon.stub((global as any), 'fetch').callsFake((url: string) => getPromiseResponse(url, fetchStub));
 }
 
