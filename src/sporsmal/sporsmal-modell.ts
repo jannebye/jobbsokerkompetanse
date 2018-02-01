@@ -1,4 +1,4 @@
-import SvarAlternativModell from './svaralternativ';
+import SvarAlternativModell from '../svar/svaralternativ';
 import { AlternativTyper } from '../utils/konstanter';
 
 interface SporsmalModell {

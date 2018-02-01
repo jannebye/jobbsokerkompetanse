@@ -13,6 +13,7 @@
 @import '../node_modules/nav-frontend-chevron-style/src/mixins';
 
 @import './less/knapper';
+@import './startside/startside';
 @import './skjema/tips/tips';
 @import './sporsmal/sporsmal';
 @import './alternativ/alternativ';
@@ -42,35 +43,6 @@ body {
 .skjemaelement__feilmelding {
     font-style: italic;
     color: @redError;
-}
-
-.startside {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 100%;
-    padding: 0 1.4rem;
-    text-align: center;
-
-    .bakgrunn {
-        position: relative;
-        margin: -1rem -1.4rem;
-        height: 40vh;
-        background-color: #cce1f7;
-        margin-bottom: 3rem;
-    }
-
-    .forside-bilde {
-        position: absolute;
-        top: -40px;
-        left: 0;
-        right: 0;
-        z-index: 1;
-    }
-
-    .knapperad {
-        margin: 2rem 0 1rem;
-    }
 }
 
 @media (min-width: @screen-sm-min) {

@@ -55,7 +55,6 @@ function finnNesteSpm(sporsmalId: string,
 
 interface OwnProps {
     handleSubmit: () => void;
-    startPaNytt: () => void;
 }
 
 interface StateProps {
@@ -90,7 +89,6 @@ class Skjema extends React.Component<SkjemaProps, {}> {
     render() {
         const {
             handleSubmit,
-            startPaNytt,
             gjeldendeSporsmalId,
             byttSpm,
             forelopigBesvarelse,
@@ -118,7 +116,6 @@ class Skjema extends React.Component<SkjemaProps, {}> {
                     )
                 }
                 handleSubmit={() => handleSubmit()}
-                startPaNytt={() => startPaNytt()}
             />
         );
     }

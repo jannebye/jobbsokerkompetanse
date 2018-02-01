@@ -15,12 +15,7 @@ function getJSXElement(besvarteSpm: Array<BesvarelseModell>) {
     return (
         <Provider store={store}>
             <IntlProvider>
-                <Resultat
-                    besvarteSporsmal={besvarteSpm}
-                    startPaNytt={() => {
-                        return;
-                    }}
-                />
+                <Resultat besvarteSporsmal={besvarteSpm} />
             </IntlProvider>
         </Provider>
     );

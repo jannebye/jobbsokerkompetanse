@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { expect } from 'chai';
 import { BesvarelseModell } from '../svar/svar-modell';
-import SvarAlternativModell from '../sporsmal/svaralternativ';
+import SvarAlternativModell from '../svar/svaralternativ';
 import { Resultat } from './resultat';
 import { configure, mount, ReactWrapper } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
@@ -18,9 +18,6 @@ function getJSXElement(besvarteSpm: Array<BesvarelseModell>) {
             <IntlProvider>
                 <Resultat
                     besvarteSporsmal={besvarteSpm}
-                    startPaNytt={() => {
-                        return;
-                    }}
                 />
             </IntlProvider>
         </Provider>

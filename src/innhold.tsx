@@ -7,7 +7,7 @@ import { BesvarelseModell } from './svar/svar-modell';
 import { Sidetype } from './utils/konstanter';
 import { Dispatch } from './types';
 import { endreSide } from './ducks/side-duck';
-import Startside from './skjema/startside';
+import Startside from './startside/startside';
 import { reset } from './svar/svar-duck';
 
 interface DispatchProps {
@@ -27,7 +27,6 @@ class Innhold extends React.Component<Props, {}> {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.startKartlegging = this.startKartlegging.bind(this);
-        this.startPaNytt = this.startPaNytt.bind(this);
     }
 
     handleSubmit() {
@@ -38,22 +37,15 @@ class Innhold extends React.Component<Props, {}> {
         return this.props.byttSide(Sidetype.KARTLEGGING);
     }
 
-    startPaNytt() {
-        return this.props
-            .reset()
-            .then(res => this.props.byttSide(Sidetype.START));
-    }
-
     render() {
         return this.props.side === Sidetype.START ? (
             <Startside startKartlegging={() => this.startKartlegging()} />
         ) : this.props.side === Sidetype.KARTLEGGING ? (
             <Skjema
                 handleSubmit={() => this.handleSubmit()}
-                startPaNytt={() => this.startPaNytt()}
             />
         ) : (
-            <Resultat startPaNytt={() => this.startPaNytt()} />
+            <Resultat />
         );
     }
 }
