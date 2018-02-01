@@ -29,7 +29,7 @@ export default { 'nb': {
 'flervalg': 'Du kan velge flere svaralternativer.',
 'forrige-knapp-start': 'Tilbake til start',
 'forrige-knapp': 'Tilbake',
-'fortsett-knapp': 'Fortsett',
+'fortsett-knapp': 'Neste',
 'ingress-raad': 'Du har nå svart på alle spørsmålene. Ut fra det du har svart, har vi noen tips til deg som vi tror kan komme til nytte når du søker jobber.',
 'intervju-overskrift': 'I intervjuet skal du overbevise om at du passer inn i bedriften og at du er et trygt valg. Hvilke erfaringer har du med jobbintervju?',
 'mellomtekst-spm-cv-04': 'Velg på en skala fra 1 til 5, hvor 1 er "ingen etterspørsel" og 5 er "stor etterspørsel".',
