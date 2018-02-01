@@ -7,7 +7,7 @@ export function stubFetch(fetchStub: FetchStub): Promise<{}> {
 function getPromiseResponse(url: string, fetchStub: FetchStub): Promise<Response> {
     const response = fetchStub.getResponse(url);
     return new Promise(((resolve, reject) => {
-        if(response.status >= 200 && response.status < 300) {
+        if (response.status >= 200 && response.status < 300) {
             resolve(response);
         }
         reject(response);
@@ -34,7 +34,7 @@ export class FetchStub {
         if (responseKey) {
             this.callCount[responseKey] += 1;
         }
-        if(responseKey) {
+        if (responseKey) {
             return this.urlMap[responseKey].response;
         }
         return new Response({});

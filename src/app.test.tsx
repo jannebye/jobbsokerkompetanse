@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './app';
-import {FetchStub, stubFetch} from "./test/fetch-test-utils";
+import { FetchStub, stubFetch } from './test/fetch-test-utils';
 import steg from './tekster/steg-xml';
 
 it('renders without crashing', () => {
