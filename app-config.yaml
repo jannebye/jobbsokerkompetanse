@@ -4,13 +4,16 @@ replicas:
   min: 2
   max: 4
   cpuThresholdPercentage: 50
-port: 80
+port: 8080
 healthcheck:
   liveness:
     path: jobbsokerkompetanse/nais/alive.txt
   readiness:
     path: jobbsokerkompetanse/nais/ready.txt
 fasitResources:
+  used:
+  - alias: appres.cms
+    resourceType: baseUrl
   exposed:
   - alias: jobbsokerkompetanseUrl
     resourceType: restservice
