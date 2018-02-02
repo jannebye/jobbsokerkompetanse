@@ -15,12 +15,7 @@ function getJSXElement(besvarteSpm: Array<BesvarelseModell>) {
     return (
         <Provider store={store}>
             <IntlProvider>
-                <Resultat
-                    besvarteSporsmal={besvarteSpm}
-                    startPaNytt={() => {
-                        return;
-                    }}
-                />
+                <Resultat besvarteSporsmal={besvarteSpm} />
             </IntlProvider>
         </Provider>
     );
@@ -29,7 +24,7 @@ function getJSXElement(besvarteSpm: Array<BesvarelseModell>) {
 // key : se id i alle-temaer.ts/ tema.tsx
 function hentTema(wrapper: ReactWrapper, key: string) {
     return wrapper
-        .find('.enkelt__tema')
+        .find('.enkelt__raad')
         .filterWhere(x => (key.length === 0 ? true : x.key() === key));
 }
 

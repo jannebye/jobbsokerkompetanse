@@ -4,7 +4,7 @@ import SporsmalModell from '../sporsmal/sporsmal-modell';
 import { marker, skjulTips, visTips, visHeleSporsmal } from '../svar/svar-duck';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
-import SvarAlternativModell from '../sporsmal/svaralternativ';
+import SvarAlternativModell from '../svar/svaralternativ';
 import { BesvarelseModell } from '../svar/svar-modell';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import AlternativContainer from '../skjema/alternativ-container';

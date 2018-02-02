@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import spm from '../sporsmal/sporsmal-alle';
 import { BesvarelseModell } from '../svar/svar-modell';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import SvarAlternativModell from './svaralternativ';
+import SvarAlternativModell from '../svar/svaralternativ';
 import { SinonSpy } from 'sinon';
 const sinon = require('sinon');
 
@@ -41,12 +41,8 @@ function getJSXElement(
                         return;
                     }}
                     totaltAntallSpm={1}
-                    handleSubmit={() => {
-                        return;
-                    }}
-                    startPaNytt={() => {
-                        return;
-                    }}
+                    handleSubmit={() => {return; }}
+                    startPaNytt={() => {return; }}
                 />
             </IntlProvider>
         </Provider>
