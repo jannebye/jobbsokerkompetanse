@@ -6,13 +6,12 @@
 .sporsmal {
 	display: flex;
 	flex-direction: column;
-	min-height: 100%;
 	padding: 1rem 1.4rem;
 
 	.framdrift {
-		position: fixed;
+		position: absolute;
 		left: 0;
-		top: 0;
+		top: 46px;
 		right: 0;
 		background-color: @navLysGra;
 		z-index: 100;
@@ -28,30 +27,19 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		height: ~'calc(100vh - 2rem)';
+		height: 72vh;
 	}
 
 	&__ingress {
 		font-size: 1rem;
 	}
 
-	section {
-		flex: 1 0 auto;
-	}
-
 	.sporsmal__knapp-tilbake {
 		display: none;
 	}
 
-	.sporsmal__paginering {
-		display: block;
-		margin: 1rem auto 0;
-		text-align: center;
-		animation: feidInn 1s both;
-	}
-
 	.sporsmal__innhold {
-		margin: 1rem 0 0;
+		margin: 2rem 0 0;
 	}
 
 	.sporsmal__ikon {
@@ -63,10 +51,11 @@
 
 	.sporsmal__knapp {
 		display: none;
-		margin: 3rem auto;
+		margin: 3rem auto 0;
 
 		&.sporsmal__videre {
 			display: block;
+			margin-top: 7rem;
 		}
 	}
 
@@ -85,10 +74,6 @@
 		.sporsmal__knapp-tilbake {
 			display: block;
 			animation: feidInn 1s both;
-		}
-
-		.sporsmal__paginering {
-			display: none;
 		}
 
 		.sporsmal__hode {
@@ -196,10 +181,13 @@
 
 @media (min-width: @screen-sm-min) {
 	.sporsmal {
-		.framdrift .andel {
-			height: 6px;
-			border-top-right-radius: 3px;
-			border-bottom-right-radius: 3px;
+		.framdrift {
+			top: 38px;
+			.andel {
+				height: 6px;
+				border-top-right-radius: 3px;
+				border-bottom-right-radius: 3px;
+			}
 		}
 		.sporsmal__start {
 			display: block;
@@ -209,10 +197,6 @@
 		.sporsmal__knapp-tilbake {
 			display: block;
 			margin-top: 3rem;
-		}
-
-		.sporsmal__paginering {
-			display: none;
 		}
 
 		.sporsmal__innhold {

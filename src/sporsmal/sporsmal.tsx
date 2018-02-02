@@ -147,16 +147,6 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                     <FormattedMessage id="forrige-knapp"/>
                                 )}
                             </KnappBase>
-
-                            <div className="sporsmal__paginering typo-normal">
-                                <FormattedMessage
-                                    id="paginering"
-                                    values={{
-                                        indeks: gjeldendeSpmIndex,
-                                        total: totaltAntallSpm
-                                    }}
-                                />
-                            </div>
                         </div>
                         <div className="sporsmal__innhold">
                             <div className="sporsmal__hode">
