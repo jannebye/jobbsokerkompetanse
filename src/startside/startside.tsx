@@ -9,34 +9,34 @@ interface StartsideProps {
     startKartlegging: () => void;
 }
 
-function Startside({ startKartlegging }: StartsideProps) {
+function Startside({startKartlegging}: StartsideProps) {
     return (
         <div className="startside">
-            <div className="bakgrunn" />
             <FormattedMessage id="startside-image-alt">
                 {(tekst: string) => (
                     <img
                         src={sporsmalImg}
                         alt={tekst}
-                        className="forside-bilde"
+                        className="startside__bilde"
+                        role="img"
                     />
                 )}
             </FormattedMessage>
-            <div>
+            <div className="startside__innhold">
                 <Sidetittel tag="h1" className="blokk-xs">
-                    <FormattedMessage id="startside-tittel" />
+                    <FormattedMessage id="startside-tittel"/>
                 </Sidetittel>
                 <Normaltekst>
-                    <FormattedHTMLMessage id="startside-ingress" />
+                    <FormattedHTMLMessage id="startside-ingress"/>
                 </Normaltekst>
-            </div>
-            <div className="knapperad">
-                <Hovedknapp
-                    onClick={() => startKartlegging()}
-                    className="sporsmal__knapp"
-                >
-                    <FormattedMessage id="start-knapp" />
-                </Hovedknapp>
+                <div className="startside__knapperad">
+                    <Hovedknapp
+                        onClick={() => startKartlegging()}
+                        className="sporsmal__knapp"
+                    >
+                        <FormattedMessage id="start-knapp"/>
+                    </Hovedknapp>
+                </div>
             </div>
         </div>
     );

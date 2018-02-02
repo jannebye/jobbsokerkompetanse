@@ -10,7 +10,7 @@ import {
     VisAlternativerAction,
     EndreAlternativOgAntallAction
 } from '../actions';
-import SvarAlternativModell from '../sporsmal/svaralternativ';
+import SvarAlternativModell from './svaralternativ';
 import spm from '../sporsmal/sporsmal-alle';
 
 const {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import SvarAlternativModell from '../sporsmal/svaralternativ';
+import SvarAlternativModell from '../svar/svaralternativ';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
 import Alternativ from '../alternativ/alternativ';
 

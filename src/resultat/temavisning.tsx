@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RaadModell } from './raad-modell';
 import { veiviserdata } from '../veiviserdata';
-import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
+import { Systemtittel, Ingress } from 'nav-frontend-typografi';
 
 interface AktivitetModell {
     id: string;
@@ -61,12 +61,12 @@ function TemaVisning({raad}: RaadProps) {
     let htmlInnhold = '';
     if (aktiviteter.length !== 0) {
         aktiviteter.map(a => (
-            htmlInnhold += `<p><span class="typo-element">${a.tittel}</span> ${a.innhold}</p>`
+            htmlInnhold += `<h2 class="typo-undertittel">${a.tittel}</h2><p>${a.innhold}</p>`
         ));
     }
 
     return (
-        <li className="enkelt__tema" key={raad.id}>
+        <li className="enkelt__raad" key={raad.id}>
             <section className="ekspenderbartPanel ekspanderbartPanel--lukket">
                 <button
                     className="ekspanderbartPanel__hode"
@@ -75,10 +75,10 @@ function TemaVisning({raad}: RaadProps) {
                         toggleEkspander(event);
                     }}
                 >
-                    <Innholdstittel tag="h1" className="ekspanderbartPanel__heading">
+                    <Systemtittel tag="h1" className="ekspanderbartPanel__heading">
                         {tema.tittel}
-                    </Innholdstittel>
-                    <Normaltekst>{tema.ingress}</Normaltekst>
+                    </Systemtittel>
+                    <Ingress>{tema.ingress}</Ingress>
                     <div className="ekspanderbartPanel__innhold" dangerouslySetInnerHTML={{__html: htmlInnhold}}/>
                     <div className="indikator-wrap">
                         <span className="ekspanderbartPanel__indikator"/>
