@@ -1,29 +1,23 @@
 @orangeBakgrunn: #fff4e8;
 
-.resultatside {
+.resultat {
 	padding: 1rem 1.4rem;
 
-	.resultatliste {
-		list-style: none;
-
-		.sporsmal__besvarelse {
-			border: 1px solid @navBlaLighten20;
-			padding: 1rem;
-			margin-top: 1rem;
-			-webkit-padding-start: 0;
-		}
-	}
-
-	.overskrift__tema {
+	.resultat__overskrift {
 		text-align: center;
 		margin-bottom: 1.5rem;
 	}
 
-	.temaliste {
+	.resultat__ingress {
+		text-align: center;
+		margin: 1.5rem 0 2.5rem;
+	}
+
+	.resultat__raadliste {
 		list-style: none;
 		padding: 0;
 
-		.enkelt__tema {
+		.enkelt__raad {
 			border: 1px solid @orangeFocus;
 			border-radius: 4px;
 			background-color: @orangeBakgrunn;
@@ -46,23 +40,13 @@
 
 	.resultat__info {
 		text-align: center;
-		margin: 1rem 0 2rem;
+		margin: 2rem 2.5rem;
 	}
 
-	.resultat__infotekst {
-		text-align: center;
-		margin: 2rem auto;
-		width: 240px;
-	}
-
-	.innholdscontainer {
-		background-color: white;
-		padding: 1rem;
-	}
-
-	.panel {
+	.resultat__panel {
 		border: 1px solid #b7b1a9;
 		background-color: @navLysGra;
+		margin: 4rem 0 2rem;
 	}
 
 	.ekspanderbartPanel {
@@ -89,6 +73,10 @@
 		}
 	}
 
+	.ekspanderbartPanel__hode:hover, .ekspanderbartPanel__hode--hover {
+		color: @navMorkGra;
+	}
+
 	.ekspanderbartPanel__heading {
 		margin-bottom: 0.5rem;
 	}
@@ -96,26 +84,22 @@
 	.ekspanderbartPanel__innhold {
 		background-color: transparent;
 		border: 0;
-		padding-top: 0;
-		padding-bottom: 0;
-		margin-top: -1rem;
+		padding: 0;
+		margin: 1.5rem 0 -0.5rem;
 	}
 
 	.ekspanderbartPanel--lukket {
 		.ekspanderbartPanel__innhold {
 			max-height: 0;
 			overflow: hidden;
-			padding-top: 0;
 			transition: max-height 1s ease-in-out;
 		}
 	}
 	.ekspanderbartPanel--apen {
 		.ekspanderbartPanel__innhold {
-			max-height: 1000px;
+			max-height: 2000px;
 			overflow: auto;
 			padding-bottom: 1rem;
-			margin-top: -1rem;
-			margin-bottom: -1rem;
 			transition: max-height 1s ease-in-out;
 			.typo-element {
 				display: inline;
@@ -128,9 +112,16 @@
 }
 
 @media (min-width: @screen-sm-min) {
-	.resultatside {
-		.temaliste {
+	.resultat {
+		padding-top: 5rem;
+		.resultat__ingress {
+			margin: 2rem 9rem 4rem;
+		}
+		.resultat__raadliste {
 			margin: 0 7rem;
+		}
+		.resultat__panel {
+			margin: 4rem 7rem 2rem;
 		}
 	}
 }

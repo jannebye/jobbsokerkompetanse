@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { expect } from 'chai';
 import { BesvarelseModell } from '../svar/svar-modell';
-import SvarAlternativModell from '../sporsmal/svaralternativ';
+import SvarAlternativModell from '../svar/svaralternativ';
 import { Resultat } from './resultat';
 import { configure, mount, ReactWrapper } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
@@ -18,9 +18,6 @@ function getJSXElement(besvarteSpm: Array<BesvarelseModell>) {
             <IntlProvider>
                 <Resultat
                     besvarteSporsmal={besvarteSpm}
-                    startPaNytt={() => {
-                        return;
-                    }}
                 />
             </IntlProvider>
         </Provider>
@@ -30,7 +27,7 @@ function getJSXElement(besvarteSpm: Array<BesvarelseModell>) {
 // key : se id i alle-temaer.ts
 function hentTema(wrapper: ReactWrapper, key: string) {
     return wrapper
-        .find('.enkelt__tema')
+        .find('.enkelt__raad')
         .filterWhere(x => (key.length === 0 ? true : x.key() === key));
 }
 
@@ -49,7 +46,7 @@ describe('<Resultat />', function() {
     it('skal vise overskrift', () => {
         const wrapper = mount(getJSXElement(besvarteSpm));
         expect(wrapper.find('#overskrift-raad').text()).to.contain(
-            'Vi har uthevet4 råd til deg'
+            'Jobbsøkertips til deg'
         );
     });
 

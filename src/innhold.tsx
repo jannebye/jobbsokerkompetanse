@@ -7,7 +7,7 @@ import { BesvarelseModell } from './svar/svar-modell';
 import { Sidetype } from './utils/konstanter';
 import { Dispatch } from './types';
 import { endreSide } from './ducks/side-duck';
-import Startside from './skjema/startside';
+import Startside from './startside/startside';
 import { reset } from './svar/svar-duck';
 
 interface DispatchProps {
@@ -53,7 +53,7 @@ class Innhold extends React.Component<Props, {}> {
                 startPaNytt={() => this.startPaNytt()}
             />
         ) : (
-            <Resultat startPaNytt={() => this.startPaNytt()} />
+            <Resultat />
         );
     }
 }
