@@ -1,1 +1,18 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 88"><defs><style>.cls-1,.cls-2{fill:none;}.cls-2{clip-rule:evenodd;}.cls-3{fill:#364250;}.cls-4{fill:#e9e9e3;}.cls-5{fill:#8e9294;}.cls-6{clip-path:url(#clip-path);}.cls-7{clip-path:url(#clip-path-2);}.cls-8{clip-path:url(#clip-path-3);}.cls-9{clip-path:url(#clip-path-4);}.cls-10{clip-path:url(#clip-path-5);}</style><clipPath id="clip-path"><rect class="cls-1" x="-4.09" y="-267.9" width="63.12" height="37.99" rx="4.39" ry="4.39"/></clipPath><clipPath id="clip-path-2"><path class="cls-2" d="M31-263.94H25.16a.79.79,0,0,1-.79-.79v-1a.79.79,0,0,1,.79-.79H31a.79.79,0,0,1,.79.79v1a.79.79,0,0,1-.79.79"/></clipPath><clipPath id="clip-path-3"><rect class="cls-1" x="26.39" y="-275.17" width="3.41" height="10.19"/></clipPath><clipPath id="clip-path-4"><path class="cls-2" d="M487.44-701c-.58,1.86,0,4.7,1.9,4.56,2.13-.16,2.54-3.67,1.7-5.48a1.92,1.92,0,0,0-1.71-1C488.2-703,487.56-701.35,487.44-701Z"/></clipPath><clipPath id="clip-path-5"><path class="cls-2" d="M509.34-701.93c-.83,1.81-.43,5.33,1.7,5.48,1.95.15,2.49-2.7,1.9-4.56-.11-.35-.75-2-1.89-2A1.92,1.92,0,0,0,509.34-701.93Z"/></clipPath></defs><title>scg_filene</title><rect class="cls-3" y="50.55" width="60.12" height="11"/><rect class="cls-4" x="3.09" y="44.67" width="53.94" height="3.7"/><rect class="cls-4" x="3.09" y="40.05" width="53.94" height="3.7"/><rect class="cls-4" x="3.09" y="35.43" width="53.94" height="3.7"/><rect class="cls-5" x="3.09" y="37.85" width="53.94" height="1.28"/><rect class="cls-4" x="0.5" y="30.89" width="53.94" height="3.7"/><rect class="cls-5" x="0.5" y="33.32" width="53.94" height="1.28"/><rect class="cls-4" x="10.06" y="26.45" width="53.94" height="3.7"/><rect class="cls-5" x="10.06" y="28.87" width="53.94" height="1.28"/><rect class="cls-5" x="3.09" y="42.47" width="53.94" height="1.28"/><rect class="cls-5" x="3.09" y="47.27" width="53.94" height="1.28"/></svg>
+<svg role="img" aria-labelled-by="soke-spm-03_title" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 88">
+	<title id="soke-spm-03_title">Papirdokument med OK-hake</title>
+	<defs>
+		<style>
+			.cls-1{fill:#e4e3da;}.cls-2{fill:#babbbb;}.cls-3{fill:#9bd0b0;}.cls-4,.cls-5,.cls-6{fill:none;stroke-linecap:round;}.cls-4{stroke:#3e3832;stroke-linejoin:round;stroke-width:0.98px;}.cls-5,.cls-6{stroke:#8e9294;stroke-miterlimit:10;}.cls-5{stroke-width:2.95px;}.cls-6{stroke-width:3.11px;}
+		</style>
+	</defs>
+	<path class="cls-1" d="M1,19.7V81.11a4,4,0,0,0,4,4H58.05a4,4,0,0,0,4-4V10.6a4,4,0,0,0-4-4H14.8Z"/>
+	<path class="cls-2" d="M14.8,6.64v9.09a4,4,0,0,1-4,4H1Z"/>
+	<circle class="cls-3" cx="52.94" cy="12.99" r="10.06"/>
+	<polyline class="cls-4" points="48.88 12.79 51.59 15.29 58.01 9.67"/>
+	<line class="cls-5" x1="14.41" y1="31.1" x2="31.02" y2="31.1"/>
+	<line class="cls-5" x1="14.41" y1="38.54" x2="48.88" y2="38.54"/>
+	<line class="cls-5" x1="14.41" y1="45.97" x2="48.88" y2="45.97"/>
+	<line class="cls-6" x1="14.41" y1="53.4" x2="48.88" y2="53.4"/>
+	<line class="cls-6" x1="14.41" y1="60.31" x2="48.88" y2="60.31"/>
+	<line class="cls-6" x1="14.27" y1="67.76" x2="48.74" y2="67.76"/>
+</svg>

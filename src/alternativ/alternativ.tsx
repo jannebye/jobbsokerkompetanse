@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import SvarAlternativModell from '../sporsmal/svaralternativ';
+import SvarAlternativModell from '../svar/svaralternativ';
 import { AlternativTyper } from '../utils/konstanter';
 import OverskriftMedHjelpeTekst from '../skjema/overskrift-med-hjelpetekst';
 
