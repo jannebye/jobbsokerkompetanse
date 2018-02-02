@@ -15,12 +15,11 @@ function InnholdsContainer({
     link
 }: InnholdsContainerProps) {
     return (
-        <Panel>
+        <Panel className="resultat__panel">
             <Innholdstittel tag="h1">
                 <FormattedMessage id={overskrift} />
             </Innholdstittel>
-            <FormattedMessage id={innhold} tagName="p" />
-            <FormattedHTMLMessage id={'les-mer-link'} values={{ link }} />
+            <FormattedHTMLMessage id={innhold} values={{ link }} tagName="p" />
         </Panel>
     );
 }

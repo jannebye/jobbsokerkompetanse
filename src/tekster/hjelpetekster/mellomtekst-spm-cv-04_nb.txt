@@ -1,1 +1,1 @@
-Marker hva du tror på en skala fra 1 til 5, hvor 1 er "ingen etterspørsel" og 5 er "stor etterspørsel".
+Velg på en skala fra 1 til 5, hvor 1 er "ingen etterspørsel" og 5 er "stor etterspørsel".
