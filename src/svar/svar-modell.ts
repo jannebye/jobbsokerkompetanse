@@ -1,4 +1,4 @@
-import SvarAlternativModell from '../sporsmal/svaralternativ';
+import SvarAlternativModell from './svaralternativ';
 
 export interface BesvarelseModell {
     sporsmalId: string;

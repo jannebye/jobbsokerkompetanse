@@ -1,1 +1,1 @@
-Ønsker du å lese mer om jobbsøkerprosessen?
+Hvis du ønsker flere jobbsøkertips, se <a href={link}>Bli en bedre jobbsøker steg for steg</a>. Du kan også svare på spørsmålene en gang til.

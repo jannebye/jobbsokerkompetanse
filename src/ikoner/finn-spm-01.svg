@@ -1,1 +1,23 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 88"><defs><style>.cls-1,.cls-10,.cls-2{fill:none;}.cls-2{clip-rule:evenodd;}.cls-3{clip-path:url(#clip-path);}.cls-4{clip-path:url(#clip-path-2);}.cls-5{clip-path:url(#clip-path-3);}.cls-6{fill:#e4e3da;}.cls-7{fill:#d74b55;}.cls-8{fill:#e25d6d;}.cls-9{fill:#fff;stroke-width:2.64px;}.cls-10,.cls-9{stroke:#3e3832;stroke-miterlimit:10;}.cls-10{stroke-width:3.73px;}.cls-11{clip-path:url(#clip-path-4);}.cls-12{clip-path:url(#clip-path-5);}</style><clipPath id="clip-path"><rect class="cls-1" x="310.44" y="28.64" width="63.12" height="37.99" rx="4.39" ry="4.39"/></clipPath><clipPath id="clip-path-2"><path class="cls-2" d="M345.57,32.6h-5.88a.79.79,0,0,1-.79-.79v-1a.79.79,0,0,1,.79-.79h5.88a.79.79,0,0,1,.79.79v1a.79.79,0,0,1-.79.79"/></clipPath><clipPath id="clip-path-3"><rect class="cls-1" x="340.92" y="21.37" width="3.41" height="10.19"/></clipPath><clipPath id="clip-path-4"><path class="cls-2" d="M802-404.46c-.58,1.86,0,4.7,1.9,4.56,2.13-.16,2.54-3.67,1.7-5.48a1.92,1.92,0,0,0-1.71-1C802.73-406.42,802.09-404.81,802-404.46Z"/></clipPath><clipPath id="clip-path-5"><path class="cls-2" d="M823.87-405.39c-.83,1.81-.43,5.33,1.7,5.48,1.95.15,2.49-2.7,1.9-4.56-.11-.35-.75-2-1.89-2A1.92,1.92,0,0,0,823.87-405.39Z"/></clipPath></defs><title>scg_filene</title><ellipse class="cls-6" cx="32" cy="74.75" rx="28.96" ry="10.25"/><path class="cls-7" d="M49.26,10.14a24.41,24.41,0,0,0-34.51,0C6.16,18.73,5.19,34.9,12.48,44.61L32,72.8,51.52,44.61c7.28-9.71,6.32-25.89-2.27-34.47Z"/><path class="cls-8" d="M32,3.23a24.34,24.34,0,0,0-17.26,7.14C6.16,19,5.19,35.13,12.48,44.85L32,73Z"/><circle class="cls-9" cx="32" cy="25.05" r="7.04"/><path class="cls-10" d="M49.26,10.14a24.41,24.41,0,0,0-34.51,0C6.16,18.73,5.19,34.9,12.48,44.61L32,72.8,51.52,44.61c7.28-9.71,6.32-25.89-2.27-34.47Z"/></svg>
+<svg role="img" aria-labelledby="finn-spm-01_title" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 88">
+	<title id="finn-spm-01_title">Bordtennisracket i høyre hånd</title>
+	<defs>
+		<style>
+			.cls-1{fill:#e0f5fb;stroke:#2e3137;stroke-miterlimit:10;}.cls-2{fill:#c42b34;}.cls-3{fill:#2e3137;}.cls-4{fill:#d84b55;}.cls-5{fill:none;}.cls-6{fill:#e4e3da;}.cls-7{fill:#0a5473;}
+		</style>
+	</defs>
+	<circle class="cls-1" cx="23.17" cy="29.49" r="21.35"/>
+	<path class="cls-2" d="M61,81.38a4.8,4.8,0,0,1-6.7-1.15L37.89,57.06a4.8,4.8,0,0,1,7.85-5.54L62.12,74.69A4.8,4.8,0,0,1,61,81.38Z"/>
+	<path class="cls-3" d="M41.85,54.34c-1.44,1-3,1.3-4-.14l-3.42-4.83a3.2,3.2,0,1,1,5.23-3.7l3.42,4.83C44.08,52,43.3,53.32,41.85,54.34Z"/>
+	<path class="cls-4" d="M39.8,57.73,55.26,79.6a1.6,1.6,0,0,0,2.62-1.85L43.08,56.82A4.59,4.59,0,0,1,39.8,57.73Z"/>
+	<path class="cls-5"
+		  d="M17.66,31.88a1,1,0,0,1,.94-.95h25a19.67,19.67,0,0,0-.08-5.14H27.81a.95.95,0,0,1,0-1.89H43.13a19.54,19.54,0,0,0-3-6.61,19.82,19.82,0,1,0,0,22.78H32a.95.95,0,1,1,0-1.89h8.6a1,1,0,0,1,.59.22,19.73,19.73,0,0,0,2.1-5.58H18.6A.94.94,0,0,1,17.66,31.88Zm4.71,6.3h6.68a.95.95,0,0,1,0,1.89H22.37a.95.95,0,1,1,0-1.89Z"/>
+	<path class="cls-6" d="M48.67,25.79H61.5a.86.86,0,0,0,0-1.72H48.67a.86.86,0,0,0,0,1.72Z"/>
+	<path class="cls-7" d="M26.87,24.84a1,1,0,0,0,.94.95H43.5c-.09-.64-.22-1.27-.37-1.89H27.81A.94.94,0,0,0,26.87,24.84Z"/>
+	<path class="cls-6" d="M61.73,30.85h-13a.95.95,0,1,0,0,1.89h13a.95.95,0,0,0,0-1.89Z"/>
+	<path class="cls-6" d="M53.37,38.18H46.51a.95.95,0,0,0,0,1.89h6.86a.95.95,0,0,0,0-1.89Z"/>
+	<path class="cls-7" d="M18.6,30.93a.95.95,0,0,0,0,1.89H43.27a16.92,16.92,0,0,0,.31-1.89Z"/>
+	<path class="cls-7" d="M22.37,40.07h6.68a.95.95,0,0,0,0-1.89H22.37a.95.95,0,1,0,0,1.89Z"/>
+	<path class="cls-7" d="M32,38.18a.95.95,0,1,0,0,1.89h8.14a19.44,19.44,0,0,0,1.05-1.67,1,1,0,0,0-.59-.22Z"/>
+	<path class="cls-3"
+		  d="M42.73,15.44a23,23,0,1,0-5.5,32A23,23,0,0,0,42.73,15.44Zm-1.56,23a19.44,19.44,0,0,1-1.05,1.67,19.81,19.81,0,1,1,3-16.17c.15.62.28,1.25.37,1.89a19.67,19.67,0,0,1,.08,5.14,16.92,16.92,0,0,1-.31,1.89A19.73,19.73,0,0,1,41.17,38.4Z"/>
+</svg>
