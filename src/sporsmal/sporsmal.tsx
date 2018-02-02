@@ -27,6 +27,7 @@ interface DispatchProps {
 interface OwnProps {
     nesteSpm: (id: string) => void;
     forrigeSpm: () => void;
+    startPaNytt: () => void;
     sporsmal: SporsmalModell;
     spmRef: any; // tslint:disable-line:no-any
     viserAlternativer: boolean;
@@ -92,6 +93,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             paVeiBakover,
             totaltAntallSpm,
             handleSubmit,
+            startPaNytt
         } = this.props;
 
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
@@ -102,7 +104,8 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         )!.svarAlternativer;
         const sporsmalImg = require('../ikoner/' + sporsmal.id + '.svg');
 
-        const erForsteSporsmal = () => forrigeSpm();
+        const erForsteSporsmal = () =>
+            this.props.sporsmal.erForsteSpm ? startPaNytt() : forrigeSpm();
 
         const klassenavn = cls('sporsmal', {
             vis_alternativer: viserAlternativer,

@@ -27,6 +27,7 @@ class Innhold extends React.Component<Props, {}> {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.startKartlegging = this.startKartlegging.bind(this);
+        this.startPaNytt = this.startPaNytt.bind(this);
     }
 
     handleSubmit() {
@@ -37,12 +38,19 @@ class Innhold extends React.Component<Props, {}> {
         return this.props.byttSide(Sidetype.KARTLEGGING);
     }
 
+    startPaNytt() {
+        return this.props
+            .reset()
+            .then(res => this.props.byttSide(Sidetype.START));
+    }
+
     render() {
         return this.props.side === Sidetype.START ? (
             <Startside startKartlegging={() => this.startKartlegging()} />
         ) : this.props.side === Sidetype.KARTLEGGING ? (
             <Skjema
                 handleSubmit={() => this.handleSubmit()}
+                startPaNytt={() => this.startPaNytt()}
             />
         ) : (
             <Resultat />
