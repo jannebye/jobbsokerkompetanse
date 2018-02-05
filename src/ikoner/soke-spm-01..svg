@@ -1,0 +1,21 @@
+<svg role="img" aria-labelled-by="soke-spm-01_title" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 88">
+	<title id="soke-spm-01_title">Skjema på mobiltelefon</title>
+	<defs>
+		<style>
+			.cls-1{fill:#627382;}.cls-2{fill:#fff;}.cls-3{fill:#e7e9e9;}.cls-4{fill:#a59d96;}.cls-5{fill:none;stroke:#2f3237;stroke-miterlimit:10;stroke-width:1.42px;}
+		</style>
+	</defs>
+	<rect class="cls-1" x="7.87" y="1.81" width="47.98" height="83.77" rx="4.43" ry="4.43"/>
+	<rect class="cls-2" x="11.56" y="11.31" width="40.96" height="62"/>
+	<rect class="cls-3" x="11.56" y="11.4" width="40.96" height="4.43"/>
+	<rect class="cls-4" x="25.73" y="30.61" width="19.62" height="2.62"/>
+	<rect class="cls-4" x="25.73" y="39.69" width="19.62" height="2.62"/>
+	<rect class="cls-4" x="25.73" y="47.72" width="19.62" height="2.62"/>
+	<rect class="cls-4" x="25.73" y="55.75" width="19.62" height="2.62"/>
+	<path class="cls-4" d="M22.09,30.61v2.61H19.33V30.61h2.76m1.06-1.06H18.27v4.73h4.88V29.55Z"/>
+	<path class="cls-4" d="M22.09,39.69v2.62H19.33V39.69h2.76m1.06-1H18.27v4.72h4.88V38.64Z"/>
+	<path class="cls-4" d="M22.09,47.72v2.62H19.33V47.72h2.76m1.06-1H18.27v4.72h4.88V46.67Z"/>
+	<path class="cls-4" d="M22.09,55.75v2.62H19.33V55.75h2.76m1.06-1H18.27v4.72h4.88V54.7Z"/>
+	<polyline class="cls-5" points="18.35 29.3 20.94 32.26 24.58 27.56"/>
+	<polyline class="cls-5" points="18.35 38.53 20.94 41.49 24.58 36.79"/>
+</svg>
