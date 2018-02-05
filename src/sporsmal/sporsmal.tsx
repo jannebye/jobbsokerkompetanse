@@ -116,10 +116,11 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             besvarelse => besvarelse.sporsmalId === this.props.sporsmal.id
         ) + 1;
 
+        const framdriftValue = Math.round(gjeldendeSpmIndex / totaltAntallSpm * 100 * 100) / 100;
         /** @type {{search: React.CSSProperties}} */
         const framdriftStyle = {
-            width: (gjeldendeSpmIndex / totaltAntallSpm * 100) + '%'
-    };
+            width: framdriftValue + '%'
+        };
 
         return (
             <div
@@ -128,7 +129,9 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                 className={klassenavn}
                 tabIndex={0}
             >
-                <div className="framdrift">
+                <div className="framdrift" role="progressbar"
+                     aria-valuenow={framdriftValue} aria-valuemin="0" aria-valuemax="100"
+                     tabIndex={0}>
                     <div className="andel" style={framdriftStyle}/>
                 </div>
                 <section>
