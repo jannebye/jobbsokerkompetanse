@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RaadModell, UtledetRaadModell } from './raad-modell';
-import { Normaltekst, Innholdstittel } from 'nav-frontend-typografi';
+import { Innholdstittel } from 'nav-frontend-typografi';
 import { AppState } from '../ducks/reducer';
 import { connect } from 'react-redux';
 
@@ -40,6 +40,8 @@ function TemaVisning({utledetRaad, raad}: TemaVisningProps) {
         htmlInnhold += `<p>${a.innhold}</p>`
     ));
 
+    let htmlIngress = riktigTema ? riktigTema.ingress : '';
+
     return (
         <li className="enkelt__tema" key={utledetRaad.id}>
             <section className="ekspenderbartPanel ekspanderbartPanel--lukket">
@@ -53,7 +55,7 @@ function TemaVisning({utledetRaad, raad}: TemaVisningProps) {
                     <Innholdstittel tag="h1" className="ekspanderbartPanel__heading">
                         {riktigTema ? riktigTema.tittel : ''}
                     </Innholdstittel>
-                    <Normaltekst>{riktigTema ? riktigTema.ingress : ''}</Normaltekst>
+                    <div className="ekspanderbartPanel__ingress"dangerouslySetInnerHTML={{__html: htmlIngress}}/>
                     <div className="ekspanderbartPanel__innhold" dangerouslySetInnerHTML={{__html: htmlInnhold}}/>
                     <div className="indikator-wrap">
                         <span className="ekspanderbartPanel__indikator"/>
