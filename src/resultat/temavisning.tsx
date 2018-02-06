@@ -79,11 +79,11 @@ function TemaVisning({raad}: RaadProps) {
                         {tema.tittel}
                     </Systemtittel>
                     <Ingress>{tema.ingress}</Ingress>
-                    <div className="ekspanderbartPanel__innhold" dangerouslySetInnerHTML={{__html: htmlInnhold}}/>
-                    <div className="indikator-wrap">
-                        <span className="ekspanderbartPanel__indikator"/>
-                    </div>
                 </button>
+                <div className="ekspanderbartPanel__innhold" dangerouslySetInnerHTML={{__html: htmlInnhold}}/>
+                <div className="indikator-wrap">
+                    <span className="ekspanderbartPanel__indikator"/>
+                </div>
             </section>
         </li>
     );
