@@ -16,98 +16,24 @@
 	.resultat__raadliste {
 		list-style: none;
 		padding: 0;
-
-		.enkelt__raad {
-			border: 1px solid @orangeFocus;
-			border-radius: 4px;
-			background-color: @orangeBakgrunn;
-			margin-bottom: 1rem;
-
-			.aktivitet {
-				ul {
-					margin-top: 1rem;
-					margin-bottom: 1rem;
-					font-weight: bold;
-					padding-bottom: 0.5rem;
-				}
-				ul li {
-					font-weight: normal;
-					padding-bottom: 0;
-				}
+		.aktivitet {
+			ul {
+				margin-top: 1rem;
+				margin-bottom: 1rem;
+				font-weight: bold;
+				padding-bottom: 0.5rem;
+			}
+			ul li {
+				font-weight: normal;
+				padding-bottom: 0;
 			}
 		}
-	}
-
-	.resultat__info {
-		text-align: center;
-		margin: 2rem 2.5rem;
 	}
 
 	.resultat__panel {
 		border: 1px solid #b7b1a9;
 		background-color: @navLysGra;
 		margin: 4rem 0 2rem;
-	}
-
-	.ekspanderbartPanel {
-		margin-top: 1rem;
-	}
-
-	.ekspanderbartPanel__hode {
-		background-color: transparent;
-		border: 0;
-		padding: 2rem;
-		text-align: left;
-		&:hover {
-			box-shadow: #ffbd66 0 2px 1px 0;
-		}
-		.typo-normal {
-			margin-bottom: 1rem;
-		}
-		.indikator-wrap {
-			margin-top: 1rem;
-			text-align: center;
-			.ekspanderbartPanel__indikator {
-				width: 25px;
-			}
-		}
-	}
-
-	.ekspanderbartPanel__hode:hover, .ekspanderbartPanel__hode--hover {
-		color: @navMorkGra;
-	}
-
-	.ekspanderbartPanel__heading {
-		margin-bottom: 0.5rem;
-	}
-
-	.ekspanderbartPanel__innhold {
-		background-color: transparent;
-		border: 0;
-		padding: 0;
-		margin: 1.5rem 0 -0.5rem;
-	}
-
-	.ekspanderbartPanel--lukket {
-		.ekspanderbartPanel__innhold {
-			max-height: 0;
-			overflow: hidden;
-			transition: max-height 1s ease-in-out;
-		}
-	}
-	.ekspanderbartPanel--apen {
-		.ekspanderbartPanel__innhold {
-			max-height: 2000px;
-			overflow: auto;
-			padding-bottom: 1rem;
-			transition: max-height 1s ease-in-out;
-			.typo-element {
-				display: inline;
-			}
-		}
-		.ekspanderbartPanel__indikator {
-			width: 25px;
-		}
 	}
 }
 
