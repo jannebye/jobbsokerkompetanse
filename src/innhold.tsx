@@ -31,7 +31,7 @@ class Innhold extends React.Component<Props, {}> {
     }
 
     handleSubmit() {
-        history.pushState(Sidetype.RESULTAT, '', '/' + Sidetype.RESULTAT);
+        history.pushState(Sidetype.RESULTAT, '', '/jobbsokerkompetanse/' + Sidetype.RESULTAT);
         return this.props.byttSide(Sidetype.RESULTAT);
     }
 

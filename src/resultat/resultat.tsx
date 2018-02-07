@@ -60,27 +60,29 @@ type Props = StateProps;
 export function Resultat({besvarteSporsmal}: Props) {
     const resultat = genererTema(besvarteSporsmal);
     return (
-        <div className="resultat">
-            <Sidetittel className="resultat__overskrift" tag="h1">
-                <FormattedHTMLMessage id="overskrift-raad"/>
-            </Sidetittel>
-            <Ingress className="resultat__ingress">
-                <FormattedHTMLMessage id="ingress-raad"/>
-            </Ingress>
-            <ul className="resultat__raadliste">
-                {resultat.map(raad => (
-                    <TemaVisning raad={raad} key={raad.id}/>
-                ))}
-            </ul>
-            <FormattedMessage id="veiviser-link">
-                {(tekst: string) => (
-                    <InnholdsContainer
-                        overskrift="veiviser-overskrift"
-                        innhold="veiviser-innhold"
-                        link={tekst}
-                    />
-                )}
-            </FormattedMessage>
+        <div className="limit">
+            <div className="resultat">
+                <Sidetittel className="resultat__overskrift" tag="h1">
+                    <FormattedHTMLMessage id="overskrift-raad"/>
+                </Sidetittel>
+                <Ingress className="resultat__ingress">
+                    <FormattedHTMLMessage id="ingress-raad"/>
+                </Ingress>
+                <ul className="resultat__raadliste">
+                    {resultat.map(raad => (
+                        <TemaVisning raad={raad} key={raad.id}/>
+                    ))}
+                </ul>
+                <FormattedMessage id="veiviser-link">
+                    {(tekst: string) => (
+                        <InnholdsContainer
+                            overskrift="veiviser-overskrift"
+                            innhold="veiviser-innhold"
+                            link={tekst}
+                        />
+                    )}
+                </FormattedMessage>
+            </div>
         </div>
     );
 }

@@ -10,6 +10,16 @@
 		padding: 2rem;
 		text-align: left;
 	}
+
+	&.ekspanderbartPanel--lukket {
+		.ekspanderbartPanel__innhold {
+			max-height: 0;
+			overflow: hidden;
+			transition: max-height 1s ease-in-out;
+			margin: 0;
+		}
+	}
+
 }
 
 	/*
@@ -45,14 +55,6 @@
 	margin: 1.5rem 0 -0.5rem;
 }
 
-.ekspanderbartPanel--lukket {
-	.ekspanderbartPanel__innhold {
-		max-height: 0;
-		overflow: hidden;
-		transition: max-height 1s ease-in-out;
-		margin: 0;
-	}
-}
 .ekspanderbartPanel--apen {
 	.ekspanderbartPanel__innhold {
 		max-height: 2000px;

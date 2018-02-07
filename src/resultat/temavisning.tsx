@@ -22,16 +22,16 @@ interface RaadProps {
 }
 
 function toggleEkspander(e: React.SyntheticEvent<HTMLButtonElement>) {
-    const knapp = (e.target as HTMLElement).closest('.ekspanderbartPanel__hode');
-    const panel = (e.target as HTMLElement).closest('.ekspenderbartPanel');
+    const knapp = (e.target as HTMLElement).closest('.artikkelpanel__hode');
+    const panel = (e.target as HTMLElement).closest('.artikkelpanel');
     if (panel && knapp) {
-        if (panel.classList.contains('ekspanderbartPanel--lukket')) {
-            panel.classList.remove('ekspanderbartPanel--lukket');
-            panel.classList.add('ekspanderbartPanel--apen');
+        if (panel.classList.contains('artikkelpanel--lukket')) {
+            panel.classList.remove('artikkelpanel--lukket');
+            panel.classList.add('artikkelpanel--apen');
             knapp.setAttribute('aria-expanded', 'true');
         } else {
-            panel.classList.remove('ekspanderbartPanel--apen');
-            panel.classList.add('ekspanderbartPanel--lukket');
+            panel.classList.remove('artikkelpanel--apen');
+            panel.classList.add('artikkelpanel--lukket');
             knapp.setAttribute('aria-expanded', 'false');
         }
     }
@@ -67,22 +67,22 @@ function TemaVisning({raad}: RaadProps) {
 
     return (
         <li className="enkelt__raad" key={raad.id}>
-            <section className="ekspenderbartPanel ekspanderbartPanel--lukket">
+            <section className="artikkelpanel artikkelpanel--lukket">
                 <button
-                    className="ekspanderbartPanel__hode"
+                    className="artikkelpanel__hode"
                     aria-expanded="false"
                     onClick={(event: React.SyntheticEvent<HTMLButtonElement>) => {
                         toggleEkspander(event);
                     }}
                 >
-                    <Systemtittel tag="h1" className="ekspanderbartPanel__heading">
+                    <Systemtittel tag="h1" className="artikkelpanel__heading">
                         {tema.tittel}
                     </Systemtittel>
                     <Ingress>{tema.ingress}</Ingress>
                 </button>
-                <div className="ekspanderbartPanel__innhold" dangerouslySetInnerHTML={{__html: htmlInnhold}}/>
+                <div className="artikkelpanel__innhold" dangerouslySetInnerHTML={{__html: htmlInnhold}}/>
                 <div className="indikator-wrap">
-                    <span className="ekspanderbartPanel__indikator"/>
+                    <span className="artikkelpanel__indikator"/>
                 </div>
             </section>
         </li>
