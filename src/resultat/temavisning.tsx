@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RaadModell, UtledetRaadModell } from './raad-modell';
-import { Innholdstittel } from 'nav-frontend-typografi';
+import { Systemtittel, Ingress } from 'nav-frontend-typografi';
 import { AppState } from '../ducks/reducer';
 import { connect } from 'react-redux';
 
@@ -15,16 +15,16 @@ interface ParentProps {
 type TemaVisningProps = StateProps & ParentProps;
 
 function toggleEkspander(e: React.SyntheticEvent<HTMLButtonElement>) {
-    const knapp = (e.target as HTMLElement).closest('.ekspanderbartPanel__hode');
-    const panel = (e.target as HTMLElement).closest('.ekspenderbartPanel');
+    const knapp = (e.target as HTMLElement).closest('.artikkelpanel__hode');
+    const panel = (e.target as HTMLElement).closest('.artikkelpanel');
     if (panel && knapp) {
-        if (panel.classList.contains('ekspanderbartPanel--lukket')) {
-            panel.classList.remove('ekspanderbartPanel--lukket');
-            panel.classList.add('ekspanderbartPanel--apen');
+        if (panel.classList.contains('artikkelpanel--lukket')) {
+            panel.classList.remove('artikkelpanel--lukket');
+            panel.classList.add('artikkelpanel--apen');
             knapp.setAttribute('aria-expanded', 'true');
         } else {
-            panel.classList.remove('ekspanderbartPanel--apen');
-            panel.classList.add('ekspanderbartPanel--lukket');
+            panel.classList.remove('artikkelpanel--apen');
+            panel.classList.add('artikkelpanel--lukket');
             knapp.setAttribute('aria-expanded', 'false');
         }
     }
@@ -36,31 +36,31 @@ function TemaVisning({utledetRaad, raad}: TemaVisningProps) {
     const aktiviteter = riktigTema ? riktigTema.aktiviteter : [];
 
     let htmlInnhold = '';
-    aktiviteter.map(a => (
-        htmlInnhold += `<p>${a.innhold}</p>`
-    ));
-
-    let htmlIngress = riktigTema ? riktigTema.ingress : '';
+    if (aktiviteter.length !== 0) {
+        aktiviteter.map(a => (
+            htmlInnhold += `<h2 class="typo-undertittel">${a.tittel}</h2><p>${a.innhold}</p>`
+        ));
+    }
 
     return (
         <li className="enkelt__tema" key={utledetRaad.id}>
             <section className="ekspenderbartPanel ekspanderbartPanel--lukket">
                 <button
-                    className="ekspanderbartPanel__hode"
+                    className="artikkelpanel__hode"
                     aria-expanded="false"
                     onClick={(event: React.SyntheticEvent<HTMLButtonElement>) => {
                         toggleEkspander(event);
                     }}
                 >
-                    <Innholdstittel tag="h1" className="ekspanderbartPanel__heading">
+                    <Systemtittel tag="h1" className="artikkelpanel__heading">
                         {riktigTema ? riktigTema.tittel : ''}
-                    </Innholdstittel>
-                    <div className="ekspanderbartPanel__ingress"dangerouslySetInnerHTML={{__html: htmlIngress}}/>
-                    <div className="ekspanderbartPanel__innhold" dangerouslySetInnerHTML={{__html: htmlInnhold}}/>
-                    <div className="indikator-wrap">
-                        <span className="ekspanderbartPanel__indikator"/>
-                    </div>
+                    </Systemtittel>
+                    <Ingress>{riktigTema ? riktigTema.ingress : ''}</Ingress>
                 </button>
+                <div className="artikkelpanel__innhold" dangerouslySetInnerHTML={{__html: htmlInnhold}}/>
+                <div className="indikator-wrap">
+                    <span className="artikkelpanel__indikator"/>
+                </div>
             </section>
         </li>
     );

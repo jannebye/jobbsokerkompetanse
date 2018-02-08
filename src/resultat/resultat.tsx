@@ -2,14 +2,13 @@ import * as React from 'react';
 import { AppState } from '../ducks/reducer';
 import { BesvarelseModell } from '../svar/svar-modell';
 import { connect } from 'react-redux';
-import { FormattedHTMLMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { fasteTemaer, leggesTilTemaer } from './tema';
 import temaLogikk from './tema-mapping';
 import { UtledetRaadModell } from './raad-modell';
 import TemaVisning from './temavisning';
 import InnholdsContainer from './innholdscontainer';
-import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
-import KnappBase from 'nav-frontend-knapper';
+import { Ingress, Sidetittel } from 'nav-frontend-typografi';
 
 function temaSkalBehandles(tema: UtledetRaadModell, alternativId: string) {
     if (temaLogikk[tema.ref]) {
@@ -56,41 +55,34 @@ interface StateProps {
     besvarteSporsmal: BesvarelseModell[];
 }
 
-interface ResultatProps {
-    startPaNytt: () => void;
-}
+type Props = StateProps;
 
-type Props = StateProps & ResultatProps;
-
-export function Resultat({ besvarteSporsmal, startPaNytt }: Props) {
+export function Resultat({besvarteSporsmal}: Props) {
     const resultat = genererTema(besvarteSporsmal);
     return (
-        <div className="resultatside">
-            <Sidetittel className="overskrift__tema" tag="h1">
-                <FormattedHTMLMessage id="overskrift-raad" />
-            </Sidetittel>
-            <ul className="temaliste">
-                {resultat.map(tema => (
-                    <TemaVisning utledetRaad={tema} key={tema.id} />
-                ))}
-            </ul>
-            <div className="resultat__info">
-                <Normaltekst className="resultat__infotekst" tag="p">
-                    <FormattedHTMLMessage id="tekst-er-lagret" />
-                </Normaltekst>
-                <KnappBase
-                    type={'standard'}
-                    className="knapp"
-                    onClick={() => startPaNytt()}
-                >
-                    Start på nytt
-                </KnappBase>
+        <div className="limit">
+            <div className="resultat">
+                <Sidetittel className="resultat__overskrift" tag="h1">
+                    <FormattedHTMLMessage id="overskrift-raad"/>
+                </Sidetittel>
+                <Ingress className="resultat__ingress">
+                    <FormattedHTMLMessage id="ingress-raad"/>
+                </Ingress>
+                <ul className="resultat__raadliste">
+                    {resultat.map(raad => (
+                        <TemaVisning utledetRaad={raad} key={raad.id}/>
+                    ))}
+                </ul>
+                <FormattedMessage id="veiviser-link">
+                    {(tekst: string) => (
+                        <InnholdsContainer
+                            overskrift="veiviser-overskrift"
+                            innhold="veiviser-innhold"
+                            link={tekst}
+                        />
+                    )}
+                </FormattedMessage>
             </div>
-            <InnholdsContainer
-                overskrift="veiviser-overskrift"
-                innhold="veiviser-innhold"
-                link="veiviser-link"
-            />
         </div>
     );
 }

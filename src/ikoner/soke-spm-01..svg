@@ -2,8 +2,7 @@
 	<title id="soke-spm-01_title">Skjema på mobiltelefon</title>
 	<defs>
 		<style>
-			.cls-1{fill:#627382;}.cls-2{fi
-			ll:#fff;}.cls-3{fill:#e7e9e9;}.cls-4{fill:#a59d96;}.cls-5{fill:none;stroke:#2f3237;stroke-miterlimit:10;stroke-width:1.42px;}
+			.cls-1{fill:#627382;}.cls-2{fill:#fff;}.cls-3{fill:#e7e9e9;}.cls-4{fill:#a59d96;}.cls-5{fill:none;stroke:#2f3237;stroke-miterlimit:10;stroke-width:1.42px;}
 		</style>
 	</defs>
 	<rect class="cls-1" x="7.87" y="1.81" width="47.98" height="83.77" rx="4.43" ry="4.43"/>

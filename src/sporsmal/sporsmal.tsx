@@ -4,7 +4,7 @@ import SporsmalModell from '../sporsmal/sporsmal-modell';
 import { marker, skjulTips, visTips, visHeleSporsmal } from '../svar/svar-duck';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
-import SvarAlternativModell from '../sporsmal/svaralternativ';
+import SvarAlternativModell from '../svar/svaralternativ';
 import { BesvarelseModell } from '../svar/svar-modell';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import AlternativContainer from '../skjema/alternativ-container';
@@ -116,143 +116,145 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             besvarelse => besvarelse.sporsmalId === this.props.sporsmal.id
         ) + 1;
 
+        const framdriftValue = Math.round(gjeldendeSpmIndex / totaltAntallSpm * 100 * 100) / 100;
         /** @type {{search: React.CSSProperties}} */
         const framdriftStyle = {
-            width: (gjeldendeSpmIndex / totaltAntallSpm * 100) + '%'
-    };
+            width: framdriftValue + '%'
+        };
 
         return (
-            <div
-                ref={spmRef}
-                id={'sp-' + sporsmal.id}
-                className={klassenavn}
-                tabIndex={0}
-            >
-                <div className="framdrift">
+            <React.Fragment>
+                <div
+                    className="framdrift"
+                    role="progressbar"
+                    aria-valuenow={framdriftValue}
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    tabIndex={0}
+                >
                     <div className="andel" style={framdriftStyle}/>
                 </div>
-                <section>
-                    <div className={'sporsmal__start'}>
-                        <div className="sporsmal__header">
-                            <KnappBase
-                                type={'standard'}
-                                className="sporsmal__knapp-tilbake"
-                                onClick={() => {
-                                    erForsteSporsmal();
-                                }}
-                            >
-                                {sporsmal.erForsteSpm ? (
-                                    <FormattedMessage id="forrige-knapp-start"/>
-                                ) : (
-                                    <FormattedMessage id="forrige-knapp"/>
-                                )}
-                            </KnappBase>
+                <div className="limit">
+                    <div
+                        ref={spmRef}
+                        id={'sp-' + sporsmal.id}
+                        className={klassenavn}
+                        tabIndex={0}
+                    >
+                        <section>
+                            <div className={'sporsmal__start'}>
+                                <div className="sporsmal__header">
+                                    <KnappBase
+                                        type={'standard'}
+                                        className="sporsmal__knapp-tilbake"
+                                        onClick={() => {
+                                            erForsteSporsmal();
+                                        }}
+                                    >
+                                        {sporsmal.erForsteSpm ? (
+                                            <FormattedMessage id="forrige-knapp-start"/>
+                                        ) : (
+                                            <FormattedMessage id="forrige-knapp"/>
+                                        )}
+                                    </KnappBase>
+                                </div>
+                                <div className="sporsmal__innhold">
+                                    <div className="sporsmal__hode">
+                                        <FormattedMessage id={sporsmal.id + ''}>
+                                            {(tekst: string) => (
+                                                <SVG
+                                                    src={sporsmalImg}
+                                                    className="sporsmal__ikon"
+                                                    role="img"
+                                                    aria-label={tekst}
+                                                >
+                                                    <img
+                                                        src={sporsmalImg}
+                                                        className="sporsmal__ikon"
+                                                        alt={tekst}
+                                                    />
+                                                </SVG>
+                                            )}
+                                        </FormattedMessage>
 
-                            <div className="sporsmal__paginering typo-normal">
-                                <FormattedMessage
-                                    id="paginering"
-                                    values={{
-                                        indeks: gjeldendeSpmIndex,
-                                        total: totaltAntallSpm
-                                    }}
-                                />
-                            </div>
-                        </div>
-                        <div className="sporsmal__innhold">
-                            <div className="sporsmal__hode">
-                                <FormattedMessage id={sporsmal.id + ''}>
-                                    {(tekst: string) => (
-                                        <SVG
-                                            src={sporsmalImg}
-                                            className="sporsmal__ikon"
-                                            role="img"
-                                            aria-label={tekst}
+                                        <Sidetittel
+                                            className="sporsmal__overskrift blokk-xs"
+                                            tag="h1"
                                         >
-                                            <img
-                                                src={sporsmalImg}
-                                                className="sporsmal__ikon"
-                                                alt={tekst}
-                                            />
-                                        </SVG>
-                                    )}
-                                </FormattedMessage>
-
-                                <Sidetittel
-                                    className="sporsmal__overskrift blokk-xs"
-                                    tag="h1"
+                                            <FormattedHTMLMessage id={sporsmal.id}/>
+                                        </Sidetittel>
+                                        <p
+                                            className="skjemaelement__feilmelding"
+                                            role="alert"
+                                            aria-live="assertive"
+                                        >
+                                            {this.state.feil && (
+                                                <FormattedMessage id="feilmelding-mangler-svar"/>
+                                            )}
+                                        </p>
+                                    </div>
+                                    <Undertekst className="sporsmal__ingress" tag="p">
+                                        <FormattedMessage
+                                            id={
+                                                sporsmal.egenUndertekst || sporsmal.type
+                                            }
+                                        />
+                                    </Undertekst>
+                                </div>
+                                <KnappBase
+                                    type={'standard'}
+                                    className="sporsmal__knapp sporsmal__videre"
+                                    onClick={() => {
+                                        visAlternativer();
+                                    }}
                                 >
-                                    <FormattedHTMLMessage id={sporsmal.id}/>
-                                </Sidetittel>
-                                <p
-                                    className="skjemaelement__feilmelding"
-                                    role="alert"
-                                    aria-live="assertive"
-                                >
-                                    {this.state.feil && (
-                                        <FormattedMessage id="feilmelding-mangler-svar"/>
-                                    )}
-                                </p>
+                                    <FormattedMessage id="fortsett-knapp"/>
+                                </KnappBase>
                             </div>
-                            <Undertekst className="sporsmal__ingress" tag="p">
-                                <FormattedMessage
-                                    id={
-                                        sporsmal.egenUndertekst || sporsmal.type
-                                    }
-                                />
-                            </Undertekst>
-                        </div>
-                        <KnappBase
-                            type={'standard'}
-                            className="sporsmal__knapp sporsmal__videre"
-                            onClick={() => {
-                                visAlternativer();
-                            }}
-                        >
-                            <FormattedMessage id="fortsett-knapp"/>
-                        </KnappBase>
+                            <AlternativContainer
+                                alternativer={sporsmal.alternativer}
+                                markerteAlternativer={markerteAlternativer}
+                                sporsmal={sporsmal}
+                                markerAlternativ={(id, alternativ) => {
+                                    this.fjernFeil(markerteAlternativer);
+                                    markerAlternativ(id, alternativ);
+                                }}
+                            />
+                            <section className="tips" role="alert" aria-live="polite">
+                                {!isUndefined(besvartSpm.tips) && (
+                                    <TipsVisning id={besvartSpm.tips!}/>
+                                )}
+                            </section>
+                            {sporsmal.erSisteSpm ? (
+                                <div className="knapperad blokk-s">
+                                    <KnappBase
+                                        type={'hoved'}
+                                        onClick={() => handleSubmit()}
+                                    >
+                                        <FormattedMessage id="send-inn"/>
+                                    </KnappBase>
+                                </div>
+                            ) : (
+                                <KnappBase
+                                    type={'hoved'}
+                                    className={'sporsmal__knapp'}
+                                    key="besvar"
+                                    onClick={e => {
+                                        this.sjekkSvar(
+                                            markerteAlternativer,
+                                            sporsmal.id,
+                                            besvarteSporsmal,
+                                            besvartSpm
+                                        );
+                                    }}
+                                >
+                                    <FormattedMessage id="fortsett-knapp"/>
+                                </KnappBase>
+                            )}
+                        </section>
                     </div>
-                    <AlternativContainer
-                        alternativer={sporsmal.alternativer}
-                        markerteAlternativer={markerteAlternativer}
-                        sporsmal={sporsmal}
-                        markerAlternativ={(id, alternativ) => {
-                            this.fjernFeil(markerteAlternativer);
-                            markerAlternativ(id, alternativ);
-                        }}
-                    />
-                    <section className="tips" role="alert" aria-live="polite">
-                        {!isUndefined(besvartSpm.tips) && (
-                            <TipsVisning id={besvartSpm.tips!}/>
-                        )}
-                    </section>
-                    {sporsmal.erSisteSpm ? (
-                        <div className="knapperad blokk-s">
-                            <KnappBase
-                                type={'hoved'}
-                                onClick={() => handleSubmit()}
-                            >
-                                <FormattedMessage id="send-inn"/>
-                            </KnappBase>
-                        </div>
-                    ) : (
-                        <KnappBase
-                            type={'hoved'}
-                            className={'sporsmal__knapp'}
-                            key="besvar"
-                            onClick={e => {
-                                this.sjekkSvar(
-                                    markerteAlternativer,
-                                    sporsmal.id,
-                                    besvarteSporsmal,
-                                    besvartSpm
-                                );
-                            }}
-                        >
-                            <FormattedMessage id="fortsett-knapp"/>
-                        </KnappBase>
-                    )}
-                </section>
-            </div>
+                </div>
+            </React.Fragment>
         );
     }
 }

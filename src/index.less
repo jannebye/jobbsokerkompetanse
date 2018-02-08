@@ -13,10 +13,12 @@
 @import '../node_modules/nav-frontend-chevron-style/src/mixins';
 
 @import './less/knapper';
+@import './startside/startside';
 @import './skjema/tips/tips';
 @import './sporsmal/sporsmal';
 @import './alternativ/alternativ';
 @import './resultat/resultat';
+@import './resultat/artikkelpanel';
 
 @navLysBlaLighten90: mix(@navLysBla, #fff, 10%);
 
@@ -31,45 +33,16 @@ form {
 }
 
 body {
-    background-color: @white;
+    background-color: @white !important;
 }
 
 .limit {
     margin: 0 auto;
-    height: 100%;
 }
 
 .skjemaelement__feilmelding {
     font-style: italic;
     color: @redError;
-}
-
-.startside {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 100%;
-    padding: 0 1.4rem;
-    text-align: center;
-
-    .bakgrunn {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 35%;
-        background-color: #cce1f3;
-    }
-
-    .forside-bilde {
-        width: 60%;
-        margin: 1rem auto 0;
-        z-index: 1;
-    }
-
-    .knapperad {
-        margin: 2rem 0 1rem;
-    }
 }
 
 @media (min-width: @screen-sm-min) {
@@ -79,10 +52,6 @@ body {
 }
 
 @media (min-width: 30em) {
-    .typo-sidetittel {
-        font-size: 1.875rem;
-        line-height: 2.125rem;
-    }
     .typo-innholdstittel {
         font-size: 1.5rem;
         line-height: 1.65rem;

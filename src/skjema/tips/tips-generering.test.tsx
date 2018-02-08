@@ -1,5 +1,5 @@
 import { visTipsEtterSporsmal } from './tips-generering';
-import SvarAlternativModell from '../../sporsmal/svaralternativ';
+import SvarAlternativModell from '../../svar/svaralternativ';
 
 describe('TipsGenerator', () => {
     let svarAlternativer: Array<SvarAlternativModell>;
