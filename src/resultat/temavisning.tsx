@@ -44,7 +44,7 @@ function TemaVisning({utledetRaad, raad}: TemaVisningProps) {
 
     return (
         <li className="enkelt__raad" key={utledetRaad.id}>
-            <section className="ekspenderbartPanel ekspanderbartPanel--lukket">
+            <section className="artikkelpanel artikkelpanel--lukket">
                 <button
                     className="artikkelpanel__hode"
                     aria-expanded="false"
