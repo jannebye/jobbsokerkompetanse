@@ -29,7 +29,8 @@ function sanitize(raad: TemaModell): RaadModell {
         return { ...u, temaer: u.temaer.tema.map(t => {
             const aktiviteter =
                 Array.isArray(t.aktiviteter.aktivitet) ? t.aktiviteter.aktivitet : [t.aktiviteter.aktivitet];
-            return { ...t, aktiviteter: aktiviteter};
+            const ingress = t.ingress.replace(/<[^>]*>/g, '');
+            return { ...t, aktiviteter, ingress };
         })};
     })};
 }
