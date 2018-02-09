@@ -43,7 +43,7 @@ function TemaVisning({utledetRaad, raad}: TemaVisningProps) {
     }
 
     return (
-        <li className="enkelt__tema" key={utledetRaad.id}>
+        <li className="enkelt__raad" key={utledetRaad.id}>
             <section className="ekspenderbartPanel ekspanderbartPanel--lukket">
                 <button
                     className="artikkelpanel__hode"
