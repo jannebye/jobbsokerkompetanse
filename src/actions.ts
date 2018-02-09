@@ -1,5 +1,6 @@
 import { Sidetype } from './utils/konstanter';
 import SvarAlternativModell from './svar/svaralternativ';
+import { TemaModell } from './resultat/tema-modell';
 
 export enum ActionType {
     BESVAR,
@@ -12,7 +13,8 @@ export enum ActionType {
     RESET,
     ENDRE_SIDE,
     VIS_TIPS,
-    SKJUL_TIPS
+    SKJUL_TIPS,
+    HENT_TEMA_OK,
 }
 
 export interface EndreAlternativAction {
@@ -63,6 +65,11 @@ export interface SkjulTipsAction {
     type: ActionType.SKJUL_TIPS;
 }
 
+export interface HentTemaAction {
+    type: ActionType.HENT_TEMA_OK;
+    data: TemaModell;
+}
+
 export type Handling =
     | EndreAlternativAction
     | EndreAlternativOgAntallAction
@@ -72,4 +79,5 @@ export type Handling =
     | ResetAction
     | EndreSideAction
     | VisTipsAction
-    | SkjulTipsAction;
+    | SkjulTipsAction
+    | HentTemaAction;

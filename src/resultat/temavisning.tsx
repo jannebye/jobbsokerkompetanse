@@ -1,25 +1,18 @@
 import * as React from 'react';
-import { RaadModell } from './raad-modell';
-import { veiviserdata } from '../veiviserdata';
+import { RaadModell, UtledetRaadModell } from './raad-modell';
 import { Systemtittel, Ingress } from 'nav-frontend-typografi';
+import { AppState } from '../ducks/reducer';
+import { connect } from 'react-redux';
 
-interface AktivitetModell {
-    id: string;
-    tittel: string;
-    innhold: string;
-}
-
-interface TemaModell {
-    id: string;
-    refid?: string;
-    tittel: string;
-    ingress: string;
-    aktiviteter?: AktivitetModell[];
-}
-
-interface RaadProps {
+interface StateProps {
     raad: RaadModell;
 }
+
+interface ParentProps {
+    utledetRaad: UtledetRaadModell;
+}
+
+type TemaVisningProps = StateProps & ParentProps;
 
 function toggleEkspander(e: React.SyntheticEvent<HTMLButtonElement>) {
     const knapp = (e.target as HTMLElement).closest('.artikkelpanel__hode');
@@ -37,26 +30,10 @@ function toggleEkspander(e: React.SyntheticEvent<HTMLButtonElement>) {
     }
 }
 
-function TemaVisning({raad}: RaadProps) {
-    const understeg = veiviserdata.steg.understeg;
-    const temagrupper = understeg.map(u => u.temaer);
-    const riktiggruppe = temagrupper.find(t => t.some(tt => tt.id === raad.id)!);
-
-    let tema: TemaModell = {
-        id: '',
-        refid: '',
-        tittel: '',
-        ingress: '',
-        aktiviteter: [{id: '', tittel: '', innhold: ''}]
-    };
-    let aktiviteter: AktivitetModell[] = []; // tslint:disable-line:no-any
-    if (riktiggruppe !== undefined) {
-        const riktigtema = riktiggruppe.find(t => t.id === raad.id);
-        if (riktigtema !== undefined) {
-            tema = riktigtema;
-        }
-        aktiviteter = riktiggruppe.find(t => t.id === raad.id)!.aktiviteter!;
-    }
+function TemaVisning({utledetRaad, raad}: TemaVisningProps) {
+    const temaer = raad.steg.map(k => k.temaer).reduce((a, b) => a.concat(b), []);
+    const riktigTema = temaer.find(t => t.refid === utledetRaad.refid);
+    const aktiviteter = riktigTema ? riktigTema.aktiviteter : [];
 
     let htmlInnhold = '';
     if (aktiviteter.length !== 0) {
@@ -66,7 +43,7 @@ function TemaVisning({raad}: RaadProps) {
     }
 
     return (
-        <li className="enkelt__raad" key={raad.id}>
+        <li className="enkelt__raad" key={utledetRaad.id}>
             <section className="artikkelpanel artikkelpanel--lukket">
                 <button
                     className="artikkelpanel__hode"
@@ -76,9 +53,9 @@ function TemaVisning({raad}: RaadProps) {
                     }}
                 >
                     <Systemtittel tag="h1" className="artikkelpanel__heading">
-                        {tema.tittel}
+                        {riktigTema ? riktigTema.tittel : ''}
                     </Systemtittel>
-                    <Ingress>{tema.ingress}</Ingress>
+                    <Ingress>{riktigTema ? riktigTema.ingress : ''}</Ingress>
                 </button>
                 <div className="artikkelpanel__innhold" dangerouslySetInnerHTML={{__html: htmlInnhold}}/>
                 <div className="indikator-wrap">
@@ -89,4 +66,10 @@ function TemaVisning({raad}: RaadProps) {
     );
 }
 
-export default TemaVisning;
+function mapStateToProps(state: AppState): StateProps {
+    return {
+        raad: state.raad.data
+    };
+}
+
+export default connect(mapStateToProps)(TemaVisning);

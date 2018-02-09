@@ -61,7 +61,6 @@ interface OwnProps {
 interface StateProps {
     gjeldendeSporsmalId: string;
     forelopigBesvarelse: BesvarelseModell[];
-    viserAlternativer: boolean;
 }
 
 interface DispatchProps {
@@ -94,7 +93,6 @@ class Skjema extends React.Component<SkjemaProps, {}> {
             gjeldendeSporsmalId,
             byttSpm,
             forelopigBesvarelse,
-            viserAlternativer
         } = this.props;
         let sporsmalRefs = this.sporsmalRefs;
 
@@ -106,7 +104,6 @@ class Skjema extends React.Component<SkjemaProps, {}> {
                         sporsmal => sporsmal.id === gjeldendeSporsmalId
                     )!
                 }
-                viserAlternativer={viserAlternativer}
                 spmRef={(ref: {}) => (sporsmalRefs[gjeldendeSporsmalId] = ref)}
                 nesteSpm={(id: string) => this.byttSpmOgFokus(id)}
                 forrigeSpm={() =>
@@ -127,7 +124,6 @@ class Skjema extends React.Component<SkjemaProps, {}> {
 const mapStateToProps = (state: AppState): StateProps => ({
     gjeldendeSporsmalId: state.svar.gjeldendeSpmId,
     forelopigBesvarelse: state.svar.data,
-    viserAlternativer: state.svar.viserAlternativer
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

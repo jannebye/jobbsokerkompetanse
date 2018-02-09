@@ -266,8 +266,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
     totaltAntallSpm: state.svar.totalAntallSpm
 });
 
-const mapDispatchToProps = (dispatch: Dispatch,
-                            props: OwnProps): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     visTips: (tipsId: string) => dispatch(visTips(tipsId)),
     markerAlternativ: (sporsmalId, alternativ: SvarAlternativModell[]) => {
         dispatch(marker(sporsmalId, alternativ));

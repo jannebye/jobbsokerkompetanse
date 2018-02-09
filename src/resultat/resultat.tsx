@@ -5,15 +5,15 @@ import { connect } from 'react-redux';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { fasteTemaer, leggesTilTemaer } from './tema';
 import temaLogikk from './tema-mapping';
-import { RaadModell } from './raad-modell';
+import { UtledetRaadModell } from './raad-modell';
 import TemaVisning from './temavisning';
 import InnholdsContainer from './innholdscontainer';
 import { Ingress, Sidetittel } from 'nav-frontend-typografi';
 
-function temaSkalBehandles(tema: RaadModell, alternativId: string) {
+function temaSkalBehandles(tema: UtledetRaadModell, alternativId: string) {
     if (temaLogikk[tema.ref]) {
         if (
-            temaLogikk[tema.ref].alternativ.find(function (alt: string) {
+            temaLogikk[tema.ref].alternativ.find(function(alt: string) {
                 return alt === alternativId;
             })
         ) {
@@ -70,7 +70,7 @@ export function Resultat({besvarteSporsmal}: Props) {
                 </Ingress>
                 <ul className="resultat__raadliste">
                     {resultat.map(raad => (
-                        <TemaVisning raad={raad} key={raad.id}/>
+                        <TemaVisning utledetRaad={raad} key={raad.id}/>
                     ))}
                 </ul>
                 <FormattedMessage id="veiviser-link">

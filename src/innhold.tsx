@@ -9,10 +9,12 @@ import { Dispatch } from './types';
 import { endreSide } from './ducks/side-duck';
 import Startside from './startside/startside';
 import { reset } from './svar/svar-duck';
+import { hentRaad, fetchTema } from './resultat/raad-duck';
 
 interface DispatchProps {
     reset: () => Promise<{}>;
     byttSide: (side: Sidetype) => void;
+    doHentRaad: () => void;
 }
 
 interface InnholdStateProps {
@@ -28,6 +30,10 @@ class Innhold extends React.Component<Props, {}> {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.startKartlegging = this.startKartlegging.bind(this);
         this.startPaNytt = this.startPaNytt.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.doHentRaad();
     }
 
     handleSubmit() {
@@ -66,7 +72,8 @@ const mapStateToProps = (state: AppState): InnholdStateProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     reset: () => new Promise(resolve => resolve(dispatch(reset()))),
-    byttSide: (side: Sidetype) => dispatch(endreSide(side))
+    byttSide: (side: Sidetype) => dispatch(endreSide(side)),
+    doHentRaad: () => fetchTema().then(raad => dispatch(hentRaad(raad)))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Innhold);
