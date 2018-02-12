@@ -12,6 +12,7 @@ import TipsVisning from '../skjema/tips/tipsvisning';
 import { visTipsEtterSporsmal } from '../skjema/tips/tips-generering';
 import { isUndefined } from 'util';
 import { Sidetittel, Undertekst } from 'nav-frontend-typografi';
+import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import SVG from 'react-inlinesvg';
 import KnappBase from 'nav-frontend-knapper';
 import * as cls from 'classnames';
@@ -183,15 +184,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                         >
                                             <FormattedHTMLMessage id={sporsmal.id}/>
                                         </Sidetittel>
-                                        <p
-                                            className="skjemaelement__feilmelding"
-                                            role="alert"
-                                            aria-live="assertive"
-                                        >
-                                            {this.state.feil && (
-                                                <FormattedMessage id="feilmelding-mangler-svar"/>
-                                            )}
-                                        </p>
+
                                     </div>
                                     <Undertekst className="sporsmal__ingress" tag="p">
                                         <FormattedMessage
@@ -223,6 +216,14 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             <section className="tips" role="alert" aria-live="polite">
                                 {!isUndefined(besvartSpm.tips) && (
                                     <TipsVisning id={besvartSpm.tips!}/>
+                                )}
+                            </section>
+                            <section className="" role="alert" aria-live="assertive">
+                                {this.state.feil && (
+                                    <AlertStripeAdvarsel>
+                                        <FormattedMessage id="feilmelding-mangler-svar"/>
+                                    </AlertStripeAdvarsel>
+
                                 )}
                             </section>
                             {sporsmal.erSisteSpm ? (
