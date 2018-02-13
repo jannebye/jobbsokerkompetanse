@@ -14,7 +14,3 @@ fasitResources:
   used:
   - alias: appres.cms
     resourceType: baseUrl
-  exposed:
-  - alias: jobbsokerkompetanseUrl
-    resourceType: restservice
-    path: /jobbsokerkompetanse
