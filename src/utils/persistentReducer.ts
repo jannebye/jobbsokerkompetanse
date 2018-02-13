@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-import { SvarState } from '../svar/svar-duck';
+import { SvarState } from '../ducks/svar-duck';
 import { SideState } from '../ducks/side-duck';
 
 function read(scope: string) {

@@ -8,8 +8,10 @@ import { Sidetype } from './utils/konstanter';
 import { Dispatch } from './types';
 import { endreSide } from './ducks/side-duck';
 import Startside from './startside/startside';
-import { reset } from './svar/svar-duck';
-import { hentRaad, fetchTema } from './resultat/raad-duck';
+import { reset } from './ducks/svar-duck';
+import { hentRaad, fetchTema } from './ducks/raad-duck';
+
+const baseUrl = '/jobbsokerkompetanse/';
 
 interface DispatchProps {
     reset: () => Promise<{}>;
@@ -34,21 +36,39 @@ class Innhold extends React.Component<Props, {}> {
 
     componentDidMount() {
         this.props.doHentRaad();
+        const innholdProps = this.props;
+        window.addEventListener('popstate', function() {
+            const path = window.location.pathname.split('/');
+            const page = path[path.length - 1];
+            switch (page) {
+                case 'startside':
+                    return innholdProps.byttSide(Sidetype.START);
+                case 'kartleggingside':
+                    return innholdProps.byttSide(Sidetype.KARTLEGGING);
+                case 'resultatside':
+                    return innholdProps.byttSide(Sidetype.RESULTAT);
+                default:
+                    break;
+            }
+        });
+        history.pushState(this.props.besvarteSporsmal, '', baseUrl + Sidetype.START);
     }
 
     handleSubmit() {
-        history.pushState(Sidetype.RESULTAT, '', '/jobbsokerkompetanse/' + Sidetype.RESULTAT);
+        history.pushState(this.props.besvarteSporsmal, '', baseUrl + Sidetype.RESULTAT);
         return this.props.byttSide(Sidetype.RESULTAT);
     }
 
     startKartlegging() {
+        history.pushState(this.props.besvarteSporsmal, '', baseUrl + Sidetype.KARTLEGGING);
         return this.props.byttSide(Sidetype.KARTLEGGING);
     }
 
     startPaNytt() {
+        history.pushState(this.props.besvarteSporsmal, '', baseUrl + Sidetype.START);
         return this.props
             .reset()
-            .then(res => this.props.byttSide(Sidetype.START));
+            .then(() => this.props.byttSide(Sidetype.START));
     }
 
     render() {

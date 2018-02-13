@@ -24,7 +24,6 @@ function getJSXElement(
         <Provider store={store}>
             <IntlProvider>
                 <Sporsmal
-                    nesteSpm={spy}
                     forrigeSpm={spy}
                     sporsmal={spmModell}
                     spmRef={spmModell}
@@ -34,6 +33,7 @@ function getJSXElement(
                     visAlternativer={() => {
                         return;
                     }}
+                    gaTilNesteSporsmal={() => {}}
                     viserAlternativer={false}
                     paVeiBakover={false}
                     besvarteSporsmal={besvarteSpm}

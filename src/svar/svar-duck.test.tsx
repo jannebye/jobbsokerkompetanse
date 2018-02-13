@@ -1,4 +1,4 @@
-import { erPaVeiBakover } from './svar-duck';
+import { erPaVeiBakover } from '../ducks/side-duck';
 import spm from '../sporsmal/sporsmal-alle';
 
 describe('svar-duck', () => {

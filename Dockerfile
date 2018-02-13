@@ -10,3 +10,5 @@ RUN npm install && npm run build
 FROM docker.adeo.no:5000/pus/decorator
 ENV APPLICATION_NAME=jobbsokerkompetanse
 COPY --from=builder /source/build /app
+
+ENV FOOTER_TYPE=no_footer

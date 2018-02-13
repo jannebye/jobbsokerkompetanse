@@ -1,24 +1,54 @@
-import { Handling, ActionType, EndreSideAction } from '../actions';
+import { Handling, ActionType, EndreSideAction, NesteSporsmalAction } from '../actions';
 import { Sidetype } from '../utils/konstanter';
+import spm from '../sporsmal/sporsmal-alle';
+import alleSporsmal from '../sporsmal/sporsmal-alle';
 
-const { ENDRE_SIDE } = ActionType;
+const {ENDRE_SIDE} = ActionType;
 
 export interface SideState {
     data: Sidetype;
+    spmId: string;
+    viserAlternativer: boolean;
+    paVeiBakover: boolean;
 }
 
 export const initialState = {
-    data: Sidetype.START
+    data: Sidetype.START,
+    spmId: alleSporsmal[0].id,
+    viserAlternativer: false,
+    paVeiBakover: false
 };
 
+export type SporsmalId = string;
+
+function sporsmalIndex(sporsmalId: SporsmalId) {
+    return spm.map(s => s.id).indexOf(sporsmalId);
+}
+
+export function erPaVeiBakover(gjeldendeSpmId: SporsmalId, sporsmalId: SporsmalId) {
+    return sporsmalIndex(sporsmalId) < sporsmalIndex(gjeldendeSpmId);
+}
+
 //  Reducer
-export default function reducer(
-    state: SideState = initialState,
-    action: Handling
-): SideState {
+export default function reducer(state: SideState = initialState,
+                                action: Handling): SideState {
     switch (action.type) {
         case ActionType.ENDRE_SIDE: {
-            return { ...state, data: action.data };
+            return {...state, data: action.data};
+        }
+        case ActionType.NESTE_SPORSMAL: {
+            const nySpmId = action.spmId;
+            const paVeiBakover = erPaVeiBakover(state.spmId, nySpmId);
+            return {
+                ...state,
+                spmId: nySpmId,
+                viserAlternativer: action.spmErBesvart,
+                paVeiBakover
+            };
+        }
+        case
+        ActionType.FORRIGE_SPORSMAL: {
+            return {...state, spmId: action.spmId};
         }
         default:
             return state;
@@ -29,5 +59,13 @@ export function endreSide(side: Sidetype): EndreSideAction {
     return {
         type: ENDRE_SIDE,
         data: side
+    };
+}
+
+export function nesteSporsmal(spmId: string, spmErBesvart: boolean): NesteSporsmalAction {
+    return {
+        type: ActionType.NESTE_SPORSMAL,
+        spmId: spmId,
+        spmErBesvart: spmErBesvart
     };
 }

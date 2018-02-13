@@ -1,5 +1,5 @@
 import { AppState } from '../ducks/reducer';
-import { SvarState } from './svar-duck';
+import { SvarState } from '../ducks/svar-duck';
 import alleSporsmal from '../sporsmal/sporsmal-alle';
 import { BesvarelseModell } from './svar-modell';
 

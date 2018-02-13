@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import { marker, skjulTips, visTips, visHeleSporsmal } from '../svar/svar-duck';
+import { marker, skjulTips, visTips, visHeleSporsmal, leggeTilSporsmal } from '../ducks/svar-duck';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import SvarAlternativModell from '../svar/svaralternativ';
@@ -15,17 +15,21 @@ import { Sidetittel, Undertekst } from 'nav-frontend-typografi';
 import SVG from 'react-inlinesvg';
 import KnappBase from 'nav-frontend-knapper';
 import * as cls from 'classnames';
+import { Sidetype } from '../utils/konstanter';
+import { nesteSporsmal } from '../ducks/side-duck';
+import alleSporsmal from '../sporsmal/sporsmal-alle';
+import { AvhengighetModell, default as Avhengigheter } from '../utils/avhengigheter';
+
+const baseUrl = '/jobbsokerkompetanse/';
 
 interface DispatchProps {
-    markerAlternativ: (sporsmalId: string,
-                       alternativ: SvarAlternativModell[]) => void;
-    visTips: (tipsId: string) => void;
-
+    markerAlternativ: (sporsmalId: string, alternativ: SvarAlternativModell[]) => void;
+    visTips: (tipsId: string, spmId: string) => void;
     visAlternativer: () => void;
+    gaTilNesteSporsmal: (spmId: string) => void;
 }
 
 interface OwnProps {
-    nesteSpm: (id: string) => void;
     forrigeSpm: () => void;
     startPaNytt: () => void;
     sporsmal: SporsmalModell;
@@ -53,6 +57,32 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         this.state = {feil: false};
     }
 
+    finnNesteSpmIListe(id: string): string {
+        const gjeldendeIndex = alleSporsmal.findIndex(spm => spm.id === id);
+        return alleSporsmal.find((value, index) => index === gjeldendeIndex + 1)!
+            .id;
+    }
+
+    finnNesteSpm(sporsmalId: string, forelopigBesvarelse: BesvarelseModell[]): string {
+        const avhengighet: AvhengighetModell | undefined = Avhengigheter.find(
+            avh => avh.sporsmalId === sporsmalId
+        );
+        if (
+            !!avhengighet &&
+            !!forelopigBesvarelse.find(
+                b =>
+                    !!b.svarAlternativer.find(
+                        alternativ =>
+                            alternativ.id === avhengighet.harSvartAlternativId
+                    )
+            )
+        ) {
+            return avhengighet.sendesTilSporsmalId;
+        }
+
+        return this.finnNesteSpmIListe(sporsmalId);
+    }
+
     sjekkSvar(markerteSpm: SvarAlternativModell[],
               sporsmalId: string,
               besvarteSporsmal: BesvarelseModell[],
@@ -62,9 +92,9 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         } else {
             const tip = visTipsEtterSporsmal(sporsmalId, besvarteSporsmal);
             if (isUndefined(besvartSpm.tips) && !isUndefined(tip)) {
-                return this.props.visTips(tip);
+                return this.props.visTips(tip, sporsmalId);
             } else {
-                return this.props.nesteSpm(sporsmalId);
+                return this.props.gaTilNesteSporsmal(this.finnNesteSpm(sporsmalId, besvarteSporsmal));
             }
         }
     }
@@ -76,6 +106,9 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
     }
 
     componentDidMount() {
+        history.pushState(
+            this.props.besvarteSporsmal, '',
+            baseUrl + Sidetype.KARTLEGGING + '/' + this.props.sporsmal.id);
         if (this.props.paVeiBakover) {
             window.scrollTo(0, 0);
         }
@@ -99,9 +132,11 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
             besvarelse => besvarelse.sporsmalId === sporsmal.id
         )!; // Vil alltid ligge i listen
-        const markerteAlternativer: SvarAlternativModell[] = besvarteSporsmal.find(
-            besvarelse => besvarelse.sporsmalId === sporsmal.id
-        )!.svarAlternativer;
+
+        let markerteAlternativer: SvarAlternativModell[] = [];
+        if (besvartSpm) {
+            markerteAlternativer = besvartSpm.svarAlternativer;
+        }
         const sporsmalImg = require('../ikoner/' + sporsmal.id + '.svg');
 
         const erForsteSporsmal = () =>
@@ -115,9 +150,13 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         const gjeldendeSpmIndex = this.props.besvarteSporsmal.findIndex(
             besvarelse => besvarelse.sporsmalId === this.props.sporsmal.id
         ) + 1;
+        console.log('spmId', this.props.sporsmal.id);
+        console.log('besvarte', this.props.besvarteSporsmal);
+        console.log('totaltAntallSpm', totaltAntallSpm);
 
         const framdriftValue = Math.round(gjeldendeSpmIndex / totaltAntallSpm * 100 * 100) / 100;
         /** @type {{search: React.CSSProperties}} */
+        console.log('gjeldendeSpmIndex', gjeldendeSpmIndex);
         const framdriftStyle = {
             width: framdriftValue + '%'
         };
@@ -127,7 +166,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                 <div
                     className="framdrift"
                     role="progressbar"
-                    aria-valuenow={framdriftValue}
+                    aria-valuenow={Math.round(framdriftValue)}
                     aria-valuemin="0"
                     aria-valuemax="100"
                     tabIndex={0}
@@ -221,8 +260,10 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 }}
                             />
                             <section className="tips" role="alert" aria-live="polite">
-                                {!isUndefined(besvartSpm.tips) && (
-                                    <TipsVisning id={besvartSpm.tips!}/>
+                                {!isUndefined(besvartSpm) && (
+                                    !isUndefined(besvartSpm.tips) && (
+                                        <TipsVisning id={besvartSpm.tips!}/>
+                                    )
                                 )}
                             </section>
                             {sporsmal.erSisteSpm ? (
@@ -239,7 +280,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                     type={'hoved'}
                                     className={'sporsmal__knapp'}
                                     key="besvar"
-                                    onClick={e => {
+                                    onClick={() => {
                                         this.sjekkSvar(
                                             markerteAlternativer,
                                             sporsmal.id,
@@ -262,17 +303,21 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
 const mapStateToProps = (state: AppState): StateProps => ({
     besvarteSporsmal: state.svar.data,
     viserAlternativer: state.svar.viserAlternativer,
-    paVeiBakover: state.svar.paVeiBakover,
+    paVeiBakover: state.side.paVeiBakover,
     totaltAntallSpm: state.svar.totalAntallSpm
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    visTips: (tipsId: string) => dispatch(visTips(tipsId)),
+    visTips: (tipsId: string, spmId: string) => dispatch(visTips(tipsId, spmId)),
     markerAlternativ: (sporsmalId, alternativ: SvarAlternativModell[]) => {
         dispatch(marker(sporsmalId, alternativ));
-        dispatch(skjulTips());
+        dispatch(skjulTips(sporsmalId));
     },
-    visAlternativer: () => dispatch(visHeleSporsmal)
+    visAlternativer: () => dispatch(visHeleSporsmal),
+    gaTilNesteSporsmal: (spmId: string) => {
+        dispatch(nesteSporsmal(spmId, false));
+        dispatch(leggeTilSporsmal(spmId));
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sporsmal);

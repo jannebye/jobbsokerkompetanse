@@ -1,23 +1,22 @@
-import { BesvarelseModell } from './svar-modell';
+import { BesvarelseModell } from '../svar/svar-modell';
 import {
     Handling,
     ActionType,
     EndreAlternativAction,
-    NesteSporsmalAction,
     ResetAction,
     VisTipsAction,
     SkjulTipsAction,
     VisAlternativerAction,
-    EndreAlternativOgAntallAction
+    EndreAlternativOgAntallAction,
+    LeggeTilSporsmalAction
 } from '../actions';
-import SvarAlternativModell from './svaralternativ';
-import spm from '../sporsmal/sporsmal-alle';
+import SvarAlternativModell from '../svar/svaralternativ';
+import { SporsmalId } from './side-duck';
 
 const {
     ENDRE_ALTERNATIV,
     ENDRE_ALTERNATIV_OG_ANTALL,
     VIS_ALTERNATIVER,
-    NESTE_SPORSMAL,
     RESET,
     VIS_TIPS,
     SKJUL_TIPS
@@ -25,36 +24,20 @@ const {
 
 export interface SvarState {
     data: BesvarelseModell[];
-    gjeldendeSpmId: string;
     viserAlternativer: boolean;
-    paVeiBakover: boolean;
     totalAntallSpm: number;
 }
 
 export const initialState = {
-    data: [
-        { sporsmalId: 'finn-spm-01', svarAlternativer: [], tips: undefined }
-    ],
-    gjeldendeSpmId: 'finn-spm-01',
+    data: [],
     viserAlternativer: false,
-    paVeiBakover: false,
     totalAntallSpm: 19
 };
 
-type SporsmalId = string;
-
-function harBesvartSpm(state: SvarState, sporsmalId: SporsmalId) {
-    return state.data.find(
-        besvarelse => besvarelse.sporsmalId === sporsmalId
-    );
-}
-
-function sporsmalIndex(sporsmalId: SporsmalId) {
-    return spm.map(s => s.id).indexOf(sporsmalId);
-}
-
-export function erPaVeiBakover(gjeldendeSpmId: SporsmalId, sporsmalId: SporsmalId) {
-    return sporsmalIndex(sporsmalId) < sporsmalIndex(gjeldendeSpmId);
+export function harBesvartSpm(utforteBesvarelser: BesvarelseModell[], sporsmalId: SporsmalId): boolean {
+    return utforteBesvarelser.map((besvarelse) => {
+        return besvarelse.sporsmalId;
+    }).includes(sporsmalId);
 }
 
 //  Reducer
@@ -131,32 +114,6 @@ export default function reducer(
                 };
             }
         }
-        case ActionType.NESTE_SPORSMAL:
-            const sporsmalId = action.data;
-            const paVeiBakover = erPaVeiBakover(state.gjeldendeSpmId, sporsmalId);
-            if (harBesvartSpm(state, sporsmalId)) {
-                return {
-                    ...state,
-                    gjeldendeSpmId: sporsmalId,
-                    viserAlternativer: true,
-                    paVeiBakover
-                };
-            } else {
-                return {
-                    ...state,
-                    data: [
-                        ...state.data,
-                        {
-                            sporsmalId: sporsmalId,
-                            svarAlternativer: [],
-                            tips: undefined
-                        }
-                    ],
-                    gjeldendeSpmId: sporsmalId,
-                    viserAlternativer: false,
-                    paVeiBakover
-                };
-            }
         case ActionType.VIS_ALTERNATIVER:
             return {
                 ...state,
@@ -170,8 +127,8 @@ export default function reducer(
                 data: [
                     ...state.data.map(
                         besvarelse =>
-                            besvarelse.sporsmalId === state.gjeldendeSpmId
-                                ? { ...besvarelse, tips: action.data }
+                            besvarelse.sporsmalId === action.spmId
+                                ? { ...besvarelse, tips: action.tipsId }
                                 : besvarelse
                     )
                 ]
@@ -182,11 +139,16 @@ export default function reducer(
                 data: [
                     ...state.data.map(
                         besvarelse =>
-                            besvarelse.sporsmalId === state.gjeldendeSpmId
+                            besvarelse.sporsmalId === action.spmId
                                 ? { ...besvarelse, tips: undefined }
                                 : besvarelse
                     )
                 ]
+            };
+        case ActionType.LEGGE_TIL_SPORSMAL:
+            return {
+                ...state,
+                data: state.data.concat({ sporsmalId: action.spmId, svarAlternativer: [], tips: undefined })
             };
         default:
             return state;
@@ -258,16 +220,16 @@ export function marker(
     };
 }
 
+export function leggeTilSporsmal(spmId: string): LeggeTilSporsmalAction {
+    return {
+        type: ActionType.LEGGE_TIL_SPORSMAL,
+        spmId: spmId
+    }
+}
+
 export const visHeleSporsmal: VisAlternativerAction = {
     type: VIS_ALTERNATIVER
 };
-
-export function nesteSporsmal(sporsmal: string): NesteSporsmalAction {
-    return {
-        type: NESTE_SPORSMAL,
-        data: sporsmal
-    };
-}
 
 export function reset(): ResetAction {
     return {
@@ -275,15 +237,17 @@ export function reset(): ResetAction {
     };
 }
 
-export function visTips(tipsId: string): VisTipsAction {
+export function visTips(tipsId: string, spmId: string): VisTipsAction {
     return {
         type: VIS_TIPS,
-        data: tipsId
+        tipsId: tipsId,
+        spmId: spmId
     };
 }
 
-export function skjulTips(): SkjulTipsAction {
+export function skjulTips(spmId: string): SkjulTipsAction {
     return {
-        type: SKJUL_TIPS
+        type: SKJUL_TIPS,
+        spmId: spmId
     };
 }

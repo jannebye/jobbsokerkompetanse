@@ -12,9 +12,16 @@ export enum ActionType {
     FORRIGE_SPORSMAL,
     RESET,
     ENDRE_SIDE,
+    ENDRE_SPORSMAL,
     VIS_TIPS,
     SKJUL_TIPS,
     HENT_TEMA_OK,
+    LEGGE_TIL_SPORSMAL,
+}
+
+export interface LeggeTilSporsmalAction {
+    type: ActionType.LEGGE_TIL_SPORSMAL;
+    spmId: string;
 }
 
 export interface EndreAlternativAction {
@@ -40,11 +47,13 @@ export interface VisAlternativerAction {
 
 export interface NesteSporsmalAction {
     type: ActionType.NESTE_SPORSMAL;
-    data: string;
+    spmId: string;
+    spmErBesvart: boolean;
 }
 
 export interface ForrigeSporsmalAction {
     type: ActionType.FORRIGE_SPORSMAL;
+    spmId: string;
 }
 
 export interface ResetAction {
@@ -58,11 +67,13 @@ export interface EndreSideAction {
 
 export interface VisTipsAction {
     type: ActionType.VIS_TIPS;
-    data: string;
+    tipsId: string;
+    spmId: string;
 }
 
 export interface SkjulTipsAction {
     type: ActionType.SKJUL_TIPS;
+    spmId: string;
 }
 
 export interface HentTemaAction {
@@ -80,4 +91,5 @@ export type Handling =
     | EndreSideAction
     | VisTipsAction
     | SkjulTipsAction
-    | HentTemaAction;
+    | HentTemaAction
+    | LeggeTilSporsmalAction;
