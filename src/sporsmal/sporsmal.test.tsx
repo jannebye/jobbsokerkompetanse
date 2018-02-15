@@ -24,7 +24,6 @@ function getJSXElement(
         <Provider store={store}>
             <IntlProvider>
                 <Sporsmal
-                    forrigeSpm={spy}
                     sporsmal={spmModell}
                     spmRef={spmModell}
                     markerAlternativ={() => {

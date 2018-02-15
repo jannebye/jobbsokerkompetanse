@@ -18,7 +18,8 @@ import * as cls from 'classnames';
 import { nesteSporsmal } from '../ducks/side-duck';
 import alleSporsmal from '../sporsmal/sporsmal-alle';
 import { AvhengighetModell, default as Avhengigheter } from '../utils/avhengigheter';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import { Sidetype } from '../utils/konstanter';
 
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string, alternativ: SvarAlternativModell[]) => void;
@@ -28,7 +29,6 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-    forrigeSpm: () => void;
     sporsmal: SporsmalModell;
     spmRef: any; // tslint:disable-line:no-any
     viserAlternativer: boolean;
@@ -112,7 +112,6 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             sporsmal,
             besvarteSporsmal,
             markerAlternativ,
-            forrigeSpm,
             spmRef,
             viserAlternativer,
             visAlternativer,
@@ -122,7 +121,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
 
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
             besvarelse => besvarelse.sporsmalId === sporsmal.id
-        )!; // Vil alltid ligge i listen
+        )!;
 
         let markerteAlternativer: SvarAlternativModell[] = [];
         if (besvartSpm) {
@@ -130,17 +129,14 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         }
         const sporsmalImg = require('../ikoner/' + sporsmal.id + '.svg');
 
-        const erForsteSporsmal = () =>
-            this.props.sporsmal.erForsteSpm ? () => history.pushState({}, 'Startsiden', '/jobbsokerkompetanse/startside') : forrigeSpm();
-
         const klassenavn = cls('sporsmal', {
             vis_alternativer: viserAlternativer,
             tilbake: paVeiBakover,
         });
 
         const gjeldendeSpmIndex = this.props.besvarteSporsmal.findIndex(
-            besvarelse => besvarelse.sporsmalId === this.props.sporsmal.id
-        ) + 1;
+            besvarelse => besvarelse.sporsmalId === sporsmal.id
+        );
 
         const framdriftValue = Math.round(gjeldendeSpmIndex / totaltAntallSpm * 100 * 100) / 100;
         /** @type {{search: React.CSSProperties}} */
@@ -148,9 +144,11 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             width: framdriftValue + '%'
         };
 
-        const tilbakeUrl = this.props.sporsmal.erForsteSpm
-            ? '/startside'
-            : '/kartleggingside/' + alleSporsmal[gjeldendeSpmIndex - 1].id;
+        const tilbakeUrl = sporsmal.erForsteSpm
+            ? '/' + Sidetype.START
+            : '/' + Sidetype.KARTLEGGING + '/' + alleSporsmal[gjeldendeSpmIndex - 1].id;
+
+        const nesteUrl = '/' + Sidetype.KARTLEGGING + '/' + alleSporsmal[gjeldendeSpmIndex + 1].id;
 
         return (
             <React.Fragment>
@@ -175,7 +173,8 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                             <p className="typo-undertekst">
                                 {'gjeldendeSpmIndex: ' + gjeldendeSpmIndex}<br/>
                                 {'framdriftValue: ' + framdriftValue}<br/>
-                                {'besvarteSporsmal: ' + besvarteSporsmal.length}
+                                {'besvarteSporsmal: ' + besvarteSporsmal.length}<br/>
+                                {'tilbakeUrl: ' + tilbakeUrl}
                             </p>
                             <div className={'sporsmal__start'}>
                                 <div className="sporsmal__header">
@@ -183,9 +182,6 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                         to={tilbakeUrl}
                                         type={'standard'}
                                         className="sporsmal__knapp-tilbake"
-                                        onClick={() => {
-                                            erForsteSporsmal();
-                                        }}
                                     >
                                         {sporsmal.erForsteSpm ? (
                                             <FormattedMessage id="forrige-knapp-start"/>
@@ -264,11 +260,11 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 )}
                             </section>
                                 <div className="knapperad blokk-s">
-                                    <KnappBase
-                                        type={'hoved'}
-                                        className={sporsmal.erSisteSpm ? '' : 'sporsmal__knapp'}
+                                    <Link
+                                        to={nesteUrl}
+                                        className={sporsmal.erSisteSpm ? '' : 'knapp knapp--hoved sporsmal__knapp'}
                                         key="besvar"
-                                        onClick={e => {
+                                        onClick={() => {
                                             this.sjekkSvar(
                                                 markerteAlternativer,
                                                 sporsmal.id,
@@ -282,7 +278,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                         ) : (
                                             <FormattedMessage id="fortsett-knapp"/>
                                         )}
-                                    </KnappBase>
+                                    </Link>
                                 </div>
                         </section>
                     </div>

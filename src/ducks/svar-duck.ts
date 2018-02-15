@@ -52,6 +52,7 @@ export default function reducer(
                     (sprsm) => sprsm.sporsmalId === action.data.sporsmalId
                 )
             ) {
+                console.log('endre alternativ if');
                 return {
                     ...state,
                     data: state.data.map(
@@ -66,16 +67,15 @@ export default function reducer(
                     )
                 };
             } else {
+                console.log('endre alternativ else');
                 return {
                     ...state,
-                    data: [
-                        ...state.data,
+                    data: state.data.concat(
                         {
                             sporsmalId: action.data.sporsmalId,
                             svarAlternativer: action.data.svarAlternativer,
                             tips: undefined
-                        }
-                    ]
+                        })
                 };
             }
         }
@@ -102,14 +102,12 @@ export default function reducer(
             } else {
                 return {
                     ...state,
-                    data: [
-                        ...state.data,
+                    data: state.data.concat(
                         {
                             sporsmalId: action.data.sporsmalId,
                             svarAlternativer: action.data.svarAlternativer,
                             tips: undefined
-                        }
-                    ],
+                        }),
                     totalAntallSpm: action.data.totalAntallSpm
                 };
             }
@@ -136,14 +134,12 @@ export default function reducer(
         case ActionType.SKJUL_TIPS:
             return {
                 ...state,
-                data: [
-                    ...state.data.map(
+                data: state.data.map(
                         besvarelse =>
                             besvarelse.sporsmalId === action.spmId
                                 ? { ...besvarelse, tips: undefined }
                                 : besvarelse
                     )
-                ]
             };
         case ActionType.LEGGE_TIL_SPORSMAL:
             return {
@@ -211,6 +207,7 @@ export function marker(
             };
         }
     }
+    console.log('marker');
     return {
         type: ENDRE_ALTERNATIV,
         data: {

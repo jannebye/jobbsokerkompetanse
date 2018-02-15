@@ -20,7 +20,7 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <IntlProvider>
-                    <BrowserRouter basename='/jobbsokerkompetanse'>
+                    <BrowserRouter basename="/jobbsokerkompetanse">
                         <Innhold/>
                     </BrowserRouter>
                 </IntlProvider>
