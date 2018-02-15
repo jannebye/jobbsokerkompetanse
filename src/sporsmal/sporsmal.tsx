@@ -263,31 +263,27 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                     )
                                 )}
                             </section>
-                            {sporsmal.erSisteSpm ? (
                                 <div className="knapperad blokk-s">
                                     <KnappBase
                                         type={'hoved'}
+                                        className={sporsmal.erSisteSpm ? '' : 'sporsmal__knapp'}
+                                        key="besvar"
+                                        onClick={e => {
+                                            this.sjekkSvar(
+                                                markerteAlternativer,
+                                                sporsmal.id,
+                                                besvarteSporsmal,
+                                                besvartSpm
+                                            );
+                                        }}
                                     >
-                                        <FormattedMessage id="send-inn"/>
+                                        {sporsmal.erSisteSpm ? (
+                                            <FormattedMessage id="send-inn"/>
+                                        ) : (
+                                            <FormattedMessage id="fortsett-knapp"/>
+                                        )}
                                     </KnappBase>
                                 </div>
-                            ) : (
-                                <Link
-                                    to={'kartleggingside/' + this.props.sporsmal.id}
-                                    className={'knapp knapp--hoved sporsmal__knapp'}
-                                    key="besvar"
-                                    onClick={() => {
-                                        this.sjekkSvar(
-                                            markerteAlternativer,
-                                            sporsmal.id,
-                                            besvarteSporsmal,
-                                            besvartSpm
-                                        );
-                                    }}
-                                >
-                                    <FormattedMessage id="fortsett-knapp"/>
-                                </Link>
-                            )}
                         </section>
                     </div>
                 </div>
