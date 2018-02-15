@@ -15,12 +15,10 @@ import { Sidetittel, Undertekst } from 'nav-frontend-typografi';
 import SVG from 'react-inlinesvg';
 import KnappBase from 'nav-frontend-knapper';
 import * as cls from 'classnames';
-import { Sidetype } from '../utils/konstanter';
 import { nesteSporsmal } from '../ducks/side-duck';
 import alleSporsmal from '../sporsmal/sporsmal-alle';
 import { AvhengighetModell, default as Avhengigheter } from '../utils/avhengigheter';
-
-const baseUrl = '/jobbsokerkompetanse/';
+import { Link } from "react-router-dom";
 
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string, alternativ: SvarAlternativModell[]) => void;
@@ -31,11 +29,9 @@ interface DispatchProps {
 
 interface OwnProps {
     forrigeSpm: () => void;
-    startPaNytt: () => void;
     sporsmal: SporsmalModell;
     spmRef: any; // tslint:disable-line:no-any
     viserAlternativer: boolean;
-    handleSubmit: () => void;
 }
 
 interface StateProps {
@@ -106,9 +102,6 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
     }
 
     componentDidMount() {
-        history.pushState(
-            this.props.besvarteSporsmal, '',
-            baseUrl + Sidetype.KARTLEGGING + '/' + this.props.sporsmal.id);
         if (this.props.paVeiBakover) {
             window.scrollTo(0, 0);
         }
@@ -125,8 +118,6 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             visAlternativer,
             paVeiBakover,
             totaltAntallSpm,
-            handleSubmit,
-            startPaNytt
         } = this.props;
 
         const besvartSpm: BesvarelseModell | undefined = besvarteSporsmal.find(
@@ -140,7 +131,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         const sporsmalImg = require('../ikoner/' + sporsmal.id + '.svg');
 
         const erForsteSporsmal = () =>
-            this.props.sporsmal.erForsteSpm ? startPaNytt() : forrigeSpm();
+            this.props.sporsmal.erForsteSpm ? () => history.pushState({}, 'Startsiden', '/jobbsokerkompetanse/startside') : forrigeSpm();
 
         const klassenavn = cls('sporsmal', {
             vis_alternativer: viserAlternativer,
@@ -150,16 +141,16 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         const gjeldendeSpmIndex = this.props.besvarteSporsmal.findIndex(
             besvarelse => besvarelse.sporsmalId === this.props.sporsmal.id
         ) + 1;
-        console.log('spmId', this.props.sporsmal.id);
-        console.log('besvarte', this.props.besvarteSporsmal);
-        console.log('totaltAntallSpm', totaltAntallSpm);
 
         const framdriftValue = Math.round(gjeldendeSpmIndex / totaltAntallSpm * 100 * 100) / 100;
         /** @type {{search: React.CSSProperties}} */
-        console.log('gjeldendeSpmIndex', gjeldendeSpmIndex);
         const framdriftStyle = {
             width: framdriftValue + '%'
         };
+
+        const tilbakeUrl = this.props.sporsmal.erForsteSpm
+            ? '/startside'
+            : '/kartleggingside/' + alleSporsmal[gjeldendeSpmIndex - 1].id;
 
         return (
             <React.Fragment>
@@ -181,9 +172,15 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                         tabIndex={0}
                     >
                         <section>
+                            <p className="typo-undertekst">
+                                {'gjeldendeSpmIndex: ' + gjeldendeSpmIndex}<br/>
+                                {'framdriftValue: ' + framdriftValue}<br/>
+                                {'besvarteSporsmal: ' + besvarteSporsmal.length}
+                            </p>
                             <div className={'sporsmal__start'}>
                                 <div className="sporsmal__header">
-                                    <KnappBase
+                                    <Link
+                                        to={tilbakeUrl}
                                         type={'standard'}
                                         className="sporsmal__knapp-tilbake"
                                         onClick={() => {
@@ -195,7 +192,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                         ) : (
                                             <FormattedMessage id="forrige-knapp"/>
                                         )}
-                                    </KnappBase>
+                                    </Link>
                                 </div>
                                 <div className="sporsmal__innhold">
                                     <div className="sporsmal__hode">
@@ -270,15 +267,14 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 <div className="knapperad blokk-s">
                                     <KnappBase
                                         type={'hoved'}
-                                        onClick={() => handleSubmit()}
                                     >
                                         <FormattedMessage id="send-inn"/>
                                     </KnappBase>
                                 </div>
                             ) : (
-                                <KnappBase
-                                    type={'hoved'}
-                                    className={'sporsmal__knapp'}
+                                <Link
+                                    to={'kartleggingside/' + this.props.sporsmal.id}
+                                    className={'knapp knapp--hoved sporsmal__knapp'}
                                     key="besvar"
                                     onClick={() => {
                                         this.sjekkSvar(
@@ -290,7 +286,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                     }}
                                 >
                                     <FormattedMessage id="fortsett-knapp"/>
-                                </KnappBase>
+                                </Link>
                             )}
                         </section>
                     </div>

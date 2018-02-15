@@ -224,7 +224,7 @@ export function leggeTilSporsmal(spmId: string): LeggeTilSporsmalAction {
     return {
         type: ActionType.LEGGE_TIL_SPORSMAL,
         spmId: spmId
-    }
+    };
 }
 
 export const visHeleSporsmal: VisAlternativerAction = {

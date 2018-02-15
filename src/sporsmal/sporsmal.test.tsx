@@ -41,8 +41,6 @@ function getJSXElement(
                         return;
                     }}
                     totaltAntallSpm={1}
-                    handleSubmit={() => {return; }}
-                    startPaNytt={() => {return; }}
                 />
             </IntlProvider>
         </Provider>

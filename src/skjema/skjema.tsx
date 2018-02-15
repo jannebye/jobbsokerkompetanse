@@ -7,6 +7,7 @@ import { AppState } from '../ducks/reducer';
 import { nesteSporsmal } from '../ducks/side-duck';
 import { BesvarelseModell } from '../svar/svar-modell';
 import { harBesvartSpm } from '../ducks/svar-duck';
+import { RouteComponentProps, withRouter } from "react-router";
 
 function forrigeSporsmal(gjeldendeSpm: string, besvarelse: BesvarelseModell[]) {
     const svarListe: BesvarelseModell[] = [...besvarelse];
@@ -23,9 +24,8 @@ function forrigeSporsmal(gjeldendeSpm: string, besvarelse: BesvarelseModell[]) {
         .sporsmalId;
 }
 
-interface OwnProps {
-    handleSubmit: () => void;
-    startPaNytt: () => void;
+interface UrlProps {
+    spmId: string;
 }
 
 interface StateProps {
@@ -34,22 +34,30 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    byttSpm: (sporsmalId: string, spmErBeesvart: boolean) => Promise<{}>;
+    byttSpm: (sporsmalId: string, spmErBeesvart: boolean) => void;
 }
 
-type SkjemaProps = OwnProps & StateProps & DispatchProps;
+type SkjemaProps = StateProps & DispatchProps & RouteComponentProps<any> & UrlProps;
 
-class Skjema extends React.Component<SkjemaProps, {}> {
+class Skjema extends React.PureComponent<SkjemaProps, {}> {
     private sporsmalRefs = {};
 
     constructor(props: SkjemaProps) {
         super(props);
+        console.log(this.props.spmId);
+    }
+
+    componentWillMount() {
+        const paths = this.props.history.location.pathname.split('/');
+        const base = paths[0];
+        const side = paths[1];
+        const spmid = paths[2];
+        console.log(base, side, spmid);
+        this.props.byttSpm(spmid, false);
     }
 
     render() {
         const {
-            handleSubmit,
-            startPaNytt,
             gjeldendeSporsmalId,
             byttSpm,
             forelopigBesvarelse
@@ -78,8 +86,6 @@ class Skjema extends React.Component<SkjemaProps, {}> {
                         )
                     )
                 }
-                handleSubmit={() => handleSubmit()}
-                startPaNytt={() => startPaNytt()}
             />
         );
     }
@@ -91,14 +97,8 @@ const mapStateToProps = (state: AppState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    byttSpm: (sporsmalId: string, spmErBesvart: boolean) => {
-        return new Promise(resolve => resolve(dispatch(
-            nesteSporsmal(
-                sporsmalId,
-                spmErBesvart)
-            ))
-        );
-    }
+    byttSpm: (sporsmalId: string, spmErBesvart: boolean) =>
+        dispatch(nesteSporsmal(sporsmalId, spmErBesvart))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Skjema);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Skjema));

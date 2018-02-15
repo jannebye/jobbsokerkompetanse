@@ -1,19 +1,17 @@
-import { Handling, ActionType, EndreSideAction, NesteSporsmalAction } from '../actions';
+import { Handling, ActionType, NesteSporsmalAction } from '../actions';
 import { Sidetype } from '../utils/konstanter';
 import spm from '../sporsmal/sporsmal-alle';
 import alleSporsmal from '../sporsmal/sporsmal-alle';
 
-const {ENDRE_SIDE} = ActionType;
-
 export interface SideState {
-    data: Sidetype;
+    sideType: Sidetype;
     spmId: string;
     viserAlternativer: boolean;
     paVeiBakover: boolean;
 }
 
 export const initialState = {
-    data: Sidetype.START,
+    sideType: Sidetype.START,
     spmId: alleSporsmal[0].id,
     viserAlternativer: false,
     paVeiBakover: false
@@ -33,9 +31,6 @@ export function erPaVeiBakover(gjeldendeSpmId: SporsmalId, sporsmalId: SporsmalI
 export default function reducer(state: SideState = initialState,
                                 action: Handling): SideState {
     switch (action.type) {
-        case ActionType.ENDRE_SIDE: {
-            return {...state, data: action.data};
-        }
         case ActionType.NESTE_SPORSMAL: {
             const nySpmId = action.spmId;
             const paVeiBakover = erPaVeiBakover(state.spmId, nySpmId);
@@ -53,13 +48,6 @@ export default function reducer(state: SideState = initialState,
         default:
             return state;
     }
-}
-
-export function endreSide(side: Sidetype): EndreSideAction {
-    return {
-        type: ENDRE_SIDE,
-        data: side
-    };
 }
 
 export function nesteSporsmal(spmId: string, spmErBesvart: boolean): NesteSporsmalAction {

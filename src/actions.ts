@@ -3,16 +3,14 @@ import SvarAlternativModell from './svar/svaralternativ';
 import { TemaModell } from './resultat/tema-modell';
 
 export enum ActionType {
-    BESVAR,
     ENDRE_ALTERNATIV,
     ENDRE_ALTERNATIV_OG_ANTALL,
     VIS_ALTERNATIVER,
-    FJERN_MARKERING,
     NESTE_SPORSMAL,
     FORRIGE_SPORSMAL,
+    ENDRE_SPORSMAL,
     RESET,
     ENDRE_SIDE,
-    ENDRE_SPORSMAL,
     VIS_TIPS,
     SKJUL_TIPS,
     HENT_TEMA_OK,
@@ -56,13 +54,19 @@ export interface ForrigeSporsmalAction {
     spmId: string;
 }
 
+export interface EndreSporsmalAction {
+    type: ActionType.ENDRE_SPORSMAL;
+    spmId: string;
+}
+
 export interface ResetAction {
     type: ActionType.RESET;
 }
 
 export interface EndreSideAction {
     type: ActionType.ENDRE_SIDE;
-    data: Sidetype;
+    side: Sidetype;
+    spmId: string;
 }
 
 export interface VisTipsAction {
