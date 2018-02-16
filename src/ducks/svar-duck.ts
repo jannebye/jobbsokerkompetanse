@@ -4,8 +4,6 @@ import {
     ActionType,
     EndreAlternativAction,
     ResetAction,
-    VisTipsAction,
-    SkjulTipsAction,
     VisAlternativerAction,
     EndreAlternativOgAntallAction,
     LeggeTilSporsmalAction
@@ -18,8 +16,6 @@ const {
     ENDRE_ALTERNATIV_OG_ANTALL,
     VIS_ALTERNATIVER,
     RESET,
-    VIS_TIPS,
-    SKJUL_TIPS
 } = ActionType;
 
 export interface SvarState {
@@ -117,28 +113,6 @@ export default function reducer(
             };
         case ActionType.RESET:
             return initialState;
-        case ActionType.VIS_TIPS:
-            return {
-                ...state,
-                data: [
-                    ...state.data.map(
-                        besvarelse =>
-                            besvarelse.sporsmalId === action.spmId
-                                ? { ...besvarelse, tips: action.tipsId }
-                                : besvarelse
-                    )
-                ]
-            };
-        case ActionType.SKJUL_TIPS:
-            return {
-                ...state,
-                data: state.data.map(
-                        besvarelse =>
-                            besvarelse.sporsmalId === action.spmId
-                                ? { ...besvarelse, tips: undefined }
-                                : besvarelse
-                    )
-            };
         case ActionType.LEGGE_TIL_SPORSMAL:
             return {
                 ...state,
@@ -228,20 +202,5 @@ export const visHeleSporsmal: VisAlternativerAction = {
 export function reset(): ResetAction {
     return {
         type: RESET
-    };
-}
-
-export function visTips(tipsId: string, spmId: string): VisTipsAction {
-    return {
-        type: VIS_TIPS,
-        tipsId: tipsId,
-        spmId: spmId
-    };
-}
-
-export function skjulTips(spmId: string): SkjulTipsAction {
-    return {
-        type: SKJUL_TIPS,
-        spmId: spmId
     };
 }

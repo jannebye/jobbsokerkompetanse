@@ -1,33 +1,40 @@
-import { Handling, ActionType, SkalViseTipsAction, SkalSkjuleTipsAction } from '../actions';
+import {
+    Handling, ActionType, VisTipsAction,
+    SkjulTipsAction
+} from '../actions';
 
 export interface TipsState {
-    visTips: boolean;
+    spmTilTipsMap: {
+        [key: string]: string
+    };
 }
 
 export const initialState = {
-    visTips: false
+    spmTilTipsMap: {}
 };
 
 //  Reducer
 export default function reducer(state: TipsState = initialState, action: Handling): TipsState {
     switch (action.type) {
-        case ActionType.SKAL_VISE_TIPS:
-            return { ...state, visTips: true };
-        case ActionType.SKAL_SKJULE_TIPS:
-            return { ...state, visTips: false };
+        case ActionType.VIS_TIPS:
+            return { ...state, spmTilTipsMap: { ...state.spmTilTipsMap, [action.spmId]: action.tipsId} };
+        case ActionType.SKJUL_TIPS:
+            return { ...state };
         default:
             return state;
     }
 }
 
-export function skalViseTips(): SkalViseTipsAction {
+export function visTips(tipsId: string, spmId: string): VisTipsAction {
     return {
-        type: ActionType.SKAL_VISE_TIPS,
+        type: ActionType.VIS_TIPS,
+        tipsId: tipsId,
+        spmId: spmId
     };
 }
 
-export function skalSkjuleTips(): SkalSkjuleTipsAction {
+export function skjulTips(): SkjulTipsAction {
     return {
-        type: ActionType.SKAL_SKJULE_TIPS,
+        type: ActionType.SKJUL_TIPS,
     };
 }

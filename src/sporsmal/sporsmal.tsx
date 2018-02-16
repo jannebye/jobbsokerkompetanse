@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import { marker, skjulTips, visTips, visHeleSporsmal, leggeTilSporsmal } from '../ducks/svar-duck';
+import { marker, visHeleSporsmal, leggeTilSporsmal } from '../ducks/svar-duck';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import SvarAlternativModell from '../svar/svaralternativ';
@@ -20,15 +20,13 @@ import alleSporsmal from '../sporsmal/sporsmal-alle';
 import { AvhengighetModell, default as Avhengigheter } from '../utils/avhengigheter';
 import { Link } from 'react-router-dom';
 import { Sidetype } from '../utils/konstanter';
-import { skalSkjuleTips, skalViseTips } from '../ducks/tips-duck';
+import { skjulTips, visTips } from '../ducks/tips-duck';
 
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string, alternativ: SvarAlternativModell[]) => void;
-    visTips: (tipsId: string, spmId: string) => void;
+    doVisTips: (tipsId: string, spmId: string) => void;
     visAlternativer: () => void;
     gaTilNesteSporsmal: (spmId: string) => void;
-    skalViseTips: () => void;
-    skalSkjuleTips: () => void;
 }
 
 interface OwnProps {
@@ -41,7 +39,9 @@ interface StateProps {
     viserAlternativer: boolean;
     paVeiBakover: boolean;
     totaltAntallSpm: number;
-    doVisTips: boolean;
+    spmTilTipsMap: {
+        [key: string]: string
+    };
 }
 
 interface EgenStateProps {
@@ -85,18 +85,16 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
     sjekkSvar(markerteSpm: SvarAlternativModell[],
               sporsmalId: string,
               besvarteSporsmal: BesvarelseModell[],
-              besvartSpm: BesvarelseModell,
               e: any) {
         if (markerteSpm.length === 0) {
             this.setState({feil: true});
         } else {
-            const tip = visTipsEtterSporsmal(sporsmalId, besvarteSporsmal);
-            if (isUndefined(besvartSpm.tips) && !isUndefined(tip)) {
+            const tipId = visTipsEtterSporsmal(sporsmalId, besvarteSporsmal);
+            if (isUndefined(this.props.spmTilTipsMap[sporsmalId]) && !isUndefined(tipId)) {
                 e.preventDefault();
-                return this.props.visTips(tip, sporsmalId);
+                this.props.doVisTips(tipId, sporsmalId);
             } else {
-                this.props.skalSkjuleTips();
-                return this.props.gaTilNesteSporsmal(this.finnNesteSpm(sporsmalId, besvarteSporsmal));
+                this.props.gaTilNesteSporsmal(this.finnNesteSpm(sporsmalId, besvarteSporsmal));
             }
         }
     }
@@ -259,10 +257,8 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                 }}
                             />
                             <section className="tips" role="alert" aria-live="polite">
-                                {!isUndefined(besvartSpm) && (
-                                    !isUndefined(besvartSpm.tips) && (
-                                        <TipsVisning id={besvartSpm.tips!}/>
-                                    )
+                                {!isUndefined(this.props.spmTilTipsMap[this.props.sporsmal.id]) && (
+                                    <TipsVisning id={this.props.spmTilTipsMap[this.props.sporsmal.id]}/>
                                 )}
                             </section>
                                 <div className="knapperad blokk-s">
@@ -275,7 +271,6 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                                 markerteAlternativer,
                                                 sporsmal.id,
                                                 besvarteSporsmal,
-                                                besvartSpm,
                                                 e
                                             );
                                         }}
@@ -300,22 +295,20 @@ const mapStateToProps = (state: AppState): StateProps => ({
     viserAlternativer: state.svar.viserAlternativer,
     paVeiBakover: state.side.paVeiBakover,
     totaltAntallSpm: state.svar.totalAntallSpm,
-    doVisTips: state.tips.visTips
+    spmTilTipsMap: state.tips.spmTilTipsMap
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    visTips: (tipsId: string, spmId: string) => dispatch(visTips(tipsId, spmId)),
+    doVisTips: (tipsId: string, spmId: string) => dispatch(visTips(tipsId, spmId)),
     markerAlternativ: (sporsmalId, alternativ: SvarAlternativModell[]) => {
         dispatch(marker(sporsmalId, alternativ));
-        dispatch(skjulTips(sporsmalId));
+        dispatch(skjulTips());
     },
     visAlternativer: () => dispatch(visHeleSporsmal),
     gaTilNesteSporsmal: (spmId: string) => {
         dispatch(nesteSporsmal(spmId, false));
         dispatch(leggeTilSporsmal(spmId));
     },
-    skalViseTips: () => dispatch(skalViseTips()),
-    skalSkjuleTips: () => dispatch(skalSkjuleTips()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sporsmal);

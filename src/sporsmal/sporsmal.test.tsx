@@ -36,13 +36,9 @@ function getJSXElement(
                     viserAlternativer={false}
                     paVeiBakover={false}
                     besvarteSporsmal={besvarteSpm}
-                    visTips={ () => {
-                        return;
-                    }}
+                    doVisTips={() => {}}
                     totaltAntallSpm={1}
-                    skalViseTips={() => {}}
-                    skalSkjuleTips={() => {}}
-                    doVisTips={false}
+                    spmTilTipsMap={{}}
                 />
             </IntlProvider>
         </Provider>

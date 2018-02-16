@@ -12,9 +12,7 @@ export enum ActionType {
     RESET,
     ENDRE_SIDE,
     VIS_TIPS,
-    SKAL_VISE_TIPS,
     SKJUL_TIPS,
-    SKAL_SKJULE_TIPS,
     HENT_TEMA_OK,
     LEGGE_TIL_SPORSMAL,
 }
@@ -77,17 +75,8 @@ export interface VisTipsAction {
     spmId: string;
 }
 
-export interface SkalViseTipsAction {
-    type: ActionType.SKAL_VISE_TIPS;
-}
-
 export interface SkjulTipsAction {
     type: ActionType.SKJUL_TIPS;
-    spmId: string;
-}
-
-export interface SkalSkjuleTipsAction {
-    type: ActionType.SKAL_SKJULE_TIPS;
 }
 
 export interface HentTemaAction {
@@ -106,6 +95,4 @@ export type Handling =
     | VisTipsAction
     | SkjulTipsAction
     | HentTemaAction
-    | LeggeTilSporsmalAction
-    | SkalViseTipsAction
-    | SkalSkjuleTipsAction;
+    | LeggeTilSporsmalAction;
