@@ -3,7 +3,6 @@ import {
     Handling,
     ActionType,
     EndreAlternativAction,
-    ResetAction,
     VisAlternativerAction,
     EndreAlternativOgAntallAction,
     LeggeTilSporsmalAction
@@ -15,7 +14,6 @@ const {
     ENDRE_ALTERNATIV,
     ENDRE_ALTERNATIV_OG_ANTALL,
     VIS_ALTERNATIVER,
-    RESET,
 } = ActionType;
 
 export interface SvarState {
@@ -111,8 +109,6 @@ export default function reducer(
                 ...state,
                 viserAlternativer: true
             };
-        case ActionType.RESET:
-            return initialState;
         case ActionType.LEGGE_TIL_SPORSMAL:
             return {
                 ...state,
@@ -198,9 +194,3 @@ export function leggeTilSporsmal(spmId: string): LeggeTilSporsmalAction {
 export const visHeleSporsmal: VisAlternativerAction = {
     type: VIS_ALTERNATIVER
 };
-
-export function reset(): ResetAction {
-    return {
-        type: RESET
-    };
-}

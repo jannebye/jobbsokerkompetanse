@@ -9,7 +9,6 @@ export enum ActionType {
     NESTE_SPORSMAL,
     FORRIGE_SPORSMAL,
     ENDRE_SPORSMAL,
-    RESET,
     ENDRE_SIDE,
     VIS_TIPS,
     SKJUL_TIPS,
@@ -54,15 +53,6 @@ export interface ForrigeSporsmalAction {
     spmId: string;
 }
 
-export interface EndreSporsmalAction {
-    type: ActionType.ENDRE_SPORSMAL;
-    spmId: string;
-}
-
-export interface ResetAction {
-    type: ActionType.RESET;
-}
-
 export interface EndreSideAction {
     type: ActionType.ENDRE_SIDE;
     side: Sidetype;
@@ -90,7 +80,6 @@ export type Handling =
     | NesteSporsmalAction
     | VisAlternativerAction
     | ForrigeSporsmalAction
-    | ResetAction
     | EndreSideAction
     | VisTipsAction
     | SkjulTipsAction
