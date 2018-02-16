@@ -1,76 +1,27 @@
 .artikkelpanel {
-	background-color: @orangeBakgrunn;
-	margin-bottom: 1rem;
+	border: 1px solid @orangeFocus;
 
-	&__hode {
-		border: 0;
-		width: 100%;
-
-		.panel-mixin();
-		.panel-focushover-mixin();
-
-		background-color: transparent;
-		color: @navMorkGra;
-		padding: 2rem;
-		margin-bottom: 0;
-		text-decoration: none;
+	.ekspanderbartPanel__hode {
+		background-color: @orangeBakgrunn;
 		text-align: left;
+		 &:hover {
+			 color: @navMorkGra;
+		 }
+	}
 
-		&:hover,
-		&--hover {
-			& .artikkelpanel__heading {
-				text-decoration: underline;
-			}
-			box-shadow: @orangeFocus 0 2px 1px 0;
-			color: @navMorkGra;
+	.ekspanderbartPanel__heading {
+		padding-right: 1rem;
+	}
+
+	.ekspanderbartPanel__innhold {
+		background-color: @orangeBakgrunn;
+
+		p {
+			margin: 0.2rem 0 1rem;
 		}
 	}
 
-	&__innhold {
-		.panel-mixin();
-		background-color: transparent;
-	}
-
-	.indikator-wrap {
-		text-align: center;
-		padding-bottom: 1rem;
-	}
-
-	&--lukket {
-		.artikkelpanel__innhold {
-			height: 0;
-			overflow: hidden;
-			padding: 0;
-			transition: max-height 1s ease-in-out;
-		}
-		.artikkelpanel__indikator {
-			.chevron-mixin();
-			.chevron-orientasjon-mixin(ned);
-		}
-	}
-
-	&--apen {
-		.artikkelpanel__hode {
-			border-bottom-left-radius: 0;
-			border-bottom-right-radius: 0;
-		}
-
-		.artikkelpanel__innhold {
-			max-height: 3000px;
-			padding: 0.5rem 2rem 0;
-			border-top-left-radius: 0;
-			border-top-right-radius: 0;
-			transition: max-height 1s ease-in-out;
-		}
-
-		.artikkelpanel__hode:hover:not(:focus),
-		.artikkelpanel__hode--hover:not(.artikkelpanel__hode--focus) {
-			box-shadow: none;
-		}
-
-		.artikkelpanel__indikator {
-			.chevron-mixin();
-			.chevron-orientasjon-mixin(opp);
-		}
+	.ekspanderbartPanel--apen > .ekspanderbartPanel__hode .ekspanderbartPanel__indikator {
+		vertical-align: top;
 	}
 }
