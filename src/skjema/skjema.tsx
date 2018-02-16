@@ -42,7 +42,6 @@ class Skjema extends React.PureComponent<SkjemaProps, {}> {
 
     render() {
         const {spmId} = this.props.match.params;
-        console.log('spmId', spmId);
         let sporsmalRefs = this.sporsmalRefs;
 
         return (

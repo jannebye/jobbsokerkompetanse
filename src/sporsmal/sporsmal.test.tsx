@@ -40,6 +40,9 @@ function getJSXElement(
                         return;
                     }}
                     totaltAntallSpm={1}
+                    skalViseTips={() => {}}
+                    skalSkjuleTips={() => {}}
+                    doVisTips={false}
                 />
             </IntlProvider>
         </Provider>

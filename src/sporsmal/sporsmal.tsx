@@ -20,12 +20,15 @@ import alleSporsmal from '../sporsmal/sporsmal-alle';
 import { AvhengighetModell, default as Avhengigheter } from '../utils/avhengigheter';
 import { Link } from 'react-router-dom';
 import { Sidetype } from '../utils/konstanter';
+import { skalSkjuleTips, skalViseTips } from '../ducks/tips-duck';
 
 interface DispatchProps {
     markerAlternativ: (sporsmalId: string, alternativ: SvarAlternativModell[]) => void;
     visTips: (tipsId: string, spmId: string) => void;
     visAlternativer: () => void;
     gaTilNesteSporsmal: (spmId: string) => void;
+    skalViseTips: () => void;
+    skalSkjuleTips: () => void;
 }
 
 interface OwnProps {
@@ -38,6 +41,7 @@ interface StateProps {
     viserAlternativer: boolean;
     paVeiBakover: boolean;
     totaltAntallSpm: number;
+    doVisTips: boolean;
 }
 
 interface EgenStateProps {
@@ -81,14 +85,17 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
     sjekkSvar(markerteSpm: SvarAlternativModell[],
               sporsmalId: string,
               besvarteSporsmal: BesvarelseModell[],
-              besvartSpm: BesvarelseModell) {
+              besvartSpm: BesvarelseModell,
+              e: any) {
         if (markerteSpm.length === 0) {
             this.setState({feil: true});
         } else {
             const tip = visTipsEtterSporsmal(sporsmalId, besvarteSporsmal);
             if (isUndefined(besvartSpm.tips) && !isUndefined(tip)) {
+                e.preventDefault();
                 return this.props.visTips(tip, sporsmalId);
             } else {
+                this.props.skalSkjuleTips();
                 return this.props.gaTilNesteSporsmal(this.finnNesteSpm(sporsmalId, besvarteSporsmal));
             }
         }
@@ -263,12 +270,13 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                         to={nesteUrl}
                                         className={sporsmal.erSisteSpm ? '' : 'knapp knapp--hoved sporsmal__knapp'}
                                         key="besvar"
-                                        onClick={() => {
+                                        onClick={(e) => {
                                             this.sjekkSvar(
                                                 markerteAlternativer,
                                                 sporsmal.id,
                                                 besvarteSporsmal,
-                                                besvartSpm
+                                                besvartSpm,
+                                                e
                                             );
                                         }}
                                     >
@@ -291,7 +299,8 @@ const mapStateToProps = (state: AppState): StateProps => ({
     besvarteSporsmal: state.svar.data,
     viserAlternativer: state.svar.viserAlternativer,
     paVeiBakover: state.side.paVeiBakover,
-    totaltAntallSpm: state.svar.totalAntallSpm
+    totaltAntallSpm: state.svar.totalAntallSpm,
+    doVisTips: state.tips.visTips
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
@@ -304,7 +313,9 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
     gaTilNesteSporsmal: (spmId: string) => {
         dispatch(nesteSporsmal(spmId, false));
         dispatch(leggeTilSporsmal(spmId));
-    }
+    },
+    skalViseTips: () => dispatch(skalViseTips()),
+    skalSkjuleTips: () => dispatch(skalSkjuleTips()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sporsmal);
