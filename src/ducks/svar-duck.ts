@@ -52,7 +52,6 @@ export default function reducer(
                     (sprsm) => sprsm.sporsmalId === action.data.sporsmalId
                 )
             ) {
-                console.log('endre alternativ if');
                 return {
                     ...state,
                     data: state.data.map(
@@ -67,7 +66,6 @@ export default function reducer(
                     )
                 };
             } else {
-                console.log('endre alternativ else');
                 return {
                     ...state,
                     data: state.data.concat(
@@ -207,7 +205,6 @@ export function marker(
             };
         }
     }
-    console.log('marker');
     return {
         type: ENDRE_ALTERNATIV,
         data: {

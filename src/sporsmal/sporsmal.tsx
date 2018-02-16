@@ -31,7 +31,6 @@ interface DispatchProps {
 interface OwnProps {
     sporsmal: SporsmalModell;
     spmRef: any; // tslint:disable-line:no-any
-    viserAlternativer: boolean;
 }
 
 interface StateProps {

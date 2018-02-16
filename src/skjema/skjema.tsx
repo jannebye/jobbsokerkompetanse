@@ -31,16 +31,18 @@ class Skjema extends React.PureComponent<SkjemaProps, {}> {
     }
 
     componentWillMount() {
-        this.props.byttSpm(this.props.match.params.spmId, harBesvartSpm(this.props.besvarteSporsmal, this.props.match.params.spmId));
+        const sporsmalId = this.props.match.params.spmId;
+        this.props.byttSpm(sporsmalId, harBesvartSpm(this.props.besvarteSporsmal, sporsmalId));
     }
 
     componentDidUpdate() {
-        this.props.byttSpm(this.props.match.params.spmId, harBesvartSpm(this.props.besvarteSporsmal, this.props.match.params.spmId));
+        const sporsmalId = this.props.match.params.spmId;
+        this.props.byttSpm(sporsmalId, harBesvartSpm(this.props.besvarteSporsmal, sporsmalId));
     }
 
     render() {
         const {spmId} = this.props.match.params;
-
+        console.log('spmId', spmId);
         let sporsmalRefs = this.sporsmalRefs;
 
         return (
