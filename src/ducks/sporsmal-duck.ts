@@ -1,9 +1,9 @@
 import {
-    Handling, ActionType, LeggTilSporsmalSomVisesAction, FjerneSporsmalSomVisesAction, LeggTilBesvartSporsmalAction, SjekkAvhengigheterAction
+    Handling, ActionType, LeggTilBesvartSporsmalAction, SjekkAvhengigheterAction
 } from '../actions';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
 import alleSporsmal  from '../sporsmal/sporsmal-alle';
-import { visTipsEtterSporsmal } from '../skjema/tips/tips-generering-ny';
+import { visTipsEtterSporsmal } from '../skjema/tips/tips-generering';
 import { SporsmalId } from './side-duck';
 import Avhengigheter from '../utils/avhengigheter';
 
@@ -56,14 +56,20 @@ export default function reducer(state: SporsmalState = initialState, action: Han
             const avhengighet = Avhengigheter.find(a => a.sporsmalId === action.spmId);
             if (avhengighet) {
 
-                if (avhengighet.sporsmalSomIkkeVises)
-
+                if (viserAvhengighetsSporsmal(state.sporsmalSomVises, avhengighet.sporsmalSomIkkeVises)) {
+                    return {
+                        ...state,
+                        sporsmalSomVises: fjernAvhengighetsSporsmal(
+                            state.sporsmalSomVises,
+                            avhengighet.sporsmalSomIkkeVises
+                        )
+                    };
+                }
                 return {
                     ...state,
-                    sporsmalSomVises: state.sporsmalSomVises.filter(
-                        spmVises => avhengighet.sporsmalSomIkkeVises.some(
-                            spmIkkeVises => spmIkkeVises !== spmVises
-                        )
+                    sporsmalSomVises: leggTilAvhengighetsSporsmal(
+                        state.sporsmalSomVises,
+                        avhengighet.sporsmalSomIkkeVises
                     )
                 };
             }
@@ -73,11 +79,28 @@ export default function reducer(state: SporsmalState = initialState, action: Han
     }
 }
 
-export function leggTilSporsmalSomVises(spmId: string): LeggTilSporsmalSomVisesAction {
-    return {
-        type: ActionType.LEGG_TIL_SPORSMAL_SOM_VISES,
-        spmId: spmId,
-    };
+function viserAvhengighetsSporsmal(sporsmalSomVises: string[], sporsmalSomIkkeVises: string[]): boolean {
+    return sporsmalSomIkkeVises.some(
+        spmIkkeVises => sporsmalSomVises.some(
+            spmVises => spmVises === spmIkkeVises
+        )
+    );
+}
+
+function fjernAvhengighetsSporsmal(sporsmalSomVises: string[], sporsmalSomIkkeVises: string[]): string[] {
+    return sporsmalSomVises.filter(
+        spmVises => sporsmalSomIkkeVises.some(
+            spmIkkeVises => spmIkkeVises === spmVises
+        )
+    );
+}
+
+function leggTilAvhengighetsSporsmal(sporsmalSomVises: string[], sporsmalSomIkkeVises: string[]): string[] {
+    return sporsmalSomVises.filter(
+        spmVises => sporsmalSomIkkeVises.some(
+            spmIkkeVises => spmIkkeVises !== spmVises
+        )
+    );
 }
 
 export function leggTilBesvartSporsmal(spmId: string, svar: string[]): LeggTilBesvartSporsmalAction {
@@ -93,7 +116,7 @@ export function sjekkAvhengigheter(svarId: string, spmId: string): SjekkAvhengig
         type: ActionType.SJEKK_AVHENGIGHETER,
         svarId: svarId,
         spmId: spmId
-    }
+    };
 }
 
 export function harBesvartSpm(utforteBesvarelser: BesvartSporsmal[], sporsmalId: SporsmalId): boolean {

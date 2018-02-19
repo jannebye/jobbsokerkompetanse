@@ -63,7 +63,8 @@ function erAlternativMulig(
     }
 }*/
 
-function AlternativContainer({avgitteSvar, sporsmal, doKlikkAlternativ, doSjekkAvhengigheter}: AlternativContainerProps) {
+function AlternativContainer(
+        {avgitteSvar, sporsmal, doKlikkAlternativ, doSjekkAvhengigheter}: AlternativContainerProps) {
     return (
         <ul className={'alternativer alternativer__' + sporsmal.type} role="group" aria-label={sporsmal.id}>
             {sporsmal.alternativer.map((alternativ: string) => {

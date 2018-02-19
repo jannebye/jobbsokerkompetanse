@@ -1,5 +1,9 @@
 import { AlternativTyper } from '../utils/konstanter';
 
+export interface Alternativ {
+    id: string;
+}
+
 interface SporsmalModell {
     id: string;
     alternativer: string[];

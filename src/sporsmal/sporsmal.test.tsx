@@ -29,6 +29,7 @@ function getJSXElement(
                     paVeiBakover={false}
                     besvarteSporsmal={besvarteSpm}
                     sporsmalSomVises={[]}
+                    avgitteSvar={[]}
                 />
             </IntlProvider>
         </Provider>

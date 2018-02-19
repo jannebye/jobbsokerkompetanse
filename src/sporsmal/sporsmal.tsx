@@ -11,7 +11,6 @@ import SVG from 'react-inlinesvg';
 import KnappBase from 'nav-frontend-knapper';
 import * as cls from 'classnames';
 import { nesteSporsmal } from '../ducks/side-duck';
-import alleSporsmal from '../sporsmal/sporsmal-alle';
 import { Link } from 'react-router-dom';
 import { Sidetype } from '../utils/konstanter';
 import { BesvartSporsmal, leggTilBesvartSporsmal } from '../ducks/sporsmal-duck';
@@ -56,6 +55,8 @@ export class Sporsmal extends React.Component<SporsmalProps> {
         } = this.props;
 
         const gjeldendeSpmIndex = sporsmalSomVises.indexOf(sporsmal.id);
+        const nesteSpmId = sporsmalSomVises[gjeldendeSpmIndex + 1];
+        const forrigeSpmId = sporsmalSomVises[gjeldendeSpmIndex - 1];
 
         const sporsmalImg = require('../ikoner/' + sporsmal.id + '.svg');
 
@@ -71,9 +72,9 @@ export class Sporsmal extends React.Component<SporsmalProps> {
 
         const tilbakeUrl = sporsmal.erForsteSpm
             ? '/' + Sidetype.START
-            : '/' + Sidetype.KARTLEGGING + '/' + alleSporsmal[gjeldendeSpmIndex - 1].id;
+            : '/' + Sidetype.KARTLEGGING + '/' + forrigeSpmId;
 
-        const nesteUrl = '/' + Sidetype.KARTLEGGING + '/' + alleSporsmal[gjeldendeSpmIndex + 1].id;
+        const nesteUrl = '/' + Sidetype.KARTLEGGING + '/' + nesteSpmId;
 
         const besvartSpm: BesvartSporsmal | undefined = besvarteSporsmal.find(
             besvarelse => besvarelse.spmId === sporsmal.id
@@ -182,10 +183,10 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                                     className={sporsmal.erSisteSpm ? '' : 'knapp knapp--hoved sporsmal__knapp'}
                                     key="besvar"
                                     onClick={(e) => {
-                                        if(besvartSpm && besvartSpm.tips) {
+                                        if (besvartSpm && besvartSpm.tips) {
                                             e.preventDefault();
                                         } else {
-                                            this.props.gaTilNesteSporsmal(this.finnNesteSpm(sporsmal.id, besvarteSporsmal), avgitteSvar);
+                                            this.props.gaTilNesteSporsmal(nesteSpmId, avgitteSvar);
                                         }}}
                                 >
                                     {sporsmal.erSisteSpm ? (
