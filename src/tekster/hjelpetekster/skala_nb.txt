@@ -1,1 +1,1 @@
-Velg på en skala fra 1 til 5 hvor 1 er "utrygg" og 5 er "trygg".
+Velg på en skala fra 1 til 5 hvor 1 er "svært dårlig" og 5 er "veldig godt".
