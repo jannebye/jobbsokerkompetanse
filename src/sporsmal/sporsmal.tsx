@@ -79,6 +79,14 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
         if (this.props.paVeiBakover) {
             window.scrollTo(0, 0);
         }
+        window.scroll(function(){
+            if (window.scrollTop() >= 300) {
+                framdrift.classList.add('fixed-header');
+            }
+            else {
+                framdrift.classList.remove('fixed-header');
+            }
+        });
     }
 
     render() {
