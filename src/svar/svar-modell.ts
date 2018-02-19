@@ -1,7 +1,5 @@
-import SvarAlternativModell from './svaralternativ';
-
 export interface BesvarelseModell {
     sporsmalId: string;
-    svarAlternativer: SvarAlternativModell[];
+    svarAlternativer: string[];
     tips: string | undefined;
 }

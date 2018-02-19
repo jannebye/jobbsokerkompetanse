@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import SvarAlternativModell from '../svar/svaralternativ';
 import { AlternativTyper } from '../utils/konstanter';
 import OverskriftMedHjelpeTekst from '../skjema/overskrift-med-hjelpetekst';
 
 interface AlternativProps {
-    alternativ: SvarAlternativModell;
+    alternativ: string;
     erValgt: boolean;
-    markerAlternativ: () => void;
+    klikk: () => void;
     sporsmalId: string;
     sporsmalType: AlternativTyper;
     kanVelges: boolean;
@@ -16,12 +15,12 @@ interface AlternativProps {
 function Alternativ({
     alternativ,
     erValgt,
-    markerAlternativ,
+    klikk,
     sporsmalId,
     sporsmalType,
     kanVelges
 }: AlternativProps) {
-    const skalHaHjelpetekst: boolean = alternativ.id === 'finn-svar-0111';
+    const skalHaHjelpetekst: boolean = alternativ === 'finn-svar-0111';
     let inputKlasser = 'skjemaelement__input ';
     let inputType: 'radio' | 'checkbox';
 
@@ -44,31 +43,31 @@ function Alternativ({
     }
 
     return (
-        <li key={alternativ.id} className="alternativ">
+        <li key={alternativ} className="alternativ">
             <input
-                id={alternativ.id}
+                id={alternativ}
                 className={inputKlasser}
                 type={inputType}
                 name={sporsmalId.toString()}
-                defaultValue={alternativ.id}
+                defaultValue={alternativ}
                 checked={erValgt}
                 disabled={!kanVelges}
                 onFocus={() => {
                     if (kanVelges && inputType === 'radio') {
-                        markerAlternativ();
+                        klikk();
                     }
                 }}
                 onChange={() => {
                     if (kanVelges) {
-                        markerAlternativ();
+                        klikk();
                     }
                 }}
             />
             <label
-                htmlFor={alternativ.id}
+                htmlFor={alternativ}
                 className={`skjemaelement__label ${erValgt ? 'markert' : ''}`}
             >
-                <FormattedMessage id={alternativ.id} />
+                <FormattedMessage id={alternativ} />
                 {skalHaHjelpetekst && (
                     <OverskriftMedHjelpeTekst
                         overskriftId=""

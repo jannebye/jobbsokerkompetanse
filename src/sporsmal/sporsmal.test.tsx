@@ -6,17 +6,16 @@ import getStore from '../store';
 import IntlProvider from '../Intl-provider';
 import { Provider } from 'react-redux';
 import spm from '../sporsmal/sporsmal-alle';
-import { BesvarelseModell } from '../svar/svar-modell';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import SvarAlternativModell from '../svar/svaralternativ';
 import { SinonSpy } from 'sinon';
+import { BesvartSporsmal } from '../ducks/sporsmal-duck';
 const sinon = require('sinon');
 
 configure({ adapter: new Adapter() });
 const store = getStore();
 
 function getJSXElement(
-    besvarteSpm: Array<BesvarelseModell>,
+    besvarteSpm: Array<BesvartSporsmal>,
     spmModell: SporsmalModell,
     spy: SinonSpy
 ) {
@@ -26,19 +25,10 @@ function getJSXElement(
                 <Sporsmal
                     sporsmal={spmModell}
                     spmRef={spmModell}
-                    markerAlternativ={() => {
-                        return;
-                    }}
-                    visAlternativer={() => {
-                        return;
-                    }}
                     gaTilNesteSporsmal={() => {}}
-                    viserAlternativer={false}
                     paVeiBakover={false}
                     besvarteSporsmal={besvarteSpm}
-                    doVisTips={() => {}}
-                    totaltAntallSpm={1}
-                    spmTilTipsMap={{}}
+                    sporsmalSomVises={[]}
                 />
             </IntlProvider>
         </Provider>
@@ -48,7 +38,7 @@ function getJSXElement(
 describe('<Sporsmal />', function() {
     let tips: string | undefined;
     let spy: SinonSpy;
-    let svarAlternativer: Array<SvarAlternativModell>;
+    let svarAlternativer: Array<string>;
     const preventDefault = {
         preventDefault: () => {
             return;
@@ -66,8 +56,8 @@ describe('<Sporsmal />', function() {
         const sisteSpm = spm.find(x => x.erSisteSpm === true)!;
         const besvarteSpm = [
             {
-                sporsmalId: sisteSpm!.id,
-                svarAlternativer: svarAlternativer,
+                spmId: sisteSpm!.id,
+                svar: svarAlternativer,
                 tips: tips
             }
         ];
@@ -79,8 +69,8 @@ describe('<Sporsmal />', function() {
         const sisteSpm = spm.find(x => x.erSisteSpm === true)!;
         const besvarteSpm = [
             {
-                sporsmalId: sisteSpm.id,
-                svarAlternativer: svarAlternativer,
+                spmId: sisteSpm.id,
+                svar: svarAlternativer,
                 tips: tips
             }
         ];
@@ -96,8 +86,8 @@ describe('<Sporsmal />', function() {
         const sporsmal = spm.find(x => !x.erSisteSpm && !x.erForsteSpm)!;
         const besvarteSpm = [
             {
-                sporsmalId: sporsmal.id,
-                svarAlternativer: svarAlternativer,
+                spmId: sporsmal.id,
+                svar: svarAlternativer,
                 tips: tips
             }
         ];
@@ -110,8 +100,8 @@ describe('<Sporsmal />', function() {
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
         const besvarteSpm = [
             {
-                sporsmalId: forsteSpm.id,
-                svarAlternativer: svarAlternativer,
+                spmId: forsteSpm.id,
+                svar: svarAlternativer,
                 tips: tips
             }
         ];
@@ -124,8 +114,8 @@ describe('<Sporsmal />', function() {
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
         const besvarteSpm = [
             {
-                sporsmalId: forsteSpm.id,
-                svarAlternativer: svarAlternativer,
+                spmId: forsteSpm.id,
+                svar: svarAlternativer,
                 tips: tips
             }
         ];
@@ -141,11 +131,11 @@ describe('<Sporsmal />', function() {
 
     it('skal ikke vise feilmelding dersom man trykker på nesteknapp og spørsmål er besvart', () => {
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
-        svarAlternativer.push({ id: forsteSpm!.alternativer[0].id });
+        svarAlternativer.push(forsteSpm!.alternativer[0]);
         const besvarteSpm = [
             {
-                sporsmalId: forsteSpm.id,
-                svarAlternativer: svarAlternativer,
+                spmId: forsteSpm.id,
+                svar: svarAlternativer,
                 tips: tips
             }
         ];
@@ -163,11 +153,11 @@ describe('<Sporsmal />', function() {
     it('skal vise tips', () => {
         const tipsId = 'sok-utenfor-hjemsted';
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
-        svarAlternativer.push({ id: forsteSpm!.alternativer[0].id });
+        svarAlternativer.push(forsteSpm!.alternativer[0]);
         const besvarteSpm = [
             {
-                sporsmalId: forsteSpm.id,
-                svarAlternativer: svarAlternativer,
+                spmId: forsteSpm.id,
+                svar: svarAlternativer,
                 tips: tipsId
             }
         ];

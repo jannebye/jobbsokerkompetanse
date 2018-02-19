@@ -6,15 +6,15 @@ import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import { nesteSporsmal } from '../ducks/side-duck';
 import { RouteComponentProps, withRouter } from 'react-router';
-import { harBesvartSpm } from '../ducks/svar-duck';
-import { BesvarelseModell } from '../svar/svar-modell';
+import { harBesvartSpm } from '../ducks/sporsmal-duck';
+import { BesvartSporsmal } from '../ducks/sporsmal-duck';
 
 interface UrlProps {
     spmId: string;
 }
 
 interface StateProps {
-    besvarteSporsmal: BesvarelseModell[];
+    besvartSporsmal: BesvartSporsmal[];
 }
 
 interface DispatchProps {
@@ -32,12 +32,12 @@ class Skjema extends React.PureComponent<SkjemaProps, {}> {
 
     componentWillMount() {
         const sporsmalId = this.props.match.params.spmId;
-        this.props.byttSpm(sporsmalId, harBesvartSpm(this.props.besvarteSporsmal, sporsmalId));
+        this.props.byttSpm(sporsmalId, harBesvartSpm(this.props.besvartSporsmal, sporsmalId));
     }
 
     componentDidUpdate() {
         const sporsmalId = this.props.match.params.spmId;
-        this.props.byttSpm(sporsmalId, harBesvartSpm(this.props.besvarteSporsmal, sporsmalId));
+        this.props.byttSpm(sporsmalId, harBesvartSpm(this.props.besvartSporsmal, sporsmalId));
     }
 
     render() {
@@ -59,7 +59,7 @@ class Skjema extends React.PureComponent<SkjemaProps, {}> {
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    besvarteSporsmal: state.svar.data
+    besvartSporsmal: state.sporsmal.besvarteSporsmal
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

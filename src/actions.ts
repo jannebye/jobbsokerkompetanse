@@ -1,5 +1,4 @@
 import { Sidetype } from './utils/konstanter';
-import SvarAlternativModell from './svar/svaralternativ';
 import { TemaModell } from './resultat/tema-modell';
 
 export enum ActionType {
@@ -14,6 +13,11 @@ export enum ActionType {
     SKJUL_TIPS,
     HENT_TEMA_OK,
     LEGGE_TIL_SPORSMAL,
+    LEGG_TIL_SPORSMAL_SOM_VISES,
+    FJERNE_SPORSMAL_SOM_VISES,
+    LEGG_TIL_BESVART_SPORSMAL,
+    KLIKK_ALTERNATIV,
+    SJEKK_AVHENGIGHETER,
 }
 
 export interface LeggeTilSporsmalAction {
@@ -25,7 +29,7 @@ export interface EndreAlternativAction {
     type: ActionType.ENDRE_ALTERNATIV;
     data: {
         sporsmalId: string;
-        svarAlternativer: SvarAlternativModell[];
+        svarAlternativer: string[];
     };
 }
 
@@ -33,7 +37,7 @@ export interface EndreAlternativOgAntallAction {
     type: ActionType.ENDRE_ALTERNATIV_OG_ANTALL;
     data: {
         sporsmalId: string;
-        svarAlternativer: SvarAlternativModell[];
+        svarAlternativer: string[];
         totalAntallSpm: number;
     };
 }
@@ -74,6 +78,33 @@ export interface HentTemaAction {
     data: TemaModell;
 }
 
+export interface LeggTilSporsmalSomVisesAction {
+    type: ActionType.LEGG_TIL_SPORSMAL_SOM_VISES;
+    spmId: string;
+}
+
+export interface FjerneSporsmalSomVisesAction {
+    type: ActionType.FJERNE_SPORSMAL_SOM_VISES;
+    spmId: string;
+}
+
+export interface LeggTilBesvartSporsmalAction {
+    type: ActionType.LEGG_TIL_BESVART_SPORSMAL;
+    spmId: string;
+    svar: string[];
+}
+
+export interface KlikkAlternativAction {
+    type: ActionType.KLIKK_ALTERNATIV;
+    svarId: string;
+}
+
+export interface SjekkAvhengigheterAction {
+    type: ActionType.SJEKK_AVHENGIGHETER;
+    svarId: string;
+    spmId: string;
+}
+
 export type Handling =
     | EndreAlternativAction
     | EndreAlternativOgAntallAction
@@ -84,4 +115,9 @@ export type Handling =
     | VisTipsAction
     | SkjulTipsAction
     | HentTemaAction
-    | LeggeTilSporsmalAction;
+    | LeggeTilSporsmalAction
+    | LeggTilSporsmalSomVisesAction
+    | FjerneSporsmalSomVisesAction
+    | LeggTilBesvartSporsmalAction
+    | KlikkAlternativAction
+    | SjekkAvhengigheterAction;
