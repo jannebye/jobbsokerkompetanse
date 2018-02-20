@@ -6,10 +6,11 @@ replicas:
   cpuThresholdPercentage: 50
 port: 8080
 healthcheck:
+  # NB: pus-decorator sine helsesjekker
   liveness:
-    path: jobbsokerkompetanse/nais/alive.txt
+    path: jobbsokerkompetanse/internal/isAlive
   readiness:
-    path: jobbsokerkompetanse/nais/ready.txt
+    path: jobbsokerkompetanse/internal/selftest
 fasitResources:
   used:
   - alias: appres.cms
