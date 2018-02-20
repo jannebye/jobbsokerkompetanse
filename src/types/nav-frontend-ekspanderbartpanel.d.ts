@@ -5,7 +5,7 @@ declare module 'nav-frontend-ekspanderbartpanel' {
         apen: boolean;
         className?: string;
         onClick?: Function;
-        tittel: any;
+        tittel: HTMLElement;
         tittelProps?: string;
         children?: {};
     }
