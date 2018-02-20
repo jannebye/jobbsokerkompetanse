@@ -32,17 +32,18 @@ export default function reducer(state: SideState = initialState,
                                 action: Handling): SideState {
     switch (action.type) {
         case ActionType.NESTE_SPORSMAL: {
+            const sideType = Sidetype.KARTLEGGING;
             const nySpmId = action.spmId;
             const paVeiBakover = erPaVeiBakover(state.spmId, nySpmId);
             return {
                 ...state,
+                sideType: sideType,
                 spmId: nySpmId,
                 viserAlternativer: action.spmErBesvart,
                 paVeiBakover
             };
         }
-        case
-        ActionType.FORRIGE_SPORSMAL: {
+        case ActionType.FORRIGE_SPORSMAL: {
             return {...state, spmId: action.spmId};
         }
         default:

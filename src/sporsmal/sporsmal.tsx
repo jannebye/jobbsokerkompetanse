@@ -64,7 +64,7 @@ export class Sporsmal extends React.Component<SporsmalProps> {
             tilbake: paVeiBakover,
         });
 
-        const framdriftValue = Math.round(gjeldendeSpmIndex + 1 / sporsmalSomVises.length * 100 * 100) / 100;
+        const framdriftValue = Math.round((gjeldendeSpmIndex + 1) / sporsmalSomVises.length * 100);
         /** @type {{search: React.CSSProperties}} */
         const framdriftStyle = {
             width: framdriftValue + '%'
@@ -80,9 +80,18 @@ export class Sporsmal extends React.Component<SporsmalProps> {
             besvarelse => besvarelse.spmId === sporsmal.id
         );
 
+        console.log('sporsmalSomVises.length: ' + sporsmalSomVises.length); // tslint:disable-line:no-console
         console.log('gjeldendeSpmIndex: ' + gjeldendeSpmIndex); // tslint:disable-line:no-console
+        console.log('avgitteSvar: ' + avgitteSvar); // tslint:disable-line:no-console
         console.log('framdriftValue: ' + framdriftValue); // tslint:disable-line:no-console
         console.log('besvarteSporsmal: ' + besvarteSporsmal.length); // tslint:disable-line:no-console
+        console.log('-------------------------: '); // tslint:disable-line:no-console
+        let besvarelser = 'besvarelser: ';
+        besvarteSporsmal.forEach((spm) => {
+            besvarelser += spm.svar + ', ';
+        });
+        console.log(besvarelser); // tslint:disable-line:no-console
+        console.log('-------------------------: '); // tslint:disable-line:no-console
         console.log('tilbakeUrl: ' + tilbakeUrl); // tslint:disable-line:no-console
 
         return (
