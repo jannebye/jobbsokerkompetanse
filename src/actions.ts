@@ -1,5 +1,6 @@
 import { Sidetype } from './utils/konstanter';
 import { TemaModell } from './resultat/tema-modell';
+import { BesvartSporsmal } from './ducks/sporsmal-duck';
 
 export enum ActionType {
     ENDRE_ALTERNATIV,
@@ -18,6 +19,9 @@ export enum ActionType {
     LEGG_TIL_BESVART_SPORSMAL,
     KLIKK_ALTERNATIV,
     SJEKK_AVHENGIGHETER,
+    NULL_STILL_AVGITTE_SVAR,
+    SKAL_STOPPE_FOR_A_VISE_NYTT_TIPS = 'SKAL_STOPPE_FOR_A_VISE_NYTT_TIPS',
+    VIS_NYTT_TIPS = 'VIS_NYTT_TIPS',
 }
 
 export interface LeggeTilSporsmalAction {
@@ -92,17 +96,34 @@ export interface LeggTilBesvartSporsmalAction {
     type: ActionType.LEGG_TIL_BESVART_SPORSMAL;
     spmId: string;
     svar: string[];
+    tips: string | undefined;
 }
 
 export interface KlikkAlternativAction {
     type: ActionType.KLIKK_ALTERNATIV;
     svarId: string;
+    spmId: string;
+    besvarteSporsmal: BesvartSporsmal[];
 }
 
 export interface SjekkAvhengigheterAction {
     type: ActionType.SJEKK_AVHENGIGHETER;
     svarId: string;
     spmId: string;
+}
+
+export interface NullStillAvgitteSvarAction {
+    type: ActionType.NULL_STILL_AVGITTE_SVAR;
+}
+
+export interface StoppForAViseNyttTipsAction {
+    type: ActionType.SKAL_STOPPE_FOR_A_VISE_NYTT_TIPS;
+    stopp: boolean;
+}
+
+export interface VisNyttTipsAction {
+    type: ActionType.VIS_NYTT_TIPS;
+    skalViseNyttTips: boolean;
 }
 
 export type Handling =
@@ -120,4 +141,7 @@ export type Handling =
     | FjerneSporsmalSomVisesAction
     | LeggTilBesvartSporsmalAction
     | KlikkAlternativAction
-    | SjekkAvhengigheterAction;
+    | SjekkAvhengigheterAction
+    | NullStillAvgitteSvarAction
+    | StoppForAViseNyttTipsAction
+    | VisNyttTipsAction;

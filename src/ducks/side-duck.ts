@@ -1,4 +1,4 @@
-import { Handling, ActionType, NesteSporsmalAction } from '../actions';
+import { Handling, ActionType, NesteSporsmalAction, StoppForAViseNyttTipsAction } from '../actions';
 import { Sidetype } from '../utils/konstanter';
 import spm from '../sporsmal/sporsmal-alle';
 import alleSporsmal from '../sporsmal/sporsmal-alle';
@@ -8,13 +8,15 @@ export interface SideState {
     spmId: string;
     viserAlternativer: boolean;
     paVeiBakover: boolean;
+    skalStoppeForAViseNyttTips: boolean;
 }
 
 export const initialState = {
     sideType: Sidetype.START,
     spmId: alleSporsmal[0].id,
     viserAlternativer: false,
-    paVeiBakover: false
+    paVeiBakover: false,
+    skalStoppeForAViseNyttTips: false,
 };
 
 export type SporsmalId = string;
@@ -45,6 +47,8 @@ export default function reducer(state: SideState = initialState,
         ActionType.FORRIGE_SPORSMAL: {
             return {...state, spmId: action.spmId};
         }
+        case ActionType.SKAL_STOPPE_FOR_A_VISE_NYTT_TIPS:
+            return { ...state, skalStoppeForAViseNyttTips: action.stopp };
         default:
             return state;
     }
@@ -55,5 +59,12 @@ export function nesteSporsmal(spmId: string, spmErBesvart: boolean): NesteSporsm
         type: ActionType.NESTE_SPORSMAL,
         spmId: spmId,
         spmErBesvart: spmErBesvart
+    };
+}
+
+export function stoppForAViseNyttTips(stopp: boolean): StoppForAViseNyttTipsAction {
+    return {
+        type: ActionType.SKAL_STOPPE_FOR_A_VISE_NYTT_TIPS,
+        stopp: stopp,
     };
 }

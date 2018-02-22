@@ -30,6 +30,12 @@ function getJSXElement(
                     besvarteSporsmal={besvarteSpm}
                     sporsmalSomVises={[]}
                     avgitteSvar={[]}
+                    tips={''}
+                    doNullStillAvgitteSvar={() => {}}
+                    skalStoppeForAViseNyttTips={false}
+                    doStoppForAViseNyttTips={() => {}}
+                    doVisNyttTips={() => {}}
+                    skalViseNyttTips={false}
                 />
             </IntlProvider>
         </Provider>

@@ -10,13 +10,17 @@ import { Sidetittel, Undertekst } from 'nav-frontend-typografi';
 import SVG from 'react-inlinesvg';
 import KnappBase from 'nav-frontend-knapper';
 import * as cls from 'classnames';
-import { nesteSporsmal } from '../ducks/side-duck';
+import { nesteSporsmal, stoppForAViseNyttTips } from '../ducks/side-duck';
 import { Link } from 'react-router-dom';
 import { Sidetype } from '../utils/konstanter';
 import { BesvartSporsmal, leggTilBesvartSporsmal } from '../ducks/sporsmal-duck';
+import { nullStillAvitteSvar, visNyttTips } from '../ducks/svar-duck';
 
 interface DispatchProps {
-    gaTilNesteSporsmal: (spmId: string, svar: string[]) => void;
+    gaTilNesteSporsmal: (spmId: string, svar: string[], tips: string | undefined) => void;
+    doNullStillAvgitteSvar: () => void;
+    doStoppForAViseNyttTips: (stopp: boolean) => void;
+    doVisNyttTips: (visTips: boolean) => void;
 }
 
 interface OwnProps {
@@ -29,6 +33,9 @@ interface StateProps {
     paVeiBakover: boolean;
     sporsmalSomVises: string[];
     avgitteSvar: string[];
+    tips: string | undefined;
+    skalStoppeForAViseNyttTips: boolean;
+    skalViseNyttTips: boolean;
 }
 
 type SporsmalProps = OwnProps & DispatchProps & StateProps;
@@ -47,11 +54,16 @@ export class Sporsmal extends React.Component<SporsmalProps> {
     render() {
         const {
             sporsmal,
-            besvarteSporsmal,
             spmRef,
             paVeiBakover,
             sporsmalSomVises,
             avgitteSvar,
+            tips,
+            doNullStillAvgitteSvar,
+            skalStoppeForAViseNyttTips,
+            doStoppForAViseNyttTips,
+            doVisNyttTips,
+            skalViseNyttTips,
         } = this.props;
 
         const gjeldendeSpmIndex = sporsmalSomVises.indexOf(sporsmal.id);
@@ -76,14 +88,14 @@ export class Sporsmal extends React.Component<SporsmalProps> {
 
         const nesteUrl = '/' + Sidetype.KARTLEGGING + '/' + nesteSpmId;
 
-        const besvartSpm: BesvartSporsmal | undefined = besvarteSporsmal.find(
+        /*const besvartSpm: BesvartSporsmal | undefined = besvarteSporsmal.find(
             besvarelse => besvarelse.spmId === sporsmal.id
-        );
+        );*/
 
-        console.log('gjeldendeSpmIndex: ' + gjeldendeSpmIndex); // tslint:disable-line:no-console
+        /*console.log('gjeldendeSpmIndex: ' + gjeldendeSpmIndex); // tslint:disable-line:no-console
         console.log('framdriftValue: ' + framdriftValue); // tslint:disable-line:no-console
         console.log('besvarteSporsmal: ' + besvarteSporsmal.length); // tslint:disable-line:no-console
-        console.log('tilbakeUrl: ' + tilbakeUrl); // tslint:disable-line:no-console
+        console.log('tilbakeUrl: ' + tilbakeUrl); // tslint:disable-line:no-console*/
 
         return (
             <React.Fragment>
@@ -173,8 +185,8 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                                 sporsmal={sporsmal}
                             />
                             <section className="tips" role="alert" aria-live="polite">
-                                {besvartSpm && besvartSpm.tips && (
-                                    <TipsVisning id={besvartSpm.tips}/>
+                                { skalViseNyttTips && (
+                                    <TipsVisning id={tips!}/>
                                 )}
                             </section>
                             <div className="knapperad blokk-s">
@@ -183,10 +195,14 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                                     className={sporsmal.erSisteSpm ? '' : 'knapp knapp--hoved sporsmal__knapp'}
                                     key="besvar"
                                     onClick={(e) => {
-                                        if (besvartSpm && besvartSpm.tips) {
+                                        if (skalStoppeForAViseNyttTips) {
+                                            doVisNyttTips(true);
+                                            doStoppForAViseNyttTips(false);
                                             e.preventDefault();
                                         } else {
-                                            this.props.gaTilNesteSporsmal(nesteSpmId, avgitteSvar);
+                                            this.props.gaTilNesteSporsmal(nesteSpmId, avgitteSvar, tips);
+                                            doNullStillAvgitteSvar();
+
                                         }}}
                                 >
                                     {sporsmal.erSisteSpm ? (
@@ -209,13 +225,19 @@ const mapStateToProps = (state: AppState): StateProps => ({
     paVeiBakover: state.side.paVeiBakover,
     sporsmalSomVises: state.sporsmal.sporsmalSomVises,
     avgitteSvar: state.svar.avgitteSvar,
+    tips: state.svar.tips,
+    skalStoppeForAViseNyttTips: state.side.skalStoppeForAViseNyttTips,
+    skalViseNyttTips: state.svar.skalViseNyttTips,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    gaTilNesteSporsmal: (spmId: string, svar: string[]) => {
+    gaTilNesteSporsmal: (spmId: string, svar: string[], tips: string | undefined) => {
         dispatch(nesteSporsmal(spmId, false));
-        dispatch(leggTilBesvartSporsmal(spmId, svar));
+        dispatch(leggTilBesvartSporsmal(spmId, svar, tips));
     },
+    doNullStillAvgitteSvar: () => dispatch(nullStillAvitteSvar()),
+    doStoppForAViseNyttTips: (stopp: boolean) => dispatch(stoppForAViseNyttTips(stopp)),
+    doVisNyttTips: (visTips: boolean) => dispatch(visNyttTips(visTips)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sporsmal);
