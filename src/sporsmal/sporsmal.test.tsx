@@ -30,6 +30,8 @@ function getJSXElement(
                     besvarteSporsmal={besvarteSpm}
                     sporsmalSomVises={[]}
                     avgitteSvar={[]}
+                    erNySide={true}
+                    ikkeNySideLenger={() => {}}
                 />
             </IntlProvider>
         </Provider>

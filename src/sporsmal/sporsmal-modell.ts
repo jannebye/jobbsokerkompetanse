@@ -6,6 +6,7 @@ export interface Alternativ {
 
 interface SporsmalModell {
     id: string;
+    sorter: number;
     alternativer: string[];
     type: AlternativTyper;
     overskriftId?: string;

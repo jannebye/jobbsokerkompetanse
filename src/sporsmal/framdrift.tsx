@@ -1,18 +1,25 @@
 import * as React from 'react';
+import SporsmalModell from './sporsmal-modell';
 
-export class Framdrift extends React.Component {
+interface StateProps {
+    sporsmal: SporsmalModell;
+    sporsmalSomVises: string[];
+}
+
+export class Framdrift extends React.Component<StateProps> {
     render() {
+        const {
+            sporsmal,
+            sporsmalSomVises,
+        } = this.props;
 
-        const gjeldendeSpmIndex = 0;
-        const totaltAntallSpm = 19;
+        const gjeldendeSpmIndex = sporsmalSomVises.indexOf(sporsmal.id);
 
-        const framdriftValue = Math.round(gjeldendeSpmIndex / totaltAntallSpm * 100 * 100) / 100;
+        const framdriftValue = Math.round((gjeldendeSpmIndex + 1) / sporsmalSomVises.length * 100);
         /** @type {{search: React.CSSProperties}} */
         const framdriftStyle = {
             width: framdriftValue + '%'
         };
-
-        console.log('framdriftValue: ' + framdriftValue); // tslint:disable-line:no-console
 
         return (
             <div
@@ -25,6 +32,6 @@ export class Framdrift extends React.Component {
             >
                 <div className="andel" style={framdriftStyle}/>
             </div>
-        )
+        );
     }
 }

@@ -10,13 +10,15 @@ import { Sidetittel, Undertekst } from 'nav-frontend-typografi';
 import SVG from 'react-inlinesvg';
 import KnappBase from 'nav-frontend-knapper';
 import * as cls from 'classnames';
-import { nesteSporsmal } from '../ducks/side-duck';
+import { nesteSporsmal, starteSvar } from '../ducks/side-duck';
 import { Link } from 'react-router-dom';
 import { Sidetype } from '../utils/konstanter';
 import { BesvartSporsmal, leggTilBesvartSporsmal } from '../ducks/sporsmal-duck';
+import { Framdrift } from './framdrift';
 
 interface DispatchProps {
     gaTilNesteSporsmal: (spmId: string, svar: string[]) => void;
+    ikkeNySideLenger: () => void;
 }
 
 interface OwnProps {
@@ -29,11 +31,13 @@ interface StateProps {
     paVeiBakover: boolean;
     sporsmalSomVises: string[];
     avgitteSvar: string[];
+    erNySide: boolean;
 }
 
 type SporsmalProps = OwnProps & DispatchProps & StateProps;
 
 export class Sporsmal extends React.Component<SporsmalProps> {
+
     constructor(props: SporsmalProps) {
         super(props);
     }
@@ -52,60 +56,44 @@ export class Sporsmal extends React.Component<SporsmalProps> {
             paVeiBakover,
             sporsmalSomVises,
             avgitteSvar,
+            erNySide,
+            ikkeNySideLenger,
         } = this.props;
 
         const gjeldendeSpmIndex = sporsmalSomVises.indexOf(sporsmal.id);
         const nesteSpmId = sporsmalSomVises[gjeldendeSpmIndex + 1];
         const forrigeSpmId = sporsmalSomVises[gjeldendeSpmIndex - 1];
-
         const sporsmalImg = require('../ikoner/' + sporsmal.id + '.svg');
 
         const klassenavn = cls('sporsmal vis_alternativer', {
             tilbake: paVeiBakover,
         });
 
-        const framdriftValue = Math.round((gjeldendeSpmIndex + 1) / sporsmalSomVises.length * 100);
-        /** @type {{search: React.CSSProperties}} */
-        const framdriftStyle = {
-            width: framdriftValue + '%'
-        };
-
         const tilbakeUrl = sporsmal.erForsteSpm
             ? '/' + Sidetype.START
             : '/' + Sidetype.KARTLEGGING + '/' + forrigeSpmId;
 
-        const nesteUrl = '/' + Sidetype.KARTLEGGING + '/' + nesteSpmId;
+        let nesteUrl = sporsmal.erSisteSpm
+            ? '/' + Sidetype.RESULTAT
+            : '/' + Sidetype.KARTLEGGING + '/' + nesteSpmId;
 
         const besvartSpm: BesvartSporsmal | undefined = besvarteSporsmal.find(
             besvarelse => besvarelse.spmId === sporsmal.id
         );
 
-        console.log('sporsmalSomVises.length: ' + sporsmalSomVises.length); // tslint:disable-line:no-console
-        console.log('gjeldendeSpmIndex: ' + gjeldendeSpmIndex); // tslint:disable-line:no-console
-        console.log('avgitteSvar: ' + avgitteSvar); // tslint:disable-line:no-console
-        console.log('framdriftValue: ' + framdriftValue); // tslint:disable-line:no-console
-        console.log('besvarteSporsmal: ' + besvarteSporsmal.length); // tslint:disable-line:no-console
-        console.log('-------------------------: '); // tslint:disable-line:no-console
-        let besvarelser = 'besvarelser: ';
-        besvarteSporsmal.forEach((spm) => {
-            besvarelser += spm.svar + ', ';
+        const spmArr = sporsmal.id.split('-');
+        const svarId = spmArr[0] + '-svar-' + spmArr[2];
+
+        let harSvar = false;
+        avgitteSvar.filter((svar, i) => {
+            if (!harSvar) {
+                harSvar = svar.startsWith(svarId);
+            }
         });
-        console.log(besvarelser); // tslint:disable-line:no-console
-        console.log('-------------------------: '); // tslint:disable-line:no-console
-        console.log('tilbakeUrl: ' + tilbakeUrl); // tslint:disable-line:no-console
 
         return (
             <React.Fragment>
-                <div
-                    className="framdrift"
-                    role="progressbar"
-                    aria-valuenow={Math.round(framdriftValue)}
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    tabIndex={0}
-                >
-                    <div className="andel" style={framdriftStyle}/>
-                </div>
+                <Framdrift sporsmal={sporsmal} sporsmalSomVises={sporsmalSomVises}/>
                 <div className="limit">
                     <div
                         ref={spmRef}
@@ -147,10 +135,7 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                                             )}
                                         </FormattedMessage>
 
-                                        <Sidetittel
-                                            className="sporsmal__overskrift blokk-xs"
-                                            tag="h1"
-                                        >
+                                        <Sidetittel className="sporsmal__overskrift blokk-xs" tag="h1">
                                             <FormattedHTMLMessage id={sporsmal.id}/>
                                         </Sidetittel>
                                         <p
@@ -158,31 +143,22 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                                             role="alert"
                                             aria-live="assertive"
                                         >
-                                            {avgitteSvar.length === 0  && (
+                                            {!harSvar && !erNySide && (
                                                 <FormattedMessage id="feilmelding-mangler-svar"/>
                                             )}
                                         </p>
                                     </div>
                                     <Undertekst className="sporsmal__ingress" tag="p">
-                                        <FormattedMessage
-                                            id={
-                                                sporsmal.egenUndertekst || sporsmal.type
-                                            }
-                                        />
+                                        <FormattedMessage id={sporsmal.egenUndertekst || sporsmal.type}/>
                                     </Undertekst>
                                 </div>
-                                <KnappBase
-                                    type={'standard'}
-                                    className="sporsmal__knapp sporsmal__videre"
-                                >
+                                <KnappBase type={'standard'} className="sporsmal__knapp sporsmal__videre">
                                     <FormattedMessage id="fortsett-knapp"/>
                                 </KnappBase>
                             </div>
-                            <AlternativContainer
-                                sporsmal={sporsmal}
-                            />
+                            <AlternativContainer sporsmal={sporsmal} />
                             <section className="tips" role="alert" aria-live="polite">
-                                {besvartSpm && besvartSpm.tips && (
+                                {besvartSpm && besvartSpm.tips && harSvar && (
                                     <TipsVisning id={besvartSpm.tips}/>
                                 )}
                             </section>
@@ -192,11 +168,17 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                                     className={sporsmal.erSisteSpm ? '' : 'knapp knapp--hoved sporsmal__knapp'}
                                     key="besvar"
                                     onClick={(e) => {
-                                        if (besvartSpm && besvartSpm.tips) {
+                                        if (
+                                            besvartSpm &&
+                                            (besvartSpm.tips && erNySide) ||
+                                            !harSvar
+                                        ) {
                                             e.preventDefault();
                                         } else {
                                             this.props.gaTilNesteSporsmal(nesteSpmId, avgitteSvar);
-                                        }}}
+                                        }
+                                        ikkeNySideLenger();
+                                    }}
                                 >
                                     {sporsmal.erSisteSpm ? (
                                         <FormattedMessage id="send-inn"/>
@@ -218,6 +200,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
     paVeiBakover: state.side.paVeiBakover,
     sporsmalSomVises: state.sporsmal.sporsmalSomVises,
     avgitteSvar: state.svar.avgitteSvar,
+    erNySide: state.side.erNySide
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
@@ -225,6 +208,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
         dispatch(nesteSporsmal(spmId, false));
         dispatch(leggTilBesvartSporsmal(spmId, svar));
     },
+    ikkeNySideLenger: () => dispatch(starteSvar()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sporsmal);

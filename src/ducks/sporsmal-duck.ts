@@ -2,7 +2,7 @@ import {
     Handling, ActionType, LeggTilBesvartSporsmalAction, SjekkAvhengigheterAction
 } from '../actions';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import alleSporsmal  from '../sporsmal/sporsmal-alle';
+import alleSporsmal from '../sporsmal/sporsmal-alle';
 import { visTipsEtterSporsmal } from '../skjema/tips/tips-generering';
 import { SporsmalId } from './side-duck';
 import Avhengigheter from '../utils/avhengigheter';
@@ -29,11 +29,13 @@ export const initialState = {
 export default function reducer(state: SporsmalState = initialState, action: Handling): SporsmalState {
     let tempListe;
     switch (action.type) {
+
         case ActionType.LEGG_TIL_SPORSMAL_SOM_VISES:
             tempListe = state.sporsmalSomVises.includes(action.spmId) ?
                 state.sporsmalSomVises :
                 state.sporsmalSomVises.concat(action.spmId);
-            return { ...state, sporsmalSomVises: tempListe };
+            return {...state, sporsmalSomVises: tempListe};
+
         case ActionType.LEGG_TIL_BESVART_SPORSMAL: {
             tempListe = state.besvarteSporsmal.filter(spm => spm.spmId !== action.spmId);
             let besvartSpm: BesvartSporsmal = {
@@ -45,23 +47,28 @@ export default function reducer(state: SporsmalState = initialState, action: Han
             if (tips) {
                 tempListe = tempListe.map(spm => {
                     if (spm.spmId === action.spmId) {
-                        return { ...spm, tips: tips };
+                        return {...spm, tips: tips};
                     }
                     return spm;
                 });
             }
-            return { ...state, besvarteSporsmal: tempListe };
+            return {...state, besvarteSporsmal: tempListe};
         }
-        case ActionType.SJEKK_AVHENGIGHETER:
-            const avhengighet = Avhengigheter.find(a => a.sporsmalId === action.spmId);
-            if (avhengighet) {
 
-                if (viserAvhengighetsSporsmal(state.sporsmalSomVises, avhengighet.sporsmalSomIkkeVises)) {
+        case ActionType.SJEKK_AVHENGIGHETER:
+            const avhengighet =
+                Avhengigheter.find(avh =>
+                    avh.sporsmalId === action.spmId &&
+                    avh.svarId === action.svarId
+                );
+
+            if (avhengighet) {
+                if (inneholderSporsmalSomSkalFjernes(state.sporsmalSomVises, avhengighet.sporsmalSomSkalFjernes)) {
                     return {
                         ...state,
                         sporsmalSomVises: fjernAvhengighetsSporsmal(
                             state.sporsmalSomVises,
-                            avhengighet.sporsmalSomIkkeVises
+                            avhengighet.sporsmalSomSkalFjernes
                         )
                     };
                 }
@@ -69,38 +76,37 @@ export default function reducer(state: SporsmalState = initialState, action: Han
                     ...state,
                     sporsmalSomVises: leggTilAvhengighetsSporsmal(
                         state.sporsmalSomVises,
-                        avhengighet.sporsmalSomIkkeVises
+                        avhengighet.sporsmalSomSkalFjernes
                     )
                 };
             }
-            return { ...state };
+            return {...state};
+
         default:
             return state;
     }
 }
 
-function viserAvhengighetsSporsmal(sporsmalSomVises: string[], sporsmalSomIkkeVises: string[]): boolean {
-    return sporsmalSomIkkeVises.some(
+export function inneholderSporsmalSomSkalFjernes(sporsmalSomVises: string[], sporsmalSomSkalFjernes: string[]): boolean {
+    return sporsmalSomSkalFjernes.some(
         spmIkkeVises => sporsmalSomVises.some(
             spmVises => spmVises === spmIkkeVises
         )
     );
 }
 
-function fjernAvhengighetsSporsmal(sporsmalSomVises: string[], sporsmalSomIkkeVises: string[]): string[] {
-    return sporsmalSomVises.filter(
-        spmVises => sporsmalSomIkkeVises.some(
-            spmIkkeVises => spmIkkeVises === spmVises
-        )
-    );
+export function fjernAvhengighetsSporsmal(sporsmalSomVises: string[], sporsmalSomSkalFjernes: string[]): string[] {
+    return sporsmalSomVises.filter(sporsmal => !sporsmalSomSkalFjernes.includes(sporsmal));
 }
 
-function leggTilAvhengighetsSporsmal(sporsmalSomVises: string[], sporsmalSomIkkeVises: string[]): string[] {
-    return sporsmalSomVises.filter(
-        spmVises => sporsmalSomIkkeVises.some(
-            spmIkkeVises => spmIkkeVises !== spmVises
-        )
-    );
+export function leggTilAvhengighetsSporsmal(sporsmalSomVises: string[], sporsmalSomSkalFjernes: string[]): string[] {
+    return sorterListeOgFjernDuplikater([...sporsmalSomVises, ...sporsmalSomSkalFjernes]);
+}
+
+function sorterListeOgFjernDuplikater(spm: string[]): string[] {
+    return alleSporsmal
+        .map(sporsmal => sporsmal.id)
+        .filter(sporsmal => spm.includes(sporsmal));
 }
 
 export function leggTilBesvartSporsmal(spmId: string, svar: string[]): LeggTilBesvartSporsmalAction {

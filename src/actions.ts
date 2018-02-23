@@ -1,4 +1,4 @@
-import { Sidetype } from './utils/konstanter';
+import { AlternativTyper, Sidetype } from './utils/konstanter';
 import { TemaModell } from './resultat/tema-modell';
 
 export enum ActionType {
@@ -7,7 +7,7 @@ export enum ActionType {
     VIS_ALTERNATIVER,
     NESTE_SPORSMAL,
     FORRIGE_SPORSMAL,
-    ENDRE_SPORSMAL,
+    STARTE_SVAR,
     ENDRE_SIDE,
     VIS_TIPS,
     SKJUL_TIPS,
@@ -57,6 +57,10 @@ export interface ForrigeSporsmalAction {
     spmId: string;
 }
 
+export interface StarteSvarAction {
+    type: ActionType.STARTE_SVAR;
+}
+
 export interface EndreSideAction {
     type: ActionType.ENDRE_SIDE;
     side: Sidetype;
@@ -97,20 +101,16 @@ export interface LeggTilBesvartSporsmalAction {
 export interface KlikkAlternativAction {
     type: ActionType.KLIKK_ALTERNATIV;
     svarId: string;
-}
-
-export interface SjekkAvhengigheterAction {
-    type: ActionType.SJEKK_AVHENGIGHETER;
-    svarId: string;
-    spmId: string;
+    alternativType: AlternativTyper;
 }
 
 export type Handling =
     | EndreAlternativAction
     | EndreAlternativOgAntallAction
     | NesteSporsmalAction
-    | VisAlternativerAction
     | ForrigeSporsmalAction
+    | StarteSvarAction
+    | VisAlternativerAction
     | EndreSideAction
     | VisTipsAction
     | SkjulTipsAction
@@ -121,3 +121,9 @@ export type Handling =
     | LeggTilBesvartSporsmalAction
     | KlikkAlternativAction
     | SjekkAvhengigheterAction;
+
+export interface SjekkAvhengigheterAction {
+    type: ActionType.SJEKK_AVHENGIGHETER;
+    svarId: string;
+    spmId: string;
+}

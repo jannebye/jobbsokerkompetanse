@@ -4,6 +4,7 @@ import { AlternativTyper } from '../utils/konstanter';
 const spm: Sporsmal[] = [
     {
         id: 'finn-spm-01',
+        sorter: 0,
         alternativer: [
             'finn-svar-0101',
             'finn-svar-0102',
@@ -22,6 +23,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'finn-spm-02',
+        sorter: 1,
         alternativer: [
             'finn-svar-0201',
             'finn-svar-0202',
@@ -34,6 +36,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'finn-spm-03',
+        sorter: 2,
         alternativer: [
             'finn-svar-0301',
             'finn-svar-0302',
@@ -43,6 +46,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'finn-spm-04',
+        sorter: 3,
         alternativer: [
             'finn-svar-0401',
             'finn-svar-0402',
@@ -55,6 +59,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'finn-spm-05',
+        sorter: 4,
         alternativer: [
             'finn-svar-0501',
             'finn-svar-0502',
@@ -65,6 +70,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'cv-spm-01',
+        sorter: 5,
         alternativer: [
             'cv-svar-0101',
             'cv-svar-0102',
@@ -80,6 +86,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'cv-spm-02',
+        sorter: 6,
         alternativer: [
             'cv-svar-0201',
             'cv-svar-0202',
@@ -89,6 +96,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'cv-spm-03',
+        sorter: 7,
         alternativer: [
             'cv-svar-0301',
             'cv-svar-0302',
@@ -98,6 +106,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'cv-spm-04',
+        sorter: 8,
         alternativer: [
             'cv-svar-0401',
             'cv-svar-0402',
@@ -110,6 +119,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'cv-spm-05',
+        sorter: 9,
         alternativer: [
             'cv-svar-0501',
             'cv-svar-0502',
@@ -123,6 +133,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'soke-spm-01',
+        sorter: 10,
         alternativer: [
             'soke-svar-0101',
             'soke-svar-0102',
@@ -134,6 +145,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'soke-spm-02',
+        sorter: 11,
         alternativer: [
             'soke-svar-0201',
             'soke-svar-0202',
@@ -143,6 +155,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'soke-spm-03',
+        sorter: 12,
         alternativer: [
             'soke-svar-0301',
             'soke-svar-0302',
@@ -152,6 +165,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'soke-spm-04',
+        sorter: 13,
         alternativer: [
             'soke-svar-0401',
             'soke-svar-0402',
@@ -161,6 +175,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'intervju-spm-01',
+        sorter: 14,
         alternativer: [
             'intervju-svar-0101',
             'intervju-svar-0102',
@@ -172,6 +187,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'intervju-spm-02',
+        sorter: 15,
         alternativer: [
             'intervju-svar-0201',
             'intervju-svar-0202',
@@ -186,6 +202,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'intervju-spm-03',
+        sorter: 16,
         alternativer: [
             'intervju-svar-0301',
             'intervju-svar-0302',
@@ -197,6 +214,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'intervju-spm-04',
+        sorter: 17,
         alternativer: [
             'intervju-svar-0401',
             'intervju-svar-0402',
@@ -213,6 +231,7 @@ const spm: Sporsmal[] = [
     },
     {
         id: 'intervju-spm-05',
+        sorter: 18,
         alternativer: [
             'intervju-svar-0501',
             'intervju-svar-0502',

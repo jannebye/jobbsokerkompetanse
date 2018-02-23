@@ -6,6 +6,8 @@ import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import { klikkAlternativ } from '../ducks/svar-duck';
 import { sjekkAvhengigheter } from '../ducks/sporsmal-duck';
+import { starteSvar } from '../ducks/side-duck';
+import { AlternativTyper } from '../utils/konstanter';
 
 interface ParentProps {
     sporsmal: SporsmalModell;
@@ -16,8 +18,9 @@ interface StateProps {
 }
 
 interface DispatchProps {
-    doKlikkAlternativ: (svarId: string) => void;
+    doKlikkAlternativ: (svarId: string, alternativType: AlternativTyper) => void;
     doSjekkAvhengigheter: (svarId: string, spmId: string) => void;
+    ikkeNySideLenger: () => void;
 }
 
 type AlternativContainerProps = ParentProps & StateProps & DispatchProps;
@@ -37,61 +40,50 @@ function erAlternativMulig(
     return true;
 }
 
-/*function prepMarkerAlternativ(
-    alternativ: string,
-    alternativListe: string[],
-    sporsmal: SporsmalModell,
-    type: string
-): string[] {
-    const erValgt = !!alternativListe.find(alt => alt === alternativ);
-    if (erValgt) {
-        if (type === 'ettvalg' || type === 'skala') {
-            return alternativListe;
-        }
-        return alternativListe.filter(alt => alt !== alternativ);
-    } else {
-        if (
-            !!sporsmal.uniktAlternativ &&
-            sporsmal.uniktAlternativ === alternativ
-        ) {
-            return [alternativ];
-        }
-        if (type === 'ettvalg' || type === 'skala') {
-            return [alternativ];
-        }
-        return [...alternativListe, alternativ];
-    }
-}*/
+export class AlternativContainer extends React.Component<AlternativContainerProps> {
 
-function AlternativContainer(
-        {avgitteSvar, sporsmal, doKlikkAlternativ, doSjekkAvhengigheter}: AlternativContainerProps) {
-    return (
-        <ul className={'alternativer alternativer__' + sporsmal.type} role="group" aria-label={sporsmal.id}>
-            {sporsmal.alternativer.map((alternativ: string) => {
-                const kanVelges: boolean = !!sporsmal.uniktAlternativ
-                    ? erAlternativMulig(
-                        sporsmal.uniktAlternativ,
-                        alternativ,
-                        avgitteSvar
-                    )
-                    : true;
-                return (
-                    <Alternativ
-                        key={alternativ}
-                        alternativ={alternativ}
-                        erValgt={avgitteSvar.includes(alternativ)}
-                        sporsmalId={sporsmal.id}
-                        sporsmalType={sporsmal.type}
-                        kanVelges={kanVelges}
-                        klikk={() => {
-                            doKlikkAlternativ(alternativ);
-                            doSjekkAvhengigheter(alternativ, sporsmal.id);
-                        }}
-                    />
-                );
-            })}
-        </ul>
-    );
+    constructor(props: AlternativContainerProps) {
+        super(props);
+    }
+
+    render() {
+        const {
+            sporsmal,
+            doKlikkAlternativ,
+            doSjekkAvhengigheter,
+            ikkeNySideLenger,
+            avgitteSvar,
+        } = this.props;
+
+        return (
+            <ul className={'alternativer alternativer__' + sporsmal.type} role="group" aria-label={sporsmal.id}>
+                {sporsmal.alternativer.map((alternativ: string) => {
+                    const kanVelges: boolean = !!sporsmal.uniktAlternativ
+                        ? erAlternativMulig(
+                            sporsmal.uniktAlternativ,
+                            alternativ,
+                            avgitteSvar
+                        )
+                        : true;
+                    return (
+                        <Alternativ
+                            key={alternativ}
+                            alternativ={alternativ}
+                            erValgt={avgitteSvar.includes(alternativ)}
+                            sporsmalId={sporsmal.id}
+                            sporsmalType={sporsmal.type}
+                            kanVelges={kanVelges}
+                            klikk={() => {
+                                doKlikkAlternativ(alternativ, sporsmal.type);
+                                doSjekkAvhengigheter(alternativ, sporsmal.id);
+                                ikkeNySideLenger();
+                            }}
+                        />
+                    );
+                })}
+            </ul>
+        );
+    }
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
@@ -99,8 +91,9 @@ const mapStateToProps = (state: AppState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    doKlikkAlternativ: (svarId: string) => dispatch(klikkAlternativ(svarId)),
+    doKlikkAlternativ: (svarId: string, type: AlternativTyper) => dispatch(klikkAlternativ(svarId, type)),
     doSjekkAvhengigheter: (svarId: string, spmId: string) => dispatch(sjekkAvhengigheter(svarId, spmId)),
+    ikkeNySideLenger: () => dispatch(starteSvar()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AlternativContainer);

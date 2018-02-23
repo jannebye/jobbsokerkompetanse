@@ -1,4 +1,4 @@
-import { Handling, ActionType, NesteSporsmalAction } from '../actions';
+import { Handling, ActionType, NesteSporsmalAction, StarteSvarAction } from '../actions';
 import { Sidetype } from '../utils/konstanter';
 import spm from '../sporsmal/sporsmal-alle';
 import alleSporsmal from '../sporsmal/sporsmal-alle';
@@ -8,13 +8,15 @@ export interface SideState {
     spmId: string;
     viserAlternativer: boolean;
     paVeiBakover: boolean;
+    erNySide: boolean;
 }
 
 export const initialState = {
     sideType: Sidetype.START,
     spmId: alleSporsmal[0].id,
     viserAlternativer: false,
-    paVeiBakover: false
+    paVeiBakover: false,
+    erNySide: true
 };
 
 export type SporsmalId = string;
@@ -40,11 +42,15 @@ export default function reducer(state: SideState = initialState,
                 sideType: sideType,
                 spmId: nySpmId,
                 viserAlternativer: action.spmErBesvart,
-                paVeiBakover
+                paVeiBakover,
+                erNySide: true
             };
         }
         case ActionType.FORRIGE_SPORSMAL: {
-            return {...state, spmId: action.spmId};
+            return {...state, spmId: action.spmId, erNySide: true};
+        }
+        case ActionType.STARTE_SVAR: {
+            return {...state, erNySide: false};
         }
         default:
             return state;
@@ -56,5 +62,11 @@ export function nesteSporsmal(spmId: string, spmErBesvart: boolean): NesteSporsm
         type: ActionType.NESTE_SPORSMAL,
         spmId: spmId,
         spmErBesvart: spmErBesvart
+    };
+}
+
+export function starteSvar(): StarteSvarAction {
+    return {
+        type: ActionType.STARTE_SVAR
     };
 }
