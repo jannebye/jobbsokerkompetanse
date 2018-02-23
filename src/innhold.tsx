@@ -4,10 +4,23 @@ import Resultat from './resultat/resultat';
 import Startside from './startside/startside';
 import { Switch, Route } from 'react-router-dom';
 import { RouteComponentProps, withRouter } from 'react-router';
+import { fetchTema, hentRaad } from './ducks/raad-duck';
+import { connect } from 'react-redux';
+import { Dispatch } from './types';
 
-class Innhold extends React.Component<RouteComponentProps<any>, {}> { // tslint:disable-line:no-any
-    constructor(props: RouteComponentProps<any>) { // tslint:disable-line:no-any
+interface DispatchProps {
+    doHentRaad: () => void;
+}
+
+type InnholdProps = DispatchProps & RouteComponentProps<any>; // tslint:disable-line:no-any
+
+class Innhold extends React.Component<InnholdProps> {
+    constructor(props: InnholdProps) {
         super(props);
+    }
+
+    componentDidMount() {
+        this.props.doHentRaad();
     }
 
     render() {
@@ -24,4 +37,8 @@ class Innhold extends React.Component<RouteComponentProps<any>, {}> { // tslint:
     }
 }
 
-export default withRouter(Innhold);
+const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+    doHentRaad: () => fetchTema().then(raad => dispatch(hentRaad(raad)))
+});
+
+export default withRouter(connect(null, mapDispatchToProps)(Innhold));
