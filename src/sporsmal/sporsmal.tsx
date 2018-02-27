@@ -65,7 +65,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             if (isUndefined(besvartSpm.tips) && !isUndefined(tip)) {
                 return this.props.visTips(tip);
             } else {
-                return this.props.nesteSpm(sporsmalId);
+                return this.props.sporsmal.erSisteSpm ? this.props.handleSubmit() : this.props.nesteSpm(sporsmalId);
             }
         }
     }
@@ -93,7 +93,6 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
             visAlternativer,
             paVeiBakover,
             totaltAntallSpm,
-            handleSubmit,
             startPaNytt
         } = this.props;
 
@@ -226,32 +225,27 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
 
                                 )}
                             </section>
-                            {sporsmal.erSisteSpm ? (
                                 <div className="knapperad blokk-s">
                                     <KnappBase
                                         type={'hoved'}
-                                        onClick={() => handleSubmit()}
+                                        className={sporsmal.erSisteSpm ? '' : 'sporsmal__knapp'}
+                                        key="besvar"
+                                        onClick={e => {
+                                            this.sjekkSvar(
+                                                markerteAlternativer,
+                                                sporsmal.id,
+                                                besvarteSporsmal,
+                                                besvartSpm
+                                            );
+                                        }}
                                     >
-                                        <FormattedMessage id="send-inn"/>
+                                        {sporsmal.erSisteSpm ? (
+                                            <FormattedMessage id="send-inn"/>
+                                        ) : (
+                                            <FormattedMessage id="fortsett-knapp"/>
+                                        )}
                                     </KnappBase>
                                 </div>
-                            ) : (
-                                <KnappBase
-                                    type={'hoved'}
-                                    className={'sporsmal__knapp'}
-                                    key="besvar"
-                                    onClick={e => {
-                                        this.sjekkSvar(
-                                            markerteAlternativer,
-                                            sporsmal.id,
-                                            besvarteSporsmal,
-                                            besvartSpm
-                                        );
-                                    }}
-                                >
-                                    <FormattedMessage id="fortsett-knapp"/>
-                                </KnappBase>
-                            )}
                         </section>
                     </div>
                 </div>

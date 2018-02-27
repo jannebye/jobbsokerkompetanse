@@ -1,4 +1,3 @@
-import * as xml2js from 'xml2js';
 import { ActionType, Handling, HentTemaAction } from '../actions';
 import { TemaModell } from './tema-modell';
 import { RaadInitialState, RaadModell } from './raad-modell';
@@ -43,21 +42,9 @@ export function hentRaad(raad: TemaModell): HentTemaAction {
 }
 
 export function fetchTema(): Promise<TemaModell> {
-    function parseXml(text: string): Promise<TemaModell> {
-        return new Promise((resolve, reject) => {
-            xml2js.parseString(text, {explicitArray: false}, (err: string, res: TemaModell) => {
-                if (err) {
-                    reject(err);
-                }
-                resolve(res);
-            });
-        });
-    }
-
-    return fetch('https://appres.nav.no/app/veiviserarbeidssoker/steg')
+    return fetch(API.stegUrl)
         .then(sjekkStatuskode)
-        .then((response) => response.text())
-        .then(parseXml);
+        .then((response) => response.json());
 }
 
 class FetchError extends Error {
@@ -76,3 +63,11 @@ export function sjekkStatuskode(response: Response) {
     const error = new FetchError(response.statusText || response.type, response);
     throw error;
 }
+
+interface ApiProps {
+    stegUrl: string;
+}
+
+export const API: ApiProps = {
+    stegUrl: `${window.location.origin}/veilarbinnhold/api/enonic/app/veiviserarbeidssoker/steg`
+};
