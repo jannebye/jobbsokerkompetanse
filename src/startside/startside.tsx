@@ -11,7 +11,7 @@ interface StartsideProps {
 
 function Startside({startKartlegging}: StartsideProps) {
     return (
-        <div className="limit">
+        <div className="limit limit__startside">
             <div className="startside">
                 <div className="startside__bildewrap">
                     <FormattedMessage id="startside-image-alt">
