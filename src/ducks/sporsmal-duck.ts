@@ -3,14 +3,13 @@ import {
 } from '../actions';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
 import alleSporsmal from '../sporsmal/sporsmal-alle';
-import { visTipsEtterSporsmal } from '../skjema/tips/tips-generering';
 import { SporsmalId } from './side-duck';
 import Avhengigheter from '../utils/avhengigheter';
 
 export interface BesvartSporsmal {
     spmId: string;
     svar: string[];
-    tips?: string;
+    tips: string | undefined;
 }
 
 export interface SporsmalState {
@@ -41,18 +40,9 @@ export default function reducer(state: SporsmalState = initialState, action: Han
             let besvartSpm: BesvartSporsmal = {
                 spmId: action.spmId,
                 svar: action.svar,
+                tips: action.tips
             };
-            tempListe = tempListe.concat(besvartSpm);
-            const tips = visTipsEtterSporsmal(action.spmId, tempListe);
-            if (tips) {
-                tempListe = tempListe.map(spm => {
-                    if (spm.spmId === action.spmId) {
-                        return {...spm, tips: tips};
-                    }
-                    return spm;
-                });
-            }
-            return {...state, besvarteSporsmal: tempListe};
+            return {...state, besvarteSporsmal: tempListe.concat(besvartSpm)};
         }
 
         case ActionType.SJEKK_AVHENGIGHETER:
@@ -109,11 +99,12 @@ function sorterListeOgFjernDuplikater(spm: string[]): string[] {
         .filter(sporsmal => spm.includes(sporsmal));
 }
 
-export function leggTilBesvartSporsmal(spmId: string, svar: string[]): LeggTilBesvartSporsmalAction {
+export function leggTilBesvartSporsmal(spmId: string, svar: string[], tips: string | undefined): LeggTilBesvartSporsmalAction {
     return {
         type: ActionType.LEGG_TIL_BESVART_SPORSMAL,
         spmId: spmId,
         svar: svar,
+        tips: tips
     };
 }
 

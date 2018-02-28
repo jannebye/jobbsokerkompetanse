@@ -1,13 +1,19 @@
-import { Handling, ActionType, KlikkAlternativAction } from '../actions';
+import { Handling, ActionType, KlikkAlternativAction, VisNyttTipsAction, NullStillAvgitteSvarAction } from '../actions';
 import { AlternativTyper } from '../utils/konstanter';
+import { BesvartSporsmal } from './sporsmal-duck';
+import { visTipsEtterSporsmal } from '../skjema/tips/tips-generering';
 
 export interface SvarState {
     avgitteSvar: string[];
+    tips: string | undefined;
+    skalViseNyttTips: boolean;
     alternativType: AlternativTyper;
 }
 
 export const initialState = {
     avgitteSvar: [],
+    tips: undefined,
+    skalViseNyttTips: false,
     alternativType: AlternativTyper.ETTVALG
 };
 
@@ -15,7 +21,17 @@ export const initialState = {
 export default function reducer(state: SvarState = initialState, action: Handling): SvarState {
     switch (action.type) {
         case ActionType.KLIKK_ALTERNATIV:
-            return {...state, avgitteSvar: oppdaterAvgitteSvar(action.svarId, state), alternativType: action.alternativType};
+            const avgitteSvar = oppdaterAvgitteSvar(action.svarId, state);
+            return {
+                ...state,
+                avgitteSvar: avgitteSvar,
+                alternativType: action.alternativType,
+                tips: visTipsEtterSporsmal(action.spmId, action.besvarteSporsmal, avgitteSvar)
+            };
+        case ActionType.NULL_STILL_AVGITTE_SVAR:
+            return initialState;
+        case ActionType.VIS_NYTT_TIPS:
+            return { ...state, skalViseNyttTips: action.skalViseNyttTips };
         default:
             return state;
     }
@@ -35,10 +51,25 @@ export function oppdaterAvgitteSvar(svarId: string, state: SvarState): string[] 
     return tempListe;
 }
 
-export function klikkAlternativ(svarId: string, alternativType: AlternativTyper): KlikkAlternativAction {
+export function klikkAlternativ(svarId: string, spmId: string, besvartSporsmal: BesvartSporsmal[], alternativType: AlternativTyper): KlikkAlternativAction {
     return {
         type: ActionType.KLIKK_ALTERNATIV,
         svarId: svarId,
+        spmId: spmId,
+        besvarteSporsmal: besvartSporsmal,
         alternativType: alternativType
+    };
+}
+
+export function nullStillAvitteSvar(): NullStillAvgitteSvarAction {
+    return {
+        type: ActionType.NULL_STILL_AVGITTE_SVAR,
+    };
+}
+
+export function visNyttTips(visTips: boolean): VisNyttTipsAction {
+    return {
+        type: ActionType.VIS_NYTT_TIPS,
+        skalViseNyttTips: visTips,
     };
 }

@@ -1,23 +1,27 @@
 import { AlternativTyper, Sidetype } from './utils/konstanter';
 import { TemaModell } from './resultat/tema-modell';
+import { BesvartSporsmal } from './ducks/sporsmal-duck';
 
 export enum ActionType {
-    ENDRE_ALTERNATIV,
-    ENDRE_ALTERNATIV_OG_ANTALL,
-    VIS_ALTERNATIVER,
-    NESTE_SPORSMAL,
-    FORRIGE_SPORSMAL,
-    STARTE_SVAR,
-    ENDRE_SIDE,
-    VIS_TIPS,
-    SKJUL_TIPS,
-    HENT_TEMA_OK,
-    LEGGE_TIL_SPORSMAL,
-    LEGG_TIL_SPORSMAL_SOM_VISES,
-    FJERNE_SPORSMAL_SOM_VISES,
-    LEGG_TIL_BESVART_SPORSMAL,
-    KLIKK_ALTERNATIV,
-    SJEKK_AVHENGIGHETER,
+    ENDRE_ALTERNATIV = 'ENDRE_ALTERNATIV',
+    ENDRE_ALTERNATIV_OG_ANTALL = 'ENDRE_ALTERNATIV_OG_ANTALL',
+    VIS_ALTERNATIVER = 'VIS_ALTERNATIVER',
+    NESTE_SPORSMAL = 'NESTE_SPORSMAL',
+    FORRIGE_SPORSMAL = 'FORRIGE_SPORSMAL',
+    STARTE_SVAR = 'STARTE_SVAR',
+    ENDRE_SIDE = 'ENDRE_SIDE',
+    VIS_TIPS = 'VIS_TIPS',
+    SKJUL_TIPS = 'SKJUL_TIPS',
+    HENT_TEMA_OK = 'HENT_TEMA_OK',
+    LEGGE_TIL_SPORSMAL = 'LEGGE_TIL_SPORSMAL',
+    LEGG_TIL_SPORSMAL_SOM_VISES = 'LEGG_TIL_SPORSMAL_SOM_VISES',
+    FJERNE_SPORSMAL_SOM_VISES = 'FJERNE_SPORSMAL_SOM_VISES',
+    LEGG_TIL_BESVART_SPORSMAL = 'LEGG_TIL_BESVART_SPORSMAL',
+    KLIKK_ALTERNATIV = 'KLIKK_ALTERNATIV',
+    SJEKK_AVHENGIGHETER = 'SJEKK_AVHENGIGHETER',
+    NULL_STILL_AVGITTE_SVAR = 'NULL_STILL_AVGITTE_SVAR',
+    SKAL_STOPPE_FOR_A_VISE_NYTT_TIPS = 'SKAL_STOPPE_FOR_A_VISE_NYTT_TIPS',
+    VIS_NYTT_TIPS = 'VIS_NYTT_TIPS',
 }
 
 export interface LeggeTilSporsmalAction {
@@ -96,12 +100,29 @@ export interface LeggTilBesvartSporsmalAction {
     type: ActionType.LEGG_TIL_BESVART_SPORSMAL;
     spmId: string;
     svar: string[];
+    tips: string | undefined;
 }
 
 export interface KlikkAlternativAction {
     type: ActionType.KLIKK_ALTERNATIV;
     svarId: string;
+    spmId: string;
     alternativType: AlternativTyper;
+    besvarteSporsmal: BesvartSporsmal[];
+}
+
+export interface NullStillAvgitteSvarAction {
+    type: ActionType.NULL_STILL_AVGITTE_SVAR;
+}
+
+export interface StoppForAViseNyttTipsAction {
+    type: ActionType.SKAL_STOPPE_FOR_A_VISE_NYTT_TIPS;
+    stopp: boolean;
+}
+
+export interface VisNyttTipsAction {
+    type: ActionType.VIS_NYTT_TIPS;
+    skalViseNyttTips: boolean;
 }
 
 export type Handling =
@@ -120,7 +141,10 @@ export type Handling =
     | FjerneSporsmalSomVisesAction
     | LeggTilBesvartSporsmalAction
     | KlikkAlternativAction
-    | SjekkAvhengigheterAction;
+    | SjekkAvhengigheterAction
+    | NullStillAvgitteSvarAction
+    | StoppForAViseNyttTipsAction
+    | VisNyttTipsAction;
 
 export interface SjekkAvhengigheterAction {
     type: ActionType.SJEKK_AVHENGIGHETER;

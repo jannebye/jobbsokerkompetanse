@@ -5,8 +5,8 @@ import Alternativ from '../alternativ/alternativ';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import { klikkAlternativ } from '../ducks/svar-duck';
-import { sjekkAvhengigheter } from '../ducks/sporsmal-duck';
-import { starteSvar } from '../ducks/side-duck';
+import { BesvartSporsmal, sjekkAvhengigheter } from '../ducks/sporsmal-duck';
+import { starteSvar, stoppForAViseNyttTips } from '../ducks/side-duck';
 import { AlternativTyper } from '../utils/konstanter';
 
 interface ParentProps {
@@ -15,12 +15,18 @@ interface ParentProps {
 
 interface StateProps {
     avgitteSvar: string[];
+    besvarteSporsmal: BesvartSporsmal[];
+    tips: string | undefined;
 }
 
 interface DispatchProps {
-    doKlikkAlternativ: (svarId: string, alternativType: AlternativTyper) => void;
+    doKlikkAlternativ: (svarId: string,
+                        spmId: string,
+                        besvarteSporsmal: BesvartSporsmal[],
+                        alternativType: AlternativTyper) => void;
     doSjekkAvhengigheter: (svarId: string, spmId: string) => void;
     ikkeNySideLenger: () => void;
+    doStoppForAViseNyttTips: (stopp: boolean) => void;
 }
 
 type AlternativContainerProps = ParentProps & StateProps & DispatchProps;
@@ -46,6 +52,12 @@ export class AlternativContainer extends React.Component<AlternativContainerProp
         super(props);
     }
 
+    componentDidUpdate(prevProps: AlternativContainerProps) {
+        if (this.props.tips && prevProps.tips !== this.props.tips) {
+            this.props.doStoppForAViseNyttTips(true);
+        }
+    }
+
     render() {
         const {
             sporsmal,
@@ -53,6 +65,7 @@ export class AlternativContainer extends React.Component<AlternativContainerProp
             doSjekkAvhengigheter,
             ikkeNySideLenger,
             avgitteSvar,
+            besvarteSporsmal,
         } = this.props;
 
         return (
@@ -74,7 +87,7 @@ export class AlternativContainer extends React.Component<AlternativContainerProp
                             sporsmalType={sporsmal.type}
                             kanVelges={kanVelges}
                             klikk={() => {
-                                doKlikkAlternativ(alternativ, sporsmal.type);
+                                doKlikkAlternativ(alternativ, sporsmal.id, besvarteSporsmal, sporsmal.type);
                                 doSjekkAvhengigheter(alternativ, sporsmal.id);
                                 ikkeNySideLenger();
                             }}
@@ -88,11 +101,17 @@ export class AlternativContainer extends React.Component<AlternativContainerProp
 
 const mapStateToProps = (state: AppState): StateProps => ({
     avgitteSvar: state.svar.avgitteSvar,
+    besvarteSporsmal: state.sporsmal.besvarteSporsmal,
+    tips: state.svar.tips
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    doKlikkAlternativ: (svarId: string, type: AlternativTyper) => dispatch(klikkAlternativ(svarId, type)),
+    doKlikkAlternativ: (svarId: string,
+                        spmId: string,
+                        besvarteSporsmal: BesvartSporsmal[],
+                        type: AlternativTyper) => dispatch(klikkAlternativ(svarId, spmId, besvarteSporsmal, type)),
     doSjekkAvhengigheter: (svarId: string, spmId: string) => dispatch(sjekkAvhengigheter(svarId, spmId)),
+    doStoppForAViseNyttTips: (stopp: boolean) => dispatch(stoppForAViseNyttTips(stopp)),
     ikkeNySideLenger: () => dispatch(starteSvar()),
 });
 

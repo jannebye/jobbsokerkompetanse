@@ -18,7 +18,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -34,7 +34,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -51,9 +51,10 @@ describe('TipsGenerator', () => {
                 {
                     spmId: spmId,
                     svar: svar,
+                    tips: undefined,
                 }
             ];
-            const tips = visTipsEtterSporsmal(spmId, besvarelse);
+            const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
             expect(tips).toEqual(expected);
         }
@@ -70,7 +71,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -86,7 +87,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -102,7 +103,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -118,7 +119,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -134,7 +135,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -150,7 +151,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -166,7 +167,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -183,7 +184,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -201,7 +202,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -222,7 +223,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -243,7 +244,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -264,7 +265,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -280,7 +281,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -296,7 +297,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -314,7 +315,7 @@ describe('TipsGenerator', () => {
                     tips: undefined
                 }
             ];
-            const tips = visTipsEtterSporsmal(spmId, besvarelse);
+            const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
             expect(tips).toEqual(expected);
         });
@@ -338,7 +339,7 @@ describe('TipsGenerator', () => {
                     tips: undefined
                 }
             ];
-            const tips = visTipsEtterSporsmal(spmId, besvarelse);
+            const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
             expect(tips).toEqual(expected);
         }
@@ -363,7 +364,7 @@ describe('TipsGenerator', () => {
                     tips: undefined
                 }
             ];
-            const tips = visTipsEtterSporsmal(spmId, besvarelse);
+            const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
             expect(tips).toEqual(expected);
         }
@@ -388,7 +389,7 @@ describe('TipsGenerator', () => {
                     tips: undefined
                 }
             ];
-            const tips = visTipsEtterSporsmal(spmId, besvarelse);
+            const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
             expect(tips).toEqual(expected);
         }
@@ -413,7 +414,7 @@ describe('TipsGenerator', () => {
                     tips: undefined
                 }
             ];
-            const tips = visTipsEtterSporsmal(spmId, besvarelse);
+            const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
             expect(tips).toEqual(expected);
         }
@@ -438,7 +439,7 @@ describe('TipsGenerator', () => {
                     tips: undefined
                 }
             ];
-            const tips = visTipsEtterSporsmal(spmId, besvarelse);
+            const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
             expect(tips).toEqual(expected);
         }
@@ -455,7 +456,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -471,7 +472,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -487,7 +488,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
@@ -516,7 +517,7 @@ describe('TipsGenerator', () => {
                     tips: undefined
                 }
             ];
-            const tips = visTipsEtterSporsmal(spmId, besvarelse);
+            const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
             expect(tips).toEqual(expected);
         }
@@ -546,7 +547,7 @@ describe('TipsGenerator', () => {
                     tips: undefined
                 }
             ];
-            const tips = visTipsEtterSporsmal(spmId, besvarelse);
+            const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
             expect(tips).toEqual(expected);
         }
@@ -571,7 +572,7 @@ describe('TipsGenerator', () => {
                     tips: undefined
                 }
             ];
-            const tips = visTipsEtterSporsmal(spmId, besvarelse);
+            const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
             expect(tips).toEqual(expected);
         }
@@ -593,7 +594,7 @@ describe('TipsGenerator', () => {
                 tips: undefined
             }
         ];
-        const tips = visTipsEtterSporsmal(spmId, besvarelse);
+        const tips = visTipsEtterSporsmal(spmId, besvarelse, svar);
 
         expect(tips).toEqual(expected);
     });
