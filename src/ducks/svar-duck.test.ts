@@ -25,7 +25,7 @@ it('oppdaterAvgitteSvar skal legge til flervalgsalternativer', () => {
         tips: undefined,
         skalViseNyttTips: false
 };
-    expect(oppdaterAvgitteSvar(svarId, svarState)).toEqual(
+    expect(oppdaterAvgitteSvar(svarId, svarState, AlternativTyper.FLERVALG)).toEqual(
         ['finn-svar-0103', 'finn-svar-0104', 'finn-svar-0101']
     )
 });
@@ -38,7 +38,7 @@ it('oppdaterAvgitteSvar skal fjerne flervalgsalternativer', () => {
         tips: undefined,
         skalViseNyttTips: false
     };
-    expect(oppdaterAvgitteSvar(svarId, svarState)).toEqual(
+    expect(oppdaterAvgitteSvar(svarId, svarState, AlternativTyper.FLERVALG)).toEqual(
         ['finn-svar-0103', 'finn-svar-0104']
     )
 });

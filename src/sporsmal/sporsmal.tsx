@@ -173,7 +173,6 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                                             e.preventDefault();
                                         } else {
                                             if (skalStoppeForAViseNyttTips) {
-                                                console.log('harSvar', harSvar);
                                                 e.preventDefault();
                                                 doVisNyttTips(true);
                                                 doStoppForAViseNyttTips(false);

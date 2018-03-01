@@ -24,7 +24,7 @@ export const initialState = {
 export default function reducer(state: SvarState = initialState, action: Handling): SvarState {
     switch (action.type) {
         case ActionType.KLIKK_ALTERNATIV:
-            const avgitteSvar = oppdaterAvgitteSvar(action.svarId, state);
+            const avgitteSvar = oppdaterAvgitteSvar(action.svarId, state, action.alternativType);
             const tips = visTipsEtterSporsmal(action.spmId, action.besvarteSporsmal, avgitteSvar);
             return {
                 ...state,
@@ -43,9 +43,9 @@ export default function reducer(state: SvarState = initialState, action: Handlin
     }
 }
 
-export function oppdaterAvgitteSvar(svarId: string, state: SvarState): string[] {
+export function oppdaterAvgitteSvar(svarId: string, state: SvarState, type: AlternativTyper): string[] {
     let tempListe;
-    if (state.alternativType === AlternativTyper.FLERVALG) {
+    if (type === AlternativTyper.FLERVALG) {
         tempListe = state.avgitteSvar.includes(svarId)
             ? state.avgitteSvar.filter(sid => sid !== svarId)
             : state.avgitteSvar.concat(svarId);
