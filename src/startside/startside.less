@@ -23,6 +23,10 @@
 	}
 }
 
+.limit.limit__startside {
+	width: 100%;
+}
+
 @media (orientation: landscape) and (max-width: 767px) {
 	.startside {
 		.startside__bildewrap {
@@ -33,14 +37,8 @@
 
 @media (orientation: landscape), (min-width: @screen-sm-min) {
 	.startside {
-		position: absolute;
-		left: 0;
-		height: ~'calc(100vh - 160px)';
-		right: 0;
-		bottom: 0;
 		display: flex;
 		flex-direction: row-reverse;
-		justify-content: center;
 		align-items: center;
 		padding: 0;
 
