@@ -230,7 +230,6 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                         type={'hoved'}
                                         className={sporsmal.erSisteSpm ? '' : 'sporsmal__knapp'}
                                         key="besvar"
-                                        disabled={this.state.feil}
                                         onClick={e => {
                                             this.sjekkSvar(
                                                 markerteAlternativer,
