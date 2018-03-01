@@ -1,4 +1,5 @@
-import { fjernAvhengighetsSporsmal, inneholderSporsmalSomSkalFjernes, leggTilAvhengighetsSporsmal } from './sporsmal-duck';
+import { fjernAvhengighetsSporsmal, inneholderSporsmalSomSkalFjernes,
+    leggTilAvhengighetsSporsmal } from './sporsmal-duck';
 
 it('inneholderSporsmalSomSkalFjernes', () => {
     const sporsmalSomVises = ['1', '2', '3', '4'];
@@ -17,6 +18,6 @@ it('fjernAvhengighetsSporsmal', () => {
 it('leggTilAvhengighetsSporsmal', () => {
     const sporsmalSomVises = ['cv-spm-01', 'intervju-spm-02'];
     const sporsmalSomSkalFjernes = ['finn-spm-03'];
-    expect(leggTilAvhengighetsSporsmal(sporsmalSomVises, sporsmalSomSkalFjernes)).toEqual(['finn-spm-03', 'cv-spm-01', 'intervju-spm-02']);
+    expect(leggTilAvhengighetsSporsmal(sporsmalSomVises, sporsmalSomSkalFjernes))
+        .toEqual(['finn-spm-03', 'cv-spm-01', 'intervju-spm-02']);
 });
-

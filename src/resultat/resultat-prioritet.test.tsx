@@ -6,7 +6,7 @@ import * as Adapter from 'enzyme-adapter-react-16';
 import getStore from '../store';
 import IntlProvider from '../Intl-provider';
 import { Provider } from 'react-redux';
-import {BesvartSporsmal} from "../ducks/sporsmal-duck";
+import { BesvartSporsmal } from '../ducks/sporsmal-duck';
 
 configure({ adapter: new Adapter() });
 const store = getStore();

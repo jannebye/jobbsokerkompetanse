@@ -1,3 +1,4 @@
+/* tslint:disable*/
 import * as React from 'react';
 import { Sporsmal } from './sporsmal';
 import { configure, mount, shallow } from 'enzyme';
