@@ -11,7 +11,7 @@ function Startside() {
     const startSpmUrl = '/' + Sidetype.KARTLEGGING + '/' + alleSporsmal[0].id;
 
     return (
-        <div className="limit">
+        <div className="limit limit__startside">
             <div className="startside">
                 <div className="startside__bildewrap">
                     <FormattedMessage id="startside-image-alt">
