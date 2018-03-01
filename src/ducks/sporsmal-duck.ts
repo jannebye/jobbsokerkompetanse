@@ -77,7 +77,8 @@ export default function reducer(state: SporsmalState = initialState, action: Han
     }
 }
 
-export function inneholderSporsmalSomSkalFjernes(sporsmalSomVises: string[], sporsmalSomSkalFjernes: string[]): boolean {
+export function inneholderSporsmalSomSkalFjernes(sporsmalSomVises: string[],
+                                                 sporsmalSomSkalFjernes: string[]): boolean {
     return sporsmalSomSkalFjernes.some(
         spmIkkeVises => sporsmalSomVises.some(
             spmVises => spmVises === spmIkkeVises
@@ -99,7 +100,8 @@ function sorterListeOgFjernDuplikater(spm: string[]): string[] {
         .filter(sporsmal => spm.includes(sporsmal));
 }
 
-export function leggTilBesvartSporsmal(spmId: string, svar: string[], tips: string | undefined): LeggTilBesvartSporsmalAction {
+export function leggTilBesvartSporsmal(spmId: string, svar: string[],
+                                       tips: string | undefined): LeggTilBesvartSporsmalAction {
     return {
         type: ActionType.LEGG_TIL_BESVART_SPORSMAL,
         spmId: spmId,

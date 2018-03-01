@@ -17,6 +17,7 @@ interface StateProps {
     avgitteSvar: string[];
     besvarteSporsmal: BesvartSporsmal[];
     tips: string | undefined;
+    erNySide: boolean;
 }
 
 interface DispatchProps {
@@ -53,9 +54,15 @@ export class AlternativContainer extends React.Component<AlternativContainerProp
     }
 
     componentDidUpdate(prevProps: AlternativContainerProps) {
-        if (this.props.tips && prevProps.tips !== this.props.tips) {
+        if (this.props.tips !== undefined && (!this.sporsmalErBesvartFraFor() && !this.props.erNySide)) {
             this.props.doStoppForAViseNyttTips(true);
         }
+    }
+
+    sporsmalErBesvartFraFor() {
+        return this.props.besvarteSporsmal
+            .map(besvartSpm => besvartSpm.spmId)
+            .includes(this.props.sporsmal.id);
     }
 
     render() {
@@ -102,7 +109,8 @@ export class AlternativContainer extends React.Component<AlternativContainerProp
 const mapStateToProps = (state: AppState): StateProps => ({
     avgitteSvar: state.svar.avgitteSvar,
     besvarteSporsmal: state.sporsmal.besvarteSporsmal,
-    tips: state.svar.tips
+    tips: state.svar.tips,
+    erNySide: state.side.erNySide,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({

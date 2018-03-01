@@ -31,18 +31,16 @@ export function erPaVeiBakover(gjeldendeSpmId: SporsmalId, sporsmalId: SporsmalI
     return sporsmalIndex(sporsmalId) < sporsmalIndex(gjeldendeSpmId);
 }
 
-//  Reducer
+// Reducer
 export default function reducer(state: SideState = initialState,
                                 action: Handling): SideState {
     switch (action.type) {
         case ActionType.NESTE_SPORSMAL: {
-            const sideType = Sidetype.KARTLEGGING;
-            const nySpmId = action.spmId;
-            const paVeiBakover = erPaVeiBakover(state.spmId, nySpmId);
+            const paVeiBakover = erPaVeiBakover(state.spmId, action.spmId);
             return {
                 ...state,
-                sideType: sideType,
-                spmId: nySpmId,
+                sideType: Sidetype.KARTLEGGING,
+                spmId: action.spmId,
                 viserAlternativer: action.spmErBesvart,
                 paVeiBakover,
                 erNySide: true

@@ -22,6 +22,7 @@ export enum ActionType {
     NULL_STILL_AVGITTE_SVAR = 'NULL_STILL_AVGITTE_SVAR',
     SKAL_STOPPE_FOR_A_VISE_NYTT_TIPS = 'SKAL_STOPPE_FOR_A_VISE_NYTT_TIPS',
     VIS_NYTT_TIPS = 'VIS_NYTT_TIPS',
+    LAST_INN_BESVART_SPORSMAL = 'LAST_INN_BESVART_SPORSMAL',
 }
 
 export interface LeggeTilSporsmalAction {
@@ -125,6 +126,12 @@ export interface VisNyttTipsAction {
     skalViseNyttTips: boolean;
 }
 
+export interface LastInnBesvartSporsmalAction {
+    type: ActionType.LAST_INN_BESVART_SPORSMAL;
+    svar: string[];
+    tips: string | undefined;
+}
+
 export type Handling =
     | EndreAlternativAction
     | EndreAlternativOgAntallAction
@@ -144,7 +151,8 @@ export type Handling =
     | SjekkAvhengigheterAction
     | NullStillAvgitteSvarAction
     | StoppForAViseNyttTipsAction
-    | VisNyttTipsAction;
+    | VisNyttTipsAction
+    | LastInnBesvartSporsmalAction;
 
 export interface SjekkAvhengigheterAction {
     type: ActionType.SJEKK_AVHENGIGHETER;

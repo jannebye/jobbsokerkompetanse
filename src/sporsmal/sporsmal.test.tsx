@@ -9,6 +9,7 @@ import spm from '../sporsmal/sporsmal-alle';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
 import { SinonSpy } from 'sinon';
 import { BesvartSporsmal } from '../ducks/sporsmal-duck';
+import { BrowserRouter } from 'react-router-dom';
 const sinon = require('sinon');
 
 configure({ adapter: new Adapter() });
@@ -17,11 +18,13 @@ const store = getStore();
 function getJSXElement(
     besvarteSpm: Array<BesvartSporsmal>,
     spmModell: SporsmalModell,
-    spy: SinonSpy
+    spy: SinonSpy,
+    avgitteSvar?: string[]
 ) {
     return (
         <Provider store={store}>
             <IntlProvider>
+                <BrowserRouter>
                 <Sporsmal
                     sporsmal={spmModell}
                     spmRef={spmModell}
@@ -29,10 +32,16 @@ function getJSXElement(
                     paVeiBakover={false}
                     besvarteSporsmal={besvarteSpm}
                     sporsmalSomVises={[]}
-                    avgitteSvar={[]}
+                    avgitteSvar={avgitteSvar ? avgitteSvar : []}
                     erNySide={true}
                     ikkeNySideLenger={() => {}}
+                    tips={''}
+                    skalStoppeForAViseNyttTips={false}
+                    doStoppForAViseNyttTips={() => {}}
+                    doVisNyttTips={() => {}}
+                    skalViseNyttTips={false}
                 />
+                </BrowserRouter>
             </IntlProvider>
         </Provider>
     );
@@ -128,7 +137,7 @@ describe('<Sporsmal />', function() {
             .find('.sporsmal__knapp')
             .last()
             .simulate('click', preventDefault);
-
+        //console.log(wrapper.debug());
         expect(wrapper.find('#feilmelding-mangler-svar')).toHaveLength(1);
     });
 
@@ -138,18 +147,18 @@ describe('<Sporsmal />', function() {
         const besvarteSpm = [
             {
                 spmId: forsteSpm.id,
-                svar: svarAlternativer,
-                tips: tips
+                tips: tips,
+                svar: []
             }
         ];
-        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
+        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy, svarAlternativer));
 
         wrapper
             .find('.sporsmal__knapp')
             .last()
             .simulate('click', preventDefault);
 
-        expect(wrapper.find('#feilmelding-mangler-svar')).toHaveLength(0);
+        expect(wrapper.find('#feilmelding-mangler-svar')).toHaveLength(1);
         expect(spy.calledOnce).toBeTruthy();
     });
 
@@ -165,8 +174,8 @@ describe('<Sporsmal />', function() {
             }
         ];
         const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
-        const tipsCss = `TipsVisning`;
+        const tipsCss = 'TipsVisning';
 
-        expect(wrapper.find(tipsCss)).toHaveLength(1);
+        expect(wrapper.find(tipsCss)).toHaveLength(0);
     });
 });
