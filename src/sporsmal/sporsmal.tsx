@@ -217,7 +217,7 @@ export class Sporsmal extends React.Component<SporsmalProps, EgenStateProps> {
                                     <TipsVisning id={besvartSpm.tips!}/>
                                 )}
                             </section>
-                            <section className="" role="alert" aria-live="assertive">
+                            <section className={sporsmal.type ==='skala' ? 'skalavalidering' : 'validering'} role="alert" aria-live="assertive">
                                 {this.state.feil && (
                                     <AlertStripeAdvarsel>
                                         <FormattedMessage id="feilmelding-mangler-svar"/>
