@@ -7,6 +7,7 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import AlternativContainer from '../skjema/alternativ-container';
 import TipsVisning from '../skjema/tips/tipsvisning';
 import { Sidetittel, Undertekst } from 'nav-frontend-typografi';
+import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import SVG from 'react-inlinesvg';
 import KnappBase from 'nav-frontend-knapper';
 import * as cls from 'classnames';
@@ -161,6 +162,18 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                             <section className="tips" role="alert" aria-live="polite">
                                 {skalViseNyttTips && tips && (
                                     <TipsVisning id={tips}/>
+                                {!isUndefined(besvartSpm.tips) && (
+                                    <TipsVisning id={besvartSpm.tips!}/>
+                                )}
+                            </section>
+                            <section
+                                className={sporsmal.type === 'skala' ? 'skalavalidering' : 'validering'}
+                            >
+                                {this.state.feil && (
+                                    <AlertStripeAdvarsel>
+                                        <FormattedMessage id="feilmelding-mangler-svar"/>
+                                    </AlertStripeAdvarsel>
+
                                 )}
                             </section>
                             <div className="knapperad blokk-s">
