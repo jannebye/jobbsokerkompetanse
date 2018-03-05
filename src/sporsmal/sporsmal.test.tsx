@@ -1,68 +1,52 @@
+/* tslint:disable*/
 import * as React from 'react';
 import { Sporsmal } from './sporsmal';
-import { configure, mount, shallow } from 'enzyme';
+import { configure } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import getStore from '../store';
-import IntlProvider from '../Intl-provider';
-import { Provider } from 'react-redux';
 import spm from '../sporsmal/sporsmal-alle';
-import { BesvarelseModell } from '../svar/svar-modell';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import SvarAlternativModell from '../svar/svaralternativ';
-import { SinonSpy } from 'sinon';
-const sinon = require('sinon');
-
+import { BesvartSporsmal } from '../ducks/sporsmal-duck';
+import { BrowserRouter } from 'react-router-dom';
+import {shallowWithIntl} from "../test/intl-enzyme-test-helper";
 configure({ adapter: new Adapter() });
-const store = getStore();
 
 function getJSXElement(
-    besvarteSpm: Array<BesvarelseModell>,
+    besvarteSpm: Array<BesvartSporsmal>,
     spmModell: SporsmalModell,
-    spy: SinonSpy
+    avgitteSvar?: string[],
+    erNySide?: boolean,
+    tips ?: string
 ) {
     return (
-        <Provider store={store}>
-            <IntlProvider>
-                <Sporsmal
-                    nesteSpm={spy}
-                    forrigeSpm={spy}
-                    sporsmal={spmModell}
-                    spmRef={spmModell}
-                    markerAlternativ={() => {
-                        return;
-                    }}
-                    visAlternativer={() => {
-                        return;
-                    }}
-                    viserAlternativer={false}
-                    paVeiBakover={false}
-                    besvarteSporsmal={besvarteSpm}
-                    visTips={ () => {
-                        return;
-                    }}
-                    totaltAntallSpm={1}
-                    handleSubmit={() => {return; }}
-                    startPaNytt={() => {return; }}
-                />
-            </IntlProvider>
-        </Provider>
+        <BrowserRouter>
+            <Sporsmal
+                sporsmal={spmModell}
+                spmRef={spmModell}
+                gaTilNesteSporsmal={() => {}}
+                paVeiBakover={false}
+                besvarteSporsmal={besvarteSpm}
+                sporsmalSomVises={[]}
+                avgitteSvar={avgitteSvar ? avgitteSvar : []}
+                erNySide={erNySide ? erNySide : false}
+                ikkeNySideLenger={() => {}}
+                tips={tips? tips : ''}
+                skalStoppeForAViseNyttTips={false}
+                doStoppForAViseNyttTips={() => {}}
+                doVisNyttTips={() => {}}
+                skalViseNyttTips={tips? true : false}
+            />
+        </BrowserRouter>
     );
 }
 
 describe('<Sporsmal />', function() {
     let tips: string | undefined;
-    let spy: SinonSpy;
-    let svarAlternativer: Array<SvarAlternativModell>;
-    const preventDefault = {
-        preventDefault: () => {
-            return;
-        }
-    };
-    const tilbakeKnappSelector =
-        'KnappBase[className="sporsmal__knapp-tilbake"] > button';
+    let svarAlternativer: Array<string>;
+
+    const tilbakeLenkeSelector =
+        'Link[className="sporsmal__knapp-tilbake"]';
 
     beforeEach(() => {
-        spy = sinon.spy();
         svarAlternativer = [];
     });
 
@@ -70,114 +54,105 @@ describe('<Sporsmal />', function() {
         const sisteSpm = spm.find(x => x.erSisteSpm === true)!;
         const besvarteSpm = [
             {
-                sporsmalId: sisteSpm!.id,
-                svarAlternativer: svarAlternativer,
+                spmId: sisteSpm!.id,
+                svar: svarAlternativer,
                 tips: tips
             }
         ];
 
-        shallow(getJSXElement(besvarteSpm, sisteSpm, spy));
+        shallowWithIntl(getJSXElement(besvarteSpm, sisteSpm));
     });
 
     it('skal kunne trykke på tilbakeknapp dersom det er siste spørsmål', () => {
         const sisteSpm = spm.find(x => x.erSisteSpm === true)!;
         const besvarteSpm = [
             {
-                sporsmalId: sisteSpm.id,
-                svarAlternativer: svarAlternativer,
+                spmId: sisteSpm.id,
+                svar: svarAlternativer,
                 tips: tips
             }
         ];
-        const wrapper = mount(getJSXElement(besvarteSpm, sisteSpm!, spy));
-        const knapp = wrapper.find(tilbakeKnappSelector);
+        const wrapper = shallowWithIntl(getJSXElement(besvarteSpm, sisteSpm!));
+        const lenke = wrapper.dive().dive().find(tilbakeLenkeSelector);
 
-        expect(knapp.exists()).toBe(true);
-        knapp.simulate('click', preventDefault);
-        expect(spy.calledOnce).toBeTruthy();
+        expect(lenke.exists()).toBe(true);
+        lenke.simulate('click', { button: 0 });
+
     });
 
     it('skal vise tilbakeknapp hvis det hverken er første eller siste spørsmål', () => {
         const sporsmal = spm.find(x => !x.erSisteSpm && !x.erForsteSpm)!;
         const besvarteSpm = [
             {
-                sporsmalId: sporsmal.id,
-                svarAlternativer: svarAlternativer,
+                spmId: sporsmal.id,
+                svar: svarAlternativer,
                 tips: tips
             }
         ];
-        const wrapper = mount(getJSXElement(besvarteSpm, sporsmal!, spy));
+        const wrapper = shallowWithIntl(getJSXElement(besvarteSpm, sporsmal!));
 
-        expect(wrapper.find(tilbakeKnappSelector).exists()).toBe(true);
+        expect(wrapper.dive().dive().find(tilbakeLenkeSelector).exists()).toBe(true);
     });
 
     it('skal vise nesteknapp', () => {
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
         const besvarteSpm = [
             {
-                sporsmalId: forsteSpm.id,
-                svarAlternativer: svarAlternativer,
+                spmId: forsteSpm.id,
+                svar: svarAlternativer,
                 tips: tips
             }
         ];
-        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
+        const wrapper = shallowWithIntl(getJSXElement(besvarteSpm, forsteSpm!));
 
-        expect(wrapper.find('.sporsmal__videre').exists()).toBe(true);
+        expect(wrapper.dive().dive().find('.sporsmal__videre').exists()).toBe(true);
     });
 
-    it('skal vise feilmelding dersom man trykker på nesteknapp og spørsmål ikke er besvart', () => {
+    it('skal vise feilmelding dersom spørsmål ikke er besvart og siden ikke er ny', () => {
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
         const besvarteSpm = [
             {
-                sporsmalId: forsteSpm.id,
-                svarAlternativer: svarAlternativer,
+                spmId: forsteSpm.id,
+                svar: svarAlternativer,
                 tips: tips
             }
         ];
-        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
+        const wrapper = shallowWithIntl(getJSXElement(besvarteSpm, forsteSpm!, [], false));
+        const wrapperWithDive = wrapper.dive().dive();
+        const feilmelding = wrapperWithDive.find('#feilmelding-mangler-svar');
 
-        wrapper
-            .find('.sporsmal__knapp')
-            .last()
-            .simulate('click', preventDefault);
-
-        expect(wrapper.find('#feilmelding-mangler-svar')).toHaveLength(1);
+        expect(feilmelding).toHaveLength(1);
+        expect(feilmelding.text().length).toBeGreaterThan(5);
     });
 
-    it('skal ikke vise feilmelding dersom man trykker på nesteknapp og spørsmål er besvart', () => {
+    it('skal ikke vise feilmelding dersom spørsmål ikke er besvart og siden er ny', () => {
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
-        svarAlternativer.push({ id: forsteSpm!.alternativer[0].id });
+        svarAlternativer.push(forsteSpm!.alternativer[0]);
         const besvarteSpm = [
             {
-                sporsmalId: forsteSpm.id,
-                svarAlternativer: svarAlternativer,
-                tips: tips
+                spmId: forsteSpm.id,
+                tips: tips,
+                svar: []
             }
         ];
-        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
+        const wrapper = shallowWithIntl(getJSXElement(besvarteSpm, forsteSpm!, svarAlternativer, true));
 
-        wrapper
-            .find('.sporsmal__knapp')
-            .last()
-            .simulate('click', preventDefault);
+        expect(wrapper.dive().dive().find('#feilmelding-mangler-svar')).toHaveLength(0);
 
-        expect(wrapper.find('#feilmelding-mangler-svar')).toHaveLength(0);
-        expect(spy.calledOnce).toBeTruthy();
     });
 
     it('skal vise tips', () => {
-        const tipsId = 'sok-utenfor-hjemsted';
+        const tipsId = 'sok-utenfor-hjemsted', tipsCss = 'TipsVisning';
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
-        svarAlternativer.push({ id: forsteSpm!.alternativer[0].id });
+        svarAlternativer.push(forsteSpm!.alternativer[0]);
         const besvarteSpm = [
             {
-                sporsmalId: forsteSpm.id,
-                svarAlternativer: svarAlternativer,
+                spmId: forsteSpm.id,
+                svar: svarAlternativer,
                 tips: tipsId
             }
         ];
-        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
-        const tipsCss = `TipsVisning`;
-
-        expect(wrapper.find(tipsCss)).toHaveLength(1);
+        const wrapper = shallowWithIntl(getJSXElement(besvarteSpm, forsteSpm!,[], true, tipsId));
+        expect(wrapper.dive().dive().find(tipsCss)).toHaveLength(1);
     });
 });

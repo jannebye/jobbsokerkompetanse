@@ -1,9 +1,13 @@
-import SvarAlternativModell from '../svar/svaralternativ';
 import { AlternativTyper } from '../utils/konstanter';
+
+export interface Alternativ {
+    id: string;
+}
 
 interface SporsmalModell {
     id: string;
-    alternativer: SvarAlternativModell[];
+    sorter: number;
+    alternativer: string[];
     type: AlternativTyper;
     overskriftId?: string;
     erForsteSpm?: boolean;

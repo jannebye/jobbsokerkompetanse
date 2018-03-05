@@ -1,18 +1,17 @@
 import * as React from 'react';
 import { expect } from 'chai';
-import { BesvarelseModell } from '../svar/svar-modell';
-import SvarAlternativModell from '../svar/svaralternativ';
 import { Resultat } from './resultat';
 import { configure, mount, ReactWrapper } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import getStore from '../store';
 import IntlProvider from '../Intl-provider';
 import { Provider } from 'react-redux';
+import { BesvartSporsmal } from '../ducks/sporsmal-duck';
 
 configure({ adapter: new Adapter() });
 const store = getStore();
 
-function getJSXElement(besvarteSpm: Array<BesvarelseModell>) {
+function getJSXElement(besvarteSpm: Array<BesvartSporsmal>) {
     return (
         <Provider store={store}>
             <IntlProvider>
@@ -33,13 +32,13 @@ function hentTema(wrapper: ReactWrapper, key: string) {
 
 // besvarteSpm.Id, svarAlternativer.sporsmalId: se alle-tekster.ts
 describe('<Resultat />', function() {
-    let besvarteSpm: BesvarelseModell[];
-    let svarAlternativer: SvarAlternativModell[];
+    let besvarteSpm: BesvartSporsmal[];
+    let svarAlternativer: string[];
     let tips: string | undefined;
 
     beforeEach(() => {
-        svarAlternativer = new Array<SvarAlternativModell>();
-        besvarteSpm = new Array<BesvarelseModell>();
+        svarAlternativer = new Array<string>();
+        besvarteSpm = new Array<BesvartSporsmal>();
         tips = undefined;
     });
 
@@ -51,10 +50,10 @@ describe('<Resultat />', function() {
     });
 
     it('skal foreslå å søke i flere bransjer hvis man søker på en type stilling', () => {
-        svarAlternativer.push({ id: 'finn-svar-0301' });
+        svarAlternativer.push('finn-svar-0301');
         besvarteSpm.push({
-            sporsmalId: 'finn-spm-03',
-            svarAlternativer: svarAlternativer,
+            spmId: 'finn-spm-03',
+            svar: svarAlternativer,
             tips: tips
         });
 
@@ -66,10 +65,10 @@ describe('<Resultat />', function() {
     });
 
     it('skal ikke foreslå å søke i flere bransjer hvis man søker på flere typer stilling', () => {
-        svarAlternativer.push({ id: 'finn-svar-0302' });
+        svarAlternativer.push('finn-svar-0302');
         besvarteSpm.push({
-            sporsmalId: 'finn-spm-03',
-            svarAlternativer: svarAlternativer,
+            spmId: 'finn-spm-03',
+            svar: svarAlternativer,
             tips: tips
         });
 
@@ -81,10 +80,10 @@ describe('<Resultat />', function() {
     });
 
     it('skal ikke foreslå hjelp til å skrive søknad', () => {
-        svarAlternativer.push({ id: 'cv-svar-0506' });
+        svarAlternativer.push('cv-svar-0506');
         besvarteSpm.push({
-            sporsmalId: 'cv-spm-05',
-            svarAlternativer: svarAlternativer,
+            spmId: 'cv-spm-05',
+            svar: svarAlternativer,
             tips: ''
         });
 
@@ -96,10 +95,10 @@ describe('<Resultat />', function() {
     });
 
     it('skal foreslå hjelp til å skrive søknad hvis man har lite erfaring med å søke', () => {
-        svarAlternativer.push({ id: 'cv-svar-0507' });
+        svarAlternativer.push('cv-svar-0507');
         besvarteSpm.push({
-            sporsmalId: 'cv-spm-05',
-            svarAlternativer: svarAlternativer,
+            spmId: 'cv-spm-05',
+            svar: svarAlternativer,
             tips: ''
         });
 
@@ -111,10 +110,10 @@ describe('<Resultat />', function() {
     });
 
     it('skal foreslå hjelp til å skrive søknad hvis man ikke har søkt det siste året', () => {
-        svarAlternativer.push({ id: 'soke-svar-0101' });
+        svarAlternativer.push('soke-svar-0101');
         besvarteSpm.push({
-            sporsmalId: 'soke-spm-01',
-            svarAlternativer: svarAlternativer,
+            spmId: 'soke-spm-01',
+            svar: svarAlternativer,
             tips: ''
         });
 
@@ -126,10 +125,10 @@ describe('<Resultat />', function() {
     });
 
     it('skal foreslå hjelp til å skrive søknad hvis man ikke har vært på intervju det siste året', () => {
-        svarAlternativer.push({ id: 'soke-svar-0201' });
+        svarAlternativer.push('soke-svar-0201');
         besvarteSpm.push({
-            sporsmalId: 'soke-spm-02',
-            svarAlternativer: svarAlternativer,
+            spmId: 'soke-spm-02',
+            svar: svarAlternativer,
             tips: ''
         });
 
@@ -141,10 +140,10 @@ describe('<Resultat />', function() {
     });
 
     it('skal foreslå hjelp til å skrive søknad hvis man ikke tilpasser søknaden', () => {
-        svarAlternativer.push({ id: 'soke-svar-0401' });
+        svarAlternativer.push('soke-svar-0401');
         besvarteSpm.push({
-            sporsmalId: 'soke-spm-04',
-            svarAlternativer: svarAlternativer,
+            spmId: 'soke-spm-04',
+            svar: svarAlternativer,
             tips: ''
         });
 
@@ -156,10 +155,10 @@ describe('<Resultat />', function() {
     });
 
     it('skal foreslå å ta kontakt med en bedrift', () => {
-        svarAlternativer.push({ id: 'finn-svar-0108' });
+        svarAlternativer.push('finn-svar-0108');
         besvarteSpm.push({
-            sporsmalId: 'finn-spm-01',
-            svarAlternativer: svarAlternativer,
+            spmId: 'finn-spm-01',
+            svar: svarAlternativer,
             tips: ''
         });
 
@@ -170,10 +169,10 @@ describe('<Resultat />', function() {
     });
 
     it('skal ikke foreslå å ta kontakt med en bedrift hvis man har kontaktet arbeidsgivere direkte', () => {
-        svarAlternativer.push({ id: 'finn-svar-0110' });
+        svarAlternativer.push('finn-svar-0110');
         besvarteSpm.push({
-            sporsmalId: 'finn-spm-01',
-            svarAlternativer: svarAlternativer,
+            spmId: 'finn-spm-01',
+            svar: svarAlternativer,
             tips: ''
         });
 
@@ -183,12 +182,12 @@ describe('<Resultat />', function() {
     });
 
     it('skal ikke foreslå å ta kontakt med en bedrift selv om man krysser av for flere alternativer', () => {
-        svarAlternativer.push({ id: 'finn-svar-0101' });
-        svarAlternativer.push({ id: 'finn-svar-0110' });
-        svarAlternativer.push({ id: 'finn-svar-0109' });
+        svarAlternativer.push('finn-svar-0101');
+        svarAlternativer.push('finn-svar-0110');
+        svarAlternativer.push('finn-svar-0109');
         besvarteSpm.push({
-            sporsmalId: 'finn-spm-01',
-            svarAlternativer: svarAlternativer,
+            spmId: 'finn-spm-01',
+            svar: svarAlternativer,
             tips: ''
         });
 
@@ -198,10 +197,10 @@ describe('<Resultat />', function() {
     });
 
     it('skal foreslå å forberede seg til intervju hvis man ikke har blitt innkalt det siste året', () => {
-        svarAlternativer.push({ id: 'soke-svar-0201' });
+        svarAlternativer.push('soke-svar-0201');
         besvarteSpm.push({
-            sporsmalId: 'soke-spm-02',
-            svarAlternativer: svarAlternativer,
+            spmId: 'soke-spm-02',
+            svar: svarAlternativer,
             tips: ''
         });
 
@@ -211,10 +210,10 @@ describe('<Resultat />', function() {
     });
 
     it('skal ikke foreslå å beskrive kompetanse', () => {
-        svarAlternativer.push({ id: 'soke-svar-0401' });
+        svarAlternativer.push('soke-svar-0401');
         besvarteSpm.push({
-            sporsmalId: 'soke-spm-04',
-            svarAlternativer: svarAlternativer,
+            spmId: 'soke-spm-04',
+            svar: svarAlternativer,
             tips: ''
         });
 

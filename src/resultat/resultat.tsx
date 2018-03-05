@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { AppState } from '../ducks/reducer';
-import { BesvarelseModell } from '../svar/svar-modell';
 import { connect } from 'react-redux';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { fasteTemaer, leggesTilTemaer } from './tema';
@@ -9,6 +8,7 @@ import { UtledetRaadModell } from './raad-modell';
 import TemaVisning from './temavisning';
 import InnholdsContainer from './innholdscontainer';
 import { Ingress, Sidetittel } from 'nav-frontend-typografi';
+import { BesvartSporsmal } from '../ducks/sporsmal-duck';
 
 function temaSkalBehandles(tema: UtledetRaadModell, alternativId: string) {
     if (temaLogikk[tema.ref]) {
@@ -23,15 +23,15 @@ function temaSkalBehandles(tema: UtledetRaadModell, alternativId: string) {
     return false;
 }
 
-function getAlleSvarteAlternativer(besvarelse: BesvarelseModell[]) {
-    return besvarelse.reduce(
-        (acc, svar) => [...acc, ...svar.svarAlternativer.map(a => a.id)],
+function getAlleSvarteAlternativer(besvarteSporsmal: BesvartSporsmal[]) {
+    return besvarteSporsmal.reduce(
+        (acc, svar) => [...acc, ...svar.svar.map(a => a)],
         []
     );
 }
 
-function genererTema(fullfortBesvarelse: BesvarelseModell[]) {
-    const valgteAlternativ = getAlleSvarteAlternativer(fullfortBesvarelse);
+function genererTema(besvarteSporsmal: BesvartSporsmal[]) {
+    const valgteAlternativ = getAlleSvarteAlternativer(besvarteSporsmal);
 
     const resultatFaste = fasteTemaer.filter(
         tema =>
@@ -52,7 +52,7 @@ function genererTema(fullfortBesvarelse: BesvarelseModell[]) {
 }
 
 interface StateProps {
-    besvarteSporsmal: BesvarelseModell[];
+    besvarteSporsmal: BesvartSporsmal[];
 }
 
 type Props = StateProps;
@@ -88,7 +88,7 @@ export function Resultat({besvarteSporsmal}: Props) {
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    besvarteSporsmal: state.svar.data
+    besvarteSporsmal: state.sporsmal.besvarteSporsmal
 });
 
 export default connect(mapStateToProps)(Resultat);
