@@ -1,70 +1,52 @@
 /* tslint:disable*/
 import * as React from 'react';
 import { Sporsmal } from './sporsmal';
-import { configure, mount, shallow } from 'enzyme';
+import { configure } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import getStore from '../store';
-import IntlProvider from '../Intl-provider';
-import { Provider } from 'react-redux';
 import spm from '../sporsmal/sporsmal-alle';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import { SinonSpy } from 'sinon';
 import { BesvartSporsmal } from '../ducks/sporsmal-duck';
 import { BrowserRouter } from 'react-router-dom';
-const sinon = require('sinon');
-
+import {shallowWithIntl} from "../test/intl-enzyme-test-helper";
 configure({ adapter: new Adapter() });
-const store = getStore();
 
 function getJSXElement(
     besvarteSpm: Array<BesvartSporsmal>,
     spmModell: SporsmalModell,
-    spy: SinonSpy,
     avgitteSvar?: string[],
     erNySide?: boolean,
+    tips ?: string
 ) {
     return (
-        <Provider store={store}>
-            <IntlProvider>
-                <BrowserRouter>
-                <Sporsmal
-                    sporsmal={spmModell}
-                    spmRef={spmModell}
-                    gaTilNesteSporsmal={() => {}}
-                    paVeiBakover={false}
-                    besvarteSporsmal={besvarteSpm}
-                    sporsmalSomVises={[]}
-                    avgitteSvar={avgitteSvar ? avgitteSvar : []}
-                    erNySide={erNySide ? erNySide : false}
-                    ikkeNySideLenger={() => {}}
-                    tips={''}
-                    skalStoppeForAViseNyttTips={false}
-                    doStoppForAViseNyttTips={() => {}}
-                    doVisNyttTips={() => {}}
-                    skalViseNyttTips={false}
-                />
-                </BrowserRouter>
-            </IntlProvider>
-        </Provider>
+        <BrowserRouter>
+            <Sporsmal
+                sporsmal={spmModell}
+                spmRef={spmModell}
+                gaTilNesteSporsmal={() => {}}
+                paVeiBakover={false}
+                besvarteSporsmal={besvarteSpm}
+                sporsmalSomVises={[]}
+                avgitteSvar={avgitteSvar ? avgitteSvar : []}
+                erNySide={erNySide ? erNySide : false}
+                ikkeNySideLenger={() => {}}
+                tips={tips? tips : ''}
+                skalStoppeForAViseNyttTips={false}
+                doStoppForAViseNyttTips={() => {}}
+                doVisNyttTips={() => {}}
+                skalViseNyttTips={tips? true : false}
+            />
+        </BrowserRouter>
     );
 }
 
 describe('<Sporsmal />', function() {
     let tips: string | undefined;
-    let spy: SinonSpy;
     let svarAlternativer: Array<string>;
-/*
-    const preventDefault = {
-        preventDefault: () => {
-            return;
-        }
-    };
-*/
+
     const tilbakeLenkeSelector =
         'Link[className="sporsmal__knapp-tilbake"]';
 
     beforeEach(() => {
-        spy = sinon.spy();
         svarAlternativer = [];
     });
 
@@ -78,7 +60,7 @@ describe('<Sporsmal />', function() {
             }
         ];
 
-        shallow(getJSXElement(besvarteSpm, sisteSpm, spy));
+        shallowWithIntl(getJSXElement(besvarteSpm, sisteSpm));
     });
 
     it('skal kunne trykke på tilbakeknapp dersom det er siste spørsmål', () => {
@@ -90,14 +72,12 @@ describe('<Sporsmal />', function() {
                 tips: tips
             }
         ];
-        const wrapper = mount(getJSXElement(besvarteSpm, sisteSpm!, spy));
-        const lenke = wrapper.find(tilbakeLenkeSelector);
+        const wrapper = shallowWithIntl(getJSXElement(besvarteSpm, sisteSpm!));
+        const lenke = wrapper.dive().dive().find(tilbakeLenkeSelector);
 
         expect(lenke.exists()).toBe(true);
-/*
         lenke.simulate('click', { button: 0 });
-        expect(spy.called).toBeTruthy();
-*/
+
     });
 
     it('skal vise tilbakeknapp hvis det hverken er første eller siste spørsmål', () => {
@@ -109,9 +89,9 @@ describe('<Sporsmal />', function() {
                 tips: tips
             }
         ];
-        const wrapper = mount(getJSXElement(besvarteSpm, sporsmal!, spy));
+        const wrapper = shallowWithIntl(getJSXElement(besvarteSpm, sporsmal!));
 
-        expect(wrapper.find(tilbakeLenkeSelector).exists()).toBe(true);
+        expect(wrapper.dive().dive().find(tilbakeLenkeSelector).exists()).toBe(true);
     });
 
     it('skal vise nesteknapp', () => {
@@ -123,12 +103,12 @@ describe('<Sporsmal />', function() {
                 tips: tips
             }
         ];
-        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
+        const wrapper = shallowWithIntl(getJSXElement(besvarteSpm, forsteSpm!));
 
-        expect(wrapper.find('.sporsmal__videre').exists()).toBe(true);
+        expect(wrapper.dive().dive().find('.sporsmal__videre').exists()).toBe(true);
     });
 
-    it('skal vise feilmelding dersom man trykker på nesteknapp og spørsmål ikke er besvart', () => {
+    it('skal vise feilmelding dersom spørsmål ikke er besvart og siden ikke er ny', () => {
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
         const besvarteSpm = [
             {
@@ -137,18 +117,15 @@ describe('<Sporsmal />', function() {
                 tips: tips
             }
         ];
-        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy, [], true));
+        const wrapper = shallowWithIntl(getJSXElement(besvarteSpm, forsteSpm!, [], false));
+        const wrapperWithDive = wrapper.dive().dive();
+        const feilmelding = wrapperWithDive.find('#feilmelding-mangler-svar');
 
-        wrapper
-            .find('.sporsmal__knapp')
-            .last();
-            //.simulate('click', { button: 0 });
-        expect(wrapper.exists()).toBeTruthy();
-        //console.log(wrapper.debug());
-        //expect(wrapper.find('#feilmelding-mangler-svar')).toHaveLength(1);
+        expect(feilmelding).toHaveLength(1);
+        expect(feilmelding.text().length).toBeGreaterThan(5);
     });
 
-    it('skal ikke vise feilmelding dersom man trykker på nesteknapp og spørsmål er besvart', () => {
+    it('skal ikke vise feilmelding dersom spørsmål ikke er besvart og siden er ny', () => {
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
         svarAlternativer.push(forsteSpm!.alternativer[0]);
         const besvarteSpm = [
@@ -158,22 +135,14 @@ describe('<Sporsmal />', function() {
                 svar: []
             }
         ];
-        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy, svarAlternativer, false));
+        const wrapper = shallowWithIntl(getJSXElement(besvarteSpm, forsteSpm!, svarAlternativer, true));
 
-        wrapper
-            .find('.sporsmal__knapp')
-            .last();
-            //.simulate('click', { button: 0 });
-        expect(wrapper.exists()).toBeTruthy();
+        expect(wrapper.dive().dive().find('#feilmelding-mangler-svar')).toHaveLength(0);
 
-/*
-        expect(wrapper.find('#feilmelding-mangler-svar')).toHaveLength(0);
-        expect(spy.called).toBeTruthy();
-*/
     });
 
     it('skal vise tips', () => {
-        const tipsId = 'sok-utenfor-hjemsted';
+        const tipsId = 'sok-utenfor-hjemsted', tipsCss = 'TipsVisning';
         const forsteSpm = spm.find(x => x.erForsteSpm === true)!;
         svarAlternativer.push(forsteSpm!.alternativer[0]);
         const besvarteSpm = [
@@ -183,9 +152,7 @@ describe('<Sporsmal />', function() {
                 tips: tipsId
             }
         ];
-        const wrapper = mount(getJSXElement(besvarteSpm, forsteSpm!, spy));
-        const tipsCss = 'TipsVisning';
-
-        expect(wrapper.find(tipsCss)).toHaveLength(0);
+        const wrapper = shallowWithIntl(getJSXElement(besvarteSpm, forsteSpm!,[], true, tipsId));
+        expect(wrapper.dive().dive().find(tipsCss)).toHaveLength(1);
     });
 });
