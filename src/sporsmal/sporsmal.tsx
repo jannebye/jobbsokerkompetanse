@@ -87,7 +87,7 @@ export class Sporsmal extends React.Component<SporsmalProps> {
         const svarId = spmArr[0] + '-svar-' + spmArr[2];
 
         let harSvar = false;
-        avgitteSvar.filter((svar, i) => {
+        avgitteSvar.filter((svar) => {
             if (!harSvar) {
                 harSvar = svar.startsWith(svarId);
             }
@@ -140,15 +140,6 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                                         <Sidetittel className="sporsmal__overskrift blokk-xs" tag="h1">
                                             <FormattedHTMLMessage id={sporsmal.id}/>
                                         </Sidetittel>
-                                        <p
-                                            className="skjemaelement__feilmelding"
-                                            role="alert"
-                                            aria-live="assertive"
-                                        >
-                                            {!harSvar && !erNySide && (
-                                                <FormattedMessage id="feilmelding-mangler-svar"/>
-                                            )}
-                                        </p>
                                     </div>
                                     <Undertekst className="sporsmal__ingress" tag="p">
                                         <FormattedMessage id={sporsmal.egenUndertekst || sporsmal.type}/>
@@ -162,18 +153,15 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                             <section className="tips" role="alert" aria-live="polite">
                                 {skalViseNyttTips && tips && (
                                     <TipsVisning id={tips}/>
-                                {!isUndefined(besvartSpm.tips) && (
-                                    <TipsVisning id={besvartSpm.tips!}/>
                                 )}
                             </section>
                             <section
                                 className={sporsmal.type === 'skala' ? 'skalavalidering' : 'validering'}
                             >
-                                {this.state.feil && (
+                                {!harSvar && !erNySide && (
                                     <AlertStripeAdvarsel>
                                         <FormattedMessage id="feilmelding-mangler-svar"/>
                                     </AlertStripeAdvarsel>
-
                                 )}
                             </section>
                             <div className="knapperad blokk-s">
