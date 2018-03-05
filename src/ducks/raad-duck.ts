@@ -1,6 +1,6 @@
 import { ActionType, Handling, HentTemaAction } from '../actions';
-import { TemaModell } from './tema-modell';
-import { RaadInitialState, RaadModell } from './raad-modell';
+import { TemaModell } from '../resultat/tema-modell';
+import { RaadInitialState, RaadModell } from '../resultat/raad-modell';
 
 const {HENT_TEMA_OK} = ActionType;
 
@@ -60,8 +60,7 @@ export function sjekkStatuskode(response: Response) {
     if (response.status >= 200 && response.status < 300 && response.ok) {
         return response;
     }
-    const error = new FetchError(response.statusText || response.type, response);
-    throw error;
+    throw new FetchError(response.statusText || response.type, response);
 }
 
 interface ApiProps {

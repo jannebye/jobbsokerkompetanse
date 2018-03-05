@@ -19,6 +19,7 @@ export default { 'nb': {
 'soke-spm-02-alt': 'Veske.',
 'soke-spm-03-alt': 'Bunke med ark.',
 'soke-spm-04-alt': 'Ark og blyant.',
+'applikasjonsnavn': '/jobbsokerkompetanse/',
 'cv-overskrift': 'CV-en skal fortelle hvem du er, hva slags utdanning du har og hva du har gjort. Hvor god er CV-en din?',
 'din-besvarelse': 'Din besvarelse',
 'dine-svar': 'Dine svar',
