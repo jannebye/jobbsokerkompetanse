@@ -7,14 +7,19 @@ interface StateProps {
 }
 
 export class Framdrift extends React.Component<StateProps> {
+
+    componentDidMount() {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY >= 300) {
+                $('nav').addClass('fixed-progress');
+            } else {
+                $('nav').removeClass('fixed-progress');
+            }
+        };
+    }
     render() {
-        const {
-            sporsmal,
-            sporsmalSomVises,
-        } = this.props;
-
+        const {sporsmal,sporsmalSomVises} = this.props;
         const gjeldendeSpmIndex = sporsmalSomVises.indexOf(sporsmal.id);
-
         const framdriftValue = Math.round((gjeldendeSpmIndex + 1) / sporsmalSomVises.length * 100);
         /** @type {{search: React.CSSProperties}} */
         const framdriftStyle = {
@@ -23,6 +28,7 @@ export class Framdrift extends React.Component<StateProps> {
 
         return (
             <div
+                ref={(ref) => HTMLDivElement = ref}
                 className="framdrift"
                 role="progressbar"
                 aria-valuenow={Math.round(framdriftValue)}
