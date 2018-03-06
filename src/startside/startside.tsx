@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { Normaltekst, Sidetittel } from 'nav-frontend-typografi';
-import { Hovedknapp } from 'nav-frontend-knapper';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { Link } from 'react-router-dom';
+import alleSporsmal from '../sporsmal/sporsmal-alle';
+import { Sidetype } from '../utils/konstanter';
 
 const sporsmalImg = require('../ikoner/forside.svg');
 
-interface StartsideProps {
-    startKartlegging: () => void;
-}
+function Startside() {
+    const startSpmUrl = '/' + Sidetype.KARTLEGGING + '/' + alleSporsmal[0].id;
 
-function Startside({startKartlegging}: StartsideProps) {
     return (
-        <div className="limit">
+        <div className="limit limit__startside">
             <div className="startside">
                 <div className="startside__bildewrap">
                     <FormattedMessage id="startside-image-alt">
@@ -33,12 +33,9 @@ function Startside({startKartlegging}: StartsideProps) {
                         <FormattedHTMLMessage id="startside-ingress"/>
                     </Normaltekst>
                     <div className="startside__knapperad">
-                        <Hovedknapp
-                            onClick={() => startKartlegging()}
-                            className="sporsmal__knapp"
-                        >
+                        <Link to={startSpmUrl} className="knapp knapp--hoved sporsmal__knapp">
                             <FormattedMessage id="start-knapp"/>
-                        </Hovedknapp>
+                        </Link>
                     </div>
                 </div>
             </div>

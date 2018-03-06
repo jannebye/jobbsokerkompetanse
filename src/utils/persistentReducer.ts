@@ -1,6 +1,5 @@
 /* tslint:disable */
 
-import { SvarState } from '../svar/svar-duck';
 import { SideState } from '../ducks/side-duck';
 
 function read(scope: string) {
@@ -17,7 +16,7 @@ function write(scope: string, content: any) {
 
 function erBesvarelseEndret(
     scope: string,
-    initialState: SvarState | SideState
+    initialState: SideState
 ) {
     const content = localStorage.getItem(scope);
     if (!content || content === 'undefined') {
@@ -36,7 +35,7 @@ export default (
     scope: string,
     location: Location,
     reducer: any,
-    initialState: SvarState | SideState
+    initialState: SideState
 ) => (state: any, action: any) => {
     let nState = state;
     if (

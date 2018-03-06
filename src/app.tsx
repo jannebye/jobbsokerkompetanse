@@ -7,6 +7,7 @@ import 'babel-polyfill';
 import { setupMock } from './mocks/setup-mock';
 import 'whatwg-fetch';
 import { erLocalhost } from './mocks/utils';
+import { BrowserRouter } from 'react-router-dom';
 
 if (process.env.REACT_APP_MOCK === 'true' || erLocalhost()) {
     setupMock();
@@ -19,7 +20,9 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <IntlProvider>
-                    <Innhold />
+                    <BrowserRouter basename="/jobbsokerkompetanse">
+                        <Innhold/>
+                    </BrowserRouter>
                 </IntlProvider>
             </Provider>
         );

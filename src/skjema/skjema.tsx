@@ -4,131 +4,84 @@ import Sporsmal from '../sporsmal/sporsmal';
 import { connect } from 'react-redux';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
-import { nesteSporsmal } from '../svar/svar-duck';
-import { BesvarelseModell } from '../svar/svar-modell';
-import {
-    default as Avhengigheter,
-    AvhengighetModell
-} from '../utils/avhengigheter';
+import { nesteSporsmal, stoppForAViseNyttTips } from '../ducks/side-duck';
+import { RouteComponentProps, withRouter } from 'react-router';
+import { harBesvartSpm } from '../ducks/sporsmal-duck';
+import { BesvartSporsmal } from '../ducks/sporsmal-duck';
+import { lastInnBesvartSporsmal, nullStillAvitteSvar } from '../ducks/svar-duck';
 
-function forrigeSporsmal(gjeldendeSpm: string, besvarelse: BesvarelseModell[]) {
-    const svarListe: BesvarelseModell[] = [...besvarelse];
-    const gjeldendeIndex = svarListe.findIndex(
-        spm => spm.sporsmalId === gjeldendeSpm
-    );
-    if (gjeldendeIndex === -1) {
-        // Returnerer siste besvarelse i listen.
-        // Gjelder når bruker ikke har valgt noen alternativer på gjeldende spm enda
-        return svarListe.find((value, index) => index === svarListe.length - 1)!
-            .sporsmalId;
-    }
-    return svarListe.find((value, index) => index === gjeldendeIndex - 1)!
-        .sporsmalId;
-}
-
-function finnNesteSpmIListe(id: string): string {
-    const gjeldendeIndex = alleSporsmal.findIndex(spm => spm.id === id);
-    return alleSporsmal.find((value, index) => index === gjeldendeIndex + 1)!
-        .id;
-}
-
-function finnNesteSpm(sporsmalId: string,
-                      forelopigBesvarelse: BesvarelseModell[]): string {
-    const avhengighet: AvhengighetModell | undefined = Avhengigheter.find(
-        avh => avh.sporsmalId === sporsmalId
-    );
-    if (
-        !!avhengighet &&
-        !!forelopigBesvarelse.find(
-            b =>
-                !!b.svarAlternativer.find(
-                    alternativ =>
-                        alternativ.id === avhengighet.harSvartAlternativId
-                )
-        )
-    ) {
-        return avhengighet.sendesTilSporsmalId;
-    }
-
-    return finnNesteSpmIListe(sporsmalId);
-}
-
-interface OwnProps {
-    handleSubmit: () => void;
-    startPaNytt: () => void;
+interface UrlProps {
+    spmId: string;
 }
 
 interface StateProps {
-    gjeldendeSporsmalId: string;
-    forelopigBesvarelse: BesvarelseModell[];
+    besvarteSporsmal: BesvartSporsmal[];
 }
 
 interface DispatchProps {
-    byttSpm: (sporsmalId: string) => Promise<{}>;
+    byttSpm: (sporsmalId: string, spmErBeesvart: boolean) => void;
+    doLastInnBesvartSporsmal: (svar: string[], tips: string | undefined) => void;
+    doNullStillAvgitteSvar: () => void;
+    doStoppForAViseNyttTips: (stopp: boolean) => void;
 }
 
-type SkjemaProps = OwnProps & StateProps & DispatchProps;
+type SkjemaProps = StateProps & DispatchProps & RouteComponentProps<any> & UrlProps; // tslint:disable-line:no-any
 
-class Skjema extends React.Component<SkjemaProps, {}> {
+class Skjema extends React.PureComponent<SkjemaProps, {}> {
     private sporsmalRefs = {};
 
     constructor(props: SkjemaProps) {
         super(props);
-
-        this.byttSpmOgFokus = this.byttSpmOgFokus.bind(this);
     }
 
-    byttSpmOgFokus(spmId: string) {
-        const nesteSpmId = finnNesteSpm(spmId, this.props.forelopigBesvarelse);
-        this.props.byttSpm(nesteSpmId).then(res => {
-            const nesteSpm = this.sporsmalRefs[this.props.gjeldendeSporsmalId];
-            nesteSpm.focus();
-        });
+    componentWillUpdate() {
+        this.props.doNullStillAvgitteSvar();
+        this.props.doStoppForAViseNyttTips(false);
+    }
+
+    componentDidUpdate() {
+        const sporsmalId = this.props.match.params.spmId;
+        this.props.byttSpm(sporsmalId, harBesvartSpm(this.props.besvarteSporsmal, sporsmalId));
+        this.oppdaterSporsmal();
+    }
+
+    oppdaterSporsmal() {
+        const besvartSpm = this.props.besvarteSporsmal.find(
+            besvart => besvart.spmId === this.props.match.params.spmId);
+        if (besvartSpm !== undefined) {
+            this.props.doLastInnBesvartSporsmal(besvartSpm.svar, besvartSpm.tips);
+        }
     }
 
     render() {
-        const {
-            handleSubmit,
-            startPaNytt,
-            gjeldendeSporsmalId,
-            byttSpm,
-            forelopigBesvarelse,
-        } = this.props;
+        const {spmId} = this.props.match.params;
         let sporsmalRefs = this.sporsmalRefs;
 
         return (
             <Sporsmal
-                key={gjeldendeSporsmalId}
+                key={spmId}
                 sporsmal={
                     alleSporsmal.find(
-                        sporsmal => sporsmal.id === gjeldendeSporsmalId
+                        sporsmal => sporsmal.id === spmId
                     )!
                 }
-                spmRef={(ref: {}) => (sporsmalRefs[gjeldendeSporsmalId] = ref)}
-                nesteSpm={(id: string) => this.byttSpmOgFokus(id)}
-                forrigeSpm={() =>
-                    byttSpm(
-                        forrigeSporsmal(
-                            gjeldendeSporsmalId,
-                            forelopigBesvarelse
-                        )
-                    )
-                }
-                handleSubmit={() => handleSubmit()}
-                startPaNytt={() => startPaNytt()}
+                spmRef={(ref: {}) => (sporsmalRefs[spmId] = ref)}
             />
         );
     }
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    gjeldendeSporsmalId: state.svar.gjeldendeSpmId,
-    forelopigBesvarelse: state.svar.data,
+    besvarteSporsmal: state.sporsmal.besvarteSporsmal
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    byttSpm: (sporsmalId: string) =>
-        new Promise(resolve => resolve(dispatch(nesteSporsmal(sporsmalId))))
+    byttSpm: (sporsmalId: string, spmErBesvart: boolean) =>
+        dispatch(nesteSporsmal(sporsmalId, spmErBesvart)),
+    doLastInnBesvartSporsmal: (svar: string[], tips: string | undefined) =>
+        dispatch(lastInnBesvartSporsmal(svar, tips)),
+    doNullStillAvgitteSvar: () => dispatch(nullStillAvitteSvar()),
+    doStoppForAViseNyttTips: (stopp: boolean) => dispatch(stoppForAViseNyttTips(stopp)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Skjema);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Skjema));

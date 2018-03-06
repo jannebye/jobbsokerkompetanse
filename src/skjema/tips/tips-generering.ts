@@ -1,66 +1,59 @@
-import { isUndefined } from 'util';
-import { BesvarelseModell } from '../../svar/svar-modell';
+import { BesvartSporsmal } from '../../ducks/sporsmal-duck';
 
-export function visTipsEtterSporsmal(
-    sporsmalId: string,
-    fullBesvarelse: BesvarelseModell[]
-) {
-    switch (sporsmalId) {
+export function visTipsEtterSporsmal(spmId: string, besvarteSporsmal: BesvartSporsmal[],
+                                     avgitteSvar: string[]): string | undefined {
+    switch (spmId) {
         case 'finn-spm-02':
-            return tipsSokUtenforHjemsted(fullBesvarelse);
+            return tipsSokUtenforHjemsted(besvarteSporsmal, avgitteSvar);
         case 'finn-spm-03':
-            return tipsPasserFlereJobber(fullBesvarelse);
+            return tipsPasserFlereJobber(besvarteSporsmal, avgitteSvar);
         case 'finn-spm-04':
-            return tipsVikariatDeltid(fullBesvarelse);
+            return tipsVikariatDeltid(besvarteSporsmal, avgitteSvar);
         case 'cv-spm-01':
-            return tipsRegistrerCV(fullBesvarelse);
+            return tipsRegistrerCV(besvarteSporsmal, avgitteSvar);
         case 'cv-spm-03':
-            return tipsTilpassCv(fullBesvarelse);
+            return tipsTilpassCv(besvarteSporsmal, avgitteSvar);
         case 'soke-spm-01':
-            return tipsOversiktSoknader(fullBesvarelse);
+            return tipsOversiktSoknader(besvarteSporsmal, avgitteSvar);
         case 'soke-spm-02':
-            return tipsForberedtIkkeIntervju(fullBesvarelse);
+            return tipsForberedtIkkeIntervju(besvarteSporsmal, avgitteSvar);
         case 'soke-spm-03':
-            return tipsIntervjuFokus(fullBesvarelse);
+            return tipsIntervjuFokus(besvarteSporsmal, avgitteSvar);
         case 'soke-spm-04':
-            return tipsSoknadSvarPaaAnnonsen(fullBesvarelse);
+            return tipsSoknadSvarPaaAnnonsen(besvarteSporsmal, avgitteSvar);
         case 'intervju-spm-02':
-            return tipsHvorforDeg(fullBesvarelse);
+            return tipsHvorforDeg(besvarteSporsmal, avgitteSvar);
         case 'intervju-spm-03':
-            return tipsIntervjuTrygg(fullBesvarelse);
+            return tipsIntervjuTrygg(besvarteSporsmal, avgitteSvar);
         case 'intervju-spm-04':
-            return tipsNettverk(fullBesvarelse);
+            return tipsNettverk(besvarteSporsmal, avgitteSvar);
         default:
             return undefined;
     }
 }
 
-function manglerBesvarelse(besvarelse: BesvarelseModell | undefined): boolean {
-    if (isUndefined(besvarelse) || besvarelse.svarAlternativer.length === 0) {
-        return true;
-    }
-    return false;
+function manglerBesvarelse(svar: string[]): boolean {
+    return svar.length === 0;
+
 }
 
 function erAlternativPaaEttvalgsSpmValgt(
     alternativId: string,
-    besvarelse: BesvarelseModell
+    avgitteSvar: string[]
 ): boolean {
-    return besvarelse.svarAlternativer.some(alt => alt.id === alternativId);
+    return avgitteSvar.some(alt => alt === alternativId);
 }
 
 /* Returnerer tipsId hvis alternativ 1 og/eller 2 er svart på spm 2, og ingen andre */
 export function tipsSokUtenforHjemsted(
-    fullBesvarelse: BesvarelseModell[]
+    besvarteSporsmal: BesvartSporsmal[],
+    avgitteSvar: string[],
 ): string | undefined {
-    const besvarelse2 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'finn-spm-02'
-    );
-    if (manglerBesvarelse(besvarelse2)) {
+    if (manglerBesvarelse(avgitteSvar)) {
         return undefined;
     } else if (
-        besvarelse2!.svarAlternativer.filter(
-            alt => alt.id !== 'finn-svar-0201' && alt.id !== 'finn-svar-0202'
+        avgitteSvar.filter(
+            alt => alt !== 'finn-svar-0201' && alt !== 'finn-svar-0202'
         ).length === 0
     ) {
         return 'sok-utenfor-hjemsted';
@@ -71,15 +64,13 @@ export function tipsSokUtenforHjemsted(
 
 /* Returnerer tipsId hvis alternativ 1 er valgt på spm 3 */
 export function tipsPasserFlereJobber(
-    fullBesvarelse: BesvarelseModell[]
+    besvarteSporsmal: BesvartSporsmal[],
+    avgitteSvar: string[],
 ): string | undefined {
-    const besvarelse3 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'finn-spm-03'
-    );
-    if (manglerBesvarelse(besvarelse3)) {
+    if (manglerBesvarelse(avgitteSvar)) {
         return undefined;
     } else if (
-        besvarelse3!.svarAlternativer.some(alt => alt.id === 'finn-svar-0301')
+        avgitteSvar.some(alt => alt === 'finn-svar-0301')
     ) {
         return 'passer-flere-jobber';
     } else {
@@ -89,16 +80,14 @@ export function tipsPasserFlereJobber(
 
 /* Returnerer tipsId hvis alternativ 1 og/eller 5 er valgt på spm 4, og ingen andre */
 export function tipsVikariatDeltid(
-    fullBesvarelse: BesvarelseModell[]
+    besvarteSporsmal: BesvartSporsmal[],
+    avgitteSvar: string[],
 ): string | undefined {
-    const besvarelse4 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'finn-spm-04'
-    );
-    if (manglerBesvarelse(besvarelse4)) {
+    if (manglerBesvarelse(avgitteSvar)) {
         return undefined;
     } else if (
-        besvarelse4!.svarAlternativer.filter(
-            alt => alt.id !== 'finn-svar-0401' && alt.id !== 'finn-svar-0405'
+        avgitteSvar.filter(
+            alt => alt !== 'finn-svar-0401' && alt !== 'finn-svar-0405'
         ).length === 0
     ) {
         return 'vikariat-deltid';
@@ -109,14 +98,12 @@ export function tipsVikariatDeltid(
 
 /* Returnerer tipsId hvis det er valgt 2 eller færre alternativ på spm 6 */
 export function tipsRegistrerCV(
-    fullBesvarelse: BesvarelseModell[]
+    besvarteSporsmal: BesvartSporsmal[],
+    avgitteSvar: string[],
 ): string | undefined {
-    const besvarelse6 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'cv-spm-01'
-    );
-    if (manglerBesvarelse(besvarelse6)) {
+    if (manglerBesvarelse(avgitteSvar)) {
         return undefined;
-    } else if (besvarelse6!.svarAlternativer.length <= 2) {
+    } else if (avgitteSvar.length <= 2) {
         return 'registrer-CV';
     } else {
         return undefined;
@@ -125,19 +112,17 @@ export function tipsRegistrerCV(
 
 /* Returnerer tipsId hvis alternativ 3 er valgt på spm 8, og alternativ 2 eller 3 på spm 3 */
 export function tipsTilpassCv(
-    fullBesvarelse: BesvarelseModell[]
+    besvarteSporsmal: BesvartSporsmal[],
+    avgitteSvar: string[],
 ): string | undefined {
-    const besvarelse8 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'cv-spm-03'
+    const besvarelse3 = besvarteSporsmal.find(
+        besvarelse => besvarelse.spmId === 'finn-spm-03'
     );
-    const besvarelse3 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'finn-spm-03'
-    );
-    if (manglerBesvarelse(besvarelse8) || manglerBesvarelse(besvarelse3)) {
+    if (manglerBesvarelse(avgitteSvar) || manglerBesvarelse(besvarelse3!.svar)) {
         return undefined;
     } else if (
-        erAlternativPaaEttvalgsSpmValgt('cv-svar-0303', besvarelse8!) &&
-        !erAlternativPaaEttvalgsSpmValgt('finn-svar-0301', besvarelse3!)
+        erAlternativPaaEttvalgsSpmValgt('cv-svar-0303', avgitteSvar) &&
+        !erAlternativPaaEttvalgsSpmValgt('finn-svar-0301', besvarelse3!.svar)
     ) {
         return 'tilpass-cv';
     } else {
@@ -147,15 +132,13 @@ export function tipsTilpassCv(
 
 /* Returnerer tipsId hvis alternativ 2, 3, 4 eller 5 er valgt på spm 11 */
 export function tipsOversiktSoknader(
-    fullBesvarelse: BesvarelseModell[]
+    besvarteSporsmal: BesvartSporsmal[],
+    avgitteSvar: string[],
 ): string | undefined {
-    const besvarelse11 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'soke-spm-01'
-    );
-    if (manglerBesvarelse(besvarelse11)) {
+    if (manglerBesvarelse(avgitteSvar)) {
         return undefined;
     } else if (
-        !erAlternativPaaEttvalgsSpmValgt('soke-svar-0101', besvarelse11!)
+        !erAlternativPaaEttvalgsSpmValgt('soke-svar-0101', avgitteSvar)
     ) {
         return 'oversikt-soknader';
     } else {
@@ -165,20 +148,18 @@ export function tipsOversiktSoknader(
 
 /* Returnerer tipsId hvis alternativ 1 er valgt på spm 12, og alternativ 4 eller 5 er valgt på spm 11 */
 export function tipsForberedtIkkeIntervju(
-    fullBesvarelse: BesvarelseModell[]
+    besvarteSporsmal: BesvartSporsmal[],
+    avgitteSvar: string[],
 ): string | undefined {
-    const besvarelse12 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'soke-spm-02'
+    const besvarelse11 = besvarteSporsmal.find(
+        besvarelse => besvarelse.spmId === 'soke-spm-01'
     );
-    const besvarelse11 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'soke-spm-01'
-    );
-    if (manglerBesvarelse(besvarelse12) || manglerBesvarelse(besvarelse11)) {
+    if (manglerBesvarelse(avgitteSvar) || manglerBesvarelse(besvarelse11!.svar)) {
         return undefined;
     } else if (
-        erAlternativPaaEttvalgsSpmValgt('soke-svar-0201', besvarelse12!) &&
-        (erAlternativPaaEttvalgsSpmValgt('soke-svar-0104', besvarelse11!) ||
-            erAlternativPaaEttvalgsSpmValgt('soke-svar-0105', besvarelse11!))
+        erAlternativPaaEttvalgsSpmValgt('soke-svar-0201', avgitteSvar) &&
+        (erAlternativPaaEttvalgsSpmValgt('soke-svar-0104', besvarelse11!.svar) ||
+            erAlternativPaaEttvalgsSpmValgt('soke-svar-0105', besvarelse11!.svar))
     ) {
         return 'forberedt-ikke-intervju';
     } else {
@@ -188,19 +169,17 @@ export function tipsForberedtIkkeIntervju(
 
 /* Returnerer tipsId hvis alternativ 1 er valgt på spm 13, og alternativ 3 er valgt på spm 12 */
 export function tipsIntervjuFokus(
-    fullBesvarelse: BesvarelseModell[]
+    besvarteSporsmal: BesvartSporsmal[],
+    avgitteSvar: string[],
 ): string | undefined {
-    const besvarelse13 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'soke-spm-03'
+    const besvarelse12 = besvarteSporsmal.find(
+        besvarelse => besvarelse.spmId === 'soke-spm-02'
     );
-    const besvarelse12 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'soke-spm-02'
-    );
-    if (manglerBesvarelse(besvarelse13) || manglerBesvarelse(besvarelse12)) {
+    if (manglerBesvarelse(avgitteSvar) || manglerBesvarelse(besvarelse12!.svar)) {
         return undefined;
     } else if (
-        erAlternativPaaEttvalgsSpmValgt('soke-svar-0301', besvarelse13!) &&
-        erAlternativPaaEttvalgsSpmValgt('soke-svar-0203', besvarelse12!)
+        erAlternativPaaEttvalgsSpmValgt('soke-svar-0301', avgitteSvar) &&
+        erAlternativPaaEttvalgsSpmValgt('soke-svar-0203', besvarelse12!.svar)
     ) {
         return 'intervju-fokus';
     } else {
@@ -210,15 +189,13 @@ export function tipsIntervjuFokus(
 
 /* Returnerer tipsId hvis alternativ 1 er valgt på spm 14 */
 export function tipsSoknadSvarPaaAnnonsen(
-    fullBesvarelse: BesvarelseModell[]
+    besvarteSporsmal: BesvartSporsmal[],
+    avgitteSvar: string[],
 ): string | undefined {
-    const besvarelse14 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'soke-spm-04'
-    );
-    if (manglerBesvarelse(besvarelse14)) {
+    if (manglerBesvarelse(avgitteSvar)) {
         return undefined;
     } else if (
-        erAlternativPaaEttvalgsSpmValgt('soke-svar-0401', besvarelse14!)
+        erAlternativPaaEttvalgsSpmValgt('soke-svar-0401', avgitteSvar)
     ) {
         return 'soknad-svar-paa-annonsen';
     } else {
@@ -228,12 +205,10 @@ export function tipsSoknadSvarPaaAnnonsen(
 
 /* Returnerer tipsId uavhengig av valgt alternativ på spm 16*/
 export function tipsHvorforDeg(
-    fullBesvarelse: BesvarelseModell[]
+    besvarteSporsmal: BesvartSporsmal[],
+    avgitteSvar: string[],
 ): string | undefined {
-    const besvarelse16 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'intervju-spm-02'
-    );
-    if (manglerBesvarelse(besvarelse16)) {
+    if (manglerBesvarelse(avgitteSvar)) {
         return undefined;
     } else {
         return 'intervju-hvorfor-deg';
@@ -242,38 +217,36 @@ export function tipsHvorforDeg(
 
 /* Returner tipsId hvis alternativ 1 eller 2 er valgt på spm 17, og 1 eller 2 på spm 16, og 1 eller 2 på spm 15 */
 export function tipsIntervjuTrygg(
-    fullBesvarelse: BesvarelseModell[]
+    besvarteSporsmal: BesvartSporsmal[],
+    avgitteSvar: string[],
 ): string | undefined {
-    const besvarelse17 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'intervju-spm-03'
+    const besvarelse16 = besvarteSporsmal.find(
+        besvarelse => besvarelse.spmId === 'intervju-spm-02'
     );
-    const besvarelse16 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'intervju-spm-02'
-    );
-    const besvarelse15 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'intervju-spm-01'
+    const besvarelse15 = besvarteSporsmal.find(
+        besvarelse => besvarelse.spmId === 'intervju-spm-01'
     );
     if (
-        manglerBesvarelse(besvarelse17) ||
-        manglerBesvarelse(besvarelse16) ||
-        manglerBesvarelse(besvarelse15)
+        manglerBesvarelse(avgitteSvar) ||
+        manglerBesvarelse(besvarelse16!.svar) ||
+        manglerBesvarelse(besvarelse15!.svar)
     ) {
         return undefined;
     } else if (
-        (erAlternativPaaEttvalgsSpmValgt('intervju-svar-0301', besvarelse17!) ||
+        (erAlternativPaaEttvalgsSpmValgt('intervju-svar-0301', avgitteSvar) ||
             erAlternativPaaEttvalgsSpmValgt(
                 'intervju-svar-0302',
-                besvarelse17!
+                avgitteSvar
             )) &&
-        (erAlternativPaaEttvalgsSpmValgt('intervju-svar-0201', besvarelse16!) ||
+        (erAlternativPaaEttvalgsSpmValgt('intervju-svar-0201', besvarelse16!.svar) ||
             erAlternativPaaEttvalgsSpmValgt(
                 'intervju-svar-0202',
-                besvarelse16!
+                besvarelse16!.svar
             )) &&
-        (erAlternativPaaEttvalgsSpmValgt('intervju-svar-0101', besvarelse15!) ||
+        (erAlternativPaaEttvalgsSpmValgt('intervju-svar-0101', besvarelse15!.svar) ||
             erAlternativPaaEttvalgsSpmValgt(
                 'intervju-svar-0102',
-                besvarelse15!
+                besvarelse15!.svar
             ))
     ) {
         return 'intervju-trygg';
@@ -284,15 +257,13 @@ export function tipsIntervjuTrygg(
 
 /* Returnerer tipsId hvis alternativ 9 er valgt på spørsmål 18 */
 export function tipsNettverk(
-    fullBesvarelse: BesvarelseModell[]
+    besvarteSporsmal: BesvartSporsmal[],
+    avgitteSvar: string[],
 ): string | undefined {
-    const besvarelse18 = fullBesvarelse.find(
-        besvarelse => besvarelse.sporsmalId === 'intervju-spm-04'
-    );
-    if (manglerBesvarelse(besvarelse18)) {
+    if (manglerBesvarelse(avgitteSvar)) {
         return undefined;
     } else if (
-        erAlternativPaaEttvalgsSpmValgt('intervju-svar-0409', besvarelse18!)
+        erAlternativPaaEttvalgsSpmValgt('intervju-svar-0409', avgitteSvar)
     ) {
         return 'nettverk';
     } else {
