@@ -20,6 +20,7 @@
     "build": "npm run build:less && npm run build:ts && npm run build:tekster"
   },
   "dependencies": {
+    "@types/gsap": "^1.19.2",
     "@types/react-router-dom": "4.2.4",
     "@types/redux-persist": "4.3.1",
     "babel-polyfill": "6.26.0",

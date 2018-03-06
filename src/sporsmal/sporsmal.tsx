@@ -15,7 +15,6 @@ import { nesteSporsmal, starteSvar, stoppForAViseNyttTips } from '../ducks/side-
 import { Link } from 'react-router-dom';
 import { Sidetype } from '../utils/konstanter';
 import { BesvartSporsmal, leggTilBesvartSporsmal } from '../ducks/sporsmal-duck';
-import { Framdrift } from './framdrift';
 import { visNyttTips } from '../ducks/svar-duck';
 
 interface DispatchProps {
@@ -95,7 +94,6 @@ export class Sporsmal extends React.Component<SporsmalProps> {
 
         return (
             <React.Fragment>
-                <Framdrift sporsmal={sporsmal} sporsmalSomVises={sporsmalSomVises}/>
                 <div className="limit">
                     <div
                         ref={spmRef}
@@ -149,7 +147,7 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                                     <FormattedMessage id="fortsett-knapp"/>
                                 </KnappBase>
                             </div>
-                            <AlternativContainer sporsmal={sporsmal} />
+                            <AlternativContainer sporsmal={sporsmal}/>
                             <section className="tips" role="alert" aria-live="polite">
                                 {skalViseNyttTips && tips && (
                                     <TipsVisning id={tips}/>
