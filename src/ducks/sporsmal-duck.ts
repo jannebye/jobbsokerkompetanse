@@ -28,13 +28,6 @@ export const initialState = {
 export default function reducer(state: SporsmalState = initialState, action: Handling): SporsmalState {
     let tempListe;
     switch (action.type) {
-
-        case ActionType.LEGG_TIL_SPORSMAL_SOM_VISES:
-            tempListe = state.sporsmalSomVises.includes(action.spmId) ?
-                state.sporsmalSomVises :
-                state.sporsmalSomVises.concat(action.spmId);
-            return {...state, sporsmalSomVises: tempListe};
-
         case ActionType.LEGG_TIL_BESVART_SPORSMAL: {
             tempListe = state.besvarteSporsmal.filter(spm => spm.spmId !== action.spmId);
             let besvartSpm: BesvartSporsmal = {
@@ -44,16 +37,13 @@ export default function reducer(state: SporsmalState = initialState, action: Han
             };
             return {...state, besvarteSporsmal: tempListe.concat(besvartSpm)};
         }
-
         case ActionType.SJEKK_AVHENGIGHETER:
             const avhengighet =
                 Avhengigheter.find(avh =>
-                    avh.sporsmalId === action.spmId &&
-                    avh.svarId === action.svarId
+                    avh.sporsmalId === action.spmId
                 );
-
             if (avhengighet) {
-                if (inneholderSporsmalSomSkalFjernes(state.sporsmalSomVises, avhengighet.sporsmalSomSkalFjernes)) {
+                if (avhengighet.svarId === action.svarId) {
                     return {
                         ...state,
                         sporsmalSomVises: fjernAvhengighetsSporsmal(
@@ -64,22 +54,21 @@ export default function reducer(state: SporsmalState = initialState, action: Han
                 }
                 return {
                     ...state,
-                    sporsmalSomVises: leggTilAvhengighetsSporsmal(
-                        state.sporsmalSomVises,
+                    sporsmalSomVises: inkluderAvhengighetsSporsmal(
+                        state,
                         avhengighet.sporsmalSomSkalFjernes
                     )
                 };
             }
             return {...state};
-
         default:
             return state;
     }
 }
 
-export function inneholderSporsmalSomSkalFjernes(sporsmalSomVises: string[],
-                                                 sporsmalSomSkalFjernes: string[]): boolean {
-    return sporsmalSomSkalFjernes.some(
+export function sporsmalSomSkalVisesInneholderAvhengighetsSporsmal(sporsmalSomVises: string[],
+                                                                   avhengighetsSporsmal: string[]): boolean {
+    return avhengighetsSporsmal.some(
         spmIkkeVises => sporsmalSomVises.some(
             spmVises => spmVises === spmIkkeVises
         )
@@ -90,14 +79,21 @@ export function fjernAvhengighetsSporsmal(sporsmalSomVises: string[], sporsmalSo
     return sporsmalSomVises.filter(sporsmal => !sporsmalSomSkalFjernes.includes(sporsmal));
 }
 
-export function leggTilAvhengighetsSporsmal(sporsmalSomVises: string[], sporsmalSomSkalFjernes: string[]): string[] {
-    return sorterListeOgFjernDuplikater([...sporsmalSomVises, ...sporsmalSomSkalFjernes]);
+function leggTilAvhengihetsSporsmal(state: SporsmalState, sporsmalSomSkalLeggesTil: string[]): string[] {
+    return state.sporsmalSomVises
+        .concat(sporsmalSomSkalLeggesTil)
+        .sort((a: string, b: string) => {
+            const spmA = state.alleSporsmal.find(sporsmal => sporsmal.id === a)!;
+            const spmB = state.alleSporsmal.find(sporsmal => sporsmal.id === b)!;
+            return spmA.sorter - spmB.sorter;
+        });
 }
 
-function sorterListeOgFjernDuplikater(spm: string[]): string[] {
-    return alleSporsmal
-        .map(sporsmal => sporsmal.id)
-        .filter(sporsmal => spm.includes(sporsmal));
+export function inkluderAvhengighetsSporsmal(state: SporsmalState, avhengighetsSporsmal: string[]): string[] {
+    if (sporsmalSomSkalVisesInneholderAvhengighetsSporsmal(state.sporsmalSomVises, avhengighetsSporsmal)) {
+        return state.sporsmalSomVises;
+    }
+    return leggTilAvhengihetsSporsmal(state, avhengighetsSporsmal);
 }
 
 export function leggTilBesvartSporsmal(spmId: string, svar: string[],
