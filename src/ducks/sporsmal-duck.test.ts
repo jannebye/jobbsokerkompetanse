@@ -31,7 +31,7 @@ describe('sporsmal-duck', () => {
         expect(inkluderAvhengighetsSporsmal(state, sporsmalSomSkalFjernes))
             .toEqual(['finn-spm-03', 'cv-spm-01', 'intervju-spm-02']);
     });
-    it('skal legge til avhengighetsporsmal', () => {
+    it('inkluderAvhengighetsSporsmal', () => {
         const state = {
             alleSporsmal: alleSporsmal,
             sporsmalSomVises: alleSporsmal.map((spm) => spm.id).filter(spm => {
