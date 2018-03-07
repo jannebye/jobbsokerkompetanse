@@ -1,28 +1,18 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import AlternativContainer from '../skjema/alternativ-container';
 import TipsVisning from '../skjema/tips/tipsvisning';
 import { Sidetittel, Undertekst } from 'nav-frontend-typografi';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
-import SVG from 'react-inlinesvg';
 import KnappBase from 'nav-frontend-knapper';
 import * as cls from 'classnames';
-import { nesteSporsmal, starteSvar, stoppForAViseNyttTips } from '../ducks/side-duck';
-import { Link } from 'react-router-dom';
-import { Sidetype } from '../utils/konstanter';
-import { BesvartSporsmal, leggTilBesvartSporsmal } from '../ducks/sporsmal-duck';
-import { visNyttTips } from '../ducks/svar-duck';
-
-interface DispatchProps {
-    gaTilNesteSporsmal: (spmId: string, nesteSpmId: string, svar: string[], tips: string | undefined) => void;
-    ikkeNySideLenger: () => void;
-    doStoppForAViseNyttTips: (stopp: boolean) => void;
-    doVisNyttTips: (visTips: boolean) => void;
-}
+import { BesvartSporsmal } from '../ducks/sporsmal-duck';
+import { SporsmalBilde } from './sporsmal-bilde';
+import { TilbakeLink } from './tilbake-link';
+import NesteLink from './neste-link';
 
 interface OwnProps {
     sporsmal: SporsmalModell;
@@ -36,11 +26,10 @@ interface StateProps {
     avgitteSvar: string[];
     erNySide: boolean;
     tips: string | undefined;
-    skalStoppeForAViseNyttTips: boolean;
     skalViseNyttTips: boolean;
 }
 
-type SporsmalProps = OwnProps & DispatchProps & StateProps;
+type SporsmalProps = OwnProps & StateProps;
 
 export class Sporsmal extends React.Component<SporsmalProps> {
 
@@ -54,33 +43,19 @@ export class Sporsmal extends React.Component<SporsmalProps> {
             spmRef,
             paVeiBakover,
             sporsmalSomVises,
-            avgitteSvar,
             erNySide,
-            ikkeNySideLenger,
             tips,
-            skalStoppeForAViseNyttTips,
-            doStoppForAViseNyttTips,
-            doVisNyttTips,
+            avgitteSvar,
             skalViseNyttTips,
-            gaTilNesteSporsmal,
         } = this.props;
 
         const gjeldendeSpmIndex = sporsmalSomVises.indexOf(sporsmal.id);
         const nesteSpmId = sporsmalSomVises[gjeldendeSpmIndex + 1];
         const forrigeSpmId = sporsmalSomVises[gjeldendeSpmIndex - 1];
-        const sporsmalImg = require('../ikoner/' + sporsmal.id + '.svg');
 
         const klassenavn = cls('sporsmal vis_alternativer', {
             tilbake: paVeiBakover,
         });
-
-        const tilbakeUrl = sporsmal.erForsteSpm
-            ? '/' + Sidetype.START
-            : '/' + Sidetype.KARTLEGGING + '/' + forrigeSpmId;
-
-        let nesteUrl = sporsmal.erSisteSpm
-            ? '/' + Sidetype.RESULTAT
-            : '/' + Sidetype.KARTLEGGING + '/' + nesteSpmId;
 
         const spmArr = sporsmal.id.split('-');
         const svarId = spmArr[0] + '-svar-' + spmArr[2];
@@ -104,37 +79,11 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                         <section>
                             <div className={'sporsmal__start'}>
                                 <div className="sporsmal__header">
-                                    <Link
-                                        to={tilbakeUrl}
-                                        type={'standard'}
-                                        className="sporsmal__knapp-tilbake"
-                                    >
-                                        {sporsmal.erForsteSpm ? (
-                                            <FormattedMessage id="forrige-knapp-start"/>
-                                        ) : (
-                                            <FormattedMessage id="forrige-knapp"/>
-                                        )}
-                                    </Link>
+                                    <TilbakeLink sporsmal={sporsmal} forrigeSpmId={forrigeSpmId} />
                                 </div>
                                 <div className="sporsmal__innhold">
                                     <div className="sporsmal__hode">
-                                        <FormattedMessage id={sporsmal.id + ''}>
-                                            {(tekst: string) => (
-                                                <SVG
-                                                    src={sporsmalImg}
-                                                    className="sporsmal__ikon"
-                                                    role="img"
-                                                    aria-label={tekst}
-                                                >
-                                                    <img
-                                                        src={sporsmalImg}
-                                                        className="sporsmal__ikon"
-                                                        alt={tekst}
-                                                    />
-                                                </SVG>
-                                            )}
-                                        </FormattedMessage>
-
+                                        <SporsmalBilde sporsmal={sporsmal} />
                                         <Sidetittel className="sporsmal__overskrift blokk-xs" tag="h1">
                                             <FormattedHTMLMessage id={sporsmal.id}/>
                                         </Sidetittel>
@@ -163,31 +112,7 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                                 )}
                             </section>
                             <div className="knapperad blokk-s">
-                                <Link
-                                    to={nesteUrl}
-                                    className={sporsmal.erSisteSpm ? '' : 'knapp knapp--hoved sporsmal__knapp'}
-                                    key="besvar"
-                                    onClick={(e) => {
-                                        if (!harSvar) {
-                                            e.preventDefault();
-                                        } else {
-                                            if (skalStoppeForAViseNyttTips) {
-                                                e.preventDefault();
-                                                doVisNyttTips(true);
-                                                doStoppForAViseNyttTips(false);
-                                            } else {
-                                                gaTilNesteSporsmal(sporsmal.id, nesteSpmId, avgitteSvar, tips);
-                                            }
-                                        }
-                                        ikkeNySideLenger();
-                                    }}
-                                >
-                                    {sporsmal.erSisteSpm ? (
-                                        <FormattedMessage id="send-inn"/>
-                                    ) : (
-                                        <FormattedMessage id="fortsett-knapp"/>
-                                    )}
-                                </Link>
+                                <NesteLink sporsmal={sporsmal} nesteSpmId={nesteSpmId} harSvar={harSvar} />
                             </div>
                         </section>
                     </div>
@@ -201,21 +126,10 @@ const mapStateToProps = (state: AppState): StateProps => ({
     besvarteSporsmal: state.sporsmal.besvarteSporsmal,
     paVeiBakover: state.side.paVeiBakover,
     sporsmalSomVises: state.sporsmal.sporsmalSomVises,
-    avgitteSvar: state.svar.avgitteSvar,
     erNySide: state.side.erNySide,
     tips: state.svar.tips,
-    skalStoppeForAViseNyttTips: state.side.skalStoppeForAViseNyttTips,
+    avgitteSvar: state.svar.avgitteSvar,
     skalViseNyttTips: state.svar.skalViseNyttTips
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    gaTilNesteSporsmal: (spmId: string, nesteSpmId: string, svar: string[], tips: string | undefined) => {
-        dispatch(nesteSporsmal(nesteSpmId, false));
-        dispatch(leggTilBesvartSporsmal(spmId, svar, tips));
-    },
-    ikkeNySideLenger: () => dispatch(starteSvar()),
-    doStoppForAViseNyttTips: (stopp: boolean) => dispatch(stoppForAViseNyttTips(stopp)),
-    doVisNyttTips: (visTips: boolean) => dispatch(visNyttTips(visTips)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sporsmal);
+export default connect(mapStateToProps)(Sporsmal);

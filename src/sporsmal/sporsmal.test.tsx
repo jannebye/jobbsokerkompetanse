@@ -22,18 +22,13 @@ function getJSXElement(
             <Sporsmal
                 sporsmal={spmModell}
                 spmRef={spmModell}
-                gaTilNesteSporsmal={() => {}}
                 paVeiBakover={false}
                 besvarteSporsmal={besvarteSpm}
                 sporsmalSomVises={[]}
                 avgitteSvar={avgitteSvar ? avgitteSvar : []}
                 erNySide={erNySide ? erNySide : false}
-                ikkeNySideLenger={() => {}}
                 tips={tips? tips : ''}
-                skalStoppeForAViseNyttTips={false}
-                doStoppForAViseNyttTips={() => {}}
-                doVisNyttTips={() => {}}
-                skalViseNyttTips={tips? true : false}
+                skalViseNyttTips={!!tips}
             />
         </BrowserRouter>
     );

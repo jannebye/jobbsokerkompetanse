@@ -1,12 +1,12 @@
 import * as React from 'react';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
 
-interface StateProps {
+interface OwnProps {
     sporsmal: SporsmalModell;
     sporsmalSomVises: string[];
 }
 
-export class Framdrift extends React.Component<StateProps> {
+export class Framdrift extends React.Component<OwnProps> {
     private framdriftContainer: HTMLDivElement;
     private framdriftIndikator: HTMLDivElement;
 
