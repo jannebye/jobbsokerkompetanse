@@ -9,6 +9,7 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { harBesvartSpm } from '../ducks/sporsmal-duck';
 import { BesvartSporsmal } from '../ducks/sporsmal-duck';
 import { lastInnBesvartSporsmal, nullStillAvitteSvar } from '../ducks/svar-duck';
+import { Framdrift } from './framdrift';
 
 interface UrlProps {
     spmId: string;
@@ -16,6 +17,7 @@ interface UrlProps {
 
 interface StateProps {
     besvarteSporsmal: BesvartSporsmal[];
+    sporsmalSomVises: string[];
 }
 
 interface DispatchProps {
@@ -56,23 +58,24 @@ class Skjema extends React.PureComponent<SkjemaProps, {}> {
     render() {
         const {spmId} = this.props.match.params;
         let sporsmalRefs = this.sporsmalRefs;
+        const sporsmal = alleSporsmal.find(spm => spm.id === spmId)!;
 
         return (
-            <Sporsmal
-                key={spmId}
-                sporsmal={
-                    alleSporsmal.find(
-                        sporsmal => sporsmal.id === spmId
-                    )!
-                }
-                spmRef={(ref: {}) => (sporsmalRefs[spmId] = ref)}
-            />
+            <React.Fragment>
+                <Framdrift sporsmal={sporsmal} sporsmalSomVises={this.props.sporsmalSomVises}/>
+                <Sporsmal
+                    key={spmId}
+                    sporsmal={sporsmal}
+                    spmRef={(ref: {}) => (sporsmalRefs[spmId] = ref)}
+                />
+            </React.Fragment>
         );
     }
 }
 
 const mapStateToProps = (state: AppState): StateProps => ({
-    besvarteSporsmal: state.sporsmal.besvarteSporsmal
+    besvarteSporsmal: state.sporsmal.besvarteSporsmal,
+    sporsmalSomVises: state.sporsmal.sporsmalSomVises
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
