@@ -57,6 +57,9 @@ export class AlternativContainer extends React.Component<AlternativContainerProp
         if (this.props.tips !== undefined && (!this.sporsmalErBesvartFraFor() && !this.props.erNySide)) {
             this.props.doStoppForAViseNyttTips(true);
         }
+        if (this.props.tips === undefined) {
+            this.props.doStoppForAViseNyttTips(false);
+        }
     }
 
     sporsmalErBesvartFraFor() {
