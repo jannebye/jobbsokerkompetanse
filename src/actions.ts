@@ -14,8 +14,6 @@ export enum ActionType {
     SKJUL_TIPS = 'SKJUL_TIPS',
     HENT_TEMA_OK = 'HENT_TEMA_OK',
     LEGGE_TIL_SPORSMAL = 'LEGGE_TIL_SPORSMAL',
-    LEGG_TIL_SPORSMAL_SOM_VISES = 'LEGG_TIL_SPORSMAL_SOM_VISES',
-    FJERNE_SPORSMAL_SOM_VISES = 'FJERNE_SPORSMAL_SOM_VISES',
     LEGG_TIL_BESVART_SPORSMAL = 'LEGG_TIL_BESVART_SPORSMAL',
     KLIKK_ALTERNATIV = 'KLIKK_ALTERNATIV',
     SJEKK_AVHENGIGHETER = 'SJEKK_AVHENGIGHETER',
@@ -87,16 +85,6 @@ export interface HentTemaAction {
     data: TemaModell;
 }
 
-export interface LeggTilSporsmalSomVisesAction {
-    type: ActionType.LEGG_TIL_SPORSMAL_SOM_VISES;
-    spmId: string;
-}
-
-export interface FjerneSporsmalSomVisesAction {
-    type: ActionType.FJERNE_SPORSMAL_SOM_VISES;
-    spmId: string;
-}
-
 export interface LeggTilBesvartSporsmalAction {
     type: ActionType.LEGG_TIL_BESVART_SPORSMAL;
     spmId: string;
@@ -144,8 +132,6 @@ export type Handling =
     | SkjulTipsAction
     | HentTemaAction
     | LeggeTilSporsmalAction
-    | LeggTilSporsmalSomVisesAction
-    | FjerneSporsmalSomVisesAction
     | LeggTilBesvartSporsmalAction
     | KlikkAlternativAction
     | SjekkAvhengigheterAction
