@@ -11,17 +11,19 @@ import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import SVG from 'react-inlinesvg';
 import KnappBase from 'nav-frontend-knapper';
 import * as cls from 'classnames';
-import { nesteSporsmal, starteSvar, stoppForAViseNyttTips } from '../ducks/side-duck';
+import { byttSporsmal, starteSvar, stoppForAViseNyttTips } from '../ducks/side-duck';
 import { Link } from 'react-router-dom';
 import { Sidetype } from '../utils/konstanter';
 import { BesvartSporsmal, leggTilBesvartSporsmal } from '../ducks/sporsmal-duck';
-import { visNyttTips } from '../ducks/svar-duck';
+import { nullStillAvitteSvar, visNyttTips } from '../ducks/svar-duck';
 
 interface DispatchProps {
-    gaTilNesteSporsmal: (spmId: string, nesteSpmId: string, svar: string[], tips: string | undefined) => void;
+    gaTilNesteSporsmal: (spmId: string, svar: string[], tips: string | undefined) => void;
+    doByttSporsmal: (nesteSpmId: string) => void;
     ikkeNySideLenger: () => void;
     doStoppForAViseNyttTips: (stopp: boolean) => void;
     doVisNyttTips: (visTips: boolean) => void;
+    doNullStillAvgitteSvar: () => void;
 }
 
 interface OwnProps {
@@ -63,7 +65,9 @@ export class Sporsmal extends React.Component<SporsmalProps> {
             doVisNyttTips,
             skalViseNyttTips,
             gaTilNesteSporsmal,
-        } = this.props;
+            doByttSporsmal,
+            doNullStillAvgitteSvar,
+    } = this.props;
 
         const gjeldendeSpmIndex = sporsmalSomVises.indexOf(sporsmal.id);
         const nesteSpmId = sporsmalSomVises[gjeldendeSpmIndex + 1];
@@ -108,6 +112,10 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                                         to={tilbakeUrl}
                                         type={'standard'}
                                         className="sporsmal__knapp-tilbake"
+                                        onClick={() => {
+                                            doByttSporsmal(forrigeSpmId);
+                                            doNullStillAvgitteSvar();
+                                        }}
                                     >
                                         {sporsmal.erForsteSpm ? (
                                             <FormattedMessage id="forrige-knapp-start"/>
@@ -176,7 +184,9 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                                                 doVisNyttTips(true);
                                                 doStoppForAViseNyttTips(false);
                                             } else {
-                                                gaTilNesteSporsmal(sporsmal.id, nesteSpmId, avgitteSvar, tips);
+                                                gaTilNesteSporsmal(sporsmal.id, avgitteSvar, tips);
+                                                doByttSporsmal(nesteSpmId);
+                                                doNullStillAvgitteSvar();
                                             }
                                         }
                                         ikkeNySideLenger();
@@ -209,13 +219,14 @@ const mapStateToProps = (state: AppState): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    gaTilNesteSporsmal: (spmId: string, nesteSpmId: string, svar: string[], tips: string | undefined) => {
-        dispatch(nesteSporsmal(nesteSpmId, false));
+    gaTilNesteSporsmal: (spmId: string, svar: string[], tips: string | undefined) => {
         dispatch(leggTilBesvartSporsmal(spmId, svar, tips));
     },
+    doByttSporsmal: (nesteSpmId: string) => dispatch(byttSporsmal(nesteSpmId, false)),
     ikkeNySideLenger: () => dispatch(starteSvar()),
     doStoppForAViseNyttTips: (stopp: boolean) => dispatch(stoppForAViseNyttTips(stopp)),
     doVisNyttTips: (visTips: boolean) => dispatch(visNyttTips(visTips)),
+    doNullStillAvgitteSvar: () => dispatch(nullStillAvitteSvar()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sporsmal);

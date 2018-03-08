@@ -1,4 +1,7 @@
-import { Handling, ActionType, NesteSporsmalAction, StarteSvarAction, StoppForAViseNyttTipsAction } from '../actions';
+import {
+    Handling, ActionType, StarteSvarAction, StoppForAViseNyttTipsAction,
+    ByttSporsmalAction
+} from '../actions';
 import { Sidetype } from '../utils/konstanter';
 import spm from '../sporsmal/sporsmal-alle';
 import alleSporsmal from '../sporsmal/sporsmal-alle';
@@ -35,7 +38,7 @@ export function erPaVeiBakover(gjeldendeSpmId: SporsmalId, sporsmalId: SporsmalI
 export default function reducer(state: SideState = initialState,
                                 action: Handling): SideState {
     switch (action.type) {
-        case ActionType.NESTE_SPORSMAL: {
+        case ActionType.BYTT_SPORSMAL: {
             const paVeiBakover = erPaVeiBakover(state.spmId, action.spmId);
             return {
                 ...state,
@@ -59,9 +62,9 @@ export default function reducer(state: SideState = initialState,
     }
 }
 
-export function nesteSporsmal(spmId: string, spmErBesvart: boolean): NesteSporsmalAction {
+export function byttSporsmal(spmId: string, spmErBesvart: boolean): ByttSporsmalAction {
     return {
-        type: ActionType.NESTE_SPORSMAL,
+        type: ActionType.BYTT_SPORSMAL,
         spmId: spmId,
         spmErBesvart: spmErBesvart
     };

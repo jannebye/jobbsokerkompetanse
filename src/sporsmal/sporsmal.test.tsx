@@ -34,6 +34,8 @@ function getJSXElement(
                 doStoppForAViseNyttTips={() => {}}
                 doVisNyttTips={() => {}}
                 skalViseNyttTips={tips? true : false}
+                doByttSporsmal={() => {}}
+                doNullStillAvgitteSvar={() => {}}
             />
         </BrowserRouter>
     );

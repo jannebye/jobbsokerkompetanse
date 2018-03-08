@@ -4,7 +4,7 @@ import Sporsmal from '../sporsmal/sporsmal';
 import { connect } from 'react-redux';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
-import { nesteSporsmal, stoppForAViseNyttTips } from '../ducks/side-duck';
+import { byttSporsmal, stoppForAViseNyttTips } from '../ducks/side-duck';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { harBesvartSpm } from '../ducks/sporsmal-duck';
 import { BesvartSporsmal } from '../ducks/sporsmal-duck';
@@ -18,10 +18,11 @@ interface UrlProps {
 interface StateProps {
     besvarteSporsmal: BesvartSporsmal[];
     sporsmalSomVises: string[];
+    avgitteSvar: string[];
 }
 
 interface DispatchProps {
-    byttSpm: (sporsmalId: string, spmErBeesvart: boolean) => void;
+    doByttSporsmal: (sporsmalId: string, spmErBeesvart: boolean) => void;
     doLastInnBesvartSporsmal: (svar: string[], tips: string | undefined) => void;
     doNullStillAvgitteSvar: () => void;
     doStoppForAViseNyttTips: (stopp: boolean) => void;
@@ -37,20 +38,19 @@ class Skjema extends React.PureComponent<SkjemaProps, {}> {
     }
 
     componentWillUpdate() {
-        this.props.doNullStillAvgitteSvar();
         this.props.doStoppForAViseNyttTips(false);
     }
 
     componentDidUpdate() {
         const sporsmalId = this.props.match.params.spmId;
-        this.props.byttSpm(sporsmalId, harBesvartSpm(this.props.besvarteSporsmal, sporsmalId));
+        this.props.doByttSporsmal(sporsmalId, harBesvartSpm(this.props.besvarteSporsmal, sporsmalId));
         this.oppdaterSporsmal();
     }
 
     oppdaterSporsmal() {
         const besvartSpm = this.props.besvarteSporsmal.find(
             besvart => besvart.spmId === this.props.match.params.spmId);
-        if (besvartSpm !== undefined) {
+        if (besvartSpm !== undefined && this.props.avgitteSvar.length === 0) {
             this.props.doLastInnBesvartSporsmal(besvartSpm.svar, besvartSpm.tips);
         }
     }
@@ -75,12 +75,13 @@ class Skjema extends React.PureComponent<SkjemaProps, {}> {
 
 const mapStateToProps = (state: AppState): StateProps => ({
     besvarteSporsmal: state.sporsmal.besvarteSporsmal,
-    sporsmalSomVises: state.sporsmal.sporsmalSomVises
+    sporsmalSomVises: state.sporsmal.sporsmalSomVises,
+    avgitteSvar: state.svar.avgitteSvar,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
-    byttSpm: (sporsmalId: string, spmErBesvart: boolean) =>
-        dispatch(nesteSporsmal(sporsmalId, spmErBesvart)),
+    doByttSporsmal: (sporsmalId: string, spmErBesvart: boolean) =>
+        dispatch(byttSporsmal(sporsmalId, spmErBesvart)),
     doLastInnBesvartSporsmal: (svar: string[], tips: string | undefined) =>
         dispatch(lastInnBesvartSporsmal(svar, tips)),
     doNullStillAvgitteSvar: () => dispatch(nullStillAvitteSvar()),
