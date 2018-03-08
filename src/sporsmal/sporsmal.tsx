@@ -28,7 +28,6 @@ interface DispatchProps {
 
 interface OwnProps {
     sporsmal: SporsmalModell;
-    spmRef: any; // tslint:disable-line:no-any
 }
 
 interface StateProps {
@@ -53,7 +52,6 @@ export class Sporsmal extends React.Component<SporsmalProps> {
     render() {
         const {
             sporsmal,
-            spmRef,
             paVeiBakover,
             sporsmalSomVises,
             avgitteSvar,
@@ -100,7 +98,6 @@ export class Sporsmal extends React.Component<SporsmalProps> {
             <React.Fragment>
                 <div className="limit">
                     <div
-                        ref={spmRef}
                         id={'sp-' + sporsmal.id}
                         className={klassenavn}
                         tabIndex={0}

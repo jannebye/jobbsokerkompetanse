@@ -32,8 +32,6 @@ interface DispatchProps {
 type SkjemaProps = StateProps & DispatchProps & RouteComponentProps<any> & UrlProps; // tslint:disable-line:no-any
 
 class Skjema extends React.PureComponent<SkjemaProps, {}> {
-    private sporsmalRefs = {};
-
     constructor(props: SkjemaProps) {
         super(props);
     }
@@ -63,7 +61,6 @@ class Skjema extends React.PureComponent<SkjemaProps, {}> {
     render() {
         const {sporsmalSomVises, spmIdLagret} = this.props;
         const {spmId} = this.props.match.params;
-        let sporsmalRefs = this.sporsmalRefs;
         const sporsmal = alleSporsmal.find(spm => spm.id === spmId)!;
 
         return (
@@ -72,7 +69,6 @@ class Skjema extends React.PureComponent<SkjemaProps, {}> {
                 <Sporsmal
                     key={spmId}
                     sporsmal={sporsmal}
-                    spmRef={(ref: {}) => (sporsmalRefs[spmId] = ref)}
                 />
             </React.Fragment>
         );

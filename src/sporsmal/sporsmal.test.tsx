@@ -21,7 +21,6 @@ function getJSXElement(
         <BrowserRouter>
             <Sporsmal
                 sporsmal={spmModell}
-                spmRef={spmModell}
                 gaTilNesteSporsmal={() => {}}
                 paVeiBakover={false}
                 besvarteSporsmal={besvarteSpm}
