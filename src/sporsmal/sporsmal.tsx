@@ -178,6 +178,7 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                                     onClick={(e) => {
                                         if (!harSvar) {
                                             e.preventDefault();
+                                            ikkeNySideLenger();
                                         } else {
                                             if (skalStoppeForAViseNyttTips) {
                                                 e.preventDefault();
@@ -189,7 +190,6 @@ export class Sporsmal extends React.Component<SporsmalProps> {
                                                 doNullStillAvgitteSvar();
                                             }
                                         }
-                                        ikkeNySideLenger();
                                     }}
                                 >
                                     {sporsmal.erSisteSpm ? (

@@ -37,11 +37,11 @@ class Skjema extends React.PureComponent<SkjemaProps, {}> {
         super(props);
     }
 
-    componentWillUpdate() {
+    componentWillMount() {
         this.props.doStoppForAViseNyttTips(false);
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
         const sporsmalId = this.props.match.params.spmId;
         this.props.doByttSporsmal(sporsmalId, harBesvartSpm(this.props.besvarteSporsmal, sporsmalId));
         this.oppdaterSporsmal();
