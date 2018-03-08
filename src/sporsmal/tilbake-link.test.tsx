@@ -3,8 +3,8 @@ import { configure } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import spm from '../sporsmal/sporsmal-alle';
 import SporsmalModell from '../sporsmal/sporsmal-modell';
-import {shallowWithIntl} from "../test/intl-enzyme-test-helper";
-import {TilbakeLink} from "./tilbake-link";
+import { shallowWithIntl } from '../test/intl-enzyme-test-helper';
+import { TilbakeLink } from './tilbake-link';
 configure({ adapter: new Adapter() });
 
 function getJSXElement(
@@ -38,4 +38,4 @@ describe('<TilbakeLink />', function() {
         expect(wrapper.find(cssLinkIkkeStart).find(cssForrigeKnapp).length).toEqual(1);
 
     });
-})
+});
