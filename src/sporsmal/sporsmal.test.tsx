@@ -39,7 +39,7 @@ describe('<Sporsmal />', function() {
     let svarAlternativer: Array<string>;
 
     const tilbakeLenkeSelector =
-        'Link[className="sporsmal__knapp-tilbake"]';
+        'TilbakeLink';
 
     beforeEach(() => {
         svarAlternativer = [];
@@ -56,23 +56,6 @@ describe('<Sporsmal />', function() {
         ];
 
         shallowWithIntl(getJSXElement(besvarteSpm, sisteSpm));
-    });
-
-    it('skal kunne trykke på tilbakeknapp dersom det er siste spørsmål', () => {
-        const sisteSpm = spm.find(x => x.erSisteSpm === true)!;
-        const besvarteSpm = [
-            {
-                spmId: sisteSpm.id,
-                svar: svarAlternativer,
-                tips: tips
-            }
-        ];
-        const wrapper = shallowWithIntl(getJSXElement(besvarteSpm, sisteSpm!));
-        const lenke = wrapper.dive().dive().find(tilbakeLenkeSelector);
-
-        expect(lenke.exists()).toBe(true);
-        lenke.simulate('click', { button: 0 });
-
     });
 
     it('skal vise tilbakeknapp hvis det hverken er første eller siste spørsmål', () => {
