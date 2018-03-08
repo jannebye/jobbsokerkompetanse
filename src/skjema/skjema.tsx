@@ -61,13 +61,14 @@ class Skjema extends React.PureComponent<SkjemaProps, {}> {
     }
 
     render() {
+        const {sporsmalSomVises, spmIdLagret} = this.props;
         const {spmId} = this.props.match.params;
         let sporsmalRefs = this.sporsmalRefs;
         const sporsmal = alleSporsmal.find(spm => spm.id === spmId)!;
 
         return (
             <React.Fragment>
-                <Framdrift sporsmal={sporsmal} sporsmalSomVises={this.props.sporsmalSomVises}/>
+                <Framdrift sporsmal={sporsmal} sporsmalSomVises={sporsmalSomVises} lagretSpmId={spmIdLagret}/>
                 <Sporsmal
                     key={spmId}
                     sporsmal={sporsmal}

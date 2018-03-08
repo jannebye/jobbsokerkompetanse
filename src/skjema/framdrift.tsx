@@ -4,6 +4,7 @@ import SporsmalModell from '../sporsmal/sporsmal-modell';
 interface StateProps {
     sporsmal: SporsmalModell;
     sporsmalSomVises: string[];
+    lagretSpmId: string;
 }
 
 export class Framdrift extends React.Component<StateProps> {
@@ -30,6 +31,10 @@ export class Framdrift extends React.Component<StateProps> {
         window.addEventListener('scroll', () => {
             this.scrolling();
         });
+    }
+
+    shouldComponentUpdate(nextProps: StateProps) {
+        return nextProps.lagretSpmId !== this.props.lagretSpmId;
     }
 
     componentDidUpdate() {
