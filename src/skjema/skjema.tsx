@@ -19,6 +19,7 @@ interface StateProps {
     besvarteSporsmal: BesvartSporsmal[];
     sporsmalSomVises: string[];
     avgitteSvar: string[];
+    spmIdLagret: string;
 }
 
 interface DispatchProps {
@@ -37,14 +38,18 @@ class Skjema extends React.PureComponent<SkjemaProps, {}> {
         super(props);
     }
 
-    componentWillMount() {
-        this.props.doStoppForAViseNyttTips(false);
+    componentWillUpdate(nextProps: SkjemaProps) {
+        if (nextProps.spmIdLagret !== this.props.spmIdLagret) {
+            this.props.doStoppForAViseNyttTips(false);
+        }
     }
 
-    componentDidMount() {
-        const sporsmalId = this.props.match.params.spmId;
-        this.props.doByttSporsmal(sporsmalId, harBesvartSpm(this.props.besvarteSporsmal, sporsmalId));
-        this.oppdaterSporsmal();
+    componentDidUpdate(prevProps: SkjemaProps) {
+        if (prevProps.spmIdLagret !== this.props.spmIdLagret) {
+            const sporsmalId = this.props.match.params.spmId;
+            this.props.doByttSporsmal(sporsmalId, harBesvartSpm(this.props.besvarteSporsmal, sporsmalId));
+            this.oppdaterSporsmal();
+        }
     }
 
     oppdaterSporsmal() {
@@ -77,6 +82,7 @@ const mapStateToProps = (state: AppState): StateProps => ({
     besvarteSporsmal: state.sporsmal.besvarteSporsmal,
     sporsmalSomVises: state.sporsmal.sporsmalSomVises,
     avgitteSvar: state.svar.avgitteSvar,
+    spmIdLagret: state.side.spmId,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
