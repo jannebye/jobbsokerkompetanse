@@ -6,7 +6,7 @@ import sideReducer, {
 } from './side-duck';
 import raadReducer, { RaadState } from './raad-duck';
 import tipsReducer, { TipsState } from './tips-duck';
-import sporsmalReducer, { SporsmalState } from './sporsmal-duck';
+import sporsmalReducer, { SporsmalState, initialState as initialSporsmalState } from './sporsmal-duck';
 import svarReducer, { SvarState } from './svar-duck';
 
 export interface AppState {
@@ -21,6 +21,6 @@ export default combineReducers<AppState>({
     side: persistent('sideState', location, sideReducer, initialSideState),
     raad: raadReducer,
     tips: tipsReducer,
-    sporsmal: sporsmalReducer,
+    sporsmal: persistent('sporsmalState', location, sporsmalReducer, initialSporsmalState),
     svar: svarReducer,
 });
