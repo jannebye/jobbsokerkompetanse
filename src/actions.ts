@@ -6,7 +6,7 @@ export enum ActionType {
     ENDRE_ALTERNATIV = 'ENDRE_ALTERNATIV',
     ENDRE_ALTERNATIV_OG_ANTALL = 'ENDRE_ALTERNATIV_OG_ANTALL',
     VIS_ALTERNATIVER = 'VIS_ALTERNATIVER',
-    NESTE_SPORSMAL = 'NESTE_SPORSMAL',
+    BYTT_SPORSMAL = 'BYTT_SPORSMAL',
     FORRIGE_SPORSMAL = 'FORRIGE_SPORSMAL',
     STARTE_SVAR = 'STARTE_SVAR',
     ENDRE_SIDE = 'ENDRE_SIDE',
@@ -49,8 +49,8 @@ export interface VisAlternativerAction {
     type: ActionType.VIS_ALTERNATIVER;
 }
 
-export interface NesteSporsmalAction {
-    type: ActionType.NESTE_SPORSMAL;
+export interface ByttSporsmalAction {
+    type: ActionType.BYTT_SPORSMAL;
     spmId: string;
     spmErBesvart: boolean;
 }
@@ -123,7 +123,7 @@ export interface LastInnBesvartSporsmalAction {
 export type Handling =
     | EndreAlternativAction
     | EndreAlternativOgAntallAction
-    | NesteSporsmalAction
+    | ByttSporsmalAction
     | ForrigeSporsmalAction
     | StarteSvarAction
     | VisAlternativerAction
