@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from '../types';
 import { AppState } from '../ducks/reducer';
 import { byttSporsmal, stoppForAViseNyttTips } from '../ducks/side-duck';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router';
 import { harBesvartSpm } from '../ducks/sporsmal-duck';
 import { BesvartSporsmal } from '../ducks/sporsmal-duck';
 import { lastInnBesvartSporsmal, nullStillAvitteSvar } from '../ducks/svar-duck';
@@ -29,7 +29,11 @@ interface DispatchProps {
     doStoppForAViseNyttTips: (stopp: boolean) => void;
 }
 
-type SkjemaProps = StateProps & DispatchProps & RouteComponentProps<any> & UrlProps; // tslint:disable-line:no-any
+interface MatchParams {
+    spmId: string;
+}
+
+export type SkjemaProps = StateProps & DispatchProps & RouteComponentProps<MatchParams> & UrlProps;
 
 class Skjema extends React.PureComponent<SkjemaProps, {}> {
     constructor(props: SkjemaProps) {
@@ -58,20 +62,33 @@ class Skjema extends React.PureComponent<SkjemaProps, {}> {
         }
     }
 
+    forrigeSporsmalErBesvart() {
+        const {sporsmalSomVises, match, besvarteSporsmal} = this.props;
+        const forrigeSpmId = sporsmalSomVises[sporsmalSomVises.indexOf(match.params.spmId) - 1];
+        return besvarteSporsmal.map(besvartSpm => besvartSpm.spmId).includes(forrigeSpmId);
+    }
+
+    erForsteSporsmal() {
+        return this.props.match.params.spmId === this.props.sporsmalSomVises[0];
+    }
+
     render() {
         const {sporsmalSomVises, spmIdLagret} = this.props;
         const {spmId} = this.props.match.params;
         const sporsmal = alleSporsmal.find(spm => spm.id === spmId)!;
 
-        return (
-            <React.Fragment>
-                <Framdrift sporsmal={sporsmal} sporsmalSomVises={sporsmalSomVises} lagretSpmId={spmIdLagret}/>
-                <Sporsmal
-                    key={spmId}
-                    sporsmal={sporsmal}
-                />
-            </React.Fragment>
-        );
+        if (this.forrigeSporsmalErBesvart() || this.erForsteSporsmal()) {
+            return (
+                <React.Fragment>
+                    <Framdrift sporsmal={sporsmal} sporsmalSomVises={sporsmalSomVises} lagretSpmId={spmIdLagret}/>
+                    <Sporsmal
+                        key={spmId}
+                        sporsmal={sporsmal}
+                    />
+                </React.Fragment>
+            );
+        }
+        return <Redirect to={'/startside'}/>;
     }
 }
 
