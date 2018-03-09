@@ -10,8 +10,6 @@ export enum ActionType {
     FORRIGE_SPORSMAL = 'FORRIGE_SPORSMAL',
     STARTE_SVAR = 'STARTE_SVAR',
     ENDRE_SIDE = 'ENDRE_SIDE',
-    VIS_TIPS = 'VIS_TIPS',
-    SKJUL_TIPS = 'SKJUL_TIPS',
     HENT_TEMA_OK = 'HENT_TEMA_OK',
     LEGGE_TIL_SPORSMAL = 'LEGGE_TIL_SPORSMAL',
     LEGG_TIL_BESVART_SPORSMAL = 'LEGG_TIL_BESVART_SPORSMAL',
@@ -70,16 +68,6 @@ export interface EndreSideAction {
     spmId: string;
 }
 
-export interface VisTipsAction {
-    type: ActionType.VIS_TIPS;
-    tipsId: string;
-    spmId: string;
-}
-
-export interface SkjulTipsAction {
-    type: ActionType.SKJUL_TIPS;
-}
-
 export interface HentTemaAction {
     type: ActionType.HENT_TEMA_OK;
     data: TemaModell;
@@ -128,8 +116,6 @@ export type Handling =
     | StarteSvarAction
     | VisAlternativerAction
     | EndreSideAction
-    | VisTipsAction
-    | SkjulTipsAction
     | HentTemaAction
     | LeggeTilSporsmalAction
     | LeggTilBesvartSporsmalAction
