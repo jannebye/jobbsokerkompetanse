@@ -1,6 +1,7 @@
 /* tslint:disable */
 
 import { SideState } from '../ducks/side-duck';
+import {SporsmalState} from "../ducks/sporsmal-duck";
 
 function read(scope: string) {
     const content = localStorage.getItem(scope);
@@ -16,7 +17,7 @@ function write(scope: string, content: any) {
 
 function erBesvarelseEndret(
     scope: string,
-    initialState: SideState
+    initialState: SideState | SporsmalState
 ) {
     const content = localStorage.getItem(scope);
     if (!content || content === 'undefined') {
@@ -35,7 +36,7 @@ export default (
     scope: string,
     location: Location,
     reducer: any,
-    initialState: SideState
+    initialState: SideState | SporsmalState
 ) => (state: any, action: any) => {
     let nState = state;
     if (
